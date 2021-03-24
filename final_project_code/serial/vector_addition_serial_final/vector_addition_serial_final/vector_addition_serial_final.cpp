@@ -2,59 +2,67 @@
 // Sources: 
 // https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
 // https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
+// https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
 
 #include <iostream>
 #include <algorithm>
 #include <vector>
 
-
-using namespace std;
-
 // Function Prototypes
-size_t element_set(size_t);
-void add(const vector<unsigned int>, const vector<unsigned int>, const vector<unsigned int>);
+int element_set(int);
+void add(const std::vector<int>, const std::vector<int>, const std::vector<int>);
 
 int main()
 {
 	// Call element_set function to assign variable no_elements with a user selected value
-	static size_t no_elements = element_set(no_elements);
+	static int no_elements = element_set(no_elements);
 
-	vector<unsigned int> a(no_elements), b(no_elements), c(no_elements);
+	std::vector<int> a(no_elements), b(no_elements), c(no_elements);
 
-	for (size_t i = 0; i < no_elements; ++i) {
-		a[i] = 1 / (unsigned int)(i + 1);
-		b[i] = a[i];
-	} 
+	// Generate random numbers via Lambda C++11 function, and place into vector
+	std::generate(a.begin(), a.end(), []() {
+		return rand() % 100;
+		});
+	std::generate(b.begin(), b.end(), []() {
+		return rand() % 100;
+		});
+
+	// Slower alternative non-random vector initialisation 
+	//for (size_t i = 0; i < no_elements; ++i) {
+	//	a[i] = 1 / (unsigned int)(i + 1);
+	//	b[i] = a[i];
+	//} 
 
 	clock_t start = clock();
 
 	add(a, b, c);
 
 	clock_t end = clock();
+
 	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-	cout << diffs << "s Vector Addition computation time, with an element size of " << no_elements << ".\n";
-	cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
+	std::cout << diffs << "s Vector Addition computation time, with an element size of " << no_elements << ".\n";
+	std::cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
 
 	return EXIT_SUCCESS;
 
 }
 
 // Function Declarations
-size_t element_set(size_t element_size) {
+int element_set(int element_size) {
 
 	int temp_input;
 
-	cout << "Please select vector addition element sample size from the options below:\n";
-	cout << "1. 9,000\n";
-	cout << "2. 90,000\n";
-	cout << "3. 9,000,00\n";
-	cout << "4. 9,000,000\n";
-	cout << "5. 65,000,000\n";
-	cin >> temp_input;
+	std::cout << "Please select vector addition element sample size from the options below:\n";
+	std::cout << "1. 9,000\n";
+	std::cout << "2. 90,000\n";
+	std::cout << "3. 9,000,00\n";
+	std::cout << "4. 9,000,000\n";
+	std::cout << "5. 65,000,000\n";
+	std::cin >> temp_input;
 
 	if (temp_input <= 0 || temp_input >= 6)
 	{
-		cout << "\n\nNo correct option selected!\nShutting down program....\n";
+		std::cout << "\n\nNo correct option selected!\nShutting down program....\n";
 		return EXIT_FAILURE;
 	}
 
@@ -76,8 +84,8 @@ size_t element_set(size_t element_size) {
 
 	return element_size;
 }
-void add(const vector<unsigned int> a, const vector<unsigned int> b, vector<unsigned int> c) {
-	// Lambda Transform c++11
-	transform(a.begin(), a.end(), b.begin(), c.begin(), 
-		[](double a, double b) {return a + b; });
+void add(const std::vector<int> a, const std::vector<int> b, std::vector<int> c) {
+	// Add contents from vector 'a' and 'b' into vector 'c' || Transform using a Lambda C++11
+	std::transform(a.begin(), a.end(), b.begin(), c.begin(), 
+		[](int a, int b) {return a + b; });
 }

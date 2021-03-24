@@ -1,12 +1,2 @@
 ﻿  vector_addition_serial_final.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include\algorithm(3457,24): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
-C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(84): message : see reference to function template instantiation '_OutIt std::transform<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,add::<lambda_fa5b45d32befaa0dde41fe74ebfa1488>>(const _InIt1,const _InIt1,const _InIt2,_OutIt,_Fn)' being compiled
-          with
-          [
-              _OutIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>,
-              _Ty=unsigned int,
-              _InIt1=std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>,
-              _InIt2=std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<unsigned int>>>,
-              _Fn=add::<lambda_fa5b45d32befaa0dde41fe74ebfa1488>
-          ]
   vector_addition_serial_final.vcxproj -> C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\vector_addition_serial_final\Debug\vector_addition_serial_final.exe

@@ -3,6 +3,7 @@
 // https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
 // https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
 // https://www.youtube.com/watch?v=QVVTsLmMlwk&t
+// https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
 
 #include <algorithm>
 #include <iostream>
@@ -15,16 +16,14 @@ int element_set(int);
 // Function that computes the sum of two arrays
 // CUDA kernel for vector addition || __global__ means this is called from the CPU, and runs on the GPU
 __global__ void vectorAdd(const int* __restrict a, const int* __restrict b,
-    int* __restrict c, size_t no_elements) {
+    int* __restrict c, int no_elements) {
     // Calculate global thread ID
     int tid = (blockIdx.x * blockDim.x) + threadIdx.x;
 
     // Boundary check
     if (tid < no_elements) c[tid] = a[tid] + b[tid];
-}
 
-// Check vector add result
-void verify_result(std::vector<int>&, std::vector<int>&, std::vector<int>&);
+}
 
 int main() {
 
@@ -41,11 +40,19 @@ int main() {
     b.reserve(no_elements);
     c.reserve(no_elements);
 
-    // Initialise random numbers in each vector
-    for (int i = 0; i < no_elements; i++) {
-        a.push_back(rand() % 100);
-        b.push_back(rand() % 100);
-    }
+    // Generate random numbers via Lambda C++11 function, and place into vector
+    generate(a.begin(), a.end(), []() {
+        return rand() % 100;
+        });
+    generate(b.begin(), b.end(), []() {
+        return rand() % 100;
+        });
+
+    // Alternative but slower || Initialize random numbers in each array
+    //for (int i = 0; i < no_elements; i++) {
+    //    a.push_back(rand() % 100);
+    //    b.push_back(rand() % 100);
+    //}
 
     // Allocate memory on the device (GPU)
     int* d_a, * d_b, * d_c;
@@ -87,8 +94,6 @@ int main() {
     double diffs = (end - start) / (double)CLOCKS_PER_SEC;
     std::cout << diffs << "s Vector Addition computation time, with an element size of " << no_elements << ".\n";
     std::cout << "PARALLEL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
-
-    verify_result(a, b, c);
 
     // Free memory on device
     cudaFree(d_a);
@@ -134,10 +139,4 @@ int element_set(int element_size) {
     }
 
     return element_size;
-}
-
-// Check vector add result on CPU
-void verify_result(std::vector<int>& a, std::vector<int>& b, std::vector<int>& c) {
-    for (int i = 0; i < a.size(); i++) {
-    }
 }
