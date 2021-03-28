@@ -1,13 +1,21 @@
-﻿// Vector Addition - Parallel
-// Sources: 
-// https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
-// https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
-// https://www.youtube.com/watch?v=QVVTsLmMlwk&t
-// https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
+﻿// Parallel Vector Addition Program
+/*
+ Code sourced and adpated from the following author/s and sourcess:
+- https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
+- https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
+- https://www.youtube.com/watch?v=QVVTsLmMlwk&t
+- https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
+ Please refer to the bibliography for a complete reference of the above author/s and sources
+*/
 
 #include <algorithm>
 #include <iostream>
 #include <vector>
+
+using std::cout;
+using std::cin;
+using std::generate;
+using std::vector;
 
 // Function Prototypes
 int element_set(int);
@@ -32,15 +40,15 @@ int main() {
     size_t bytes = sizeof(int) * no_elements;
 
     // Vectors for holding the host-side (CPU-side) data
-    std::vector<int> a;
-    std::vector<int> b;
-    std::vector<int> c;
+    vector<int> a;
+    vector<int> b;
+    vector<int> c;
 
     a.reserve(no_elements);
     b.reserve(no_elements);
     c.reserve(no_elements);
 
-    // Generate random numbers via Lambda C++11 function, and place into vector
+    // Initialise vector by generating random numbers via Lambda C++11 function
     generate(a.begin(), a.end(), []() {
         return rand() % 100;
         });
@@ -88,12 +96,12 @@ int main() {
     // barrier.
     cudaMemcpy(c.data(), d_c, bytes, cudaMemcpyDeviceToHost);
 
-    // Stop the clock just before the vectorAdd function finishes executing
+    // Stop the clock just after the vectorAdd function finishes executing
     clock_t end = clock();
 
     double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-    std::cout << diffs << "s Vector Addition computation time, with an element size of " << no_elements << ".\n";
-    std::cout << "PARALLEL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
+    cout << diffs << "s Vector Addition computation time, with an element size of " << no_elements << ".\n";
+    cout << "PARALLEL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
 
     // Free memory on device
     cudaFree(d_a);
@@ -108,34 +116,34 @@ int element_set(int element_size) {
 
     int temp_input;
 
-    std::cout << "Please select vector addition element sample size from the options below:\n";
-    std::cout << "1. 9,000\n";
-    std::cout << "2. 90,000\n";
-    std::cout << "3. 9,000,00\n";
-    std::cout << "4. 9,000,000\n";
-    std::cout << "5. 65,000,000\n";
-    std::cin >> temp_input;
+    cout << "Please select vector addition element sample size from the options below:\n";
+    cout << "1. 55,000,000\n";
+    cout << "2. 100,000,000\n";
+    cout << "3. 150,000,000\n";
+    cout << "4. 200,000,000\n";
+    cout << "5. 280,000,000\n";
+    cin >> temp_input;
 
     if (temp_input <= 0 || temp_input >= 6)
     {
-        std::cout << "\n\nNo correct option selected!\nShutting down program....\n";
+        cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
 
     if (temp_input == 1) {
-        element_size = 9000;
+        element_size = 55000000;
     }
     else if (temp_input == 2) {
-        element_size = 90000;
+        element_size = 100000000;
     }
     else if (temp_input == 3) {
-        element_size = 900000;
+        element_size = 150000000;
     }
     else if (temp_input == 4) {
-        element_size = 9000000;
+        element_size = 200000000;
     }
     else if (temp_input == 5) {
-        element_size = 65000000;
+        element_size = 280000000;
     }
 
     return element_size;
