@@ -48,6 +48,9 @@ int main() {
     b.reserve(no_elements);
     c.reserve(no_elements);
 
+    // Start the clock
+    clock_t start = clock();
+
     // Initialise vector by generating random numbers via Lambda C++11 function
     generate(a.begin(), a.end(), []() {
         return rand() % 100;
@@ -67,9 +70,6 @@ int main() {
     cudaMalloc(&d_a, bytes);
     cudaMalloc(&d_b, bytes);
     cudaMalloc(&d_c, bytes);
-
-    // Start the clock
-    clock_t start = clock();
 
     // Copy data from the host to the device (CPU -> GPU)
     cudaMemcpy(d_a, a.data(), bytes, cudaMemcpyHostToDevice);
@@ -117,11 +117,11 @@ int element_set(int element_size) {
     int temp_input;
 
     cout << "Please select vector addition element sample size from the options below:\n";
-    cout << "1. 55,000,000\n";
-    cout << "2. 100,000,000\n";
-    cout << "3. 150,000,000\n";
-    cout << "4. 200,000,000\n";
-    cout << "5. 280,000,000\n";
+    cout << "1. 25,000,000\n";
+    cout << "2. 35,000,000\n";
+    cout << "3. 45,000,000\n";
+    cout << "4. 55,000,000\n";
+    cout << "5. 65,000,000\n";
     cin >> temp_input;
 
     if (temp_input <= 0 || temp_input >= 6)
@@ -129,21 +129,21 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-
+    // 25 million elements
     if (temp_input == 1) {
-        element_size = 55000000;
-    }
+        element_size = 25000000;
+    } // 35 million elements
     else if (temp_input == 2) {
-        element_size = 100000000;
-    }
+        element_size = 35000000;
+    } // 45 million elements
     else if (temp_input == 3) {
-        element_size = 150000000;
-    }
+        element_size = 45000000;
+    } // 55 million elements
     else if (temp_input == 4) {
-        element_size = 200000000;
-    }
+        element_size = 55000000;
+    } // 65 million elements
     else if (temp_input == 5) {
-        element_size = 280000000;
+        element_size = 65000000;
     }
 
     return element_size;

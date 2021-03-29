@@ -45,6 +45,8 @@ int main() {
     vector<int> h_b(no_elements * no_elements);
     vector<int> h_c(no_elements * no_elements);
 
+    // Start the clock
+    clock_t start = clock();
 
     // Initialise vector matrices by generating random numbers via Lambda C++11 function
     generate(h_a.begin(), h_a.end(), []() {
@@ -59,9 +61,6 @@ int main() {
     cudaMalloc(&d_a, bytes);
     cudaMalloc(&d_b, bytes);
     cudaMalloc(&d_c, bytes);
-
-    // Start the clock
-    clock_t start = clock();
 
     // Copy data to the device
     cudaMemcpy(d_a, h_a.data(), bytes, cudaMemcpyHostToDevice);
@@ -105,10 +104,10 @@ int element_set(int element_size) {
 
     cout << "Please select matrix multiplication element sample size from the options below:\n";
     cout << "1. 1,000\n";
-    cout << "2. 3,000\n"; // Needs to be max size
-    cout << "3. 4,500\n";
-    cout << "4. 6,500\n";
-    cout << "5. 9,000\n";
+    cout << "2. 1,500\n";
+    cout << "3. 2,000\n";
+    cout << "4. 2,500\n";
+    cout << "5. 3,000\n";
     cin >> temp_input;
 
     if (temp_input <= 0 || temp_input >= 6)
@@ -121,16 +120,16 @@ int element_set(int element_size) {
         element_size = 1000;
     }
     else if (temp_input == 2) {
-        element_size = 3000;
+        element_size = 1500;
     }
     else if (temp_input == 3) {
-        element_size = 4500;
+        element_size = 2000;
     }
     else if (temp_input == 4) {
-        element_size = 6500;
+        element_size = 2500;
     }
     else if (temp_input == 5) {
-        element_size = 9000;
+        element_size = 3000;
     }
 
     return element_size;
