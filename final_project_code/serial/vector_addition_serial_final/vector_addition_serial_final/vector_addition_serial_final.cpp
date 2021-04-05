@@ -27,12 +27,8 @@ int main()
     clock_t start = clock();
 
 	// Generate random numbers via Lambda C++11 function, and place into vector
-	generate(a.begin(), a.end(), []() {
-		return rand() % 100;
-		});
-	generate(b.begin(), b.end(), []() {
-		return rand() % 100;
-		});
+	generate(a.begin(), a.end(), []() { return rand() % 100; });
+	generate(b.begin(), b.end(), []() { return rand() % 100; });
 
 	// Slower alternative non-random vector initialisation 
 	//for (size_t i = 0; i < no_elements; ++i) {
