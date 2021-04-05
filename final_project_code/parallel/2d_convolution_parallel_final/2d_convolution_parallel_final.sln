@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2d_convolution_parallel_final", "2d_convolution_parallel_final.vcxproj", "{670C2B61-D9B0-4D91-9963-31481BB32711}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{670C2B61-D9B0-4D91-9963-31481BB32711}.Debug|x64.ActiveCfg = Debug|x64
+		{670C2B61-D9B0-4D91-9963-31481BB32711}.Debug|x64.Build.0 = Debug|x64
+		{670C2B61-D9B0-4D91-9963-31481BB32711}.Release|x64.ActiveCfg = Release|x64
+		{670C2B61-D9B0-4D91-9963-31481BB32711}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA0DA354-3C9C-45EA-B93F-97A5D095B7D5}
+	EndGlobalSection
+EndGlobal

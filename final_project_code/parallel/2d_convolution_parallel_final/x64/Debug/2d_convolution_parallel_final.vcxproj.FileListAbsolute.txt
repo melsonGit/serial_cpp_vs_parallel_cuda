@@ -1,0 +1,2 @@
+C:\Users\Matt1\source\repos\CUDA Projects\2d_convolution_parallel_final\x64\Debug\2d_convolution_parallel_final.exe
+C:\Users\Matt1\source\repos\CUDA Projects\2d_convolution_parallel_final\x64\Debug\2d_convolution_parallel_final.pdb
