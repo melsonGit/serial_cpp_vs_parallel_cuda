@@ -128,11 +128,11 @@ int element_set(int element_size) {
     int temp_input;
 
     cout << "Please select 2-D convolution element sample size from the options below:\n";
-    cout << "1. 5,120\n";
-    cout << "2. 10,240\n";
-    cout << "3. 15,360\n";
-    cout << "4. 20,480\n";
-    cout << "5. 25,600\n";
+    cout << "1. 4,096\n";
+    cout << "2. 5,120\n";
+    cout << "3. 6,144\n";
+    cout << "4. 8,192\n";
+    cout << "5. 10,240\n";
     cin >> temp_input;
 
     if (temp_input <= 0 || temp_input >= 6)
@@ -141,21 +141,21 @@ int element_set(int element_size) {
         return EXIT_FAILURE;
     }
     // Work from a bases of 1024 and times that to get a good array number
-    // 5120 elements
+    // 4096 elements
     if (temp_input == 1) {
-        element_size = 5120;
-    } // 10240 elements
+        element_size = 4096;
+    } // 5120 elements
     else if (temp_input == 2) {
-        element_size = 10240; // Appears to be the max for SERIAL
-    } // 15360 elements
+        element_size = 5120;
+    } // 6144 elements
     else if (temp_input == 3) {
-        element_size = 15360;
-    } // 20480 elements
+        element_size = 6144;
+    } // 8192 elements
     else if (temp_input == 4) {
-        element_size = 20480;
-    } // 25600 elements
+        element_size = 8192;
+    } // 10240 elements
     else if (temp_input == 5) {
-        element_size = 25600;
+        element_size = 10240;
     }
 
     return element_size;
