@@ -1,12 +1,11 @@
 ﻿// Parallel Vector Addition Program
-/*
- Code sourced and adpated from the following author/s and sourcess:
-- https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
-- https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
-- https://www.youtube.com/watch?v=QVVTsLmMlwk&t
-- https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
- Please refer to the bibliography for a complete reference of the above author/s and sources
-*/
+//
+// Code sourced and adpated from the following author/s and sources: 
+// - https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
+// - https://www.youtube.com/watch?v=QVVTsLmMlwk&t
+// - https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 #include <algorithm>
 #include <iostream>
@@ -96,17 +95,16 @@ int main() {
     // barrier.
     cudaMemcpy(c.data(), d_c, bytes, cudaMemcpyDeviceToHost);
 
-    // Stop the clock just after the vectorAdd function finishes executing
+    // Free memory on device
+    cudaFree(d_a);
+    cudaFree(d_b);
+    cudaFree(d_c);
+    
     clock_t end = clock();
 
     double diffs = (end - start) / (double)CLOCKS_PER_SEC;
     cout << diffs << "s Vector Addition computation time, with an element size of " << no_elements << ".\n";
     cout << "PARALLEL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
-
-    // Free memory on device
-    cudaFree(d_a);
-    cudaFree(d_b);
-    cudaFree(d_c);
 
     return EXIT_SUCCESS;
 }
@@ -129,19 +127,19 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-    // 25 million elements
+        // 25 million elements
     if (temp_input == 1) {
         element_size = 25000000;
-    } // 35 million elements
+    }   // 35 million elements
     else if (temp_input == 2) {
         element_size = 35000000;
-    } // 45 million elements
+    }   // 45 million elements
     else if (temp_input == 3) {
         element_size = 45000000;
-    } // 55 million elements
+    }   // 55 million elements
     else if (temp_input == 4) {
         element_size = 55000000;
-    } // 65 million elements
+    }   // 65 million elements
     else if (temp_input == 5) {
         element_size = 65000000;
     }

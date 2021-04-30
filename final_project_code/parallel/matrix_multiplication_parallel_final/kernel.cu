@@ -1,13 +1,12 @@
 ﻿// Parallel Matrix Multiplication Program
-/*
- Code sourced and adpated from the following author/s and sourcess:
- - https://github.com/CoffeeBeforeArch/from_scratch/blob/master/matrixMul/matrix_mul.cu
- - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/matrixMul/baseline/mmul.cu
- - https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
- - https://docs.microsoft.com/en-us/archive/msdn-magazine/2012/april/c-amp-introduction-to-tiling-in-c-amp
- - https://docs.microsoft.com/en-us/cpp/parallel/amp/walkthrough-matrix-multiplication?view=msvc-160
- Please refer to the bibliography for a complete reference of the above author/s and sources
-*/
+//
+// Code sourced and adpated from the following author/s and sources: 
+// - https://github.com/CoffeeBeforeArch/from_scratch/blob/master/matrixMul/matrix_mul.cu
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/matrixMul/baseline/mmul.cu
+// - https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
+// - https://docs.microsoft.com/en-us/archive/msdn-magazine/2012/april/c-amp-introduction-to-tiling-in-c-amp
+// - https://docs.microsoft.com/en-us/cpp/parallel/amp/walkthrough-matrix-multiplication?view=msvc-160
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 #include <algorithm>
 #include <iostream>
@@ -82,17 +81,16 @@ int main() {
     // Copy back to the host - Might be able to delete as this is for the Verify_result function
     cudaMemcpy(h_c.data(), d_c, bytes, cudaMemcpyDeviceToHost);
 
-    // Stop the clock just after the vectorAdd function finishes executing
+    // Free memory on device
+    cudaFree(d_a);
+    cudaFree(d_b);
+    cudaFree(d_c);
+
     clock_t end = clock();
 
     double diffs = (end - start) / (double)CLOCKS_PER_SEC;
     cout << diffs << "s Matrix Multiplication computation time, with an element size of " << no_elements << ".\n";
     cout << "PARALLEL MATRIX MULTIPLICATION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
-
-    // Free memory on device
-    cudaFree(d_a);
-    cudaFree(d_b);
-    cudaFree(d_c);
 
     return EXIT_SUCCESS;
 }
@@ -115,19 +113,19 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-
+        // 1000 elements
     if (temp_input == 1) {
         element_size = 1000;
-    }
+    }   // 1500 elements
     else if (temp_input == 2) {
         element_size = 1500;
-    }
+    }   // 2000 elements
     else if (temp_input == 3) {
         element_size = 2000;
-    }
+    }   // 2500 elements
     else if (temp_input == 4) {
         element_size = 2500;
-    }
+    }   // 3000 elements
     else if (temp_input == 5) {
         element_size = 3000;
     }

@@ -1,8 +1,10 @@
-﻿/* Sources:
-- https://www.youtube.com/watch?v=OlLquh9Lnbc
-- https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/1d_naive/convolution.cu
-- https://mathworld.wolfram.com/Convolution.html
-*/
+﻿// Parallel Naive 1-D Convolution Program
+//
+// Code sourced and adpated from the following author/s and sources: 
+// - https://www.youtube.com/watch?v=OlLquh9Lnbc
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/1d_naive/convolution.cu
+// - https://mathworld.wolfram.com/Convolution.html
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 
 #include <algorithm>
@@ -76,7 +78,7 @@ int main() {
     // Generate random numbers via Lambda C++11 function, and place into vector
     generate(begin(h_array), end(h_array), []() { return rand() % 100; });
 
-    // Allocate the mask and initialize it || m mumber of elements in vector are randomised between 1 - 10
+    // Allocate the mask and initialise it || m mumber of elements in vector are randomised between 1 - 10
     vector<int> h_mask(m);
     generate(begin(h_mask), end(h_mask), []() { return rand() % 10; });
 
@@ -102,7 +104,7 @@ int main() {
     // Call the kernel
     convolution_1d << <GRID, THREADS >> > (d_array, d_mask, d_result, no_elements, m);
 
-    // Copy back the result
+    // Copy back to the host - Might be able to delete as this is for the Verify_result function
     cudaMemcpy(h_result.data(), d_result, bytes_n, cudaMemcpyDeviceToHost);
 
     // Free allocated memory on the device and host
@@ -137,19 +139,19 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-    // 10 million elements
+        // 10 million elements
     if (temp_input == 1) {
         element_size = 10000000;
-    } // 25 million elements
+    }   // 25 million elements
     else if (temp_input == 2) {
         element_size = 25000000;
-    } // 55 million elements
+    }   // 55 million elements
     else if (temp_input == 3) {
         element_size = 55000000;
-    } // 75 million elements
+    }   // 75 million elements
     else if (temp_input == 4) {
         element_size = 75000000;
-    } // 90 million elements
+    }   // 90 million elements
     else if (temp_input == 5) {
         element_size = 90000000;
     }

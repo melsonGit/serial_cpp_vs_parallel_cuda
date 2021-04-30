@@ -1,8 +1,10 @@
-﻿/* Sources:
-- https://www.youtube.com/watch?v=qxcfco89wvs
-- https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/2d_constant_memory/convolution.cu
-- https://mathworld.wolfram.com/Convolution.html
-*/
+﻿// Parallel 2-D Convolution Program
+//
+// Code sourced and adpated from the following author/s and sources: 
+// - https://www.youtube.com/watch?v=qxcfco89wvs
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/2d_constant_memory/convolution.cu
+// - https://mathworld.wolfram.com/Convolution.html
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 #include <cassert>
 #include <cstdlib>
@@ -141,19 +143,19 @@ int element_set(int element_size) {
         return EXIT_FAILURE;
     }
     // Work from a bases of 1024 and times that to get a good array number
-    // 4096 elements
+        // 4096 elements
     if (temp_input == 1) {
         element_size = 4096;
-    } // 5120 elements
+    }   // 5120 elements
     else if (temp_input == 2) {
         element_size = 5120;
-    } // 6144 elements
+    }   // 6144 elements
     else if (temp_input == 3) {
         element_size = 6144;
-    } // 8192 elements
+    }   // 8192 elements
     else if (temp_input == 4) {
         element_size = 8192;
-    } // 10240 elements
+    }   // 10240 elements
     else if (temp_input == 5) {
         element_size = 10240;
     }
@@ -161,10 +163,10 @@ int element_set(int element_size) {
     return element_size;
 }
 
-// Initializes an no_elements x no_elements matrix with random numbers ranging from 1-100
+// Initialises an no_elements x no_elements matrix with random numbers ranging from 1-100
 // Takes:
-//  m : Pointer to the matrix
-//  no_elements : Dimension of the matrix (square)
+//  m = Pointer to the matrix
+//  no_elements = Dimension of the matrix (square)
 void init_matrix(int* m, int no_elements) {
     for (int i = 0; i < no_elements; i++) {
         for (int j = 0; j < no_elements; j++) {
