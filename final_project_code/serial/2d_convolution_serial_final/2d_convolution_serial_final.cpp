@@ -1,8 +1,10 @@
-/* Sources:
-- https://www.youtube.com/watch?v=qxcfco89wvs
-- https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/2d_constant_memory/convolution.cu
-- https://mathworld.wolfram.com/Convolution.html
-*/
+// Sequential 2-D Convolutuion Program
+//
+// Code sourced and adpated from the following author/s and sources: 
+// - https://www.youtube.com/watch?v=qxcfco89wvs
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/2d_constant_memory/convolution.cu
+// - https://mathworld.wolfram.com/Convolution.html
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 #include <cassert>
 #include <cstdlib>
@@ -35,11 +37,11 @@ int main() {
 
     clock_t start = clock();
 
-    // Allocate the matrix and initialize it
+    // Allocate the matrix and initialise it
     vector<int> matrix(no_elements * no_elements);
     init_matrix(matrix, no_elements);
 
-    // Allocate the mask and initialize it
+    // Allocate the mask and initialise it
     vector<int> h_mask (MASK_DIM * MASK_DIM);
     init_matrix(h_mask, MASK_DIM);
 
@@ -71,20 +73,19 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-    // Work from a bases of 1024 and times that to get a good array number
-    // 4096 elements
+        // 4096 elements
     if (temp_input == 1) {
         element_size = 4096;
-    } // 5120 elements
+    }   // 5120 elements
     else if (temp_input == 2) {
         element_size = 5120;
-    } // 6144 elements
+    }   // 6144 elements
     else if (temp_input == 3) {
         element_size = 6144;
-    } // 8192 elements
+    }   // 8192 elements
     else if (temp_input == 4) {
         element_size = 8192;
-    } // 10240 elements
+    }   // 10240 elements
     else if (temp_input == 5) {
         element_size = 10240;
     }
@@ -92,10 +93,10 @@ int element_set(int element_size) {
     return element_size;
 }
 
-// Initializes an n x n matrix with random numbers
-// Takes:
-//  m : Pointer to the matrix
-//  no_elements : Dimension of the matrix (square)
+// Initialises an n x n matrix with random numbers
+// Arguments:
+//  m = Pointer to the matrix
+//  no_elements = Dimension of the matrix (square)
 void init_matrix(vector<int> m, int no_elements) {
     for (int i = 0; i < no_elements; i++) {
         for (int j = 0; j < no_elements; j++) {
@@ -104,11 +105,11 @@ void init_matrix(vector<int> m, int no_elements) {
     }
 }
 
-// Verifies the 2D convolution result on the CPU
-// Takes:
-//  m:      Original matrix
-//  mask:   Convolutional mask
-//  no_elements:      Dimensions of the matrix
+// Executes 2D convolution
+// Arguments:
+//  m = Original matrix
+//  mask = Convolutional mask
+//  no_elements = Dimensions of the matrix
 
 void convolution_2d(vector<int> m, vector<int> mask, int no_elements) {
     // Temp value for accumulating results
@@ -122,7 +123,7 @@ void convolution_2d(vector<int> m, vector<int> mask, int no_elements) {
     for (int i = 0; i < no_elements; i++) {
         // Go over each column
         for (int j = 0; j < no_elements; j++) {
-            // Reset the temp variable
+            // Assign the temp variable a value
             temp = 0;
 
             // Go over each mask row
@@ -135,7 +136,7 @@ void convolution_2d(vector<int> m, vector<int> mask, int no_elements) {
                     // Update offset value for column
                     offset_c = j - MASK_OFFSET + l;
 
-                    // Range checks if we are hanging off the matrix
+                    // Range checks if hanging off the matrix
                     if (offset_r >= 0 && offset_r < no_elements) {
                         if (offset_c >= 0 && offset_c < no_elements) {
                             // Accumulate partial results

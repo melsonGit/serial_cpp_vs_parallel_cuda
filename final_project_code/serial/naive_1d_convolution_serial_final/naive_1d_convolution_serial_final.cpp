@@ -1,8 +1,10 @@
-/* Sources:
-- https://www.youtube.com/watch?v=OlLquh9Lnbc
-- https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/1d_naive/convolution.cu
-- https://mathworld.wolfram.com/Convolution.html
-*/
+// Sequential Naive 1-D Convolution Program
+//
+// Code sourced and adpated from the following author/s and sources: 
+// - https://www.youtube.com/watch?v=OlLquh9Lnbc
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/1d_naive/convolution.cu
+// - https://mathworld.wolfram.com/Convolution.html
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 
 #include <algorithm>
@@ -15,14 +17,6 @@ using std::cout;
 using std::cin;
 using std::generate;
 using std::vector;
-
-// 1-D convolution kernel
-//  Arguments:
-//      array   = padded array
-//      mask    = convolution mask
-//      result  = result array
-//      no_elements       = number of elements in array
-//      m       = number of elements in the mask
 
 // Function Prototypes
 int element_set(int);
@@ -39,7 +33,7 @@ int main() {
     // Number of elements in the convolution mask
     int m = 7;
 
-    // Allocate the vector with no_elements...
+    // Allocate the vector with no_elements
     vector<int> h_array(no_elements);
 
     clock_t start = clock();
@@ -47,7 +41,7 @@ int main() {
     // Generate random numbers via Lambda C++11 function, and place into vector
     generate(begin(h_array), end(h_array), []() { return rand() % 100; });
 
-    // Allocate the mask and initialize it || m mumber of elements in vector are randomised between 1 - 10
+    // Allocate the mask and initialise it || m mumber of elements in vector are randomised between 1 - 10
     vector<int> h_mask(m);
     generate(begin(h_mask), end(h_mask), []() { return rand() % 10; });
 

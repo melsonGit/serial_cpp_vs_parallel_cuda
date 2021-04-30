@@ -1,12 +1,11 @@
 // Sequential Matrix Multiplication Program 
-/*
- Code sourced and adpated from the following author/s and sourcess:
- - https://www.programiz.com/cpp-programming/examples/matrix-multiplication
- - https://github.com/CoffeeBeforeArch/from_scratch/blob/master/matrixMul/matrix_mul.cu
- - https://docs.microsoft.com/en-us/archive/msdn-magazine/2012/april/c-amp-introduction-to-tiling-in-c-amp
- - https://docs.microsoft.com/en-us/cpp/parallel/amp/walkthrough-matrix-multiplication?view=msvc-160
- Please refer to the bibliography for a complete reference of the above author/s and sources
-*/
+//
+// Code sourced and adpated from the following author/s and sources:
+// - https://www.programiz.com/cpp-programming/examples/matrix-multiplication
+// - https://github.com/CoffeeBeforeArch/from_scratch/blob/master/matrixMul/matrix_mul.cu
+// - https://docs.microsoft.com/en-us/archive/msdn-magazine/2012/april/c-amp-introduction-to-tiling-in-c-amp
+// - https://docs.microsoft.com/en-us/cpp/parallel/amp/walkthrough-matrix-multiplication?view=msvc-160
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 #include <algorithm>
 #include <iostream>
@@ -26,7 +25,7 @@ int main() {
     // Call element_set function to assign variable no_elements with a user selected value
     static int no_elements = element_set(no_elements);
 
-    // Host vectors
+    // Initialise vector size
     vector<int> a(no_elements * no_elements), b(no_elements * no_elements), c(no_elements * no_elements);
 
     // Start the clock
@@ -42,7 +41,7 @@ int main() {
 
     matrix_multi(a, b, c, no_elements);
 
-    // Stop the clock just after the vectorAdd function finishes executing
+    
     clock_t end = clock();
 
     double diffs = (end - start) / (double)CLOCKS_PER_SEC;
@@ -70,19 +69,19 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-
+        // 1000 elements
     if (temp_input == 1) {
         element_size = 1000;
-    }
+    }   // 1500 elements
     else if (temp_input == 2) {
         element_size = 1500;
-    }
+    }   // 2000 elements
     else if (temp_input == 3) {
         element_size = 2000;
-    }
+    }   // 2500 elements
     else if (temp_input == 4) {
         element_size = 2500;
-    }
+    }   // 3000 elements
     else if (temp_input == 5) {
         element_size = 3000;
     }

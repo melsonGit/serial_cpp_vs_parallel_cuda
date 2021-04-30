@@ -1,8 +1,10 @@
-// Vector Addition - Serial
-// Sources: 
-// https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
-// https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
-// https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
+// Sequential Vector Addition Program
+//
+// Code sourced and adpated from the following author/s and sources: 
+// - https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
+// - https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
+// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 #include <iostream>
 #include <algorithm>
