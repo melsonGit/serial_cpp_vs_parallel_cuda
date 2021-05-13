@@ -48,12 +48,8 @@ int main() {
     clock_t start = clock();
 
     // Initialise vector matrices by generating random numbers via Lambda C++11 function
-    generate(h_a.begin(), h_a.end(), []() {
-        return rand() % 100;
-        });
-    generate(h_b.begin(), h_b.end(), []() {
-        return rand() % 100;
-        });
+    generate(h_a.begin(), h_a.end(), []() {return rand() % 100;});
+    generate(h_b.begin(), h_b.end(), []() {return rand() % 100;});
 
     // Allocate device memory
     int* d_a, * d_b, * d_c;
