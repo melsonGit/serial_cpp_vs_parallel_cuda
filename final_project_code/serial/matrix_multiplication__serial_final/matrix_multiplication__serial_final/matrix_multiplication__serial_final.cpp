@@ -32,12 +32,8 @@ int main() {
     clock_t start = clock();
 
     // Initialise vector matrices by generating random numbers via Lambda C++11 function
-    generate(a.begin(), a.end(), []() {
-        return rand() % 100;
-        });
-    generate(b.begin(), b.end(), []() {
-        return rand() % 100;
-        });
+    generate(a.begin(), a.end(), []() {return rand() % 100;});
+    generate(b.begin(), b.end(), []() {return rand() % 100;});
 
     matrix_multi(a, b, c, no_elements);
 

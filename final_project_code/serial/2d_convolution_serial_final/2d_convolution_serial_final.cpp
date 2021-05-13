@@ -93,7 +93,7 @@ int element_set(int element_size) {
     return element_size;
 }
 
-// Initialises an n x n matrix with random numbers
+// Initialises an no_elements x no_elements matrix with random numbers
 // Arguments:
 //  m = Pointer to the matrix
 //  no_elements = Dimension of the matrix (square)

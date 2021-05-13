@@ -1,0 +1,6 @@
+﻿  matrix_multiplication__serial_final.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 87 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  matrix_multiplication__serial_final.vcxproj -> C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\matrix_multiplication__serial_final\Release\matrix_multiplication__serial_final.exe
