@@ -19,9 +19,7 @@ using std::vector;
 // Function Prototypes
 int element_set(int);
 
-// Kernal that will be called from host (CPU) and run on the device (GPU)
-// Function that computes the sum of two arrays
-// CUDA kernel for vector addition || __global__ means this is called from the CPU, and runs on the GPU
+// CUDA kernel for vector addition || Function that computes the sum of two arrays
 __global__ void vectorAdd(const int* __restrict a, const int* __restrict b,
     int* __restrict c, int no_elements) {
     // Calculate global thread ID
@@ -51,18 +49,8 @@ int main() {
     clock_t start = clock();
 
     // Initialise vector by generating random numbers via Lambda C++11 function
-    generate(a.begin(), a.end(), []() {
-        return rand() % 100;
-        });
-    generate(b.begin(), b.end(), []() {
-        return rand() % 100;
-        });
-
-    // Alternative but slower || Initialize random numbers in each array
-    //for (int i = 0; i < no_elements; i++) {
-    //    a.push_back(rand() % 100);
-    //    b.push_back(rand() % 100);
-    //}
+    generate(a.begin(), a.end(), []() {return rand() % 100;});
+    generate(b.begin(), b.end(), []() {return rand() % 100;});
 
     // Allocate memory on the device (GPU)
     int* d_a, * d_b, * d_c;
@@ -78,21 +66,12 @@ int main() {
     int NUM_THREADS = 1 << 10;
 
     // CTAs per Grid
-    // We need to launch at LEAST as many threads as we have elements
-    // This equation pads an extra CTA to the grid if N cannot evenly be divided
-    // by NUM_THREADS (e.g. N = 1025, NUM_THREADS = 1024)
     int NUM_BLOCKS = (no_elements + NUM_THREADS - 1) / NUM_THREADS;
 
     // Launch the kernel on the GPU
-    // Kernel calls are asynchronous (the CPU program continues execution after
-    // call, but not necessarily before the kernel finishes)
     vectorAdd << <NUM_BLOCKS, NUM_THREADS >> > (d_a, d_b, d_c, no_elements);
 
     // Copy sum vector from device to host
-    // cudaMemcpy is a synchronous operation, and waits for the prior kernel
-    // launch to complete (both go to the default stream in this case).
-    // Therefore, this cudaMemcpy acts as both a memcpy and synchronization
-    // barrier.
     cudaMemcpy(c.data(), d_c, bytes, cudaMemcpyDeviceToHost);
 
     // Free memory on device

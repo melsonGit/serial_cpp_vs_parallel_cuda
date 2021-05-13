@@ -61,7 +61,7 @@ int main() {
     // Call element_set function to assign variable no_elements with a user selected value || Sets number of elements to be used
     static int no_elements = element_set(no_elements);
 
-    // Size of the array in bytes
+    // Size of the vector in bytes
     int bytes_n = no_elements * sizeof(int);
 
     // Number of elements in the convolution mask
@@ -95,7 +95,7 @@ int main() {
     cudaMemcpy(d_array, h_array.data(), bytes_n, cudaMemcpyHostToDevice);
     cudaMemcpy(d_mask, h_mask.data(), bytes_m, cudaMemcpyHostToDevice);
 
-    // Threads per TB
+    // Threads per TB (thread blocks)
     int THREADS = 256;
 
     // Number of TBs
@@ -104,7 +104,7 @@ int main() {
     // Call the kernel
     convolution_1d << <GRID, THREADS >> > (d_array, d_mask, d_result, no_elements, m);
 
-    // Copy back to the host - Might be able to delete as this is for the Verify_result function
+    // Copy back to the host
     cudaMemcpy(h_result.data(), d_result, bytes_n, cudaMemcpyDeviceToHost);
 
     // Free allocated memory on the device and host
