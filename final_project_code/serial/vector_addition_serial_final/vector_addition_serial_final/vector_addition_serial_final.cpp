@@ -32,12 +32,6 @@ int main()
 	generate(a.begin(), a.end(), []() { return rand() % 100; });
 	generate(b.begin(), b.end(), []() { return rand() % 100; });
 
-	// Slower alternative non-random vector initialisation 
-	//for (size_t i = 0; i < no_elements; ++i) {
-	//	a[i] = 1 / (unsigned int)(i + 1);
-	//	b[i] = a[i];
-	//} 
-
 	add(a, b, c);
 
 	clock_t end = clock();

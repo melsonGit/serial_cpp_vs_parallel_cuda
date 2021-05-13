@@ -1,0 +1,6 @@
+﻿  naive_1d_convolution_serial_final.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 88 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  naive_1d_convolution_serial_final.vcxproj -> C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\naive_1d_convolution_serial_final\Release\naive_1d_convolution_serial_final.exe

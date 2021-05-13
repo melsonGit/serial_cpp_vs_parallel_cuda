@@ -1,0 +1,1 @@
+C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\naive_1d_convolution_serial_final\Release\naive_1d_convolution_serial_final.exe
