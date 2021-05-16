@@ -6,8 +6,7 @@
 // - https://mathworld.wolfram.com/Convolution.html
 // Please refer to the bibliography for a complete reference of the above author/s and sources
 
-#include <cassert>
-#include <cstdlib>
+
 #include <iostream>
 #include <vector>
 
@@ -92,6 +91,9 @@ int element_set(int element_size) {
 
     return element_size;
 }
+
+
+//Function Declarations
 
 // Initialises an no_elements x no_elements matrix with random numbers
 // Arguments:

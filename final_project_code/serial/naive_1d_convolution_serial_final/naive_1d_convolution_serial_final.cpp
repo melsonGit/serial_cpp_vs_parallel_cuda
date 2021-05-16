@@ -8,8 +8,6 @@
 
 
 #include <algorithm>
-#include <cassert>
-#include <cstdlib>
 #include <iostream>
 #include <vector>
 
@@ -27,19 +25,19 @@ int main() {
     // Call element_set function to assign variable no_elements with a user selected value || Sets number of elements to be used
     static int no_elements = element_set(no_elements);
 
-    // Size of the array in bytes
+    // Size of the vector in bytes
     int bytes_n = no_elements * sizeof(int);
 
     // Number of elements in the convolution mask
     int m = 7;
 
     // Allocate the vector with no_elements
-    vector<int> h_array(no_elements);
+    vector<int> h_vector(no_elements);
 
     clock_t start = clock();
 
     // Generate random numbers via Lambda C++11 function, and place into vector
-    generate(begin(h_array), end(h_array), []() { return rand() % 100; });
+    generate(begin(h_vector), end(h_vector), []() { return rand() % 100; });
 
     // Allocate the mask and initialise it || m mumber of elements in vector are randomised between 1 - 10
     vector<int> h_mask(m);
@@ -48,7 +46,7 @@ int main() {
     // Allocate space for the result
     vector<int> h_result(no_elements);
 
-    convolution(h_array, h_mask, h_result, no_elements, m);
+    convolution(h_vector, h_mask, h_result, no_elements, m);
 
     clock_t end = clock();
 
@@ -59,7 +57,7 @@ int main() {
     return EXIT_SUCCESS;
 }
 
-// Function Prototypes
+
 int element_set(int element_size) {
 
     int temp_input;
@@ -97,7 +95,7 @@ int element_set(int element_size) {
     return element_size;
 }
 
-void convolution(vector<int> array, vector<int> mask, vector<int> result, int element_size, int m) {
+void convolution(vector<int> main_vector, vector<int> mask, vector<int> result, int element_size, int m) {
 
     int radius = m / 2;
     int temp;
@@ -108,7 +106,7 @@ void convolution(vector<int> array, vector<int> mask, vector<int> result, int el
         temp = 0;
         for (int j = 0; j < m; j++) {
             if ((start + j >= 0) && (start + j < element_size)) {
-                temp += array[start + j] * mask[j];
+                temp += main_vector[start + j] * mask[j];
             }
         }
     }
