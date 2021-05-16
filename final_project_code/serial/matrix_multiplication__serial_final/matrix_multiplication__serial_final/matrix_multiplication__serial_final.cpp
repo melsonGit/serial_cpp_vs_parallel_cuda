@@ -18,7 +18,7 @@ using std::vector;
 
 // Function Prototypes
 int element_set(int);
-void matrix_multi(const vector<int>, const vector<int>, const vector<int>, int);
+void matrix_multi(vector<int>, vector<int>, vector<int>, int);
 
 int main() {
 
@@ -84,7 +84,7 @@ int element_set(int element_size) {
 
     return element_size;
 }
-void matrix_multi(const vector<int> matrix_a, const vector<int> matrix_b, vector<int> matrix_mult, int elements) {
+void matrix_multi(vector<int> matrix_a, vector<int> matrix_b, vector<int> matrix_mult, int elements) {
     // For each row
     for (int row = 0; row < elements; row++) {
         // For each column
