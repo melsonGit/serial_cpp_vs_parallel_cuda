@@ -20,13 +20,13 @@ using std::vector;
 
 // 1-D convolution kernel
 //  Arguments:
-//      array   = padded array
+//      vector   = padded vector
 //      mask    = convolution mask
-//      result  = result array
-//      no_elements       = number of elements in array
+//      result  = result vector
+//      no_elements       = number of elements in vector
 //      m       = number of elements in the mask
 
-__global__ void convolution_1d(int* array, int* mask, int* result, int no_elements,
+__global__ void convolution_1d(int* vector, int* mask, int* result, int no_elements,
     int m) {
     // Global thread ID calculation
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
@@ -45,7 +45,7 @@ __global__ void convolution_1d(int* array, int* mask, int* result, int no_elemen
         // Ignore elements that hang off (0s don't contribute)
         if (((start + j) >= 0) && (start + j < no_elements)) {
             // accumulate partial results
-            temp += array[start + j] * mask[j];
+            temp += vector[start + j] * mask[j];
         }
     }
 
@@ -71,12 +71,12 @@ int main() {
     int bytes_m = m * sizeof(int);
 
     // Allocate the vector with no_elements...
-    vector<int> h_array(no_elements);
+    vector<int> h_vector(no_elements);
 
     clock_t start = clock();
 
     // Generate random numbers via Lambda C++11 function, and place into vector
-    generate(begin(h_array), end(h_array), []() { return rand() % 100; });
+    generate(begin(h_vector), end(h_vector), []() { return rand() % 100; });
 
     // Allocate the mask and initialise it || m mumber of elements in vector are randomised between 1 - 10
     vector<int> h_mask(m);
@@ -86,13 +86,13 @@ int main() {
     vector<int> h_result(no_elements);
 
     // Allocate space on the device
-    int* d_array, * d_mask, * d_result;
-    cudaMalloc(&d_array, bytes_n);
+    int* d_vector, * d_mask, * d_result;
+    cudaMalloc(&d_vector, bytes_n);
     cudaMalloc(&d_mask, bytes_m);
     cudaMalloc(&d_result, bytes_n);
 
     // Copy the data to the device
-    cudaMemcpy(d_array, h_array.data(), bytes_n, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_vector, h_vector.data(), bytes_n, cudaMemcpyHostToDevice);
     cudaMemcpy(d_mask, h_mask.data(), bytes_m, cudaMemcpyHostToDevice);
 
     // Threads per TB (thread blocks)
@@ -102,7 +102,7 @@ int main() {
     int GRID = (no_elements + THREADS - 1) / THREADS;
 
     // Call the kernel
-    convolution_1d << <GRID, THREADS >> > (d_array, d_mask, d_result, no_elements, m);
+    convolution_1d << <GRID, THREADS >> > (d_vector, d_mask, d_result, no_elements, m);
 
     // Copy back to the host
     cudaMemcpy(h_result.data(), d_result, bytes_n, cudaMemcpyDeviceToHost);
@@ -110,7 +110,7 @@ int main() {
     // Free allocated memory on the device and host
     cudaFree(d_result);
     cudaFree(d_mask);
-    cudaFree(d_array);
+    cudaFree(d_vector);
 
     clock_t end = clock();
 
@@ -121,7 +121,7 @@ int main() {
     return EXIT_SUCCESS;
 }
 
-// Function Prototypes
+
 int element_set(int element_size) {
 
     int temp_input;

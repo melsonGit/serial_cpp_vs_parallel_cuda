@@ -19,7 +19,7 @@ using std::vector;
 // Function Prototypes
 int element_set(int);
 
-// CUDA kernel for vector addition || Function that computes the sum of two arrays
+// CUDA kernel for vector addition || Function that computes the sum of two vectors
 __global__ void vectorAdd(const int* __restrict a, const int* __restrict b,
     int* __restrict c, int no_elements) {
     // Calculate global thread ID
