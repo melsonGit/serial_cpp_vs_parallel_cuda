@@ -6,7 +6,6 @@
 // - https://mathworld.wolfram.com/Convolution.html
 // Please refer to the bibliography for a complete reference of the above author/s and sources
 
-#include <cassert>
 #include <cstdlib>
 #include <iostream>
 
@@ -123,8 +122,10 @@ int main() {
     cout << "PARALLEL 2-D CONVOLUTION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
 
     return EXIT_SUCCESS;
+
 }
 
+// Function Declarations
 int element_set(int element_size) {
 
     int temp_input;
@@ -142,7 +143,6 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-    // Work from a bases of 1024 and times that to get a good array number
         // 4096 elements
     if (temp_input == 1) {
         element_size = 4096;

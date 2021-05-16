@@ -74,7 +74,7 @@ int main() {
     // Launch kernel
     matrixMul << <blocks, threads >> > (d_a, d_b, d_c, no_elements);
 
-    // Copy back to the host - Might be able to delete as this is for the Verify_result function
+    // Copy back to the host
     cudaMemcpy(h_c.data(), d_c, bytes, cudaMemcpyDeviceToHost);
 
     // Free memory on device
