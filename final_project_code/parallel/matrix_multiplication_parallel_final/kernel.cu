@@ -1,8 +1,8 @@
-﻿// Parallel Matrix Multiplication Program
+// Parallel Matrix Multiplication Program
 //
 // Code sourced and adpated from the following author/s and sources: 
 // - https://github.com/CoffeeBeforeArch/from_scratch/blob/master/matrixMul/matrix_mul.cu
-// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/matrixMul/baseline/mmul.cu
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/6589c89a78dee44e14ccb362cdae69f2e6850a2c/matrixMul/baseline/mmul.cu
 // - https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
 // - https://docs.microsoft.com/en-us/archive/msdn-magazine/2012/april/c-amp-introduction-to-tiling-in-c-amp
 // - https://docs.microsoft.com/en-us/cpp/parallel/amp/walkthrough-matrix-multiplication?view=msvc-160
@@ -64,8 +64,8 @@ int main() {
     // Threads per CTA dimension
     int THREADS = 32;
 
-    // Blocks per grid dimension (assumes THREADS divides N evenly)
-    int BLOCKS = no_elements / THREADS;
+    // Blocks per grid dimension
+    int BLOCKS = (no_elements + THREADS - 1) / THREADS;
 
     // Use dim3 structs for block  and grid dimensions
     dim3 threads(THREADS, THREADS);
