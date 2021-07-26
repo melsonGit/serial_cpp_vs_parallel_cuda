@@ -1,8 +1,8 @@
-﻿// Parallel Vector Addition Program
+// Parallel Vector Addition Program
 //
 // Code sourced and adpated from the following author/s and sources: 
 // - https://solarianprogrammer.com/2012/04/11/vector-addition-benchmark-c-cpp-fortran/
-// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/vectorAdd/baseline/vectorAdd.cu
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/6589c89a78dee44e14ccb362cdae69f2e6850a2c/vectorAdd/baseline/vectorAdd.cu
 // - https://www.youtube.com/watch?v=QVVTsLmMlwk&t
 // - https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
 // Please refer to the bibliography for a complete reference of the above author/s and sources
@@ -37,13 +37,9 @@ int main() {
     size_t bytes = sizeof(int) * no_elements;
 
     // Vectors for holding the host-side (CPU-side) data
-    vector<int> a;
-    vector<int> b;
-    vector<int> c;
-
-    a.reserve(no_elements);
-    b.reserve(no_elements);
-    c.reserve(no_elements);
+    vector<int> a (no_elements);
+    vector<int> b (no_elements);
+    vector<int> c (no_elements);
 
     // Start the clock
     clock_t start = clock();
