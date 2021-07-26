@@ -25,7 +25,8 @@ using std::vector;
 //      m       = number of elements in the mask
 
 __global__ void convolution_1d(int* vector, int* mask, int* result, int no_elements,
-    int m) {
+    int m)
+{
     // Global thread ID calculation
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
 
@@ -39,9 +40,11 @@ __global__ void convolution_1d(int* vector, int* mask, int* result, int no_eleme
     int temp = 0;
 
     // Go over each element of the mask
-    for (int j = 0; j < m; j++) {
+    for (int j = 0; j < m; j++)
+    {
         // Ignore elements that hang off (0s don't contribute)
-        if (((start + j) >= 0) && (start + j < no_elements)) {
+        if (((start + j) >= 0) && (start + j < no_elements))
+        {
             // accumulate partial results
             temp += vector[start + j] * mask[j];
         }
@@ -54,7 +57,8 @@ __global__ void convolution_1d(int* vector, int* mask, int* result, int no_eleme
 // Function Prototypes
 int element_set(int);
 
-int main() {
+int main()
+{
 
     // Call element_set function to assign variable no_elements with a user selected value || Sets number of elements to be used
     static int no_elements = element_set(no_elements);
@@ -79,47 +83,48 @@ int main() {
 
     // Generate random numbers via Lambda C++11 function, and place into vector
     generate(begin(h_vector), end(h_vector), []() { return rand() % 100; });
-    // initialise mask || m mumber of elements in vector are randomised between 1 - 10
-    generate(begin(h_mask), end(h_mask), []() { return rand() % 10; });
+// initialise mask || m mumber of elements in vector are randomised between 1 - 10
+generate(begin(h_mask), end(h_mask), []() { return rand() % 10; });
 
-    // Allocate space on the device
-    int* d_vector, * d_mask, * d_result;
-    cudaMalloc(&d_vector, bytes_n);
-    cudaMalloc(&d_mask, bytes_m);
-    cudaMalloc(&d_result, bytes_n);
+// Allocate space on the device
+int* d_vector, * d_mask, * d_result;
+cudaMalloc(&d_vector, bytes_n);
+cudaMalloc(&d_mask, bytes_m);
+cudaMalloc(&d_result, bytes_n);
 
-    // Copy the data to the device
-    cudaMemcpy(d_vector, h_vector.data(), bytes_n, cudaMemcpyHostToDevice);
-    cudaMemcpy(d_mask, h_mask.data(), bytes_m, cudaMemcpyHostToDevice);
+// Copy the data to the device
+cudaMemcpy(d_vector, h_vector.data(), bytes_n, cudaMemcpyHostToDevice);
+cudaMemcpy(d_mask, h_mask.data(), bytes_m, cudaMemcpyHostToDevice);
 
-    // Threads per TB (thread blocks)
-    int THREADS = 256;
+// Threads per TB (thread blocks)
+int THREADS = 256;
 
-    // Number of TBs
-    int BLOCKS = (no_elements + THREADS - 1) / THREADS;
+// Number of TBs
+int BLOCKS = (no_elements + THREADS - 1) / THREADS;
 
-    // Call the kernel
-    convolution_1d << <BLOCKS, THREADS >> > (d_vector, d_mask, d_result, no_elements, m);
+// Call the kernel
+convolution_1d << < BLOCKS, THREADS >> > (d_vector, d_mask, d_result, no_elements, m);
 
-    // Copy back to the host
-    cudaMemcpy(h_result.data(), d_result, bytes_n, cudaMemcpyDeviceToHost);
+// Copy back to the host
+cudaMemcpy(h_result.data(), d_result, bytes_n, cudaMemcpyDeviceToHost);
 
-    // Free allocated memory on the device and host
-    cudaFree(d_result);
-    cudaFree(d_mask);
-    cudaFree(d_vector);
+// Free allocated memory on the device and host
+cudaFree(d_result);
+cudaFree(d_mask);
+cudaFree(d_vector);
 
-    clock_t end = clock();
+clock_t end = clock();
 
-    double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-    cout << diffs << "s 1-D Naive Convolution computation time, with an element size of " << no_elements << ".\n";
-    cout << "PARALLEL 1-D NAIVE CONVOLUTION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
+double diffs = (end - start) / (double)CLOCKS_PER_SEC;
+cout << diffs << "s 1-D Naive Convolution computation time, with an element size of " << no_elements << ".\n";
+cout << "PARALLEL 1-D NAIVE CONVOLUTION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
 
-    return EXIT_SUCCESS;
+return EXIT_SUCCESS;
 }
 
 
-int element_set(int element_size) {
+int element_set(int element_size)
+{
 
     int temp_input;
 
@@ -136,20 +141,25 @@ int element_set(int element_size) {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-        // 10 million elements
-    if (temp_input == 1) {
+    // 10 million elements
+    if (temp_input == 1)
+    {
         element_size = 10000000;
     }   // 25 million elements
-    else if (temp_input == 2) {
+    else if (temp_input == 2)
+    {
         element_size = 25000000;
     }   // 55 million elements
-    else if (temp_input == 3) {
+    else if (temp_input == 3)
+    {
         element_size = 55000000;
     }   // 75 million elements
-    else if (temp_input == 4) {
+    else if (temp_input == 4)
+    {
         element_size = 75000000;
     }   // 90 million elements
-    else if (temp_input == 5) {
+    else if (temp_input == 5)
+    {
         element_size = 90000000;
     }
 
