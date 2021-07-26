@@ -1,15 +1,13 @@
-﻿// Parallel Naive 1-D Convolution Program
+// Parallel Naive 1-D Convolution Program
 //
 // Code sourced and adpated from the following author/s and sources: 
 // - https://www.youtube.com/watch?v=OlLquh9Lnbc
-// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/master/convolution/1d_naive/convolution.cu
+// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/6589c89a78dee44e14ccb362cdae69f2e6850a2c/convolution/1d_naive/convolution.cu
 // - https://mathworld.wolfram.com/Convolution.html
 // Please refer to the bibliography for a complete reference of the above author/s and sources
 
 
 #include <algorithm>
-#include <cassert>
-#include <cstdlib>
 #include <iostream>
 #include <vector>
 
@@ -32,10 +30,10 @@ __global__ void convolution_1d(int* vector, int* mask, int* result, int no_eleme
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Calculate radius of the mask
-    int r = m / 2;
+    int radius = m / 2;
 
     // Calculate the starting point for the element
-    int start = tid - r;
+    int start = tid - radius;
 
     // Temp value for calculation
     int temp = 0;
@@ -72,18 +70,17 @@ int main() {
 
     // Allocate the vector with no_elements...
     vector<int> h_vector(no_elements);
+    // Allocate the mask with m...
+    vector<int> h_mask(m);
+    // Allocate space for the result
+    vector<int> h_result(no_elements);
 
     clock_t start = clock();
 
     // Generate random numbers via Lambda C++11 function, and place into vector
     generate(begin(h_vector), end(h_vector), []() { return rand() % 100; });
-
-    // Allocate the mask and initialise it || m mumber of elements in vector are randomised between 1 - 10
-    vector<int> h_mask(m);
+    // initialise mask || m mumber of elements in vector are randomised between 1 - 10
     generate(begin(h_mask), end(h_mask), []() { return rand() % 10; });
-
-    // Allocate space for the result
-    vector<int> h_result(no_elements);
 
     // Allocate space on the device
     int* d_vector, * d_mask, * d_result;
@@ -99,10 +96,10 @@ int main() {
     int THREADS = 256;
 
     // Number of TBs
-    int GRID = (no_elements + THREADS - 1) / THREADS;
+    int BLOCKS = (no_elements + THREADS - 1) / THREADS;
 
     // Call the kernel
-    convolution_1d << <GRID, THREADS >> > (d_vector, d_mask, d_result, no_elements, m);
+    convolution_1d << <BLOCKS, THREADS >> > (d_vector, d_mask, d_result, no_elements, m);
 
     // Copy back to the host
     cudaMemcpy(h_result.data(), d_result, bytes_n, cudaMemcpyDeviceToHost);
