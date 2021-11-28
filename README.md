@@ -6,7 +6,7 @@ File raw_data.xlsx details runtime data of both parallel and serial programs.
 
 This project focuses on the GPU/GPGPU and CPU components, as well as the CUDA and C++ languages. I wanted to test and compare the computational power of both the GPU/GPGPU and CPU. To do this, I developed 8 programs: 4 programs were developed in traditional C++, and were to be executed solely by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, and were to be executed by the GPU/GPGPU. 
 
-The 4 arithmetic operations are: [Vector Addition](# Program: Vector Addition), [Matrix Multiplication](# Program: Matrix Multiplication), [1-D Convolution](# Program: 1-D Convolution) and [2-D Convolution](# Program: 2-D Convolution).
+The 4 arithmetic operations are: Vector Addition, Matrix Multiplication, 1-D Convolution and 2-D Convolution.
 
 # Detailed Overview
 
@@ -18,16 +18,20 @@ My first hurdle was overcoming the technical issues that came with setting up CU
 
 With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became more familiar with CUDA. Perhaps in the future I will look at pushing a more OOP stance on the code, as well as compiling all programs into one single program. As it stands, I believe each program serves the purpose it was made for. 
 
-# Program: Vector Addition
+# Program Design: Vector Addition
 WIP
+
 ![image](https://user-images.githubusercontent.com/50531920/143775297-518d75d8-155f-4b65-af49-84203804684b.png)
-# Program: Matrix Multiplication
+# Program Design: Matrix Multiplication
 WIP
+
 ![image](https://user-images.githubusercontent.com/50531920/143775312-2c57ea4a-67f1-4767-b885-53c245922dfa.png)
-# Program: 1-D Convolution
+# Program Design: 1-D Convolution
 WIP
+
 ![image](https://user-images.githubusercontent.com/50531920/143775280-c8060745-af36-4295-9d2b-496ed4adb974.png)
-# Program: 2-D Convolution
+# Program Design: 2-D Convolution
 WIP
+
 ![image](https://user-images.githubusercontent.com/50531920/143775286-eb21b914-e63e-408a-8fc9-05370b7a645e.png)
 
