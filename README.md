@@ -6,17 +6,7 @@ File raw_data.xlsx details runtime data of both parallel and serial programs.
 
 This project focuses on the GPU/GPGPU and CPU components, as well as the CUDA and C++ languages. I wanted to test and compare the computational power of both the GPU/GPGPU and CPU. To do this, I developed 8 programs: 4 programs were developed in traditional C++, and were to be executed solely by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, and were to be executed by the GPU/GPGPU. 
 
-The 4 arithmetic operations are: [Vector Addition](#Program: Vector Addition), [Matrix Multiplication](#Program: Matrix Multiplication), [1-D Convolution](#Program: 1-D Convolution) and [2-D Convolution](#Program: 2-D Convolution).
-
-# Program: Vector Addition
-WIP
-# Program: Matrix Multiplication
-WIP
-# Program: 1-D Convolution
-WIP
-# Program: 2-D Convolution
-WIP
-
+The 4 arithmetic operations are: [Vector Addition](# Program: Vector Addition), [Matrix Multiplication](# Program: Matrix Multiplication), [1-D Convolution](# Program: 1-D Convolution) and [2-D Convolution](# Program: 2-D Convolution).
 
 # Detailed Overview
 
