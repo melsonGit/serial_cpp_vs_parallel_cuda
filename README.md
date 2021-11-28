@@ -32,6 +32,12 @@ WIP
 ![image](https://user-images.githubusercontent.com/50531920/143775280-c8060745-af36-4295-9d2b-496ed4adb974.png)
 # Program Design: 2-D Convolution
 WIP
-
 ![image](https://user-images.githubusercontent.com/50531920/143775286-eb21b914-e63e-408a-8fc9-05370b7a645e.png)
+
+
+
+### Sublime's custom image
+<p align="center">
+  <img src="https://github.com/waldyr/Sublime-Installer/blob/master/sublime_text.png?raw=true" alt="Sublime's custom image"/>
+</p>
 
