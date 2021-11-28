@@ -2,7 +2,23 @@
 Dissertation work for completion of MSc ICT. This implementation, alongside my written thesis, achieved a 77% mark. I achieved a Distinction for my MSc overall.
 File raw_data.xlsx details runtime data of both parallel and serial programs.
 
-# Overview
+# Basic Overview
+
+This project focuses on the GPU/GPGPU and CPU components, as well as the CUDA and C++ languages. I wanted to test and compare the computational power of both the GPU/GPGPU and CPU. To do this, I developed 8 programs: 4 programs were developed in traditional C++, and were to be executed solely by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, and were to be executed by the GPU/GPGPU. 
+
+The 4 arithmetic operations are: [Vector Addition](#Program: Vector Addition), [Matrix Multiplication](#Program: Matrix Multiplication), [1-D Convolution](#Program: 1-D Convolution) and [2-D Convolution](#Program: 2-D Convolution).
+
+# Program: Vector Addition
+WIP
+# Program: Matrix Multiplication
+WIP
+# Program: 1-D Convolution
+WIP
+# Program: 2-D Convolution
+WIP
+
+
+# Detailed Overview
 
 I started this project to not only fulfill my MSc, but I also hold a keen interest in the roles of the GPU/GPGPU (graphics processing unit/ general-purpose graphics processing unit) and CPU (central processing unit). I wanted to test the capabilities of both components in numerous environments that were computationally intensive enough to determine where the strengths of GPU/GPGPUs and CPUs lie anecdotally (this area is heavily documented). Combining that with my passion for coding; I went down the rabbit hole that is CUDA (compute unified device architecture). 
 
