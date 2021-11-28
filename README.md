@@ -18,26 +18,35 @@ My first hurdle was overcoming the technical issues that came with setting up CU
 
 With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became more familiar with CUDA. Perhaps in the future I will look at pushing a more OOP stance on the code, as well as compiling all programs into one single program. As it stands, I believe each program serves the purpose it was made for. 
 
+
 # Program Design: Vector Addition
 WIP
 
-![image](https://user-images.githubusercontent.com/50531920/143775297-518d75d8-155f-4b65-af49-84203804684b.png)
+<p align="center">
+  <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/add.png" alt="Vector Addition"/>
+</p>
+
+
 # Program Design: Matrix Multiplication
 WIP
 
-![image](https://user-images.githubusercontent.com/50531920/143775312-2c57ea4a-67f1-4767-b885-53c245922dfa.png)
+<p align="center">
+  <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/multi.png" alt="Matrix Multiplication"/>
+</p>
+
+
 # Program Design: 1-D Convolution
 WIP
 
-![image](https://user-images.githubusercontent.com/50531920/143775280-c8060745-af36-4295-9d2b-496ed4adb974.png)
+<p align="center">
+  <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/1d.png" alt="1-D Convolution"/>
+</p>
+
+
 # Program Design: 2-D Convolution
 WIP
-![image](https://user-images.githubusercontent.com/50531920/143775286-eb21b914-e63e-408a-8fc9-05370b7a645e.png)
 
-
-
-### Sublime's custom image
 <p align="center">
-  <img src="https://github.com/waldyr/Sublime-Installer/blob/master/sublime_text.png?raw=true" alt="Sublime's custom image"/>
+  <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/2d.png" alt="2-D Convolution"/>
 </p>
 
