@@ -20,9 +20,14 @@ With regards to the overall design of the code; being more acclimated to an OOP 
 
 # Program: Vector Addition
 WIP
+![image](https://user-images.githubusercontent.com/50531920/143775297-518d75d8-155f-4b65-af49-84203804684b.png)
 # Program: Matrix Multiplication
 WIP
+![image](https://user-images.githubusercontent.com/50531920/143775312-2c57ea4a-67f1-4767-b885-53c245922dfa.png)
 # Program: 1-D Convolution
 WIP
+![image](https://user-images.githubusercontent.com/50531920/143775280-c8060745-af36-4295-9d2b-496ed4adb974.png)
 # Program: 2-D Convolution
 WIP
+![image](https://user-images.githubusercontent.com/50531920/143775286-eb21b914-e63e-408a-8fc9-05370b7a645e.png)
+
