@@ -1,9 +1,11 @@
 // Sequential Vector Addition Program
 
-
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include "popVec.h"
+#include "add.h"
+
 
 using std::cout;
 using std::cin;
@@ -11,15 +13,15 @@ using std::generate;
 using std::vector;
 
 // Function Prototypes
-int element_set(int);
+int elementSet(int);
 void add(vector<int>, vector<int>, vector<int>);
 
 int main()
 {
-	// Call element_set function to assign variable no_elements with a user selected value
-	static int no_elements = element_set(no_elements);
+	// Call elementSet function to assign variable noElements with a user selected value
+	static int noElements = elementSet(noElements);
 
-	vector<int> a(no_elements), b(no_elements), c(no_elements);
+	vector<int> a(noElements), b(noElements), c(noElements);
 
     clock_t start = clock();
 
@@ -32,7 +34,7 @@ int main()
 	clock_t end = clock();
 
 	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-	cout << diffs << "s Vector Addition computation time, with an element size of " << no_elements << ".\n";
+	cout << diffs << "s Vector Addition computation time, with an element size of " << noElements << ".\n";
 	cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
 
 	return EXIT_SUCCESS;
@@ -40,9 +42,9 @@ int main()
 }
 
 // Function Declarations
-int element_set(int element_size) {
+int elementSet(int elementSize) {
 
-    int temp_input;
+    int tempInput;
 
     cout << "Please select vector addition element sample size from the options below:\n";
     cout << "1. 25,000,000\n";
@@ -50,31 +52,31 @@ int element_set(int element_size) {
     cout << "3. 45,000,000\n";
     cout << "4. 55,000,000\n";
     cout << "5. 65,000,000\n";
-    cin >> temp_input;
+    cin >> tempInput;
 
-    if (temp_input <= 0 || temp_input >= 6)
+    if (tempInput <= 0 || tempInput >= 6)
     {
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
       // 25 million elements
-    if (temp_input == 1) {
-        element_size = 25000000;
+    if (tempInput == 1) {
+        elementSize = 25000000;
     } // 35 million elements
-    else if (temp_input == 2) {
-        element_size = 35000000;
+    else if (tempInput == 2) {
+        elementSize = 35000000;
     } // 45 million elements
-    else if (temp_input == 3) {
-        element_size = 45000000;
+    else if (tempInput == 3) {
+        elementSize = 45000000;
     } // 55 million elements
-    else if (temp_input == 4) {
-        element_size = 55000000;
+    else if (tempInput == 4) {
+        elementSize = 55000000;
     } // 65 million elements
-    else if (temp_input == 5) {
-        element_size = 65000000;
+    else if (tempInput == 5) {
+        elementSize = 65000000;
     }
 
-    return element_size;
+    return elementSize;
 }
 void add(vector<int> a, vector<int> b, vector<int> c) {
 	// Add contents from vector 'a' and 'b' into vector 'c' || Transform using a Lambda C++11

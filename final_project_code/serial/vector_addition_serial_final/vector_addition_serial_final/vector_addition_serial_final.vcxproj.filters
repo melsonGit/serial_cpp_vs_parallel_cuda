@@ -18,5 +18,19 @@
     <ClCompile Include="vector_addition_serial_final.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="add.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="popVec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="add.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="popVec.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

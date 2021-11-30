@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\vector_addition_serial_final\x64\Debug\vector_addition_serial_final.exe</FullPath>
+      <FullPath>C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\x64\Debug\vector_addition_serial_final.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

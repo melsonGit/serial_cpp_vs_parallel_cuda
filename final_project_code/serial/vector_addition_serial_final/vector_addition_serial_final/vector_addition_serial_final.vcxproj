@@ -139,7 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="add.cpp" />
+    <ClCompile Include="popVec.cpp" />
     <ClCompile Include="vector_addition_serial_final.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="add.h" />
+    <ClInclude Include="popVec.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
