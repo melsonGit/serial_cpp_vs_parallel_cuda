@@ -10,16 +10,19 @@ The 4 arithmetic operations are: [Vector Addition](https://github.com/melsonGit/
 
 # Detailed Overview
 
-I started this project to not only fulfill my MSc, but I also hold a keen interest in the roles of the GPU/GPGPU (graphics processing unit/ general-purpose graphics processing unit) and CPU (central processing unit). I wanted to test the capabilities of both components in numerous environments that were computationally intensive enough to determine where the strengths of GPU/GPGPUs and CPUs lie anecdotally (this area is heavily documented). Combining that with my passion for coding; I went down the rabbit hole that is CUDA (compute unified device architecture). 
+I started this project to not only fulfill my MSc, but I also hold a keen interest in the roles of the GPU/GPGPU and CPU. I wanted to test the capabilities of both components in numerous environments that were computationally intensive enough to determine where the strengths of GPU/GPGPUs and CPUs lie anecdotally (this area is heavily documented). Combining that with my passion for coding; I went down the rabbit hole that is CUDA (compute unified device architecture; CUDA is Nvidia's propriety GPU programming language).  
 
-My first hurdle was overcoming the technical issues that came with setting up CUDA inside the VS (visual studio) environment. After **3** failed attempts and pain-stakingly configuring my workstation, I was able to get CUDA up and running. With documentation and a few online video tutorials to guide me, I was able to develop **8** mini-programs which tested the GPU/GPGPU and CPU using arithmetic operations (detailed below). 
+My first hurdle was overcoming the technical issues that came with setting up CUDA inside the VS IDE. After **3** failed attempts and pain-stakingly configuring my workstation, I was able to get CUDA up and running. With documentation and a few online video tutorials to guide me, I was able to develop **8** mini-programs which tested the GPU/GPGPU and CPU using arithmetic operations (detailed below).
 
 # Future of this project
 
 With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became more familiar with CUDA. Perhaps in the future I will look at pushing a more OOP stance on the code, as well as collating all programs into a one single program. As it stands, I believe each program serves the purpose it was made for. In the near-future, I wish to try and refactor most of the code.
 
 # Program Design: Vector Addition
-WIP
+
+The below image displays the vector addition logic. This encompasses an addition operation between two populated input vectors into a vector sum. The resulting value is then placed into an output vector. Vector addition was selected as it demonstrates raw CPU and GPU processing speeds in a computationally competent operation while undertaking a substantial sample size. Additionally, the vector addition program implementation was used as an instrument in the initial attempt of homogenising serialising parallel code, thus creating a blueprint for forthcoming program code serialisation.
+
+
 
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/add.png" alt="Vector Addition"/>
