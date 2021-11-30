@@ -60,5 +60,5 @@ Previous literature highlights that convolution is an arithmetic operation that 
 
 <p align="center">
     <p align="center"><i>Above images sourced from thesis.</i></p>
-    <p align="center"><i>Credit to Nick (CoffeeBeforeArch) for being the inspiration for this project. Your tutorials provided a foundation for this project.</i></p>
+    <p align="center"><i>Credit to Nick (CoffeeBeforeArch) for creating tutorials that provided the foundation of this project.</i></p>
 </p>
