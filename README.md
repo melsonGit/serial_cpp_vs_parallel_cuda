@@ -57,3 +57,5 @@ Presented in below, 2-D convolution follows an identical operation (of 1-D convo
 </p>
 
 Previous literature highlights that convolution is an arithmetic operation that CPUs excel at executing, inherently a result of greater cache volumes than GPUs. However, 2-D convolutions (or any multi-dimensional convolution) introduces more parallel aspects due a larger mask vector, thus incurring non-sequential data access. This additional dimension favours GPUs over CPUs. As a result, this justified the inclusion of both 1-D and 2-D convolution arithmetic operations for the present project.
+
+Credit to Nick (CoffeeBeforeArch) for inspiring this project. 
