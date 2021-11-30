@@ -22,20 +22,20 @@ With regards to the overall design of the code; being more acclimated to an OOP 
 
 The below image displays the vector addition logic. This encompasses an addition operation between two populated input vectors into a vector sum. The resulting value is then placed into an output vector. Vector addition was selected as it demonstrates raw CPU and GPU processing speeds in a computationally competent operation while undertaking a substantial sample size. Additionally, the vector addition program implementation was used as an instrument in the initial attempt of homogenising serialising parallel code, thus creating a blueprint for forthcoming program code serialisation.
 
-
-
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/add.png" alt="Vector Addition"/>
 </p>
 
-
 # Program Design: Matrix Multiplication
-WIP
+
+Matrix multiplication involves a resultant square matrix through multiplication and summation of two squared arrays or vector matrices. As displayed in figure 3.6, the two matrices, matrix A and matrix B, multiply corresponding first elements and proceeding second elements. The summation of these multiplication operations are inputted into matrix C, whereby the loop iterates continuously following this pattern until all elements of matrix A and matrix B are processed. 
 
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/multi.png" alt="Matrix Multiplication"/>
+    <p align="center"><i>X denotes a subsequent matrix element</i></p>
 </p>
 
+Matrix multiplication is a commonly used operation in computer science and software development, specifically in image and digital sound. It incorporates two fundamental components of mathematical operations: matrices and linear algebra. Additionally, it encompasses core components of ML and AI through simultaneous iterative operations of element multiplication and addition, which in turn highlights certain CPU and GPU capabilities during mass and substantial calculations. Ultimately, the operation was an important inclusion for the project.
 
 # Program Design: 1-D Convolution
 WIP
