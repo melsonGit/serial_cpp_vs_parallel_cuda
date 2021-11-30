@@ -1,10 +1,4 @@
 // Sequential Matrix Multiplication Program 
-//
-// Code sourced and adpated from the following author/s and sources:
-// - https://www.programiz.com/cpp-programming/examples/matrix-multiplication
-// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/6589c89a78dee44e14ccb362cdae69f2e6850a2c/matrixMul/baseline/mmul.cu
-// - https://docs.microsoft.com/en-us/cpp/parallel/amp/walkthrough-matrix-multiplication?view=msvc-160
-// Please refer to the bibliography for a complete reference of the above author/s and sources
 
 #include <algorithm>
 #include <iostream>
@@ -19,8 +13,7 @@ using std::vector;
 int element_set(int);
 void matrix_multi(vector<int>, vector<int>, vector<int>, int);
 
-int main()
-{
+int main() {
 
     // Call element_set function to assign variable no_elements with a user selected value
     static int no_elements = element_set(no_elements);
@@ -32,12 +25,12 @@ int main()
     clock_t start = clock();
 
     // Initialise vector matrices by generating random numbers via Lambda C++11 function
-    generate(a.begin(), a.end(), []() { return rand() % 100; });
-    generate(b.begin(), b.end(), []() { return rand() % 100; });
+    generate(a.begin(), a.end(), []() {return rand() % 100;});
+    generate(b.begin(), b.end(), []() {return rand() % 100;});
 
     matrix_multi(a, b, c, no_elements);
 
-
+    
     clock_t end = clock();
 
     double diffs = (end - start) / (double)CLOCKS_PER_SEC;
@@ -48,8 +41,7 @@ int main()
 }
 
 // Function Declarations
-int element_set(int element_size)
-{
+int element_set(int element_size) {
 
     int temp_input;
 
@@ -66,43 +58,34 @@ int element_set(int element_size)
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-    // 1000 elements
-    if (temp_input == 1)
-    {
+        // 1000 elements
+    if (temp_input == 1) {
         element_size = 1000;
     }   // 1500 elements
-    else if (temp_input == 2)
-    {
+    else if (temp_input == 2) {
         element_size = 1500;
     }   // 2000 elements
-    else if (temp_input == 3)
-    {
+    else if (temp_input == 3) {
         element_size = 2000;
     }   // 2500 elements
-    else if (temp_input == 4)
-    {
+    else if (temp_input == 4) {
         element_size = 2500;
     }   // 3000 elements
-    else if (temp_input == 5)
-    {
+    else if (temp_input == 5) {
         element_size = 3000;
     }
 
     return element_size;
 }
 
-void matrix_multi(vector<int> matrix_a, vector<int> matrix_b, vector<int> matrix_mult, int elements)
-{
+void matrix_multi(vector<int> matrix_a, vector<int> matrix_b, vector<int> matrix_mult, int elements) {
     // For each row
-    for (int row = 0; row < elements; row++)
-    {
+    for (int row = 0; row < elements; row++) {
         // For each column
-        for (int col = 0; col < elements; col++)
-        {
+        for (int col = 0; col < elements; col++) {
             // For every elements in the row-column couple
             matrix_mult[row * elements + col] = 0;
-            for (int k = 0; k < elements; k++)
-            {
+            for (int k = 0; k < elements; k++) {
                 // Store results of a single element from matrix_a and matrix_b into a single element of matrix_mult
                 matrix_mult[row * elements + col] += matrix_a[row * elements + k] * matrix_b[k * elements + col];
             }
