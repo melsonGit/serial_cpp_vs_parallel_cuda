@@ -1,11 +1,4 @@
-// Parallel Matrix Multiplication Program
-//
-// Code sourced and adpated from the following author/s and sources: 
-// - https://github.com/CoffeeBeforeArch/from_scratch/blob/7f2eb33e2d6e38034d91cafa14df660446537c20/matrixMul/matrix_mul.cu
-// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/6589c89a78dee44e14ccb362cdae69f2e6850a2c/matrixMul/baseline/mmul.cu
-// - https://thispointer.com/how-to-fill-a-vector-with-random-numbers-in-c/
-// - https://docs.microsoft.com/en-us/cpp/parallel/amp/walkthrough-matrix-multiplication?view=msvc-160
-// Please refer to the bibliography for a complete reference of the above author/s and sources
+﻿// Parallel Matrix Multiplication Program
 
 #include <algorithm>
 #include <iostream>
@@ -19,23 +12,20 @@ using std::vector;
 // Function Prototypes
 int element_set(int);
 
-__global__ void matrixMul(const int* a, const int* b, int* c, int no_elements)
-{
+__global__ void matrixMul(const int* a, const int* b, int* c, int no_elements) {
     // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Iterate over row, and down column
     c[row * no_elements + col] = 0;
-    for (int k = 0; k < no_elements; k++)
-    {
+    for (int k = 0; k < no_elements; k++) {
         // Accumulate results for a single element
         c[row * no_elements + col] += a[row * no_elements + k] * b[k * no_elements + col];
     }
 }
 
-int main()
-{
+int main() {
 
     // Call element_set function to assign variable no_elements with a user selected value
     static int no_elements = element_set(no_elements);
@@ -50,8 +40,8 @@ int main()
     clock_t start = clock();
 
     // Initialise vector matrices by generating random numbers via Lambda C++11 function
-    generate(h_a.begin(), h_a.end(), []() { return rand() % 100; });
-    generate(h_b.begin(), h_b.end(), []() { return rand() % 100; });
+    generate(h_a.begin(), h_a.end(), []() {return rand() % 100;});
+    generate(h_b.begin(), h_b.end(), []() {return rand() % 100;});
 
     // Allocate device memory
     int* d_a, * d_b, * d_c;
@@ -74,7 +64,7 @@ int main()
     dim3 blocks(BLOCKS, BLOCKS);
 
     // Launch kernel
-    matrixMul << < blocks, threads >> > (d_a, d_b, d_c, no_elements);
+    matrixMul << <blocks, threads >> > (d_a, d_b, d_c, no_elements);
 
     // Copy back to the host
     cudaMemcpy(h_c.data(), d_c, bytes, cudaMemcpyDeviceToHost);
@@ -94,8 +84,7 @@ int main()
 }
 
 // Function Declarations
-int element_set(int element_size)
-{
+int element_set(int element_size) {
 
     int temp_input;
 
@@ -112,25 +101,20 @@ int element_set(int element_size)
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-    // 1000 elements
-    if (temp_input == 1)
-    {
+        // 1000 elements
+    if (temp_input == 1) {
         element_size = 1000;
     }   // 1500 elements
-    else if (temp_input == 2)
-    {
+    else if (temp_input == 2) {
         element_size = 1500;
     }   // 2000 elements
-    else if (temp_input == 3)
-    {
+    else if (temp_input == 3) {
         element_size = 2000;
     }   // 2500 elements
-    else if (temp_input == 4)
-    {
+    else if (temp_input == 4) {
         element_size = 2500;
     }   // 3000 elements
-    else if (temp_input == 5)
-    {
+    else if (temp_input == 5) {
         element_size = 3000;
     }
 
