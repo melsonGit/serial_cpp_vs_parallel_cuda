@@ -1,10 +1,4 @@
-// Parallel 2-D Convolution Program
-//
-// Code sourced and adpated from the following author/s and sources: 
-// - https://www.youtube.com/watch?v=qxcfco89wvs
-// - https://github.com/CoffeeBeforeArch/cuda_programming/blob/6589c89a78dee44e14ccb362cdae69f2e6850a2c/convolution/2d_constant_memory/convolution.cu
-// - https://mathworld.wolfram.com/Convolution.html
-// Please refer to the bibliography for a complete reference of the above author/s and sources
+﻿// Parallel 2-D Convolution Programs
 
 #include <iostream>
 #include <cstdlib>
@@ -26,8 +20,7 @@ __constant__ int mask[7 * 7];
 //  matrix: Input matrix
 //  result: Convolution result
 //  no_elements:      Dimensions of the matrices
-__global__ void convolution_2d(int* matrix, int* result, int no_elements)
-{
+__global__ void convolution_2d(int* matrix, int* result, int no_elements) {
     // Calculate the global thread positions
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
@@ -40,17 +33,13 @@ __global__ void convolution_2d(int* matrix, int* result, int no_elements)
     int temp = 0;
 
     // Iterate over all the rows
-    for (int i = 0; i < MASK_DIM; i++)
-    {
+    for (int i = 0; i < MASK_DIM; i++) {
         // Go over each column
-        for (int j = 0; j < MASK_DIM; j++)
-        {
+        for (int j = 0; j < MASK_DIM; j++) {
             // Range check for rows
-            if ((start_r + i) >= 0 && (start_r + i) < no_elements)
-            {
+            if ((start_r + i) >= 0 && (start_r + i) < no_elements) {
                 // Range check for columns
-                if ((start_c + j) >= 0 && (start_c + j) < no_elements)
-                {
+                if ((start_c + j) >= 0 && (start_c + j) < no_elements) {
                     // Accumulate result
                     temp += matrix[(start_r + i) * no_elements + (start_c + j)] *
                         mask[i * MASK_DIM + j];
@@ -68,8 +57,7 @@ int element_set(int);
 void init_matrix(int*, int);
 
 
-int main()
-{
+int main() {
 
 
     // Call element_set function to assign variable no_elements with a user selected value || Sets number of elements to be used
@@ -112,7 +100,7 @@ int main()
     dim3 blocks(BLOCKS, BLOCKS);
 
     // Perform 2D Convolution
-    convolution_2d << < blocks, threads >> > (d_matrix, d_result, no_elements);
+    convolution_2d << <blocks, threads >> > (d_matrix, d_result, no_elements);
 
     // Copy the result back to the CPU
     cudaMemcpy(h_result, d_result, bytes_n, cudaMemcpyDeviceToHost);
@@ -135,8 +123,7 @@ int main()
 }
 
 // Function Declarations
-int element_set(int element_size)
-{
+int element_set(int element_size) {
 
     int temp_input;
 
@@ -153,25 +140,20 @@ int element_set(int element_size)
         cout << "\n\nNo correct option selected!\nShutting down program....\n";
         return EXIT_FAILURE;
     }
-    // 4096 elements
-    if (temp_input == 1)
-    {
+        // 4096 elements
+    if (temp_input == 1) {
         element_size = 4096;
     }   // 5120 elements
-    else if (temp_input == 2)
-    {
+    else if (temp_input == 2) {
         element_size = 5120;
     }   // 6144 elements
-    else if (temp_input == 3)
-    {
+    else if (temp_input == 3) {
         element_size = 6144;
     }   // 8192 elements
-    else if (temp_input == 4)
-    {
+    else if (temp_input == 4) {
         element_size = 8192;
     }   // 10240 elements
-    else if (temp_input == 5)
-    {
+    else if (temp_input == 5) {
         element_size = 10240;
     }
 
@@ -182,14 +164,14 @@ int element_set(int element_size)
 // Takes:
 //  m = Pointer to the matrix
 //  no_elements = Dimension of the matrix (square)
-void init_matrix(int* m, int no_elements)
-{
-    for (int i = 0; i < no_elements; i++)
-    {
-        for (int j = 0; j < no_elements; j++)
-        {
+void init_matrix(int* m, int no_elements) {
+    for (int i = 0; i < no_elements; i++) {
+        for (int j = 0; j < no_elements; j++) {
             m[no_elements * i + j] = rand() % 100;
         }
     }
 }
+
+
+
 
