@@ -1,10 +1,17 @@
 #pragma once
 
 #include "popVec.cpp"
-/*
-class tempClassVec
+#include <iostream>
+#include <cstdlib>
+
+class popVec
 {
+private:
+	int elementSize{};
 public:
-	int tempFuncAdd(int&);
+	// Constructor
+	popVec(int x);
+
+	// Function to assign elementSize a value
+	int elementSet(int&);
 };
-*/
