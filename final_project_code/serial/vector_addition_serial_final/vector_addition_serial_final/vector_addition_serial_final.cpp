@@ -3,48 +3,33 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include "popVec.h"
-#include "add.h"
-
-
-using std::cout;
-using std::cin;
-using std::generate;
-using std::vector;
-
-// Function Prototypes
-void add(vector<int>, vector<int>, vector<int>);
+#include "conSet.h"
+#include "addFunc.h"
 
 int main()
 {
-	// Call elementSet function to assign variable noElements with a user selected value
-	popVec noElements{0};
-
-	// Allocate vectors a, b and c the size of noElements
-	vector<int> a(noElements), b(noElements), c(noElements);
+	// Call conSet function to assign variable conSize with a user selected value
+	int conSize = conSet(conSize);
+	// Assign input vectors (a & b) and the output vector (c) a container size conSize
+	std::vector<int> a(conSize), b(conSize), c(conSize);
 
     clock_t start = clock();
 
+	// Re-seed rand() function for each run
+	srand((unsigned int)time(NULL));
+
 	// Generate random numbers via Lambda C++11 function, and place into vector
-	generate(a.begin(), a.end(), []() { return rand() % 100; });
-	generate(b.begin(), b.end(), []() { return rand() % 100; });
+	std::generate(a.begin(), a.end(), []() { return rand() % 100; });
+	std::generate(b.begin(), b.end(), []() { return rand() % 100; });
 
 	add(a, b, c);
 
 	clock_t end = clock();
 
 	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-	cout << diffs << "s Vector Addition computation time, with an element size of " << noElements << ".\n";
-	cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
+	std::cout << diffs << "s Vector Addition computation time, with an container size of " << conSize << ".\n";
+	std::cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
 
 	return EXIT_SUCCESS;
 
 }
-
-
-void add(vector<int> a, vector<int> b, vector<int> c) {
-	// Add contents from vector 'a' and 'b' into vector 'c' || Transform using a Lambda C++11
-	transform(a.begin(), a.end(), b.begin(), c.begin(), 
-		[](int a, int b) {return a + b; });
-}
-

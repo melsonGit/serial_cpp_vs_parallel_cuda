@@ -1,45 +1,5 @@
-﻿  popVec.cpp
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(3,1): error C2653: 'popVec': is not a class or namespace name
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(4,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(5,5): error C2065: 'elementSize': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(6,1): warning C4508: 'popVec': function should return a value; 'void' return type assumed
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(8,5): error C2653: 'popVec': is not a class or namespace name
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(12,10): error C2039: 'cout': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(12,15): error C2065: 'cout': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(13,10): error C2039: 'cout': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(13,15): error C2065: 'cout': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(14,10): error C2039: 'cout': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(14,15): error C2065: 'cout': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(15,10): error C2039: 'cout': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(15,15): error C2065: 'cout': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(16,10): error C2039: 'cout': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(16,15): error C2065: 'cout': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(17,10): error C2039: 'cout': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(17,15): error C2065: 'cout': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(18,10): error C2039: 'cin': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(18,14): error C2065: 'cin': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(22,14): error C2039: 'cout': is not a member of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\predefined C++ types (compiler internal)(340): message : see declaration of 'std'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(22,19): error C2065: 'cout': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(23,9): error C2065: 'EXIT_FAILURE': undeclared identifier
+﻿  conSet.cpp
+  numGen.cpp
   vector_addition_serial_final.cpp
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(3,1): error C2653: 'popVec': is not a class or namespace name
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(4,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(5,5): error C2065: 'elementSize': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(6,1): warning C4508: 'popVec': function should return a value; 'void' return type assumed
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\popVec.cpp(8,5): error C2653: 'popVec': is not a class or namespace name
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(21,9): error C2146: syntax error: missing ';' before identifier 'noElements'
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(21,2): warning C4551: function call missing argument list
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(21,9): error C2065: 'noElements': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(24,16): error C2065: 'noElements': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(24,31): error C2065: 'noElements': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(24,46): error C2065: 'noElements': undeclared identifier
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\vector_addition_serial_final\vector_addition_serial_final.cpp(37,85): error C2065: 'noElements': undeclared identifier
   Generating Code...
+  vector_addition_serial_final.vcxproj -> C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\final_project_code\serial\vector_addition_serial_final\x64\Debug\vector_addition_serial_final.exe
