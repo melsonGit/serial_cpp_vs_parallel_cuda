@@ -18,19 +18,31 @@
     <ClCompile Include="vector_addition_serial_final.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="add.cpp">
+    <ClCompile Include="addFunc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="popVec.cpp">
+    <ClCompile Include="checkAdd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="numGen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="add.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="addFunc.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="popVec.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="checkAdd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="numGen.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
