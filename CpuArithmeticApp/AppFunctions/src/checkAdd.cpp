@@ -1,4 +1,4 @@
-#include "checkAdd.h"
+#include "../inc/checkAdd.h"
 
 void checkAdd(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c)
 {
@@ -7,7 +7,7 @@ void checkAdd(std::vector<int> const& a, std::vector<int> const& b, std::vector<
 
 	for (int i{0}; i < a.size(); i++)
 	{
-		if ((a[i] + b[i]) != c[0])
+		if ((a[i] + b[i]) != c[i])
 			addsMatch = false;
 		else
 			continue;

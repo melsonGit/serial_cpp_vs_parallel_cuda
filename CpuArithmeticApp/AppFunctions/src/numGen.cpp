@@ -1,4 +1,4 @@
-#include "numGen.h"
+#include "../inc/numGen.h"
 
 void numGen(std::vector<int> &a, std::vector<int> &b)
 {

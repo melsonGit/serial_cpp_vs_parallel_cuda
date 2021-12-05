@@ -1,4 +1,4 @@
-#include "conSet.h"
+#include "../inc/conSet.h"
 
 int conSet(int& n)
 {

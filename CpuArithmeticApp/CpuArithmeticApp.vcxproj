@@ -139,14 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AppFunctions\addFunc.cpp" />
-    <ClCompile Include="AppFunctions\addFunc\addFunc.cpp" />
-    <ClCompile Include="AppFunctions\checkAdd.cpp" />
-    <ClCompile Include="AppFunctions\checkAdd\checkAdd.cpp" />
-    <ClCompile Include="AppFunctions\conSet.cpp" />
-    <ClCompile Include="AppFunctions\conSet\conSet.cpp" />
-    <ClCompile Include="AppFunctions\numGen.cpp" />
-    <ClCompile Include="AppFunctions\numGen\numGen.cpp" />
     <ClCompile Include="AppFunctions\src\addFunc.cpp" />
     <ClCompile Include="AppFunctions\src\checkAdd.cpp" />
     <ClCompile Include="AppFunctions\src\conSet.cpp" />
@@ -167,6 +159,9 @@
     <ClInclude Include="AppFunctions\inc\numGen.h" />
     <ClInclude Include="AppFunctions\numGen.h" />
     <ClInclude Include="AppFunctions\numGen\numGen.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Debug\CpuArithmeticApp.tlog\unsuccessfulbuild" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

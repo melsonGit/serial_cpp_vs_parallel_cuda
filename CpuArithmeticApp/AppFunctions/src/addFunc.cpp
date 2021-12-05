@@ -1,4 +1,4 @@
-#include "addFunc.h"
+#include "../inc/addFunc.h"
 
 void add(std::vector<int> const &a, std::vector<int>  const &b, std::vector<int> &c) {
 	// Add contents from vector 'a' and 'b' into vector 'c' || Transform using a Lambda C++11

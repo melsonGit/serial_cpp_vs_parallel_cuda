@@ -3,10 +3,10 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include "conSet.h"
 #include "addFunc.h"
-#include "numGen.h"
 #include "checkAdd.h"
+#include "conSet.h"
+#include "numGen.h"
 
 int main()
 {
