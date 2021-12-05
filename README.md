@@ -16,7 +16,7 @@ My first hurdle was overcoming the technical issues that came with setting up CU
 
 # Future of this project
 
-With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became more familiar with CUDA. Perhaps in the future I will look at pushing a more OOP stance on the code, as well as collating all programs into a one single program. As it stands, I believe each program serves the purpose it was made for. In the near-future, I wish to try and refactor most of the code.
+With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became familiar with CUDA. I would consider a pure OOP approach to be somewhat unnecessary for this particular project, partly due to the overhead involved. However, I wish to integrate all programs into one, and an OOP approach will help in that regard. As it stands, I believe each program serves the purpose it was made for. In the near-future, I wish to try and refactor most of the code.
 
 # Program Logic: Vector Addition
 
