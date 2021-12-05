@@ -5,26 +5,29 @@
 #include <vector>
 #include "conSet.h"
 #include "addFunc.h"
+#include "numGen.h"
 
 int main()
 {
-	// Call conSet function to assign variable conSize with a user selected value
+	// Assign variable conSize with a user selected value
 	int conSize = conSet(conSize);
-	// Assign input vectors (a & b) and the output vector (c) a container size conSize
+
+	// Assign input vectors (a & b) and the output vector (c) a container size of conSize
 	std::vector<int> a(conSize), b(conSize), c(conSize);
 
+	// Populate vectors
+	numGen(a, b);
+
+	// Start clock
     clock_t start = clock();
 
-	// Re-seed rand() function for each run
-	srand((unsigned int)time(NULL));
-
-	// Generate random numbers via Lambda C++11 function, and place into vector
-	std::generate(a.begin(), a.end(), []() { return rand() % 100; });
-	std::generate(b.begin(), b.end(), []() { return rand() % 100; });
-
+	// Begin sequential vector addition operation
 	add(a, b, c);
 
+	// Stop clock
 	clock_t end = clock();
+
+	// checkAdd(); func to determine if the output vector is indeed correct, print SUCCESS if correct or FAILED if not
 
 	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
 	std::cout << diffs << "s Vector Addition computation time, with an container size of " << conSize << ".\n";

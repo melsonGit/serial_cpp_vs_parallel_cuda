@@ -27,6 +27,9 @@
     <ClCompile Include="numGen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="checkAdd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conSet.h">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="numGen.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="checkAdd.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
