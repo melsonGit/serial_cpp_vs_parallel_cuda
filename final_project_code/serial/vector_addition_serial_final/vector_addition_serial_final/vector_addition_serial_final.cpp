@@ -6,6 +6,7 @@
 #include "conSet.h"
 #include "addFunc.h"
 #include "numGen.h"
+#include "checkAdd.h"
 
 int main()
 {
@@ -27,10 +28,11 @@ int main()
 	// Stop clock
 	clock_t end = clock();
 
-	// checkAdd(); func to determine if the output vector is indeed correct, print SUCCESS if correct or FAILED if not
+	// Check output vector contents
+	checkAdd(a, b, c);
 
 	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-	std::cout << diffs << "s Vector Addition computation time, with an container size of " << conSize << ".\n";
+	std::cout << diffs << "s Vector Addition computation time, with a container size of " << conSize << ".\n";
 	std::cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
 
 	return EXIT_SUCCESS;
