@@ -1,7 +1,8 @@
-﻿  addFunc.cpp
+﻿  opChoice.cpp
+  addFunc.cpp
   checkAdd.cpp
   conSet.cpp
   numGen.cpp
   CpuArithmeticApp.cpp
   Generating Code...
-Debug\addFunc.obj : fatal error LNK1112: module machine type 'x86' conflicts with target machine type 'x64'
+  CpuArithmeticApp.vcxproj -> C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\CpuArithmeticApp\x64\Debug\CpuArithmeticApp.exe

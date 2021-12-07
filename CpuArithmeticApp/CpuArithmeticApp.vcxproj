@@ -139,10 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AppFunctions\src\addFunc.cpp" />
-    <ClCompile Include="AppFunctions\src\checkAdd.cpp" />
-    <ClCompile Include="AppFunctions\src\conSet.cpp" />
-    <ClCompile Include="AppFunctions\src\numGen.cpp" />
+    <ClCompile Include="AppFunctions\src\core\opChoice.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\addFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\checkAdd.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\conSet.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\numGen.cpp" />
     <ClCompile Include="CpuArithmeticApp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,11 +153,12 @@
     <ClInclude Include="AppFunctions\checkAdd\checkAdd.h" />
     <ClInclude Include="AppFunctions\conSet.h" />
     <ClInclude Include="AppFunctions\conSet\conSet.h" />
-    <ClInclude Include="AppFunctions\inc\addFunc.h" />
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
-    <ClInclude Include="AppFunctions\inc\checkAdd.h" />
-    <ClInclude Include="AppFunctions\inc\conSet.h" />
-    <ClInclude Include="AppFunctions\inc\numGen.h" />
+    <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\addFunc.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\checkAdd.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\conSet.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\numGen.h" />
     <ClInclude Include="AppFunctions\numGen.h" />
     <ClInclude Include="AppFunctions\numGen\numGen.h" />
   </ItemGroup>
