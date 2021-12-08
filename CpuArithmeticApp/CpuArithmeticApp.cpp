@@ -28,7 +28,7 @@ int main()
 
 	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
 	std::cout << diffs << "s Vector Addition computation time, with a container size of " << conSize << ".\n";
-	std::cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
+	std::cout << "Closing program...\n";
 
 	return EXIT_SUCCESS;
 
