@@ -20,6 +20,7 @@ int main()
 	// Begin sequential vector addition operation
 	add(a, b, c);
 
+
 	// Stop clock
 	clock_t end = clock();
 
