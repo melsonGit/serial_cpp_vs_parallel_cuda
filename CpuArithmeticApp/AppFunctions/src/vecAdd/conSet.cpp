@@ -1,8 +1,9 @@
 #include "../../inc/vecAdd/conSet.h"
 
-int conSet(int& n)
+
+vecAddConSize conSet(vecAddConSize& n)
 {
-    int tempInput;
+    userChoice tempInput;
 
     std::cout << "Please select vector addition element sample size from the options below:\n";
     std::cout << "1. 25,000,000\n";

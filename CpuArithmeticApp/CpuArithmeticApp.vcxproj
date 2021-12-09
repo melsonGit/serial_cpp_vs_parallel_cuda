@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,6 +157,7 @@
     <ClInclude Include="AppFunctions\conSet\conSet.h" />
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
     <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
+    <ClInclude Include="AppFunctions\inc\allTDefs.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\addFunc.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\checkAdd.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\conSet.h" />

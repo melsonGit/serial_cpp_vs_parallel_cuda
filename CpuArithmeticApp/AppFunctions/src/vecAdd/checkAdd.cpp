@@ -3,18 +3,18 @@
 void checkAdd(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c)
 {
 	std::cout << "Checking results..." << std::endl;
-	bool addsMatch = true;
+	bool doesMatch = true;
 
 	for (int i{0}; i < a.size(); i++)
 	{
 		if ((a[i] + b[i]) != c[i])
-			addsMatch = false;
+			doesMatch = false;
 		else
 			continue;
 
 	}
 	
-	if (!addsMatch)
+	if (!doesMatch)
 		std::cout << "Vector addition unsuccessful; output vector data does not match the expected result.\n"
 				  << "Timing results will be discarded.\n" << std::endl;
 	else

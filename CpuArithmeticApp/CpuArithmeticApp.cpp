@@ -2,11 +2,12 @@
 #include <algorithm>
 #include <vector>
 #include "../CpuArithmeticApp/AppFunctions/inc/allHeaders.h"
+#include "../CpuArithmeticApp/AppFunctions/inc/allTDefs.h"
 
 int main()
 {
 	// Assign variable conSize with a user selected value
-	int conSize = conSet(conSize);
+	vecAddConSize conSize = conSet(conSize);
 
 	// Assign input vectors (a & b) and the output vector (c) a container size of conSize
 	std::vector<int> a(conSize), b(conSize), c(conSize);

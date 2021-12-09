@@ -2,5 +2,6 @@
 
 #include <iostream>
 #include <cstdlib>
+#include "../../inc/allTDefs.h"
 
-int conSet(int&);
+vecAddConSize conSet(vecAddConSize&);

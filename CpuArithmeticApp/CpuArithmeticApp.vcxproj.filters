@@ -62,9 +62,6 @@
     <ClInclude Include="AppFunctions\inc\allHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AppFunctions\inc\vecAdd\addFunc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AppFunctions\inc\vecAdd\checkAdd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -75,6 +72,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AppFunctions\inc\core\opChoice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\allTDefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\vecAdd\addFunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

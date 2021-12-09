@@ -2,7 +2,7 @@
 
 void opChoice()
 {
-    int tempInput;
+    userChoice tempInput;
 
     std::cout << "Please select an arithmetic operation from the options below:\n";
     std::cout << "1. Vector Addition\n";
