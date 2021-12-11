@@ -1,4 +1,6 @@
 #pragma once
+#ifndef ALL_HEADERS
+#define ALL_HEADERS
 
 // Core Function
 #include "core/opChoice.h"
@@ -26,3 +28,5 @@
 // #----- numGenTCon
 // #----- conSetTCon
 // #----- numGenTCon
+
+#endif

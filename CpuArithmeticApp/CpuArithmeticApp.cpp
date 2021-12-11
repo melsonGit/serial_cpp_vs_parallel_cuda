@@ -16,19 +16,22 @@ int main()
 	numGen(a, b);
 
 	// Start clock
-	clock_t start = clock();
+	clock_t opStart = clock();
 
 	// Begin sequential vector addition operation
 	add(a, b, c);
 
 	// Stop clock
-	clock_t end = clock();
+	clock_t opEnd = clock();
 
 	// Check output vector contents
 	checkAdd(a, b, c);
 
-	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-	std::cout << diffs << "s Vector Addition computation time, with a container size of " << conSize << ".\n";
+	// Calculate overall time spent to complete operation
+	double completionTime = (opEnd - opStart) / (double)CLOCKS_PER_SEC;
+
+	// Output timing to complete operation and container size
+	std::cout << completionTime << "s Vector Addition computation time, with a container size of " << conSize << ".\n";
 	std::cout << "Closing program...\n";
 
 	return EXIT_SUCCESS;

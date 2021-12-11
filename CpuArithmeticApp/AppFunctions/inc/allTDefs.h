@@ -1,4 +1,6 @@
 #pragma once
+#ifndef ALL_T_DEFS
+#define ALL_T_DEFS
 
 // uint16_t types
 
@@ -19,3 +21,4 @@ typedef uint32_t vecAddConSize;
 // Type size for 1-D convolution containers
 typedef uint32_t oneConvConSize;
 
+#endif
