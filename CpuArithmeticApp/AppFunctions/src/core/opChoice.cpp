@@ -17,13 +17,20 @@ void opChoice()
         std::cout << "\n\nNo correct option selected.\nShutting down program....\n";
         EXIT_FAILURE;
     }
-    if (tempInput == 1) {
-    } // load relevant vecAdd classes
-    else if (tempInput == 2) {
-    } // load relevant mMulti classes
-    else if (tempInput == 3) {
-    } // load relevant 1-D convo classes
-    else if (tempInput == 4) {
-      // load relevant 2-D convo classes
+    if (tempInput == 1) 
+    {
+        // load relevant vecAdd classes
+    } 
+    else if (tempInput == 2) 
+    {
+        // load relevant mMulti classes
+    } 
+    else if (tempInput == 3) 
+    {
+        // load relevant 1-D convo classes
+    } 
+    else if (tempInput == 4) 
+    {
+        // load relevant 2-D convo classes
     }
 }

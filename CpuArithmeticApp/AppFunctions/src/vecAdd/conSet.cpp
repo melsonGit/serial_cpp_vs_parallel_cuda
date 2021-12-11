@@ -18,21 +18,26 @@ vecAddConSize conSet(vecAddConSize& n)
         std::cout << "\n\nNo correct option selected!\nShutting down program....\n";
         EXIT_FAILURE;
     }
-    // 25 million elements
-    if (tempInput == 1) {
-        n = 25000000;
-    } // 35 million elements
-    else if (tempInput == 2) {
-        n = 35000000;
-    } // 45 million elements
-    else if (tempInput == 3) {
-        n = 45000000;
-    } // 55 million elements
-    else if (tempInput == 4) {
-        n = 55000000;
-    } // 65 million elements
-    else if (tempInput == 5) {
-        n = 65000000;
+    
+    if (tempInput == 1) 
+    {
+        n = 25000000; // 25 million elements
+    } 
+    else if (tempInput == 2) 
+    {
+        n = 35000000; // 35 million elements
+    } 
+    else if (tempInput == 3) 
+    {
+        n = 45000000; // 45 million elements
+    } 
+    else if (tempInput == 4) 
+    {
+        n = 55000000; // 55 million elements
+    } 
+    else if (tempInput == 5) 
+    {
+        n = 65000000; // 65 million elements
     }
 
     return n;
