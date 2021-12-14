@@ -3,16 +3,17 @@
 void opChoice(int& input)
 {
 
-    bool correctSelect = false;
+    bool correctChoice = false;
+
+    std::cout << "Please select an arithmetic operation from the options below:\n\n";
+    std::cout << "Vector Addition:           enter '1'\n";
+    std::cout << "Matrix Multiplication:     enter '2'\n";
+    std::cout << "1-D Convolution:           enter '3'\n";
+    std::cout << "2-D Convolution:           enter '4'\n\n";
+    std::cout << "If you wish to close this program, please enter '5'\n";
 
     do 
     {
-        std::cout << "Please select an arithmetic operation from the options below:\n\n";
-        std::cout << "Vector Addition:           enter '1'\n";
-        std::cout << "Matrix Multiplication:     enter '2'\n";
-        std::cout << "1-D Convolution:           enter '3'\n";
-        std::cout << "2-D Convolution:           enter '4'\n\n";
-        std::cout << "If you wish to close this program, please enter '5'\n";
         std::cin.clear();
         std::cin >> input;
 
@@ -24,35 +25,35 @@ void opChoice(int& input)
         {
             // load relevant vecAdd classes
             std::cout << "\nVector Addition has been selected.\n\n";
-            correctSelect = true;
+            correctChoice = true;
         }
         else if (input == 2)
         {
             // load relevant matMulti classes
             std::cout << "\nMatrix Multiplication has been selected.\n\n";
-            correctSelect = true;
+            correctChoice = true;
         }
         else if (input == 3)
         {
             // load relevant oneConv classes
             std::cout << "\n1-D Convolution has been selected.\n\n";
-            correctSelect = true;
+            correctChoice = true;
         }
         else if (input == 4)
         {
             // load relevant twoConv classes
             std::cout << "\n2-D Convolution has been selected.\n\n";
-            correctSelect = true;
+            correctChoice = true;
         }
         else if (input == 5)
         {
             bool closeChoice = false;
 
+            std::cout << "\nAre you sure you want to close the program?\n";
+            std::cout << "Yes (1) || No (2)\n";
+
             do
             {
-
-                std::cout << "\nAre you sure you want to close the program?\n";
-                std::cout << "Yes (1) || No (2)\n";
                 std::cin.clear();
                 std::cin >> input;
 
@@ -63,7 +64,7 @@ void opChoice(int& input)
                 else if (input == 1)
                 {
                     closeChoice = true;
-                    correctSelect = true;
+                    correctChoice = true;
                     input = 5;
                 }
                 else if (input == 2)
@@ -72,8 +73,8 @@ void opChoice(int& input)
                     closeChoice = true;
                 }
 
-            } while (closeChoice == false);
+            } while (closeChoice != true);
         }
 
-    } while (correctSelect == false);
+    } while (correctChoice != true);
 }
