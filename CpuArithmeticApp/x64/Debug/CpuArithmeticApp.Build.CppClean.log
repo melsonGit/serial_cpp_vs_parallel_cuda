@@ -6,8 +6,15 @@ c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\deb
 c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\checkadd.obj
 c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\addfunc.obj
 c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\opchoice.obj
-c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\cpuarithmeticapp.ilk
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\vecaddcore.obj
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\consetmatmulti.obj
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\numgenmatmulti.obj
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\vecnumgen.obj
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\vecconset.obj
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\veccheckadd.obj
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\vecaddfunc.obj
 c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\cpuarithmeticapp.exe
+c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\cpuarithmeticapp.ilk
 c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\cpuarithmeticapp.pdb
 c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\cpuarithmeticapp.tlog\cl.command.1.tlog
 c:\users\matt1\source\repos\serial_cpp_vs_parallel_cuda\cpuarithmeticapp\x64\debug\cpuarithmeticapp.tlog\cl.read.1.tlog

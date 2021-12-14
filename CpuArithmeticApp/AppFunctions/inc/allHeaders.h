@@ -6,27 +6,27 @@
 #include "core/opChoice.h"
 
 // Sequential Vector Addition
-#include "vecAdd/addFunc.h" // rename addFuncVec
-#include "vecAdd/checkAdd.h" // rename checkOpVec
-#include "vecAdd/conSet.h" // rename conSetVec
-#include "vecAdd/numGen.h" // rename numGenVec
+#include "vecAdd/vecCore.h"
 
 // Sequential Matrix Multiplication
-// #----- conSetMul
-// #----- numGenMul
-// #----- conSetMul
-// #----- numGenMul
+//#include "matMulti/matMultiCore.h"
+// #----- conSetMuli
+// #----- numGenMuli
+// #----- conSetMuli
+// #----- numGenMuli
 
 // Sequential 1-D Convolution
-// #----- conSetCon
-// #----- numGenCon
-// #----- conSetCon
-// #----- numGenCon
+//#include "oneConv/oneConvCore.h"
+// #----- conSetConv
+// #----- numGenConv
+// #----- conSetConv
+// #----- numGenConv
 
 // Sequential 2-D Convolution
-// #----- conSetTCon
-// #----- numGenTCon
-// #----- conSetTCon
-// #----- numGenTCon
+//#include "twoConv/twoConvCore.h"
+// #----- conSetTConv
+// #----- numGenTConv
+// #----- conSetTConv
+// #----- numGenTConv
 
 #endif

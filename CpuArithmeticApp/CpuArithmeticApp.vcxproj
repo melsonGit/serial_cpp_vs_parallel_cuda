@@ -142,10 +142,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppFunctions\src\core\opChoice.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\addFunc.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\checkAdd.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\conSet.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\numGen.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\conSetMatMulti.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\numGenMatMulti.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecCheckAdd.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecCore.cpp" />
     <ClCompile Include="CpuArithmeticApp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +161,11 @@
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
     <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
     <ClInclude Include="AppFunctions\inc\allTDefs.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\addFunc.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\checkAdd.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\conSet.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\numGen.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecCheckAdd.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecConSet.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecCore.h" />
     <ClInclude Include="AppFunctions\numGen.h" />
     <ClInclude Include="AppFunctions\numGen\numGen.h" />
   </ItemGroup>

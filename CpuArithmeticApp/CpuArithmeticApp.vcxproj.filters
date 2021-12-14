@@ -18,19 +18,28 @@
     <ClCompile Include="CpuArithmeticApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AppFunctions\src\vecAdd\addFunc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AppFunctions\src\vecAdd\checkAdd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AppFunctions\src\vecAdd\conSet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AppFunctions\src\vecAdd\numGen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AppFunctions\src\core\opChoice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\matMulti\conSetMatMulti.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\matMulti\numGenMatMulti.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\vecAdd\vecNumGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\vecAdd\vecConSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\vecAdd\vecCheckAdd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\vecAdd\vecCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,22 +71,25 @@
     <ClInclude Include="AppFunctions\inc\allHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AppFunctions\inc\vecAdd\checkAdd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AppFunctions\inc\vecAdd\conSet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AppFunctions\inc\vecAdd\numGen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AppFunctions\inc\core\opChoice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AppFunctions\inc\allTDefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AppFunctions\inc\vecAdd\addFunc.h">
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecCheckAdd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecConSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecNumGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
