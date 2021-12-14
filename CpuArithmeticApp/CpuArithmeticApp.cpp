@@ -6,6 +6,18 @@
 
 int main()
 {
+	int runProg{ 0 };
+	int closeProg{ 5 };
+
+	do 
+	{
+		opChoice(runProg);
+	
+	} while (runProg != closeProg);
+
+	std::cout << "\nClosing program.\n";
+	//return EXIT_SUCCESS;
+
 	// Assign variable conSize with a user selected value
 	vecAddConSize conSize = conSet(conSize);
 

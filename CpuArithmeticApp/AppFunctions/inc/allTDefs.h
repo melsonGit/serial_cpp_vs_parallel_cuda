@@ -4,9 +4,6 @@
 
 // uint16_t types
 
-// Type size for user input
-typedef uint16_t userChoice;
-
 // Type size for 2-D convolution  containers
 typedef uint16_t twoConvConSize;
 

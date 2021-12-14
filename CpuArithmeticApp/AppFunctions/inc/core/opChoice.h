@@ -6,6 +6,6 @@
 #include <cstdlib>
 #include "../../inc/allTDefs.h"
 
-void opChoice();
+void opChoice(int&);
 
 #endif

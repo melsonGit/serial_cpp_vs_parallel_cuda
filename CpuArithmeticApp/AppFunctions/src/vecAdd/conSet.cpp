@@ -3,7 +3,7 @@
 
 vecAddConSize conSet(vecAddConSize& n)
 {
-    userChoice tempInput;
+    int tempInput;
 
     std::cout << "Please select vector addition element sample size from the options below:\n";
     std::cout << "1. 25,000,000\n";
