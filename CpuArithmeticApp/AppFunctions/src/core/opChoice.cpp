@@ -28,7 +28,7 @@ void opChoice(int& input)
         }
         else if (input == 2)
         {
-            // load relevant mMulti classes
+            // load relevant matMulti classes
             std::cout << "\nMatrix Multiplication has been selected.\n";
             correctSelect = true;
         }
@@ -62,7 +62,6 @@ void opChoice(int& input)
                 }
                 else if (input == 1)
                 {
-                    // Close program
                     closeChoice = true;
                     correctSelect = true;
                     input = 5;

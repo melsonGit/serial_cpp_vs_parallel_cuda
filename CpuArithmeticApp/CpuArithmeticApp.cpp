@@ -6,13 +6,29 @@
 
 int main()
 {
-	int runProg{ 0 };
-	int closeProg{ 5 };
+	int runProg{}, closeProg{ 5 };
 
 	do 
 	{
+		runProg = 0;
+
 		opChoice(runProg);
-	
+
+	#if 0
+		if (runProg == 1)
+			// launchVecAdd();
+			int vec;
+		else if (runProg == 2)
+			// launchMatMulti();
+			int multi;
+		else if (runProg == 3)
+			// launch1d();
+			int oneD;
+		else if (runProg == 4)
+			// launch2d();
+			int twoD;
+	#endif 
+
 	} while (runProg != closeProg);
 
 	std::cout << "\nClosing program.\n";
