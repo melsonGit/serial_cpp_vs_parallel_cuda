@@ -9,24 +9,12 @@
 #include "vecAdd/vecCore.h"
 
 // Sequential Matrix Multiplication
-//#include "matMulti/matMultiCore.h"
-// #----- conSetMuli
-// #----- numGenMuli
-// #----- conSetMuli
-// #----- numGenMuli
+#include "matMulti/matMultiCore.h"
 
 // Sequential 1-D Convolution
-//#include "oneConv/oneConvCore.h"
-// #----- conSetConv
-// #----- numGenConv
-// #----- conSetConv
-// #----- numGenConv
+#include "oneConv/oneConvCore.h"
 
 // Sequential 2-D Convolution
 //#include "twoConv/twoConvCore.h"
-// #----- conSetTConv
-// #----- numGenTConv
-// #----- conSetTConv
-// #----- numGenTConv
 
 #endif

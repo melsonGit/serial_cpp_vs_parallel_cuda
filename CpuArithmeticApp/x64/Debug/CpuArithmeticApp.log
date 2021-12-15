@@ -1,9 +1,6 @@
-﻿  matMultiCheck.cpp
-  matMultiConSet.cpp
-  matMultiCore.cpp
-  matMultiFunc.cpp
-  matMultiNumGen.cpp
-  vecCheck.cpp
+﻿  matMultiCore.cpp
+  oneConvCore.cpp
+  vecConSet.cpp
   vecCore.cpp
   CpuArithmeticApp.cpp
   Generating Code...
