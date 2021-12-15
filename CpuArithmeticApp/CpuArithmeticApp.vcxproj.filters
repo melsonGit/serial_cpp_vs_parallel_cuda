@@ -21,12 +21,6 @@
     <ClCompile Include="AppFunctions\src\core\opChoice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AppFunctions\src\matMulti\conSetMatMulti.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AppFunctions\src\matMulti\numGenMatMulti.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,10 +30,25 @@
     <ClCompile Include="AppFunctions\src\vecAdd\vecConSet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AppFunctions\src\vecAdd\vecCheckAdd.cpp">
+    <ClCompile Include="AppFunctions\src\vecAdd\vecCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AppFunctions\src\vecAdd\vecCore.cpp">
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiConSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiNumGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\vecAdd\vecCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,9 +86,6 @@
     <ClInclude Include="AppFunctions\inc\allTDefs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AppFunctions\inc\vecAdd\vecCheckAdd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AppFunctions\inc\vecAdd\vecConSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -90,6 +96,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AppFunctions\inc\vecAdd\vecCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiNumGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiFunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

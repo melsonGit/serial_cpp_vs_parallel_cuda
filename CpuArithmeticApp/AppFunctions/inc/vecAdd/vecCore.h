@@ -5,7 +5,7 @@
 #include "vecConSet.h"
 #include "vecNumGen.h"
 #include "vecAddFunc.h"
-#include "vecCheckAdd.h"
+#include "vecCheck.h"
 #include "../allTDefs.h"
 
 void vecCore();

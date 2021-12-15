@@ -1,5 +1,10 @@
-﻿  opChoice.cpp
-  vecConSet.cpp
+﻿  matMultiCheck.cpp
+  matMultiConSet.cpp
+  matMultiCore.cpp
+  matMultiFunc.cpp
+  matMultiNumGen.cpp
+  vecCheck.cpp
+  vecCore.cpp
   CpuArithmeticApp.cpp
   Generating Code...
   CpuArithmeticApp.vcxproj -> C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\CpuArithmeticApp\x64\Debug\CpuArithmeticApp.exe

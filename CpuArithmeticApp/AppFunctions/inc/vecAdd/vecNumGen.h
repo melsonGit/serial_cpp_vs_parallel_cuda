@@ -1,6 +1,6 @@
 #pragma once
-#ifndef NUM_GEN
-#define NUM_GEN
+#ifndef VEC_NUM_GEN
+#define VEC_NUM_GEN
 
 #include <iostream>
 #include <algorithm>

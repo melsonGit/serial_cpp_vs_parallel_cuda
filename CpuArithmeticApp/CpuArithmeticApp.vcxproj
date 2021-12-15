@@ -142,10 +142,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppFunctions\src\core\opChoice.cpp" />
-    <ClCompile Include="AppFunctions\src\matMulti\conSetMatMulti.cpp" />
-    <ClCompile Include="AppFunctions\src\matMulti\numGenMatMulti.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCore.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiNumGen.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\vecCheckAdd.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecCheck.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecConSet.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecNumGen.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecCore.cpp" />
@@ -161,8 +164,13 @@
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
     <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
     <ClInclude Include="AppFunctions\inc\allTDefs.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiFunc.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiNumGen.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\vecCheckAdd.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecCheck.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecConSet.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecNumGen.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecCore.h" />
