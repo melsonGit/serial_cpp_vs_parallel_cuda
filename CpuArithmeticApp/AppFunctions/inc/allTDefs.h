@@ -10,7 +10,7 @@
 typedef uint16_t twoConvConSize;
 
 // Type size for matrix multiplication containers
-typedef uint16_t mMultiConSize;
+typedef uint16_t matMultiConSize;
 
 // uint32_t types
 
