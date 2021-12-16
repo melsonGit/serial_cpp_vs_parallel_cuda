@@ -4,25 +4,25 @@ void vecCore()
 {
 
 	// Assign variable conSize with a user selected value
-	vecAddConSize conSize = conSet(conSize);
+	vecAddConSize conSize = vecConSet(conSize);
 
 	// Assign input vectors (a & b) and the output vector (c) a container size of conSize
 	std::vector<int> a(conSize), b(conSize), c(conSize);
 
 	// Populate vectors
-	numGen(a, b);
+	vecNumGen(a, b);
 
 	// Start clock
 	clock_t opStart = clock();
 
 	// Begin sequential vector addition operation
-	add(a, b, c);
+	vecAddFunc(a, b, c);
 
 	// Stop clock
 	clock_t opEnd = clock();
 
 	// Check output vector contents
-	checkAdd(a, b, c);
+	vecCheck(a, b, c);
 
 	// Calculate overall time spent to complete operation
 	double completionTime = (opEnd - opStart) / (double)CLOCKS_PER_SEC;

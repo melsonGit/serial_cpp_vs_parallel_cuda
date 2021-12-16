@@ -1,7 +1,7 @@
 #include "../../inc/vecAdd/vecConSet.h"
 
 
-vecAddConSize conSet(vecAddConSize& n)
+vecAddConSize vecConSet(vecAddConSize& n)
 {
     int tempInput{0};
 

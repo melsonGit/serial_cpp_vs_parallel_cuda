@@ -6,6 +6,6 @@
 #include <algorithm>
 #include <vector>
 
-void numGen(std::vector<int>&, std::vector<int>&);
+void vecNumGen(std::vector<int>&, std::vector<int>&);
 
 #endif

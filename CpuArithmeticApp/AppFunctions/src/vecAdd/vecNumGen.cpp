@@ -1,6 +1,6 @@
 #include "../../inc/vecAdd/vecNumGen.h"
 
-void numGen(std::vector<int> &a, std::vector<int> &b)
+void vecNumGen(std::vector<int> &a, std::vector<int> &b)
 {
 	// Re-seed rand() function for each run
 	srand((uint32_t)time(NULL));

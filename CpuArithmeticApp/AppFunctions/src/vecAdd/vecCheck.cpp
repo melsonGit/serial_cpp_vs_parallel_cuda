@@ -1,6 +1,6 @@
 #include "../../inc/vecAdd/vecCheck.h"
 
-void checkAdd(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c)
+void vecCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c)
 {
 	std::cout << "Checking results..." << std::endl;
 	bool doesMatch = true;

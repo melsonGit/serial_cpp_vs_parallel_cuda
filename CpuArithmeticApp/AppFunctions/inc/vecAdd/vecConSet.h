@@ -5,6 +5,6 @@
 #include <iostream>
 #include "../../inc/allTDefs.h"
 
-vecAddConSize conSet(vecAddConSize&);
+vecAddConSize vecConSet(vecAddConSize&);
 
 #endif
