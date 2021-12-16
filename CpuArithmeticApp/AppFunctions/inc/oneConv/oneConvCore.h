@@ -8,4 +8,6 @@
 #include "oneConvCheck.h"
 #include "../allTDefs.h"
 
+void oneConvCore();
+
 #endif

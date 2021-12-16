@@ -15,6 +15,6 @@
 #include "oneConv/oneConvCore.h"
 
 // Sequential 2-D Convolution
-//#include "twoConv/twoConvCore.h"
+#include "twoConv/twoConvCore.h"
 
 #endif

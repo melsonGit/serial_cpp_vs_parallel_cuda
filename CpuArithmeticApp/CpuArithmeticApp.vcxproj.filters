@@ -66,6 +66,21 @@
     <ClCompile Include="AppFunctions\src\oneConv\oneConvNumGen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppFunctions\addFunc.h">
@@ -144,6 +159,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvNumGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvFunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

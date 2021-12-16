@@ -13,14 +13,12 @@ int main()
 
 		if (runProg == 1)
 			vecCore();
-#if 0
 		else if (runProg == 2)
-			// matMultiCore();
+			matMultiCore();
 		else if (runProg == 3)
-			// oneConvCore();
+			oneConvCore();
 		else if (runProg == 4)
-			// twoConvCore();
-#endif 
+			twoConvCore();
 
 	} while (runProg != closeProg);
 

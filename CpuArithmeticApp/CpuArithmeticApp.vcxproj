@@ -152,6 +152,11 @@
     <ClCompile Include="AppFunctions\src\oneConv\oneConvCore.cpp" />
     <ClCompile Include="AppFunctions\src\oneConv\oneConvFunc.cpp" />
     <ClCompile Include="AppFunctions\src\oneConv\oneConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCore.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecCheck.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecConSet.cpp" />
@@ -179,6 +184,11 @@
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvFunc.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvFunc.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvNumGen.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecCheck.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecConSet.h" />

@@ -8,4 +8,6 @@
 #include "matMultiCheck.h"
 #include "../allTDefs.h"
 
+void matMultiCore();
+
 #endif
