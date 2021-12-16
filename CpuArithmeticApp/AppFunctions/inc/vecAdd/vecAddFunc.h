@@ -2,6 +2,7 @@
 #ifndef ADD_FUNC
 #define ADD_FUNC
 
+#include <iostream>
 #include <vector>
 #include <algorithm>
 

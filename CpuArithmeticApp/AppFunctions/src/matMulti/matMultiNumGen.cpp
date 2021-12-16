@@ -2,10 +2,14 @@
 
 void matMultiNumGen(std::vector<int>& a, std::vector<int>& b)
 {
+    std::cout << "\nMatrix Multiplication: Populating input vectors.\n";
+
     // Re-seed rand() function for each run
     srand((uint16_t)time(NULL));
 
     // Generate random numbers via Lambda C++11 function, and place into vector
     std::generate(a.begin(), a.end(), []() { return rand() % 100; });
     std::generate(b.begin(), b.end(), []() { return rand() % 100; });
+
+    std::cout << "\nMatrix Multiplication: Populating complete.\n";
 }

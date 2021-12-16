@@ -30,4 +30,8 @@ void vecCore()
 	// Output timing to complete operation and container size
 	std::cout << completionTime << "s Vector Addition computation time, with a container size of " << conSize << ".\n\n";
 	std::cout << "Returning to selection screen.\n\n";
+
+	std::cout << "#########################################################################\n" <<
+				 "#########################################################################\n" <<
+				 "#########################################################################\n\n";
 }

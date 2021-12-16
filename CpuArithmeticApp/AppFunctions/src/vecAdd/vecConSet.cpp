@@ -7,15 +7,15 @@ vecAddConSize vecConSet(vecAddConSize& n)
 
     bool correctChoice = false;
 
-    std::cout << "Please select vector addition element sample size from the options below:\n";
-    std::cout << "1. 25,000,000\n";
-    std::cout << "2. 35,000,000\n";
-    std::cout << "3. 45,000,000\n";
-    std::cout << "4. 55,000,000\n";
-    std::cout << "5. 65,000,000\n";
-
     do 
     {
+        std::cout << "Please select vector addition element sample size from the options below:\n\n";
+        std::cout << "25,000,000 elements:        enter '1'\n";
+        std::cout << "35,000,000 elements:        enter '2'\n";
+        std::cout << "45,000,000 elements:        enter '3'\n";
+        std::cout << "55,000,000 elements:        enter '4'\n";
+        std::cout << "65,000,000 elements:        enter '5'\n";
+
         std::cin.clear();
         std::cin >> tempInput;
 

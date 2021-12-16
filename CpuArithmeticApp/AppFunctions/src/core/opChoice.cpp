@@ -5,15 +5,15 @@ void opChoice(int& input)
 
     bool correctChoice = false;
 
-    std::cout << "Please select an arithmetic operation from the options below:\n\n";
-    std::cout << "Vector Addition:           enter '1'\n";
-    std::cout << "Matrix Multiplication:     enter '2'\n";
-    std::cout << "1-D Convolution:           enter '3'\n";
-    std::cout << "2-D Convolution:           enter '4'\n\n";
-    std::cout << "If you wish to close this program, please enter '5'\n";
-
     do 
     {
+        std::cout << "Please select an arithmetic operation from the options below:\n\n";
+        std::cout << "Vector Addition:           enter '1'\n";
+        std::cout << "Matrix Multiplication:     enter '2'\n";
+        std::cout << "1-D Convolution:           enter '3'\n";
+        std::cout << "2-D Convolution:           enter '4'\n\n";
+        std::cout << "If you wish to close this program, please enter '5'\n";
+
         std::cin.clear();
         std::cin >> input;
 

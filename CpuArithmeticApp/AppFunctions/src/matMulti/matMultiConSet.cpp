@@ -8,15 +8,15 @@ matMultiConSize matMultiConSet(matMultiConSize& n)
 
     bool correctChoice = false;
 
-    std::cout << "Please select matrix multiplication element sample size from the options below:\n";
-    std::cout << "1. 1,000\n";
-    std::cout << "2. 1,500\n";
-    std::cout << "3. 2,000\n";
-    std::cout << "4. 2,500\n";
-    std::cout << "5. 3,000\n";
-
     do
     {
+        std::cout << "Please select matrix multiplication element sample size from the options below:\n\n";
+        std::cout << "1,000 elements:        enter '1'\n";
+        std::cout << "1,500 elements:        enter '2'\n";
+        std::cout << "2,000 elements:        enter '3'\n";
+        std::cout << "2,500 elements:        enter '4'\n";
+        std::cout << "3,000 elements:        enter '5'\n";
+
         std::cin.clear();
         std::cin >> tempInput;
 
