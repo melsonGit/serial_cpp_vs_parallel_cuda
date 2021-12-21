@@ -1,6 +1,6 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
-void matMultiCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c)
+void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b, std::vector<std::vector<int>> const& c)
 {
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 	bool doesMatch = true;
