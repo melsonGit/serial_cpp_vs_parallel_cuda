@@ -1,6 +1,6 @@
 #include "../../inc/matMulti/matMultiFunc.h"
 
-void matMultiFunc(std::vector<int> const& matrix_a, std::vector<int> const& matrix_b, std::vector<int> &matrix_mult, matMultiConSize const conSize) 
+void matMultiFunc(std::vector<std::vector<int>> const& matrix_a, std::vector<std::vector<int>> const& matrix_b, std::vector<std::vector<int>>&matrix_mult, matMultiConSize const conSize)
 {
     std::cout << "\nMatrix Multiplication: Starting operation.\n";
 

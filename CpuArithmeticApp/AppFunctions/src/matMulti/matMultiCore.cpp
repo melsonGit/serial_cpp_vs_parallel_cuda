@@ -6,8 +6,8 @@ void matMultiCore()
 	// Assign variable conSize with a user selected value
 	matMultiConSize conSize = matMultiConSet(conSize);
 
-	// Assign input vectors (a & b) and the output vector (c) a container size of conSize
-	std::vector<int> a(conSize * conSize), b(conSize * conSize), c(conSize * conSize);
+	// Assign 2D input vectors (a & b) and the 2D output vector (c) a container size of conSize by 2
+	std::vector<std::vector<int>> a(conSize, std::vector<int>(2, 0)), b(conSize, std::vector<int>(2, 0)), c(conSize, std::vector<int>(2, 0));
 
 	// Populate vectors
 	matMultiNumGen(a, b);

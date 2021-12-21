@@ -6,6 +6,6 @@
 #include <algorithm>
 #include <vector>
 
-void matMultiNumGen(std::vector<int>&, std::vector<int>&);
+void matMultiNumGen(std::vector<std::vector<int>>&, std::vector<std::vector<int>>&);
 
 #endif
