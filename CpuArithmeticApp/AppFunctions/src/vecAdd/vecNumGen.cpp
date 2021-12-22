@@ -5,7 +5,7 @@ void vecNumGen(std::vector<int> &a, std::vector<int> &b)
 	std::cout << "\nVector Addition: Populating input vectors.\n";
 
 	// Re-seed rand() function for each run
-	srand((uint32_t)time(NULL));
+	srand((uint64_t)time(NULL));
 
 	// Generate random numbers via Lambda C++11 function, and place into vector
 	std::generate(a.begin(), a.end(), []() { return rand() % 100; });
