@@ -5,7 +5,7 @@ void matMultiNumGen(std::vector<std::vector<int>>& a, std::vector<std::vector<in
     std::cout << "\nMatrix Multiplication: Populating input vectors.\n";
 
     // Re-seed rand() function for each run
-    srand((uint64_t)time(NULL));
+    srand((unsigned int)time(NULL));
 
     // Loop to populate 2D vector a
     // For each row
