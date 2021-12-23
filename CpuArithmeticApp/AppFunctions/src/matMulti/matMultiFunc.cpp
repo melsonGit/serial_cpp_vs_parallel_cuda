@@ -1,45 +1,35 @@
 #include "../../inc/matMulti/matMultiFunc.h"
 
-void matMultiFunc(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b, 
-                  std::vector<std::vector<int>> &c, matMultiConSize const conSize)
+void matMultiFunc(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b,
+    std::vector<std::vector<int>>& c, matMultiConSize const& conSize)
 {
     std::cout << "\nMatrix Multiplication: Starting operation.\n";
 
+    int rowSize{ 2 };
+    int count{ 0 };
+
     // For each row
-    for (int row = 0; row < conSize; row++) {
+    for (auto row{ 0 }; row < conSize; row++) 
+    {
+        auto k{ 0 };
+
         // For each column in that row
-        for (int col = 0; col < conSize; col++) {
-            // For each element in this row-column
-            c[row][col] = 0;
-            for (int k = 0; k < conSize; k++) {
-                // Store results of a single element from a and b into a single element of c
-                c[row][col] += a[row][k] * b[k][col];
+        for (auto col{ 0 }; col < rowSize; col++, k++) 
+        {
+            // Currently only looks at first two elements of the b vec
 
-                std::cout << "Input vector 1: " << a[row][k] << '\n';
-                std::cout << "Input vector 2: " << b[k][col] << '\n';
-                std::cout << "Output vector: " << c[row][k] << '\n';
+            c[row][k] += a[row][k] * b[k][col];
 
-                std::cout << "hit\n";
+            std::cout << "Input vector 1: " << a[row][k] << '\n';
+            std::cout << "Input vector 2: " << b[k][col] << '\n';
+            std::cout << "Output vector: " << c[row][k] << '\n';
 
-
-            }
+            std::cout << "BREAK\n";
+            count++;
         }
     }
 
     std::cout << "\nMatrix Multiplication: Operation complete.\n";
+    std::cout << count <<'\n';
+
 }
-
-#if 0
-// Loop to populate 2D vector a
-// For each row
-for (auto iRow = 0; iRow < a.size(); iRow++)
-{
-    // For each column in that row
-    for (auto iCol = 0; iCol < a[iRow].size(); iCol++)
-        // Assign random number to vector of vector of ints to columns iCol of rows iRows
-        a[iRow][iCol] = rand() % 100;
-}
-
-
-c[row * conSize + col] = 0;
-#endif

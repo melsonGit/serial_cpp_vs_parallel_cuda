@@ -13,15 +13,12 @@ void matMultiNumGen(std::vector<std::vector<int>>& a, std::vector<std::vector<in
     {
         // For each column in that row
         for (auto iCol = 0; iCol < a[iRow].size(); iCol++)
+        {
             // Assign random number to vector of vector of ints to columns iCol of rows iRows
             a[iRow][iCol] = rand() % 100;
-    }
+            b[iRow][iCol] = rand() % 100;
+        }
 
-    // Loop to populate 2D vector b
-    for (auto jRow = 0; jRow < a.size(); jRow++)
-    {
-        for (auto jCol = 0; jCol < a[jCol].size(); jCol++)
-            b[jRow][jCol] = rand() % 100;
     }
     std::cout << "\nMatrix Multiplication: Populating complete.\n";
 }

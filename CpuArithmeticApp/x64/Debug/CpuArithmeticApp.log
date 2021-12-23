@@ -1,2 +1,4 @@
-﻿  matMultiFunc.cpp
+﻿  matMultiCheck.cpp
+  matMultiFunc.cpp
+  Generating Code...
   CpuArithmeticApp.vcxproj -> C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\CpuArithmeticApp\x64\Debug\CpuArithmeticApp.exe

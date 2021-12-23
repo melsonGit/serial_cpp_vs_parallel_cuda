@@ -15,7 +15,7 @@ void matMultiCore()
 	// Start clock
 	clock_t opStart = clock();
 
-	// Begin sequential vector addition operation
+	// Begin sequential matrix multiplication operation
 	matMultiFunc(a, b, c, conSize);
 
 	// Stop clock
