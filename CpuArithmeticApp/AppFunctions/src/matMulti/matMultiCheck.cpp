@@ -2,6 +2,7 @@
 
 void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b, std::vector<std::vector<int>> const& c)
 {
+#if 0
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 	bool doesMatch = true;
 
@@ -20,6 +21,7 @@ void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vect
 	else
 		std::cout << "Matrix multiplication successful: output vector data matches expected results.\n"
 		          << "Timing results will be recorded.\n\n";
+#endif
 }
 
 // Implement a feature that automatically inputs successful data into an excel spreadsheet - via python script or third-party library

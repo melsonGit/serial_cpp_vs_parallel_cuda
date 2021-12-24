@@ -28,7 +28,7 @@ void matMultiCore()
 	double completionTime = (opEnd - opStart) / (double)CLOCKS_PER_SEC;
 
 	// Output timing to complete operation and container size
-	std::cout << completionTime << "s Matrix Multiplication computation time, with a container size of " << conSize << ".\n\n";
+	std::cout << completionTime << "s Matrix Multiplication computation time, with a container size of " << conSize * 2 << ".\n\n";
 	std::cout << "Returning to selection screen.\n\n";
 
 	std::cout << "#########################################################################\n" <<

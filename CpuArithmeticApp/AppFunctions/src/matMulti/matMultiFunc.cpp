@@ -1,35 +1,23 @@
 #include "../../inc/matMulti/matMultiFunc.h"
 
 void matMultiFunc(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b,
-    std::vector<std::vector<int>>& c, matMultiConSize const& conSize)
+                  std::vector<std::vector<int>>& c, matMultiConSize const& numRows)
 {
     std::cout << "\nMatrix Multiplication: Starting operation.\n";
 
-    int rowSize{ 2 };
-    int count{ 0 };
+    int numCols{ 2 };
 
     // For each row
-    for (auto row{ 0 }; row < conSize; row++) 
+    for (auto i{ 0 }; i < numRows; i++) 
     {
-        auto k{ 0 };
-
         // For each column in that row
-        for (auto col{ 0 }; col < rowSize; col++, k++) 
+        for (auto j{ 0 }; j < numCols; j++) 
         {
-            // Currently only looks at first two elements of the b vec
-
-            c[row][k] += a[row][k] * b[k][col];
-
-            std::cout << "Input vector 1: " << a[row][k] << '\n';
-            std::cout << "Input vector 2: " << b[k][col] << '\n';
-            std::cout << "Output vector: " << c[row][k] << '\n';
-
-            std::cout << "BREAK\n";
-            count++;
+            // For each row-column combination
+            for (auto k{0}; k < numCols; k++)
+                c[i][j] += a[i][k] * b[k][j];       
         }
     }
 
     std::cout << "\nMatrix Multiplication: Operation complete.\n";
-    std::cout << count <<'\n';
-
 }
