@@ -22,7 +22,7 @@ void matMultiCore()
 	clock_t opEnd = clock();
 
 	// Check output vector contents
-	matMultiCheck(a, b, c);
+	matMultiCheck(a, b, c, conSize);
 
 	// Calculate overall time spent to complete operation
 	double completionTime = (opEnd - opStart) / (double)CLOCKS_PER_SEC;

@@ -22,7 +22,7 @@ void vecCore()
 	clock_t opEnd = clock();
 
 	// Check output vector contents
-	vecCheck(a, b, c);
+	vecCheck(a, b, c, conSize);
 
 	// Calculate overall time spent to complete operation
 	double completionTime = (opEnd - opStart) / (double)CLOCKS_PER_SEC;

@@ -1,17 +1,17 @@
 #include "../../inc/vecAdd/vecCheck.h"
 
-void vecCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c)
+void vecCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c, vecAddConSize const& conSize)
 {
 	std::cout << "\nVector Addition: Authenticating results.\n\n";
+
 	bool doesMatch = true;
 
-	for (auto i{0}; i < a.size(); i++)
+	for (auto i{ 0 }; i < conSize && doesMatch; i++)
 	{
 		if ((a[i] + b[i]) != c[i])
 			doesMatch = false;
 		else
 			continue;
-
 	}
 	
 	if (!doesMatch)

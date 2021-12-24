@@ -1,18 +1,33 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
-void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b, std::vector<std::vector<int>> const& c)
+void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b, 
+				   std::vector<std::vector<int>> const& c, matMultiConSize const& numRows)
 {
-#if 0
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
+
 	bool doesMatch = true;
+	// Only 2 columns exist in a 2D vector
+	int numCols{ 2 };
 
-	for (auto i{0}; i < a.size(); i++)
+	// For each row
+	for (auto i{ 0 }; i < numRows; i++)
 	{
-		if ((a[i][i] * b[i][i]) != c[i][i])
-			doesMatch = false;
-		else
-			continue;
+		// For each column in that row
+		for (auto j{ 0 }; j < numCols && doesMatch; j++)
+		{
+			// For each row-column combination
+			int resultVar{ 0 };
 
+			for (auto k{ 0 }; k < numCols; k++)
+			{
+				resultVar += a[i][k] * b[k][j];
+			}
+
+			if (resultVar != c[i][j])
+				doesMatch = false;
+			else
+				continue;
+		}
 	}
 
 	if (!doesMatch)
@@ -21,7 +36,4 @@ void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vect
 	else
 		std::cout << "Matrix multiplication successful: output vector data matches expected results.\n"
 		          << "Timing results will be recorded.\n\n";
-#endif
 }
-
-// Implement a feature that automatically inputs successful data into an excel spreadsheet - via python script or third-party library
