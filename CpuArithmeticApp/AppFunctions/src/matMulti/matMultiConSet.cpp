@@ -4,7 +4,7 @@
 matMultiConSize matMultiConSet(matMultiConSize& n)
 {
 
-    int tempInput{ 0 };
+    int userInput{ 0 };
 
     bool correctChoice = false;
 
@@ -18,38 +18,45 @@ matMultiConSize matMultiConSet(matMultiConSize& n)
         std::cout << "6,000 elements:        enter '5'\n";
 
         std::cin.clear();
-        std::cin >> tempInput;
 
-        if (tempInput <= 0 || tempInput >= 6)
+        if (!(std::cin >> userInput))
         {
-            std::cout << "\nPlease select a valid option.\n\n";
+            std::cout << "\nPlease enter numbers only.\n\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-        else if (tempInput == 1)
+        else 
         {
-            n = 1000; // 1,000 x 2 matrix
-            correctChoice = true;
+            if (userInput <= 0 || userInput >= 6)
+            {
+                std::cout << "\nPlease select a valid option.\n\n";
+            }
+            else if (userInput == 1)
+            {
+                n = 1000; // 1,000 x 2 matrix
+                correctChoice = true;
+            }
+            else if (userInput == 2)
+            {
+                n = 1500; // 1500 x 2 matrix
+                correctChoice = true;
+            }
+            else if (userInput == 3)
+            {
+                n = 2000; // 2000 x 2 matrix
+                correctChoice = true;
+            }
+            else if (userInput == 4)
+            {
+                n = 2500; // 2500 x 2 matrix
+                correctChoice = true;
+            }
+            else if (userInput == 5)
+            {
+                n = 3000; // 3000 x 2 matrix
+                correctChoice = true;
+            }
         }
-        else if (tempInput == 2)
-        {
-            n = 1500; // 1500 x 2 matrix
-            correctChoice = true;
-        }
-        else if (tempInput == 3)
-        {
-            n = 2000; // 2000 x 2 matrix
-            correctChoice = true;
-        }
-        else if (tempInput == 4)
-        {
-            n = 2500; // 2500 x 2 matrix
-            correctChoice = true;
-        }
-        else if (tempInput == 5)
-        {
-            n = 3000; // 3000 x 2 matrix
-            correctChoice = true;
-        }
-
     } while (correctChoice != true);
 
     return n;

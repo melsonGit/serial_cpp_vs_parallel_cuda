@@ -11,15 +11,23 @@ int main()
 
 		opChoice(runProg);
 
-		if (runProg == 1)
+		switch (runProg)
+		{
+		case 1:
 			vecAddCore();
-		else if (runProg == 2)
+			break;
+		case 2:
 			matMultiCore();
-		else if (runProg == 3)
+			break;
+		case 3:
 			oneConvCore();
-		else if (runProg == 4)
+			break;
+		case 4:
 			twoConvCore();
-
+			break;
+		default:
+			break;
+		}
 	} while (runProg != closeProg);
 
 	std::cout << "\nClosing program.\n";

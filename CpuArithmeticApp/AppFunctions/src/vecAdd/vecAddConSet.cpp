@@ -3,7 +3,7 @@
 
 vecAddConSize vecAddConSet(vecAddConSize& n)
 {
-    int tempInput{0};
+    int userInput{0};
 
     bool correctChoice = false;
 
@@ -17,38 +17,45 @@ vecAddConSize vecAddConSet(vecAddConSize& n)
         std::cout << "65,000,000 elements:        enter '5'\n";
 
         std::cin.clear();
-        std::cin >> tempInput;
 
-        if (tempInput <= 0 || tempInput >= 6)
+        if (!(std::cin >> userInput))
         {
-            std::cout << "\nPlease select a valid option.\n\n";
+            std::cout << "\nPlease enter numbers only.\n\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-        else if (tempInput == 1)
+        else
         {
-            n = 25000000; // 25 million elements
-            correctChoice = true;
+            if (userInput <= 0 || userInput >= 6)
+            {
+                std::cout << "\nPlease select a valid option.\n\n";
+            }
+            else if (userInput == 1)
+            {
+                n = 25000000; // 25 million elements
+                correctChoice = true;
+            }
+            else if (userInput == 2)
+            {
+                n = 35000000; // 35 million elements
+                correctChoice = true;
+            }
+            else if (userInput == 3)
+            {
+                n = 45000000; // 45 million elements
+                correctChoice = true;
+            }
+            else if (userInput == 4)
+            {
+                n = 55000000; // 55 million elements
+                correctChoice = true;
+            }
+            else if (userInput == 5)
+            {
+                n = 65000000; // 65 million elements
+                correctChoice = true;
+            }
         }
-        else if (tempInput == 2)
-        {
-            n = 35000000; // 35 million elements
-            correctChoice = true;
-        }
-        else if (tempInput == 3)
-        {
-            n = 45000000; // 45 million elements
-            correctChoice = true;
-        }
-        else if (tempInput == 4)
-        {
-            n = 55000000; // 55 million elements
-            correctChoice = true;
-        }
-        else if (tempInput == 5)
-        {
-            n = 65000000; // 65 million elements
-            correctChoice = true;
-        }
-
     } while (correctChoice != true);
 
     return n;
