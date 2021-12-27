@@ -12,7 +12,7 @@ int main()
 		opChoice(runProg);
 
 		if (runProg == 1)
-			vecCore();
+			vecAddCore();
 		else if (runProg == 2)
 			matMultiCore();
 		else if (runProg == 3)

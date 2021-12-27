@@ -158,10 +158,10 @@
     <ClCompile Include="AppFunctions\src\twoConv\twoConvFunc.cpp" />
     <ClCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp" />
     <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\vecCheck.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\vecConSet.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\vecNumGen.cpp" />
-    <ClCompile Include="AppFunctions\src\vecAdd\vecCore.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddCore.cpp" />
     <ClCompile Include="CpuArithmeticApp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -190,10 +190,10 @@
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvFunc.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvNumGen.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\vecCheck.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\vecConSet.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\vecNumGen.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\vecCore.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCheck.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddConSet.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCore.h" />
     <ClInclude Include="AppFunctions\numGen.h" />
     <ClInclude Include="AppFunctions\numGen\numGen.h" />
   </ItemGroup>

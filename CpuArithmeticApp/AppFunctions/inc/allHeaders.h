@@ -6,7 +6,7 @@
 #include "core/opChoice.h"
 
 // Sequential Vector Addition
-#include "vecAdd/vecCore.h"
+#include "vecAdd/vecAddCore.h"
 
 // Sequential Matrix Multiplication
 #include "matMulti/matMultiCore.h"

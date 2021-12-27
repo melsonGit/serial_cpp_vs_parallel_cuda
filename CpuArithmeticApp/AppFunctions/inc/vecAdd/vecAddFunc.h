@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ADD_FUNC
-#define ADD_FUNC
+#ifndef VEC_ADD_FUNC
+#define VEC_ADD_FUNC
 
 #include <iostream>
 #include <vector>
