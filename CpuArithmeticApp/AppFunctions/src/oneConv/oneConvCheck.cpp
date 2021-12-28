@@ -7,14 +7,6 @@ void oneConvCheck(std::vector<int>& mainVec, std::vector<int>& maskVec, oneConvC
 
 	bool doesMatch = true;
 
-	for (auto i{ 0 }; i < conSize && doesMatch; i++)
-	{
-		if ((a[i] + b[i]) != c[i])
-			doesMatch = false;
-		else
-			continue;
-	}
-
 	if (!doesMatch)
 		std::cout << "1D Convolution unsuccessful: output vector data does not match the expected result.\n"
 		<< "Timing results will be discarded.\n\n";
