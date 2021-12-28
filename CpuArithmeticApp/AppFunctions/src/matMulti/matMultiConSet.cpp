@@ -1,6 +1,5 @@
 #include "../../inc/matMulti/matMultiConSet.h"
 
-
 matMultiConSize matMultiConSet(matMultiConSize& n)
 {
 

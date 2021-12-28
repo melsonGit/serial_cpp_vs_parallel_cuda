@@ -6,6 +6,7 @@ void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vect
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 
 	bool doesMatch = true;
+
 	// Only 2 columns exist in a 2D vector
 	int numCols{ 2 };
 
@@ -31,7 +32,7 @@ void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vect
 	}
 
 	if (!doesMatch)
-		std::cout << "Matrix multiplication unsuccessful: output vector data does not match the expected result.\n"
+		std::cout << "Matrix multiplication unsuccessful: output vector data does not match expected results.\n"
 		          << "Timing results will be discarded.\n\n";
 	else
 		std::cout << "Matrix multiplication successful: output vector data matches expected results.\n"

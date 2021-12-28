@@ -15,7 +15,7 @@ void vecAddCheck(std::vector<int> const& a, std::vector<int> const& b, std::vect
 	}
 	
 	if (!doesMatch)
-		std::cout << "Vector addition unsuccessful: output vector data does not match the expected result.\n"
+		std::cout << "Vector addition unsuccessful: output vector data does not match expected results.\n"
 		          << "Timing results will be discarded.\n\n";
 	else
 		std::cout << "Vector addition successful: output vector data matches expected results.\n"
