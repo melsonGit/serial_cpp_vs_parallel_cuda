@@ -1,2 +1,0 @@
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\CpuArithmeticApp\Debug\CpuArithmeticApp.exe
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\CpuArithmeticApp\Debug\CpuArithmeticApp.pdb

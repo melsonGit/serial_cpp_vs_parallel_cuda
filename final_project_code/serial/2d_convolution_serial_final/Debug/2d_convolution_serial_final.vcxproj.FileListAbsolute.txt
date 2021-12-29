@@ -1,2 +1,0 @@
-C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\2d_convolution_serial_final\Debug\2d_convolution_serial_final.exe
-C:\Users\Matt1\source\repos\Serial C++ CUDA Projects\2d_convolution_serial_final\Debug\2d_convolution_serial_final.pdb
