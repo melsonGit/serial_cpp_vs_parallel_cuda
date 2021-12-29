@@ -8,9 +8,9 @@ void oneConvCore()
     // Number of elements in the convolution mask
     int maskSize = 7;
 
-    // Allocate main vector with size conSize
-    std::vector<int> mainVec(conSize);
-    // Allocate mask vector with m
+    // Allocate main vector and resultant vector with size conSize
+    std::vector<int> mainVec(conSize), resVec(conSize);
+    // Allocate mask vector with maskSize
     std::vector<int> maskVec(maskSize);
 
     // Popluate main vector and mask vector
@@ -20,12 +20,12 @@ void oneConvCore()
     clock_t opStart = clock();
 
     // Start 1D Convolution operation
-    oneConvFunc(mainVec, maskVec, conSize, maskSize);
+    oneConvFunc(mainVec, maskVec, resVec, conSize, maskSize);
 
     // Stop clock
     clock_t opEnd = clock();
 
-    oneConvCheck(mainVec, maskVec, conSize, maskSize);
+    oneConvCheck(mainVec, maskVec, resVec, conSize, maskSize);
 
     // Calculate overall time spent to complete operation
     double completionTime = (opEnd - opStart) / (double)CLOCKS_PER_SEC;

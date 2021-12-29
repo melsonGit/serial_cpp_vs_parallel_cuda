@@ -2,7 +2,6 @@
 
 void oneConvNumGen(std::vector<int>& mainVec, std::vector<int>& maskVec)
 {
-
     std::cout << "\n1D Convolution: Populating main and mask vectors.\n";
 
     // Re-seed rand() function for each run

@@ -6,6 +6,6 @@
 #include <vector>
 #include "../allTDefs.h"
 
-void oneConvCheck(std::vector<int>&, std::vector<int>&, oneConvConSize&, int&);
+void oneConvCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, oneConvConSize const&, int const&);
 
 #endif

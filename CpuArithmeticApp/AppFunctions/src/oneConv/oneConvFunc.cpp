@@ -1,6 +1,7 @@
 #include "../../inc/oneConv/oneConvFunc.h"
 
-void oneConvFunc(std::vector<int>& mainVec, std::vector<int>& maskVec, oneConvConSize& conSize, int& maskSize)
+void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, 
+                 oneConvConSize const& conSize, int const& maskSize)
 {
     std::cout << "\n1D Convolution: Starting operation.\n";
 
