@@ -4,7 +4,7 @@ void vecAddCore()
 {
 
 	// Assign variable conSize with a user selected value
-	vecAddConSize conSize = vecAddConSet(conSize);
+	vecAddConSize conSize{ vecAddConSet(conSize) };
 
 	// Assign input vectors (a & b) and the output vector (c) a container size of conSize
 	std::vector<int> a(conSize), b(conSize), c(conSize);
