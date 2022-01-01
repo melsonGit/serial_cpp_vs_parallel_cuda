@@ -18,13 +18,13 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<std::vector<int>> 
             resVec[i] = 0;
 
             // Go over each mask row
-            for (int k = 0; k < MASK_DIM; k++) 
+            for (int k = 0; k < MASK_TWO_DIM; k++) 
             {
                 // Update offset value for row
                 offset_r = i - MASK_OFFSET + k;
 
                 // Go over each mask column
-                for (int l = 0; l < MASK_DIM; l++) 
+                for (int l = 0; l < MASK_TWO_DIM; l++) 
                 {
                     // Update offset value for column
                     offset_c = j - MASK_OFFSET + l;
@@ -35,7 +35,7 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<std::vector<int>> 
                         if (offset_c >= 0 && offset_c < conSize)
                         {
                             // Accumulate results into resVec
-                            resVec[i] += mainVec[offset_r * conSize + offset_c] * maskVec[k * MASK_DIM][l];
+                            resVec[i] += mainVec[offset_r * conSize + offset_c] * maskVec[k * MASK_TWO_DIM][l];
                         }
                     }
                 }

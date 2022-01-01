@@ -3,9 +3,9 @@
 #define TWO_CONV_FUNC
 
 // 7 x 7 convolutional mask
-#define MASK_DIM 7
+#define MASK_TWO_DIM 7
 // Amount the the matrix will hang over the matrix
-#define MASK_OFFSET (MASK_DIM / 2)
+#define MASK_OFFSET (MASK_TWO_DIM / 2)
 
 #include <iostream>
 #include <vector>
