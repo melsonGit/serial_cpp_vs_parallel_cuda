@@ -11,10 +11,12 @@ void twoConvCore()
     twoConvConSize conSize { twoConvConSet(conSize) };
 
     // Assign vectors mainVec(input vector) and resVec (resultant vector) a container size of conSize
-    std::vector<int> mainVec(conSize), resVec(conSize);
+    // mainVec is a matrix, therefore must be a 2D vector
+    std::vector<std::vector<int>> mainVec(conSize, std::vector<int>(2, 0)), resVec(conSize, std::vector<int>(2, 0));
+
     // Assign 2D vector maskVec(maskVec) a container size of MASK_DIM * MASK_DIM
     std::vector<std::vector<int>> maskVec(MASK_TWO_DIM, std::vector<int>(2, 0));
-
+   
     // Populate mainVec and maskVec
     twoConvNumGen(mainVec, maskVec);
 

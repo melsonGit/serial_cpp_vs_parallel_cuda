@@ -5,7 +5,7 @@ void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
 {
     std::cout << "\n1D Convolution: Starting operation.\n";
 
-    // Radius will determine when the operation can start and end to prevent out of bound errors
+    // Radius will determine when convolution occurs to prevent out of bound errors
     int maskRadius { MASK_ONE_DIM / 2 };
     int start { 0 };
 

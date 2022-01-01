@@ -31,27 +31,27 @@ twoConvConSize twoConvConSet (twoConvConSize& n)
             }
             else if (userInput == 1)
             {
-                n = 4096; // 4,096 elements
+                n = 2048; // 2,048 x 2 elements
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                n = 5120; // 5,120 elements
+                n = 2560; // 2,560 x 2 elements
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                n = 6144; // 6,144 elements
+                n = 3072; // 3,072 x 2 elements
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                n = 8192; // 8,192 elements
+                n = 4096; // 4,096 x 2 elements
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                n = 10240; // 10,240 elements
+                n = 5120; // 5,120 x 2 elements
                 correctChoice = true;
             }
         }
