@@ -12,10 +12,10 @@ void twoConvNumGen(std::vector<int>& mainVec, std::vector<std::vector<int>>& mas
 
     // Loop to populate 2D vector maskVec
     // For each row
-    for (auto iRow = 0; iRow < maskVec.size(); iRow++)
+    for (auto iRow { 0 }; iRow < maskVec.size(); iRow++)
     {
         // For each column in that row
-        for (auto iCol = 0; iCol < maskVec[iRow].size(); iCol++)
+        for (auto iCol { 0 }; iCol < maskVec[iRow].size(); iCol++)
         {
             // Assign random number to vector of vector of ints to columns iCol of rows iRows
             maskVec[iRow][iCol] = rand() % 100; // ##!! CHANGE TO 10 IF ISSUES ARISE!!##

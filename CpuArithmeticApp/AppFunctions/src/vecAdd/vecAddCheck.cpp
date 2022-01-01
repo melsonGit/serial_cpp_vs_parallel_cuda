@@ -4,7 +4,7 @@ void vecAddCheck(std::vector<int> const& a, std::vector<int> const& b, std::vect
 {
 	std::cout << "\nVector Addition: Authenticating results.\n\n";
 
-	bool doesMatch = true;
+	bool doesMatch { true };
 
 	for (auto i{ 0 }; i < conSize && doesMatch; i++)
 	{

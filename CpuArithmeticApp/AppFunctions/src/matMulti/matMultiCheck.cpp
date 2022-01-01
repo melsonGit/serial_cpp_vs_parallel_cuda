@@ -5,21 +5,21 @@ void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vect
 {
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 
-	bool doesMatch = true;
+	bool doesMatch { true };
 
 	// Only 2 columns exist in a 2D vector
-	int numCols{ 2 };
+	int numCols { 2 };
 
 	// For each row
-	for (auto i{ 0 }; i < numRows; i++)
+	for (auto i { 0 }; i < numRows; i++)
 	{
 		// For each column in that row
-		for (auto j{ 0 }; j < numCols && doesMatch; j++)
+		for (auto j { 0 }; j < numCols && doesMatch; j++)
 		{
 			// For each row-column combination
-			int resultVar{ 0 };
+			int resultVar { 0 };
 
-			for (auto k{ 0 }; k < numCols; k++)
+			for (auto k { 0 }; k < numCols; k++)
 			{
 				resultVar += a[i][k] * b[k][j];
 			}

@@ -3,9 +3,9 @@
 matMultiConSize matMultiConSet(matMultiConSize& n)
 {
 
-    int userInput{ 0 };
+    int userInput { 0 };
 
-    bool correctChoice = false;
+    bool correctChoice { false };
 
     do
     {
@@ -56,7 +56,7 @@ matMultiConSize matMultiConSet(matMultiConSize& n)
                 correctChoice = true;
             }
         }
-    } while (correctChoice != true);
+    } while (!correctChoice);
 
     return n;
 }

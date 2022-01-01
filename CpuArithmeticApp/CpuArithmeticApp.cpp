@@ -1,9 +1,8 @@
-#include <iostream>
 #include "../CpuArithmeticApp/AppFunctions/inc/allHeaders.h"
 
 int main()
 {
-	int runProg{}, closeProg{ 5 };
+	int runProg { 0 }, closeProg { 5 };
 
 	do 
 	{
@@ -29,8 +28,6 @@ int main()
 			break;
 		}
 	} while (runProg != closeProg);
-
-	std::cout << "\nClosing program.\n";
 
 	return EXIT_SUCCESS;
 

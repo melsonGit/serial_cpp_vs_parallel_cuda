@@ -9,10 +9,10 @@ void matMultiNumGen(std::vector<std::vector<int>>& a, std::vector<std::vector<in
 
     // Loop to populate 2D vector a
     // For each row
-    for (auto iRow = 0; iRow < a.size(); iRow++)
+    for (auto iRow { 0 }; iRow < a.size(); iRow++)
     {
         // For each column in that row
-        for (auto iCol = 0; iCol < a[iRow].size(); iCol++)
+        for (auto iCol { 0 }; iCol < a[iRow].size(); iCol++)
         {
             // Assign random number to vector of vector of ints to columns iCol of rows iRows
             a[iRow][iCol] = rand() % 100;

@@ -3,7 +3,7 @@
 void opChoice(int& userInput)
 {
 
-    bool correctChoice = false;
+    bool correctChoice { false };
 
     do 
     {
@@ -55,7 +55,7 @@ void opChoice(int& userInput)
             }
             else if (userInput == 5)
             {
-                bool closeChoice = false;
+                bool closeChoice { false };
 
                 std::cout << "\nAre you sure you want to close the program?\n";
                 std::cout << "Yes (1) || No (2)\n";
@@ -79,6 +79,7 @@ void opChoice(int& userInput)
                         closeChoice = true;
                         correctChoice = true;
                         userInput = 5;
+                        std::cout << "\nClosing program.\n";
                     }
                     else if (userInput == 2)
                     {
@@ -86,8 +87,8 @@ void opChoice(int& userInput)
                         closeChoice = true;
                     }
 
-                } while (closeChoice != true);
+                } while (!closeChoice);
             }
         }
-    } while (correctChoice != true);
+    } while (!correctChoice);
 }

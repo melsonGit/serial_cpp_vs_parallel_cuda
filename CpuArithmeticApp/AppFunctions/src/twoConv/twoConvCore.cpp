@@ -8,7 +8,7 @@
 void twoConvCore()
 {
     // Assign variable conSize with a user selected value
-    twoConvConSize conSize = twoConvConSet(conSize);
+    twoConvConSize conSize { twoConvConSet(conSize) };
 
     // Assign vectors mainVec(input vector) and resVec (resultant vector) a container size of conSize
     std::vector<int> mainVec(conSize), resVec(conSize);
@@ -18,16 +18,16 @@ void twoConvCore()
     // Populate mainVec and maskVec
     twoConvNumGen(mainVec, maskVec);
 
-    clock_t opStart = clock();
+    clock_t opStart { clock() };
 
     twoConvFunc(mainVec, maskVec, resVec, conSize);
 
-    clock_t opEnd = clock();
+    clock_t opEnd { clock() };
 
     twoConvCheck(mainVec, maskVec, resVec, conSize);
 
     // Calculate overall time spent to complete operation
-    double completionTime = (opEnd - opStart) / (double)CLOCKS_PER_SEC;
+    double completionTime { (opEnd - opStart) / (double)CLOCKS_PER_SEC };
 
     // Output timing to complete operation and container size
     std::cout << completionTime << "s 2D Convolution computation time, with a container size of " << conSize << ".\n\n";
