@@ -14,11 +14,14 @@ void twoConvCore()
     // mainVec is a matrix, therefore must be a 2D vector
     std::vector<std::vector<int>> mainVec(conSize, std::vector<int>(2, 0)), resVec(conSize, std::vector<int>(2, 0));
 
-    // Assign 2D vector maskVec(maskVec) a container size of MASK_DIM * MASK_DIM
+    // Assign 2D vector mask vector (maskVec) a container size of MASK_DIM * MASK_DIM
     std::vector<std::vector<int>> maskVec(MASK_TWO_DIM, std::vector<int>(2, 0));
    
     // Populate mainVec and maskVec
-    twoConvNumGen(mainVec, maskVec);
+    std::cout << "\n2D Convolution: Populating main vector.\n";
+    twoConvNumGen(mainVec);
+    std::cout << "\n2D Convolution: Populating mask vector.\n";
+    twoConvNumGen(maskVec);
 
     clock_t opStart { clock() };
 

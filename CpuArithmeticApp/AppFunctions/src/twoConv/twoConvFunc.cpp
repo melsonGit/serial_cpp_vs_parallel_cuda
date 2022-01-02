@@ -3,21 +3,23 @@
 void twoConvFunc(std::vector<std::vector<int>> const& mainVec, std::vector<std::vector<int>> const& maskVec, std::vector<std::vector<int>>& resVec,
                  twoConvConSize const& conSize)
 {
+    std::cout << "\n2D Convolution: Populating complete.\n";
     std::cout << "\n2D Convolution: Starting operation.\n";
 
     // Radius rows/cols will determine when convolution occurs to prevent out of bound errors
     // twoConv utilises one for rows AND columns as we're dealing with a 2D mask vector
     int radiusOffsetRows;
     int radiusOffsetCols;
+    int tempResult;
 
     // Go over each row
     for (auto i { 0 }; i < conSize; i++)
     {
         // Go over each column
-        for (auto j { 0 }; j < conSize; j++)
+        for (auto j { 0 }; j < resVec[i].size(); j++)
         {
-            // Assign the resVec variable a value
-            resVec[i][j] = 0;
+            // Assign the tempResult variable a value
+            tempResult = 0;
 
             // Go over each mask row
             for (auto k { 0 }; k < MASK_TWO_DIM; k++)
@@ -37,11 +39,13 @@ void twoConvFunc(std::vector<std::vector<int>> const& mainVec, std::vector<std::
                         if (radiusOffsetCols >= 0 && radiusOffsetCols < conSize)
                         {
                             // Accumulate results into resVec
-                            resVec[i][j] += mainVec[radiusOffsetRows * conSize][radiusOffsetCols] * maskVec[k * MASK_TWO_DIM][l];
+                            tempResult += mainVec[radiusOffsetRows + i][radiusOffsetCols + j] * maskVec[k * MASK_TWO_DIM][l];
                         }
                     }
                 }
             }
+
+            resVec[i][j] = tempResult;
         }
     }
     std::cout << "\n2D Convolution: Operation complete.\n";
