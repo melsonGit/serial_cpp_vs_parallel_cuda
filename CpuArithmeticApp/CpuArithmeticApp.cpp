@@ -1,34 +1,33 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
 #include "../CpuArithmeticApp/AppFunctions/inc/allHeaders.h"
 
 int main()
 {
-	// Assign variable conSize with a user selected value
-	int conSize = conSet(conSize);
+	int runProg { 0 }, closeProg { 5 };
 
-	// Assign input vectors (a & b) and the output vector (c) a container size of conSize
-	std::vector<int> a(conSize), b(conSize), c(conSize);
+	do 
+	{
+		runProg = 0;
 
-	// Populate vectors
-	numGen(a, b);
+		opChoice(runProg);
 
-	// Start clock
-	clock_t start = clock();
-
-	// Begin sequential vector addition operation
-	add(a, b, c);
-
-	// Stop clock
-	clock_t end = clock();
-
-	// Check output vector contents
-	checkAdd(a, b, c);
-
-	double diffs = (end - start) / (double)CLOCKS_PER_SEC;
-	std::cout << diffs << "s Vector Addition computation time, with a container size of " << conSize << ".\n";
-	std::cout << "SEQUENTIAL VECTOR ADDITION COMPUTATION SUCCESSFUL.\nShutting down program....\n";
+		switch (runProg)
+		{
+		case 1:
+			vecAddCore();
+			break;
+		case 2:
+			matMultiCore();
+			break;
+		case 3:
+			oneConvCore();
+			break;
+		case 4:
+			twoConvCore();
+			break;
+		default:
+			break;
+		}
+	} while (runProg != closeProg);
 
 	return EXIT_SUCCESS;
 

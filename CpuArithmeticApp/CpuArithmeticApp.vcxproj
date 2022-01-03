@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,6 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,10 +141,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AppFunctions\src\addFunc.cpp" />
-    <ClCompile Include="AppFunctions\src\checkAdd.cpp" />
-    <ClCompile Include="AppFunctions\src\conSet.cpp" />
-    <ClCompile Include="AppFunctions\src\numGen.cpp" />
+    <ClCompile Include="AppFunctions\src\core\opChoice.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCore.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvCore.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCore.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddCore.cpp" />
     <ClCompile Include="CpuArithmeticApp.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,11 +171,29 @@
     <ClInclude Include="AppFunctions\checkAdd\checkAdd.h" />
     <ClInclude Include="AppFunctions\conSet.h" />
     <ClInclude Include="AppFunctions\conSet\conSet.h" />
-    <ClInclude Include="AppFunctions\inc\addFunc.h" />
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
-    <ClInclude Include="AppFunctions\inc\checkAdd.h" />
-    <ClInclude Include="AppFunctions\inc\conSet.h" />
-    <ClInclude Include="AppFunctions\inc\numGen.h" />
+    <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
+    <ClInclude Include="AppFunctions\inc\allTDefs.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiFunc.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvCheck.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvConSet.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvFunc.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvFunc.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCheck.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddConSet.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCore.h" />
     <ClInclude Include="AppFunctions\numGen.h" />
     <ClInclude Include="AppFunctions\numGen\numGen.h" />
   </ItemGroup>

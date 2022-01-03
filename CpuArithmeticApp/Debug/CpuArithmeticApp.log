@@ -1,5 +1,0 @@
-﻿  checkAdd.cpp
-C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\CpuArithmeticApp\AppFunctions\src\checkAdd.cpp(8,19): warning C4018: '<': signed/unsigned mismatch
-  numGen.cpp
-  Generating Code...
-  CpuArithmeticApp.vcxproj -> C:\Users\Matt1\source\repos\serial_cpp_vs_parallel_cuda\CpuArithmeticApp\Debug\CpuArithmeticApp.exe

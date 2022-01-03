@@ -11,11 +11,11 @@ The 4 arithmetic operations are: [Vector Addition](https://github.com/melsonGit/
 
 I started this project to not only fulfill my MSc, but I also hold a keen interest in the roles of the GPU/GPGPU and CPU. I wanted to test the capabilities of both components in numerous environments that were computationally intensive enough to determine where the strengths of GPU/GPGPUs and CPUs lie anecdotally (this area is heavily documented). Combining that with my passion for coding; I went down the rabbit hole that is CUDA (compute unified device architecture; CUDA is Nvidia's propriety GPU programming language).  
 
-My first hurdle was overcoming the technical issues that came with setting up CUDA inside the VS IDE. After **3** failed attempts and pain-stakingly configuring my workstation, I was able to get CUDA up and running. With documentation and a few online video tutorials to guide me, I was able to develop **8** mini-programs which tested the GPU/GPGPU and CPU using arithmetic operations (detailed below).
+My first hurdle was overcoming the technical issues that came with setting up CUDA inside the VS IDE. After **3** failed attempts and pain-stakingly configuring my workstation, I was able to get CUDA up and running. With documentation and a few online video tutorials to guide me, I was able to develop **8** mini-programs which tested the GPU/GPGPU and CPU using arithmetic operations (detailed below). Admittedly I didn't develop my programs to the level I had envisioned prior to starting my thesis. Despite this, it provided an avenue for me to explore numerous areas of the GPU/GPGPU and CPU in detail for my written work.
 
 # Future of this project
 
-With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became familiar with CUDA. I would consider a pure OOP approach to be somewhat unnecessary for this particular project, partly due to the overhead involved. However, I wish to integrate all programs into one, and an OOP approach will help in that regard. As it stands, I believe each program serves the purpose it was made for. In the near-future, I wish to try and refactor most of the code.
+With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became familiar with CUDA. I would consider a pure OOP approach to be somewhat unnecessary for this particular project, partly due to the overhead involved. However, I wish to integrate all programs into a one or two programs (serial and parallel), and an OOP approach will help in that regard. As it stands, I believe each program serves the purpose it was made for at the time I worked on my thesis. There are noticable areas of improvement to be made, namely in serial Matrix Multiplication and 2-D Convolution operations, lacking semantically _true_ 2-D containers.
 
 # Program Logic: Vector Addition
 
@@ -49,7 +49,7 @@ The above image displays this process; values 1, 4, 6 and 3 populate the input v
 
 # Program Logic: 2-D Convolution
 
-Presented below, 2-D convolution follows an identical operation (of 1-D convolution) albeit with a 2-D mask vector, increasing value population twofold through rows and columns. Once more, each corresponding element of input and mask vectors will multiply (represented by orange arrows; e.g. 3x1, 3x1, 2x4, 2x4, 1x6, 1x6.) and summation of this operation is pushed to the outpour vector (e.g. 3 + 3 + 8 + 8 + 6 + 6 = 34).
+Presented below, 2-D convolution follows an identical operation (of 1-D convolution) albeit with a 2-D mask vector, increasing value population twofold through rows and columns. Once more, each corresponding element of input and mask vectors will multiply (represented by orange arrows; e.g. 3x1, 3x1, 2x4, 2x4, 1x6, 1x6.) and summation of this operation is pushed to the output vector (e.g. 3 + 3 + 8 + 8 + 6 + 6 = 34).
 
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/2d.png" alt="2-D Convolution"/>
