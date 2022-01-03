@@ -10,7 +10,10 @@ void vecAddCore()
 	std::vector<int> a(conSize), b(conSize), c(conSize);
 
 	// Populate vectors
-	vecAddNumGen(a, b);
+	std::cout << "\nVector Addition: Populating 1 of 2 input vectors.\n";
+	vecAddNumGen(a);
+	std::cout << "\nVector Addition: Populating 2 of 2 input vectors.\n";
+	vecAddNumGen(b);
 
 	// Start clock
 	clock_t opStart { clock() };

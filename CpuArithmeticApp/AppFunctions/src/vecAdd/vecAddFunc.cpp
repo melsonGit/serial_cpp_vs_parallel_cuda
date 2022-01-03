@@ -2,6 +2,7 @@
 
 void vecAddFunc(std::vector<int> const &a, std::vector<int>  const &b, std::vector<int> &c)
 {
+	std::cout << "\nVector Addition: Populating complete.\n";
 	std::cout << "\nVector Addition: Starting operation.\n";
 
 	// Add contents from vector 'a' and 'b' into vector 'c' || Transform using a Lambda C++11

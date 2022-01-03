@@ -16,6 +16,6 @@
 #include <vector>
 #include "../allTDefs.h"
 
-void twoConvFunc(std::vector<std::vector<int>> const&, std::vector<std::vector<int>> const&, std::vector<std::vector<int>>&, twoConvConSize const&);
+void twoConvFunc(std::vector<int> const&, std::vector<int> const&, std::vector<int>&, twoConvConSize const&);
 
 #endif

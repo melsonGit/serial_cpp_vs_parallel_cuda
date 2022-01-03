@@ -10,10 +10,10 @@ twoConvConSize twoConvConSet (twoConvConSize& n)
     {
         std::cout << "Please select 2D Convolution element sample size from the options below:\n\n";
         std::cout << "4,096  elements:        enter '1'\n";
-        std::cout << "5,120  elements:        enter '2'\n";
-        std::cout << "6.144  elements:        enter '3'\n";
-        std::cout << "8,192  elements:        enter '4'\n";
-        std::cout << "10,240 elements:        enter '5'\n";
+        std::cout << "5,184  elements:        enter '2'\n";
+        std::cout << "6,400  elements:        enter '3'\n";
+        std::cout << "8,836  elements:        enter '4'\n";
+        std::cout << "10,201 elements:        enter '5'\n";
 
         std::cin.clear();
 
@@ -31,27 +31,27 @@ twoConvConSize twoConvConSet (twoConvConSize& n)
             }
             else if (userInput == 1)
             {
-                n = 2048; // 2,048 x 2 elements
+                n = 64; // 64 x 64 = 4,096 elements
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                n = 2560; // 2,560 x 2 elements
+                n = 72; // 72 x 72 = 5,184 elements
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                n = 3072; // 3,072 x 2 elements
+                n = 80; // 80 x 80 = 6,400 elements
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                n = 4096; // 4,096 x 2 elements
+                n = 94; // 94 x 94 = 8,836 elements
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                n = 5120; // 5,120 x 2 elements
+                n = 101; // 101 x 101 = 10,201 elements
                 correctChoice = true;
             }
         }

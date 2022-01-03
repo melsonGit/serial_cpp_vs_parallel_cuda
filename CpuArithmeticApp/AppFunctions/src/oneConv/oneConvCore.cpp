@@ -17,7 +17,10 @@ void oneConvCore()
     std::vector<int> maskVec(MASK_ONE_DIM);
 
     // Popluate main vector and mask vector
-    oneConvNumGen(mainVec, maskVec);
+    std::cout << "\n1D Convolution: Populating main vector.\n";
+    oneConvNumGen(mainVec);
+    std::cout << "\n1D Convolution: Populating mask vector.\n";
+    oneConvNumGen(maskVec);
 
     // Start clock
     clock_t opStart { clock() };

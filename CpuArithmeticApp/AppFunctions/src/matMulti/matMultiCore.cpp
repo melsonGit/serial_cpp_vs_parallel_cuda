@@ -9,7 +9,10 @@ void matMultiCore()
 	std::vector<std::vector<int>> a(conSize, std::vector<int>(2, 0)), b(conSize, std::vector<int>(2, 0)), c(conSize, std::vector<int>(2, 0));
 
 	// Populate vectors
-	matMultiNumGen(a, b);
+	std::cout << "\nMatrix Multiplication: Populating 1 of 2 input vectors.\n";
+	matMultiNumGen(a);
+	std::cout << "\nMatrix Multiplication: Populating 2 of 2 input vectors.\n";
+	matMultiNumGen(b);
 
 	// Start clock
 	clock_t opStart { clock() };

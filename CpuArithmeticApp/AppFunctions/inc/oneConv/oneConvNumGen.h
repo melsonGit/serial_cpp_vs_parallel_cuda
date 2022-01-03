@@ -6,6 +6,6 @@
 #include <algorithm>
 #include <vector>
 
-void oneConvNumGen(std::vector<int>&, std::vector<int>&);
+void oneConvNumGen(std::vector<int>&);
 
 #endif

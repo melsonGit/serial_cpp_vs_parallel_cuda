@@ -12,10 +12,11 @@ void twoConvCore()
 
     // Assign vectors mainVec(input vector) and resVec (resultant vector) a container size of conSize
     // mainVec is a matrix, therefore must be a 2D vector
-    std::vector<std::vector<int>> mainVec(conSize, std::vector<int>(2, 0)), resVec(conSize, std::vector<int>(2, 0));
+    std::vector<int> mainVec(conSize * conSize), resVec(conSize * conSize, 0);
 
     // Assign 2D vector mask vector (maskVec) a container size of MASK_DIM * MASK_DIM
-    std::vector<std::vector<int>> maskVec(MASK_TWO_DIM, std::vector<int>(2, 0));
+    // NOTE: ensure conSize * conSize / MASK_DIM * MASK_DIM  persists when moving onto 2D vectors, this ensures func and check work
+    std::vector<int> maskVec(MASK_TWO_DIM * MASK_TWO_DIM);
    
     // Populate mainVec and maskVec
     std::cout << "\n2D Convolution: Populating main vector.\n";
@@ -35,7 +36,7 @@ void twoConvCore()
     double completionTime { (opEnd - opStart) / (double)CLOCKS_PER_SEC };
 
     // Output timing to complete operation and container size
-    std::cout << completionTime << "s 2D Convolution computation time, with a container size of " << conSize << ".\n\n";
+    std::cout << completionTime << "s 2D Convolution computation time, with a container size of " << conSize * conSize << ".\n\n";
     std::cout << "Returning to selection screen.\n\n";
 
     std::cout << "#########################################################################\n" <<

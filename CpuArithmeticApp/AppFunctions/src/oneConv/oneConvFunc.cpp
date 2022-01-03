@@ -3,6 +3,7 @@
 void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, 
                  oneConvConSize const& conSize)
 {
+    std::cout << "\n1D Convolution: Populating complete.\n";
     std::cout << "\n1D Convolution: Starting operation.\n";
 
     // Radius will determine when convolution occurs to prevent out of bound errors
