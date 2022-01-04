@@ -6,7 +6,6 @@
 #include "vecAddNumGen.h"
 #include "vecAddFunc.h"
 #include "vecAddCheck.h"
-#include "../allTDefs.h"
 
 void vecAddCore();
 
