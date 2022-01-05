@@ -1,6 +1,6 @@
 #include "../../inc/twoConv/twoConvConSet.h"
 
-twoConvConSize twoConvConSet (twoConvConSize& n) 
+int twoConvConSet (int& n) 
 {
     int userInput { 0 };
 

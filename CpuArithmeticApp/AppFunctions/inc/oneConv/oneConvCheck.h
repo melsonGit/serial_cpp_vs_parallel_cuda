@@ -9,8 +9,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../allTDefs.h"
 
-void oneConvCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, oneConvConSize const&);
+void oneConvCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, int const&);
 
 #endif

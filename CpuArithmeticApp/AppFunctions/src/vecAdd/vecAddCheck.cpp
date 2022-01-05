@@ -1,6 +1,6 @@
 #include "../../inc/vecAdd/vecAddCheck.h"
 
-void vecAddCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c, vecAddConSize const& conSize)
+void vecAddCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c, int const& conSize)
 {
 	std::cout << "\nVector Addition: Authenticating results.\n\n";
 

@@ -9,7 +9,7 @@ void oneConvCore()
 {
 
     // Assign variable conSize with a user selected value
-    oneConvConSize conSize { oneConvConSet(conSize) };
+    int conSize { oneConvConSet(conSize) };
 
     // Allocate main vector and resultant vector with size conSize
     std::vector<int> mainVec(conSize), resVec(conSize);

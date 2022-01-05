@@ -1,6 +1,6 @@
 #include "../../inc/matMulti/matMultiConSet.h"
 
-matMultiConSize matMultiConSet(matMultiConSize& n)
+int matMultiConSet(int& n)
 {
 
     int userInput { 0 };

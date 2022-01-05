@@ -1,7 +1,7 @@
 #include "../../inc/oneConv/oneConvCheck.h"
 
 void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resVec,
-	 oneConvConSize const& conSize)
+	 int const& conSize)
 {
 
 	std::cout << "\n1D Convolution: Authenticating results.\n\n";

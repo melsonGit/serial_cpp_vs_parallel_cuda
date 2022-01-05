@@ -1,6 +1,6 @@
 #include "../../inc/twoConv/twoConvFunc.h"
 
-void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, twoConvConSize const& conSize)
+void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, int const& conSize)
 {
     std::cout << "\n2D Convolution: Populating complete.\n";
     std::cout << "\n2D Convolution: Starting operation.\n";

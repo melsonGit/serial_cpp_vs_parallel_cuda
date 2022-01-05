@@ -6,7 +6,6 @@
 #include "twoConvNumGen.h"
 #include "twoConvFunc.h"
 #include "twoConvCheck.h"
-#include "../allTDefs.h"
 
 void twoConvCore();
 

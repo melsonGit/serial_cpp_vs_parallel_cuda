@@ -4,9 +4,8 @@
 
 #include <iostream>
 #include <vector>
-#include "../allTDefs.h"
 
 void matMultiCheck(std::vector<std::vector<int>> const&, std::vector<std::vector<int>> const&, 
-				   std::vector<std::vector<int>> const&, matMultiConSize const&);
+				   std::vector<std::vector<int>> const&, int const&);
 
 #endif

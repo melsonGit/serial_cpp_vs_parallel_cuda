@@ -1,6 +1,6 @@
 #include "../../inc/oneConv/oneConvConSet.h"
 
-oneConvConSize oneConvConSet(oneConvConSize& n)
+int oneConvConSet(int& n)
 {
 
     int userInput { 0 };

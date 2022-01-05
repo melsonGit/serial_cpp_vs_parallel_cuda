@@ -8,7 +8,7 @@
 void twoConvCore()
 {
     // Assign variable conSize with a user selected value
-    twoConvConSize conSize { twoConvConSet(conSize) };
+    int conSize { twoConvConSet(conSize) };
 
     // Assign vectors mainVec(input vector) and resVec (resultant vector) a container size of conSize
     // mainVec is a matrix, therefore must be a 2D vector

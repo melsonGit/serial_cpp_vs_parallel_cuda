@@ -1,7 +1,7 @@
 #include "../../inc/vecAdd/vecAddConSet.h"
 
 
-vecAddConSize vecAddConSet(vecAddConSize& n)
+int vecAddConSet(int& n)
 {
     int userInput { 0 };
 

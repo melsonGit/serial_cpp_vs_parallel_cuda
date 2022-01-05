@@ -3,8 +3,7 @@
 #define VEC_CON_SET
 
 #include <iostream>
-#include "../../inc/allTDefs.h"
 
-vecAddConSize vecAddConSet(vecAddConSize&);
+int vecAddConSet(int&);
 
 #endif
