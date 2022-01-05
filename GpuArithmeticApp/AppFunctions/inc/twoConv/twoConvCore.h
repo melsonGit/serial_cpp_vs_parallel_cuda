@@ -4,7 +4,7 @@
 
 #include "twoConvConSet.h"
 #include "twoConvNumGen.h"
-#include "twoConvFunc.h"
+#include "twoConvFunc.cuh"
 #include "twoConvCheck.h"
 
 void twoConvCore();

@@ -4,7 +4,7 @@
 
 #include "oneConvConSet.h"
 #include "oneConvNumGen.h"
-#include "oneConvFunc.h"
+#include "oneConvFunc.cuh"
 #include "oneConvCheck.h"
 
 void oneConvCore();

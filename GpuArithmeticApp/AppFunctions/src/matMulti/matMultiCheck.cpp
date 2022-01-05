@@ -1,28 +1,27 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
-// Check result on the CPU
-void matMultiCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c, int const& conSize) 
+void matMultiCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c, int conSize) 
 {
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 
 	bool doesMatch { true };
 
     // For each row
-    for (auto i { 0 }; i < conSize; i++) 
+    for (auto rowIn { 0 }; rowIn < conSize; rowIn++) 
 	{
 		// For each column in that row
-        for (auto j { 0 }; j < conSize && doesMatch; j++) 
+        for (auto colIn { 0 }; colIn < conSize && doesMatch; colIn++) 
 		{
 			// For each row-column combination
             int resultVar { 0 };
 
-            for (auto k { 0 }; k < conSize; k++) 
+            for (auto rowColPair { 0 }; rowColPair < conSize; rowColPair++) 
 			{
-                // Accumulate the partial results
-                resultVar += a[i * conSize + k] * b[k * conSize + j];
+                // Accumulate results in that combo
+                resultVar += a[rowIn * conSize + rowColPair] * b[rowColPair * conSize + colIn];
             }
 
-			if (resultVar != c[i * conSize + j])
+			if (resultVar != c[rowIn * conSize + colIn])
 				doesMatch = false;
 			else
 				continue;
@@ -30,8 +29,8 @@ void matMultiCheck(std::vector<int> const& a, std::vector<int> const& b, std::ve
     }
 	if (!doesMatch)
 		std::cout << "Matrix multiplication unsuccessful: output vector data does not match expected results.\n"
-		<< "Timing results will be discarded.\n\n";
+		<< "Timing results will be discarded.\n";
 	else
 		std::cout << "Matrix multiplication successful: output vector data matches expected results.\n"
-		<< "Timing results will be recorded.\n\n";
+		<< "Timing results will be recorded.\n";
 }

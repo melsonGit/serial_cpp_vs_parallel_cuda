@@ -1,5 +1,3 @@
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
 #include "../GpuArithmeticApp/AppFunctions/inc/allHeaders.h"
 
 int main()

@@ -4,7 +4,7 @@
 
 #include "vecAddConSet.h"
 #include "vecAddNumGen.h"
-#include "vecAddFunc.h"
+#include "vecAddFunc.cuh"
 #include "vecAddCheck.h"
 
 void vecAddCore();

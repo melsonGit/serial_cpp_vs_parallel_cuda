@@ -1,1 +1,1 @@
-#include "../../inc/twoConv/twoConvFunc.h"
+#include "../../inc/twoConv/twoConvFunc.cuh"

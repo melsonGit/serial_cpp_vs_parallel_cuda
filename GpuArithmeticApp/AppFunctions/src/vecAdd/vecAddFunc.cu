@@ -1,1 +1,1 @@
-#include "../../inc/vecAdd/vecAddFunc.h"
+#include "../../inc/vecAdd/vecAddFunc.cuh"

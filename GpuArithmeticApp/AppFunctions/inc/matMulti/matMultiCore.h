@@ -4,7 +4,7 @@
 
 #include "matMultiConSet.h"
 #include "matMultiNumGen.h"
-#include "matMultiFunc.h"
+#include "matMultiFunc.cuh"
 #include "matMultiCheck.h"
 
 void matMultiCore();

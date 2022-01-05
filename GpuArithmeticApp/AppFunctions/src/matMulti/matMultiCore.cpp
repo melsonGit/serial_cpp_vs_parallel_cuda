@@ -4,17 +4,16 @@ void matMultiCore()
 {
 	// Assign variable conSize with a user selected value
 	int conSize { matMultiConSet(conSize) };
+	size_t bytes{ conSize * conSize * sizeof(int) };
 
-	// native vectors rather htna the typical 2d vector i used in serial 
+	// Native vectors rather than typical 2d vectors used in serial 
 
 	// Assign native host input vectors (hostA & hostB) and the native host output vector (hostC) a container size of conSize * conSize
 	std::vector<int> hostA(conSize * conSize), hostB(conSize * conSize), hostC(conSize * conSize);
-	size_t bytes { conSize * conSize * sizeof(int) };
-
+	
 	// Populate vectors
 	std::cout << "\nMatrix Multiplication: Populating 1 of 2 host input vectors.\n";
 	matMultiNumGen(hostA);
-
 	std::cout << "\nMatrix Multiplication: Populating 2 of 2 host input vectors.\n";
 	matMultiNumGen(hostB);
 
@@ -36,7 +35,7 @@ void matMultiCore()
 	int THREADS { 32 };
 
 	// Initialise blocks per grid dimension for threads to operate in
-	int BLOCKS { (conSize + THREADS - 1) / THREADS };
+	int BLOCKS {conSize / THREADS};
 
 	// Use dim3 structs for block and grid dimensions
 	dim3 threads(THREADS, THREADS);
@@ -48,7 +47,8 @@ void matMultiCore()
 	// Launch kernel
 	std::cout << "\nMatrix Multiplication: Starting operation.\n";
 
-	matMultiFunc << <blocks, threads >> > (deviceA, deviceB, deviceC, conSize);
+	matMultiFunc<<<blocks, threads>>>(deviceA, deviceB, deviceC, conSize);
+	cudaDeviceSynchronize();
 
 	std::cout << "\nMatrix Multiplication: Operation complete.\n";
 
