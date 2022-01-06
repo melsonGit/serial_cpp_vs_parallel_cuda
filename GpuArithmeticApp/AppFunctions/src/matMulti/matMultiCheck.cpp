@@ -1,36 +1,37 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
-void matMultiCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c, int conSize) 
-{
-	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
+void matMultiCheck(std::vector<int> const& inputA, std::vector<int> const& inputB, std::vector<int> const& outputVec, const int& conSize) {
 
-	bool doesMatch { true };
+    std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
+
+    bool doesMatch { true };
 
     // For each row
-    for (auto rowIn { 0 }; rowIn < conSize; rowIn++) 
-	{
-		// For each column in that row
-        for (auto colIn { 0 }; colIn < conSize && doesMatch; colIn++) 
-		{
-			// For each row-column combination
+    for (auto rowIn { 0 }; rowIn < conSize && doesMatch; rowIn++) 
+    {
+        // For every column...
+        for (auto colIn { 0 }; colIn < conSize; colIn++) 
+        {
+            // For every element in the row-column pair
             int resultVar { 0 };
 
             for (auto rowColPair { 0 }; rowColPair < conSize; rowColPair++) 
-			{
-                // Accumulate results in that combo
-                resultVar += a[rowIn * conSize + rowColPair] * b[rowColPair * conSize + colIn];
+            {
+                // Accumulate the partial results
+                resultVar += inputA[rowIn * conSize + rowColPair] * inputB[rowColPair * conSize + colIn];
             }
 
-			if (resultVar != c[rowIn * conSize + colIn])
-				doesMatch = false;
-			else
-				continue;
+            if (resultVar != outputVec[rowIn * conSize + colIn])
+                doesMatch = false;
+            else
+                continue;
         }
     }
-	if (!doesMatch)
-		std::cout << "Matrix multiplication unsuccessful: output vector data does not match expected results.\n"
-		<< "Timing results will be discarded.\n";
-	else
-		std::cout << "Matrix multiplication successful: output vector data matches expected results.\n"
-		<< "Timing results will be recorded.\n";
+
+    if (!doesMatch)
+        std::cout << "Matrix multiplication unsuccessful: output vector data does not match expected results.\n"
+        << "Timing results will be discarded.\n";
+    else
+        std::cout << "Matrix multiplication successful: output vector data matches expected results.\n"
+        << "Timing results will be recorded.\n";
 }

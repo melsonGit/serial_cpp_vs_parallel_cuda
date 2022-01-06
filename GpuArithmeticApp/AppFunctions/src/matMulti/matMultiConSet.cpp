@@ -32,7 +32,7 @@ int matMultiConSet(int& n)
             }
             else if (userInput == 1)
             {
-                n = 1000; // 1,000 x 2 matrix
+                n = 1 << 10; // 1,000 x 2 matrix
                 correctChoice = true;
             }
             else if (userInput == 2)

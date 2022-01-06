@@ -114,7 +114,7 @@
     <CudaCompile Include="AppFunctions\src\matMulti\matMultiConSet.cpp">
       <FileType>CppCode</FileType>
     </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiCore.cpp">
+    <CudaCompile Include="AppFunctions\src\matMulti\matMultiCore.cu">
       <FileType>CppCode</FileType>
     </CudaCompile>
     <CudaCompile Include="AppFunctions\src\matMulti\matMultiFunc.cu">

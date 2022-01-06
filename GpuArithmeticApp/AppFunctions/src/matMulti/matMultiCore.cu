@@ -46,18 +46,16 @@ void matMultiCore()
 	std::cout << "\nMatrix Multiplication: Starting operation.\n";
 
 	matMultiFunc<<<blocks, threads>>>(deviceA, deviceB, deviceC, conSize);
-	cudaDeviceSynchronize();
 
 	std::cout << "\nMatrix Multiplication: Operation complete.\n";
-
-	clock_t opEnd{ clock() };
-
 	std::cout << "\nMatrix Multiplication: Copying results from device to host.\n";
 
 	// Copy back to the host
 	cudaMemcpy(hostC.data(), deviceC, bytes, cudaMemcpyDeviceToHost);
 
 	std::cout << "\nMatrix Multiplication: Copying complete.\n";
+
+	clock_t opEnd{ clock() };
 
 	// Verify result on CPU
 	matMultiCheck(hostA, hostB, hostC, conSize);

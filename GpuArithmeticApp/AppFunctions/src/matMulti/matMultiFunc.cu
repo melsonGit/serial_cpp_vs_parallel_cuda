@@ -1,16 +1,17 @@
 #include "../../inc/matMulti/matMultiFunc.cuh"
 
-__global__ void matMultiFunc(const int* inputA, const int* inputB, int* outputC, const int& conSize)
+__global__ void matMultiFunc(const int* inputA, const int* inputB, int* outputVec, const int conSize)
 {
     // Compute each thread's global row and column index
-    int rowID = blockIdx.y * blockDim.y + threadIdx.y;
-    int colID = blockIdx.x * blockDim.x + threadIdx.x;
+    int rowId { blockIdx.y * blockDim.y + threadIdx.y };
+    int colId { blockIdx.x * blockDim.x + threadIdx.x };
 
     // Iterate over row, and down column
-    outputC[rowID * conSize + colID] = 0;
-    for (auto k { 0 }; k < conSize; k++) 
+    outputVec[rowId * conSize + colId] = 0;
+
+    for (auto rowColPairId { 0 }; rowColPairId < conSize; rowColPairId++)
     {
         // Accumulate results for a single element
-        outputC[rowID * conSize + colID] += inputA[rowID * conSize + k] * inputB[k * conSize + colID];
+        outputVec[rowId * conSize + colId] += inputA[rowId * conSize + rowColPairId] * inputB[rowColPairId * conSize + colId];
     }
 }
