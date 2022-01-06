@@ -1,6 +1,6 @@
 #include "../../inc/matMulti/matMultiFunc.cuh"
 
-__global__ void matMultiFunc(const int* inputA, const int* inputB, int* outputC, int conSize)
+__global__ void matMultiFunc(const int* inputA, const int* inputB, int* outputC, const int& conSize)
 {
     // Compute each thread's global row and column index
     int rowID = blockIdx.y * blockDim.y + threadIdx.y;

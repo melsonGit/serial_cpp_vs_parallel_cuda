@@ -6,8 +6,6 @@ void matMultiCore()
 	int conSize { matMultiConSet(conSize) };
 	size_t bytes{ conSize * conSize * sizeof(int) };
 
-	// Native vectors rather than typical 2d vectors used in serial 
-
 	// Assign native host input vectors (hostA & hostB) and the native host output vector (hostC) a container size of conSize * conSize
 	std::vector<int> hostA(conSize * conSize), hostB(conSize * conSize), hostC(conSize * conSize);
 	

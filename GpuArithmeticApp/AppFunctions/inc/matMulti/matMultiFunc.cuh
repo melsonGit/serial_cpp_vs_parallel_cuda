@@ -5,7 +5,7 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-__global__ void matMultiFunc(const int*, const int*, int*, int);
+__global__ void matMultiFunc(const int*, const int*, int*, const int&);
 
 #endif
 
