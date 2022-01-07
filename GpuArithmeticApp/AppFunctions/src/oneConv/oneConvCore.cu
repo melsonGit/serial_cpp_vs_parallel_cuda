@@ -39,7 +39,7 @@ void oneConvCore()
 	int THREADS = 256;
 
 	// Number of TBs with padding
-	int BLOCKS = (conSize + THREADS - 1) / THREADS;
+	int BLOCKS{ (conSize + THREADS - 1) / THREADS };
 
 	// Start clock
 	clock_t opStart{ clock() };

@@ -37,22 +37,22 @@ int matMultiConSet(int& n)
             }
             else if (userInput == 2)
             {
-                n = 1500; // 1500 x 2 matrix
+                n = 1000; // 1500 x 2 matrix
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                n = 2000; // 2000 x 2 matrix
+                n = 1 << 7; // 2000 x 2 matrix
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                n = 2500; // 2500 x 2 matrix
+                n = 1 << 9; // 2500 x 2 matrix
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                n = 3000; // 3000 x 2 matrix
+                n = 1 << 10; // 3000 x 2 matrix
                 correctChoice = true;
             }
         }

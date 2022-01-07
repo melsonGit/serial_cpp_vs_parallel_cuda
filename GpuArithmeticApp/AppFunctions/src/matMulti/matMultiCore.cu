@@ -33,7 +33,7 @@ void matMultiCore()
 	int THREADS { 32 };
 
 	// Initialise blocks per grid dimension for threads to operate in
-	int BLOCKS {conSize / THREADS};
+	int BLOCKS{ (conSize + THREADS - 1) / THREADS };
 
 	// Use dim3 structs for block and grid dimensions
 	dim3 threads(THREADS, THREADS);
