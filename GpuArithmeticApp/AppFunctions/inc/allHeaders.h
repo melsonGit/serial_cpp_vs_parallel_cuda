@@ -9,10 +9,10 @@
 #include "vecAdd/vecAddCore.h"
 
 // Parallel Matrix Multiplication
-#include "matMulti/matMultiCore.h"
+#include "matMulti/matMultiCore.cuh"
 
 // Parallel 1D Convolution
-#include "oneConv/oneConvCore.h"
+#include "oneConv/oneConvCore.cuh"
 
 // Parallel 2D Convolution
 #include "twoConv/twoConvCore.h"

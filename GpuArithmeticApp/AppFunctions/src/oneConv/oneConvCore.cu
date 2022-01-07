@@ -1,9 +1,4 @@
-#include "../../inc/oneConv/oneConvCore.h"
-
-#ifndef MASK_ONE_DIM
-// Number of elements in the convolution mask
-#define MASK_ONE_DIM 7
-#endif
+#include "../../inc/oneConv/oneConvCore.cuh"
 
 void oneConvCore()
 {
@@ -12,7 +7,7 @@ void oneConvCore()
 	// Size of the vector in bytes
 	int bytes_n = conSize * sizeof(int);
 	// Size of mask in bytes
-	int bytes_m = MASK_ONE_DIM * sizeof(int);
+	int bytes_m { MASK_ONE_DIM * sizeof(int) };
 
 	// Allocate main vector and resultant vector with size conSize
 	std::vector<int> hostMainVec(conSize), hostResVec(conSize);
@@ -54,7 +49,6 @@ void oneConvCore()
 
 	// Call the kernel
 	oneConvFunc << <BLOCKS, THREADS >> > (deviceMainVec, deviceMaskVec, deviceResVec, conSize);
-	cudaDeviceSynchronize();
 
 	std::cout << "\n1D Convolution: Operation complete.\n";
 

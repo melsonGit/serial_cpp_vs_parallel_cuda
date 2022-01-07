@@ -1,4 +1,4 @@
-#include "../../inc/matMulti/matMultiCore.h"
+#include "../../inc/matMulti/matMultiCore.cuh"
 
 void matMultiCore()
 {

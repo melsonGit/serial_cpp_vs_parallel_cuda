@@ -86,13 +86,13 @@
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
     <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h" />
-    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.cuh" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiFunc.cuh" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiNumGen.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvCheck.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvConSet.h" />
-    <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.cuh" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvFunc.cuh" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
@@ -130,7 +130,7 @@
     <CudaCompile Include="AppFunctions\src\oneConv\oneConvConSet.cpp">
       <FileType>CppCode</FileType>
     </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\oneConv\oneConvCore.cpp">
+    <CudaCompile Include="AppFunctions\src\oneConv\oneConvCore.cu">
       <FileType>CppCode</FileType>
     </CudaCompile>
     <CudaCompile Include="AppFunctions\src\oneConv\oneConvFunc.cu">
