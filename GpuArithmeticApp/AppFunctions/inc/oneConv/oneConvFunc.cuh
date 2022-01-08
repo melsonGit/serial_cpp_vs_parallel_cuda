@@ -7,8 +7,6 @@
 #define MASK_ONE_DIM 7
 #endif
 
-#include <iostream>
-#include <vector>
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 

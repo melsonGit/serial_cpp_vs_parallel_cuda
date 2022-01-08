@@ -1,6 +1,6 @@
 #include "../../inc/oneConv/oneConvConSet.h"
 
-int oneConvConSet(int& n)
+int oneConvConSet(int& conSize)
 {
 
     int userInput { 0 };
@@ -32,31 +32,31 @@ int oneConvConSet(int& n)
             }
             else if (userInput == 1)
             {
-                n = 10000000; // 10 million elements
+                conSize = 10000000; // 10 million elements
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                n = 25000000; // 25 million elements
+                conSize = 25000000; // 25 million elements
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                n = 55000000; // 55 million elements
+                conSize = 55000000; // 55 million elements
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                n = 75000000; // 75 million elements
+                conSize = 75000000; // 75 million elements
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                n = 90000000; // 90 million elements
+                conSize = 90000000; // 90 million elements
                 correctChoice = true;
             }
         }
     } while (!correctChoice);
 
-    return n;
+    return conSize;
 }

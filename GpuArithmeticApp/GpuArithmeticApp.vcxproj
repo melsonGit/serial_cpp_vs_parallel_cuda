@@ -97,12 +97,12 @@
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h" />
-    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.cuh" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvFunc.cuh" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvNumGen.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCheck.h" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddConSet.h" />
-    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCore.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCore.cuh" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.cuh" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddNumGen.h" />
     <CudaCompile Include="AppFunctions\src\core\opChoice.cpp">
@@ -145,7 +145,7 @@
     <CudaCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp">
       <FileType>CppCode</FileType>
     </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\twoConv\twoConvCore.cpp">
+    <CudaCompile Include="AppFunctions\src\twoConv\twoConvCore.cu">
       <FileType>CppCode</FileType>
     </CudaCompile>
     <CudaCompile Include="AppFunctions\src\twoConv\twoConvFunc.cu">
@@ -160,7 +160,7 @@
     <CudaCompile Include="AppFunctions\src\vecAdd\vecAddConSet.cpp">
       <FileType>CppCode</FileType>
     </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddCore.cpp">
+    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddCore.cu">
       <FileType>CppCode</FileType>
     </CudaCompile>
     <CudaCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cu">

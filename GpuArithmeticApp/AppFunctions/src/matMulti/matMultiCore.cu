@@ -4,7 +4,9 @@ void matMultiCore()
 {
 	// Assign variable conSize with a user selected value
 	int conSize { matMultiConSet(conSize) };
-	size_t bytes{ conSize * conSize * sizeof(int) };
+
+	// Initialise memory allocation variable
+	size_t vecMem{ conSize * conSize * sizeof(int) };
 
 	// Assign native host input vectors (hostA & hostB) and the native host output vector (hostC) a container size of conSize * conSize
 	std::vector<int> hostA(conSize * conSize), hostB(conSize * conSize), hostC(conSize * conSize);
@@ -17,17 +19,17 @@ void matMultiCore()
 
 	std::cout << "\nMatrix Multiplication: Populating complete.\n";
 
-	// Assign input device pointers (deviceA & deviceB) and output device pointer (deviceC) memory size of bytes
+	// Assign input device pointers (deviceA & deviceB) and output device pointer (deviceC) memory size of vecMem
 	int* deviceA, * deviceB, * deviceC;
-	cudaMalloc(&deviceA, bytes);
-	cudaMalloc(&deviceB, bytes);
-	cudaMalloc(&deviceC, bytes);
+	cudaMalloc(&deviceA, vecMem);
+	cudaMalloc(&deviceB, vecMem);
+	cudaMalloc(&deviceC, vecMem);
 
 	// Copy host input vector data to the device input pointers
 	std::cout << "\nMatrix Multiplication: Copying data from host to device.\n";
 
-	cudaMemcpy(deviceA, hostA.data(), bytes, cudaMemcpyHostToDevice);
-	cudaMemcpy(deviceB, hostB.data(), bytes, cudaMemcpyHostToDevice);
+	cudaMemcpy(deviceA, hostA.data(), vecMem, cudaMemcpyHostToDevice);
+	cudaMemcpy(deviceB, hostB.data(), vecMem, cudaMemcpyHostToDevice);
 
 	// Initialise threads per CTA (Compute Thread Array) dimension
 	int THREADS { 32 };
@@ -51,7 +53,7 @@ void matMultiCore()
 	std::cout << "\nMatrix Multiplication: Copying results from device to host.\n";
 
 	// Copy back to the host
-	cudaMemcpy(hostC.data(), deviceC, bytes, cudaMemcpyDeviceToHost);
+	cudaMemcpy(hostC.data(), deviceC, vecMem, cudaMemcpyDeviceToHost);
 
 	std::cout << "\nMatrix Multiplication: Copying complete.\n";
 

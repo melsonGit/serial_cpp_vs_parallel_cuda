@@ -1,6 +1,6 @@
 #include "../../inc/twoConv/twoConvConSet.h"
 
-int twoConvConSet (int& n) 
+int twoConvConSet (int& conSize) 
 {
     int userInput { 0 };
 
@@ -31,33 +31,33 @@ int twoConvConSet (int& n)
             }
             else if (userInput == 1)
             {
-                n = 64; // 64 x 64 = 4,096 elements
+                conSize = 64; // 64 x 64 = 4,096 elements
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                n = 72; // 72 x 72 = 5,184 elements
+                conSize = 72; // 72 x 72 = 5,184 elements
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                n = 80; // 80 x 80 = 6,400 elements
+                conSize = 80; // 80 x 80 = 6,400 elements
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                n = 94; // 94 x 94 = 8,836 elements
+                conSize = 94; // 94 x 94 = 8,836 elements
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                n = 101; // 101 x 101 = 10,201 elements
+                conSize = 101; // 101 x 101 = 10,201 elements
                 correctChoice = true;
             }
         }
     } while (!correctChoice);
 
-    return n;
+    return conSize;
 }
 
 

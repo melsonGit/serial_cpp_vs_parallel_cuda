@@ -6,7 +6,7 @@
 #include "core/opChoice.h"
 
 // Parallel Vector Addition
-#include "vecAdd/vecAddCore.h"
+#include "vecAdd/vecAddCore.cuh"
 
 // Parallel Matrix Multiplication
 #include "matMulti/matMultiCore.cuh"
@@ -15,6 +15,6 @@
 #include "oneConv/oneConvCore.cuh"
 
 // Parallel 2D Convolution
-#include "twoConv/twoConvCore.h"
+#include "twoConv/twoConvCore.cuh"
 
 #endif

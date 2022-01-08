@@ -1,13 +1,5 @@
 #include "../../inc/oneConv/oneConvFunc.cuh"
 
-// 1-D convolution kernel
-//  Arguments:
-//      mainVec       = padded vector
-//      maskVec       = convolution mask
-//      resVec        = result vector
-//      conSize       = number of elements in vector
-//      MASK_DIM_ONE  = number of elements in the mask
-
 __global__ void oneConvFunc(const int* mainVec, const int* maskVec, int* resVec, const int conSize) 
 {
     // Global thread ID calculation

@@ -1,6 +1,6 @@
 #include "../../inc/matMulti/matMultiConSet.h"
 
-int matMultiConSet(int& n)
+int matMultiConSet(int& conSize)
 {
 
     int userInput { 0 };
@@ -32,31 +32,31 @@ int matMultiConSet(int& n)
             }
             else if (userInput == 1)
             {
-                n = 1 << 10; // 1,000 x 2 matrix
+                conSize = 1 << 10; // 1,000 x 2 matrix - use this one
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                n = 1000; // 1500 x 2 matrix
+                conSize = 1000; // 1500 x 2 matrix - ignore for now
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                n = 1 << 7; // 2000 x 2 matrix
+                conSize = 1 << 7; // 2000 x 2 matrix - ignore for now
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                n = 1 << 9; // 2500 x 2 matrix
+                conSize = 1 << 9; // 2500 x 2 matrix - ignore for now
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                n = 1 << 10; // 3000 x 2 matrix
+                conSize = 1 << 10; // 3000 x 2 matrix - ignore for now
                 correctChoice = true;
             }
         }
     } while (!correctChoice);
 
-    return n;
+    return conSize;
 }
