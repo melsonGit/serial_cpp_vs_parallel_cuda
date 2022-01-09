@@ -32,27 +32,27 @@ int matMultiConSet(int& conSize)
             }
             else if (userInput == 1)
             {
-                conSize = 1 << 10; // 1,000 x 2 matrix - use this one
+                conSize = 1 << 10; // use this one 2 ^ 10 x 2 ^ 10
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                conSize = 1000; // 1500 x 2 matrix - ignore for now
+                conSize = 1000; // ignore for now
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                conSize = 1 << 7; // 2000 x 2 matrix - ignore for now
+                conSize = 1 << 7; // ignore for now
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                conSize = 1 << 9; // 2500 x 2 matrix - ignore for now
+                conSize = 1 << 9; // ignore for now
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                conSize = 1 << 10; // 3000 x 2 matrix - ignore for now
+                conSize = 1 << 10; // ignore for now
                 correctChoice = true;
             }
         }

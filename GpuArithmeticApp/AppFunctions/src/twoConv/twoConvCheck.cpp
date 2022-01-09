@@ -1,5 +1,13 @@
 #include "../../inc/twoConv/twoConvCheck.h"
 
+#ifndef MASK_TWO_DIM
+#define MASK_TWO_DIM 7
+#endif
+
+#ifndef MASK_OFFSET
+#define MASK_OFFSET (MASK_TWO_DIM / 2)
+#endif
+
 void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize)
 {
     std::cout << "\n2D Convolution: Authenticating results.\n\n";
@@ -12,13 +20,10 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
 
     bool doesMatch { true };
 
-    // Calculate mask radius to avoid subscript errors - determine where and when we calculate convolution
-    int maskRadius { MASK_TWO_DIM / 2 };
-
     for (auto rowIn { 0 }; rowIn < conSize; rowIn++)
     {
         // Go over each column
-        for (auto colIn { 0 }; colIn < conSize; colIn++)
+        for (auto colIn { 0 }; colIn < conSize && doesMatch; colIn++)
         {
             // Reset the temp variable
             resultVar = 0;
@@ -27,13 +32,13 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
             for (auto maskRow { 0 }; maskRow < MASK_TWO_DIM; maskRow++)
             {
                 // Update offset value for row
-                radiusOffsetRows = rowIn - maskRadius + maskRow;
+                radiusOffsetRows = rowIn - MASK_OFFSET + maskRow;
 
                 // Go over each mask column
                 for (auto maskCol { 0 }; maskCol < MASK_TWO_DIM; maskCol++)
                 {
                     // Update offset value for column
-                    radiusOffsetCols = colIn - maskRadius + maskCol;
+                    radiusOffsetCols = colIn - MASK_OFFSET + maskCol;
 
                     // Range checks if we are hanging off the matrix
                     if (radiusOffsetRows >= 0 && radiusOffsetRows < conSize) 

@@ -31,27 +31,27 @@ int twoConvConSet(int& conSize)
             }
             else if (userInput == 1)
             {
-                conSize = 1 << 10; // 64 x 64 = 4,096 elements
+                conSize = 1 << 10; // 2 ^ 10 x 2 ^ 10 elements - use this one
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                conSize = 72; // 72 x 72 = 5,184 elements
+                conSize = 72; // - ignore for now
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                conSize = 80; // 80 x 80 = 6,400 elements
+                conSize = 80; // - ignore for now
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                conSize = 94; // 94 x 94 = 8,836 elements
+                conSize = 94; // - ignore for now
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                conSize = 101; // 101 x 101 = 10,201 elements
+                conSize = 101; // - ignore for now
                 correctChoice = true;
             }
         }

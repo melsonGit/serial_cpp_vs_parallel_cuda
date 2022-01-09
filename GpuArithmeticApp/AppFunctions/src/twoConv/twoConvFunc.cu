@@ -1,19 +1,28 @@
 #include "../../inc/twoConv/twoConvFunc.cuh"
 
+extern __constant__ int maskConstant[7 * 7];
+
+#ifndef MASK_TWO_DIM
+#define MASK_TWO_DIM 7
+#endif
+
+// Calculate mask radius to avoid subscript errors - determine where and when we calculate convolution
+#ifndef MASK_OFFSET
+#define MASK_OFFSET (MASK_TWO_DIM / 2)
+#endif
+
+
 __global__ void twoConvFunc(const int* deviceMainVec, int* deviceResVec, const int conSize)
 {
     // Calculate the global thread positions
-    int rowId { blockIdx.y * blockDim.y + threadIdx.y };
-    int colId { blockIdx.x * blockDim.x + threadIdx.x };
-
-    // Calculate mask radius to avoid subscript errors - determine where and when we calculate convolution
-    int maskRadius { MASK_TWO_DIM / 2 };
+    int rowId = blockIdx.y * blockDim.y + threadIdx.y;
+    int colId = blockIdx.x * blockDim.x + threadIdx.x;
 
     int resultVar { 0 };
 
     // Starting index for calculation
-    int startRowPoint { rowId - maskRadius };
-    int startColPoint { colId - maskRadius };
+    int startRowPoint { rowId - MASK_OFFSET };
+    int startColPoint { colId - MASK_OFFSET };
 
     // Iterate over all the rows
     for (auto rowIn { 0 }; rowIn < MASK_TWO_DIM; rowIn++) 
@@ -33,6 +42,7 @@ __global__ void twoConvFunc(const int* deviceMainVec, int* deviceResVec, const i
                 }
             }
         }
-        deviceResVec[rowId * conSize + colId] = resultVar;
     }
+
+    deviceResVec[rowId * conSize + colId] = resultVar;
 }
