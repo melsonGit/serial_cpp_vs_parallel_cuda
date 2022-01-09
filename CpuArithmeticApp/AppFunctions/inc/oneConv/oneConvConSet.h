@@ -3,8 +3,7 @@
 #define ONE_CONV_CON_SET
 
 #include <iostream>
-#include "../../inc/allTDefs.h"
 
-oneConvConSize oneConvConSet(oneConvConSize&);
+int oneConvConSet(int&);
 
 #endif

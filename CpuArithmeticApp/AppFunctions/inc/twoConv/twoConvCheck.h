@@ -14,8 +14,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../allTDefs.h"
 
-void twoConvCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, twoConvConSize const&);
+void twoConvCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, int const&);
 
 #endif

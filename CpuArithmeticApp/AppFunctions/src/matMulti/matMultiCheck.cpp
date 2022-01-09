@@ -1,7 +1,7 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
 void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b, 
-				   std::vector<std::vector<int>> const& c, matMultiConSize const& numRows)
+				   std::vector<std::vector<int>> const& c, int const& numRows)
 {
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 

@@ -1,7 +1,7 @@
 #include "../../inc/vecAdd/vecAddConSet.h"
 
 
-vecAddConSize vecAddConSet(vecAddConSize& n)
+int vecAddConSet(int& conSize)
 {
     int userInput { 0 };
 
@@ -32,33 +32,33 @@ vecAddConSize vecAddConSet(vecAddConSize& n)
             }
             else if (userInput == 1)
             {
-                n = 25000000; // 25 million elements
+                conSize = 25000000; // 25 million elements
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                n = 35000000; // 35 million elements
+                conSize = 35000000; // 35 million elements
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                n = 45000000; // 45 million elements
+                conSize = 45000000; // 45 million elements
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                n = 55000000; // 55 million elements
+                conSize = 55000000; // 55 million elements
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                n = 65000000; // 65 million elements
+                conSize = 65000000; // 65 million elements
                 correctChoice = true;
             }
         }
     } while (!correctChoice);
 
-    return n;
+    return conSize;
 }
 
 

@@ -11,10 +11,10 @@
 // Sequential Matrix Multiplication
 #include "matMulti/matMultiCore.h"
 
-// Sequential 1-D Convolution
+// Sequential 1D Convolution
 #include "oneConv/oneConvCore.h"
 
-// Sequential 2-D Convolution
+// Sequential 2D Convolution
 #include "twoConv/twoConvCore.h"
 
 #endif

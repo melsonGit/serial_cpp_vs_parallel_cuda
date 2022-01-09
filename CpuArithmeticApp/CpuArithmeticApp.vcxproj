@@ -173,7 +173,6 @@
     <ClInclude Include="AppFunctions\conSet\conSet.h" />
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
     <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
-    <ClInclude Include="AppFunctions\inc\allTDefs.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.h" />

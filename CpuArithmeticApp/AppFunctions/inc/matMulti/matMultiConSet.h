@@ -3,8 +3,7 @@
 #define MULTI_CON_SET
 
 #include <iostream>
-#include "../../inc/allTDefs.h"
 
-matMultiConSize matMultiConSet(matMultiConSize&);
+int matMultiConSet(int&);
 
 #endif

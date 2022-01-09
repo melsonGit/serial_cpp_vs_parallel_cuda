@@ -6,7 +6,6 @@
 #include "oneConvNumGen.h"
 #include "oneConvFunc.h"
 #include "oneConvCheck.h"
-#include "../allTDefs.h"
 
 void oneConvCore();
 

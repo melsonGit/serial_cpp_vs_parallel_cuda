@@ -1,7 +1,7 @@
 #include "../../inc/matMulti/matMultiFunc.h"
 
 void matMultiFunc(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b,
-                  std::vector<std::vector<int>>& c, matMultiConSize const& numRows)
+                  std::vector<std::vector<int>>& c, int const& numRows)
 {
     std::cout << "\nMatrix Multiplication: Populating complete.\n";
     std::cout << "\nMatrix Multiplication: Starting operation.\n";

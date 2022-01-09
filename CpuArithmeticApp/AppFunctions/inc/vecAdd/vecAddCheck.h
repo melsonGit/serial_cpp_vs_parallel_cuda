@@ -4,8 +4,7 @@
 
 #include <iostream>
 #include <vector>
-#include "../allTDefs.h"
 
-void vecAddCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, vecAddConSize const& conSize);
+void vecAddCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, int const& conSize);
 
 #endif

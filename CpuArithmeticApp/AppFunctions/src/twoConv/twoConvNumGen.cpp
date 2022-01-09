@@ -9,7 +9,9 @@ void twoConvNumGen(std::vector<int>& vecToPop)
     std::generate(vecToPop.begin(), vecToPop.end(), []() { return rand() % 100; });
 }
 
-#if 0 // For future 2D implementation
+#if 0 
+// For future 2D implementation
+
 // Loop to populate 2D vector
 // For each row
 for (auto iRow { 0 }; iRow < vecToPop.size(); iRow++)

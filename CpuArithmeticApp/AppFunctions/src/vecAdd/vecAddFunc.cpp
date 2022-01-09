@@ -1,6 +1,6 @@
 #include "../../inc/vecAdd/vecAddFunc.h"
 
-void vecAddFunc(std::vector<int> const &a, std::vector<int>  const &b, std::vector<int> &c)
+void vecAddFunc(std::vector<int> const &a, std::vector<int> const &b, std::vector<int> &c)
 {
 	std::cout << "\nVector Addition: Populating complete.\n";
 	std::cout << "\nVector Addition: Starting operation.\n";
