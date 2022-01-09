@@ -1,6 +1,8 @@
 # serial_cpp_vs_parallel_cuda
 Dissertation work for completion of MSc ICT. This implementation, alongside my written thesis, achieved a 77% mark. I achieved a Distinction for my MSc overall.
 
+Please refer to the [wiki](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/wiki) for a more detailed overview on the inner workings of this project. 
+
 # Basic Overview
 
 This project focuses on the GPU/GPGPU and CPU components, as well as the CUDA and C++ languages. I wanted to test and compare the computational power of both the GPU/GPGPU and CPU. To do this, I developed 8 programs: 4 programs were developed in traditional C++, and were to be executed solely by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, and were to be executed by the GPU/GPGPU. 
