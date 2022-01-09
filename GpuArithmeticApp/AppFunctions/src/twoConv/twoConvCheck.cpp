@@ -54,9 +54,9 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
     }
 
     if (!doesMatch)
-        std::cout << "1D Convolution unsuccessful: output vector data does not match the expected result.\n"
+        std::cout << "2D Convolution unsuccessful: output vector data does not match the expected result.\n"
         << "Timing results will be discarded.\n";
     else
-        std::cout << "1D Convolution successful: output vector data matches expected results.\n"
+        std::cout << "2D Convolution successful: output vector data matches expected results.\n"
         << "Timing results will be recorded.\n";
 }

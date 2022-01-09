@@ -3,11 +3,12 @@
 void oneConvCore()
 {
 	// Assign variable conSize with a user selected value
-	int conSize{ oneConvConSet(conSize) };
+	int conSize { oneConvConSet(conSize) };
+
 	// Size of the vector in bytes
-	int bytes_n = conSize * sizeof(int);
+	size_t bytesVecMem { conSize * sizeof(int) };
 	// Size of mask in bytes
-	int bytes_m { MASK_ONE_DIM * sizeof(int) };
+	size_t bytesMaskMem { MASK_ONE_DIM * sizeof(int) };
 
 	// Allocate main vector and resultant vector with size conSize
 	std::vector<int> hostMainVec(conSize), hostResVec(conSize);
@@ -24,16 +25,16 @@ void oneConvCore()
 
 	// Allocate space on the device
 	int* deviceMainVec, * deviceMaskVec, * deviceResVec;
-	cudaMalloc(&deviceMainVec, bytes_n);
-	cudaMalloc(&deviceMaskVec, bytes_m);
-	cudaMalloc(&deviceResVec, bytes_n);
+	cudaMalloc(&deviceMainVec, bytesVecMem);
+	cudaMalloc(&deviceMaskVec, bytesMaskMem);
+	cudaMalloc(&deviceResVec, bytesVecMem);
 
 	// Copy host input vector data to the device input pointers
 	std::cout << "\n1D Convolution: Copying data from host to device.\n";
 
 	// Copy the data to the device
-	cudaMemcpy(deviceMainVec, hostMainVec.data(), bytes_n, cudaMemcpyHostToDevice);
-	cudaMemcpy(deviceMaskVec, hostMaskVec.data(), bytes_m, cudaMemcpyHostToDevice);
+	cudaMemcpy(deviceMainVec, hostMainVec.data(), bytesVecMem, cudaMemcpyHostToDevice);
+	cudaMemcpy(deviceMaskVec, hostMaskVec.data(), bytesMaskMem, cudaMemcpyHostToDevice);
 
 	// Threads per TB (thread blocks)
 	int THREADS = 256;
@@ -58,7 +59,7 @@ void oneConvCore()
 	std::cout << "\n1D Convolution: Copying results from device to host.\n";
 
 	// Copy back to the host
-	cudaMemcpy(hostResVec.data(), deviceResVec, bytes_n, cudaMemcpyDeviceToHost);
+	cudaMemcpy(hostResVec.data(), deviceResVec, bytesVecMem, cudaMemcpyDeviceToHost);
 
 	oneConvCheck(hostMainVec.data(), hostMaskVec.data(), hostResVec.data(), conSize);
 

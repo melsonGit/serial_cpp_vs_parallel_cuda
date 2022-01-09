@@ -2,7 +2,7 @@
 
 void vecAddCheck(std::vector<int> const& inputA, std::vector<int> const& inputB, std::vector<int> const& resVec, int const& conSize)
 {
-	std::cout << "\nVector Addition: Authenticating results.\n";
+	std::cout << "\nVector Addition: Authenticating results.\n\n";
 
 	bool doesMatch { true };
 

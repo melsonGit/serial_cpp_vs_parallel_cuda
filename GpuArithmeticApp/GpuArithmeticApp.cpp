@@ -30,5 +30,4 @@ int main()
 	} while (runProg != closeProg);
 
 	return EXIT_SUCCESS;
-
 }
