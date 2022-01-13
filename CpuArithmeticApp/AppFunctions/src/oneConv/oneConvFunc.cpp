@@ -1,5 +1,10 @@
 #include "../../inc/oneConv/oneConvFunc.h"
 
+#ifndef MASK_ONE_DIM
+// Number of elements in the convolution mask
+#define MASK_ONE_DIM 7
+#endif
+
 void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, 
                  int const& conSize)
 {

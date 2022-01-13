@@ -2,8 +2,8 @@
 #ifndef MULTI_NUM_GEN
 #define MULTI_NUM_GEN
 
-#include <iostream>
-#include <algorithm>
+#include <cstdlib>
+#include <time.h>
 #include <vector>
 
 void matMultiNumGen(std::vector<std::vector<int>>&);

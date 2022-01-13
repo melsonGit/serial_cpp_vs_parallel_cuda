@@ -2,7 +2,8 @@
 #ifndef TWO_CONV_NUM_GEN
 #define TWO_CONV_NUM_GEN
 
-#include <iostream>
+#include <cstdlib>
+#include <time.h>
 #include <vector>
 #include <algorithm>
 

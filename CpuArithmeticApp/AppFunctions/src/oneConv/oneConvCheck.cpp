@@ -1,7 +1,11 @@
 #include "../../inc/oneConv/oneConvCheck.h"
 
-void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resVec,
-	 int const& conSize)
+#ifndef MASK_ONE_DIM
+// Number of elements in the convolution mask
+#define MASK_ONE_DIM 7
+#endif
+
+void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resVec, int const& conSize)
 {
 
 	std::cout << "\n1D Convolution: Authenticating results.\n\n";

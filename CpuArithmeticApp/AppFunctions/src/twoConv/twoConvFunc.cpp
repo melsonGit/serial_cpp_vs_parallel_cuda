@@ -1,5 +1,15 @@
 #include "../../inc/twoConv/twoConvFunc.h"
 
+#ifndef MASK_TWO_DIM
+// 7 x 7 convolutional mask
+#define MASK_TWO_DIM 7
+#endif
+
+#ifndef MASK_OFFSET
+// Amount the the matrix will hang over the matrix
+#define MASK_OFFSET (MASK_TWO_DIM / 2)
+#endif
+
 void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, int const& conSize)
 {
     std::cout << "\n2D Convolution: Populating complete.\n";

@@ -2,7 +2,8 @@
 #ifndef VEC_NUM_GEN
 #define VEC_NUM_GEN
 
-#include <iostream>
+#include <time.h>
+#include <cstdlib>
 #include <algorithm>
 #include <vector>
 

@@ -2,7 +2,6 @@
 
 void vecAddCore()
 {
-
 	// Assign variable conSize with a user selected value
 	int conSize { vecAddConSet(conSize) };
 
