@@ -1,5 +1,10 @@
 #include "../../inc/oneConv/oneConvFunc.cuh"
 
+#ifndef MASK_ONE_DIM
+// Number of elements in the convolution mask
+#define MASK_ONE_DIM 7
+#endif
+
 __global__ void oneConvFunc(const int* mainVec, const int* maskVec, int* resVec, const int conSize) 
 {
     // Global thread ID calculation

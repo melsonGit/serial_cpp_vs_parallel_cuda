@@ -1,12 +1,12 @@
 #include "../../inc/twoConv/twoConvCore.cuh"
 
+// Allocate mask in constant memory
+__constant__ int maskConstant[7 * 7];
+
 // Number of elements in the convolution mask
 #ifndef MASK_TWO_DIM
 #define MASK_TWO_DIM 7
 #endif
-
-// Allocate mask in constant memory
-__constant__ int maskConstant[7 * 7];
 
 void twoConvCore()
 {

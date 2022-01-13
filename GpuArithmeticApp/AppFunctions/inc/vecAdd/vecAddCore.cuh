@@ -4,13 +4,13 @@
 
 #include <iostream>
 #include <vector>
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
 
 #include "vecAddConSet.h"
 #include "vecAddNumGen.h"
 #include "vecAddFunc.cuh"
 #include "vecAddCheck.h"
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
 
 void vecAddCore();
 

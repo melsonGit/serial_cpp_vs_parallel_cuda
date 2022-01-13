@@ -2,7 +2,8 @@
 #ifndef ONE_CONV_NUM_GEN
 #define ONE_CONV_NUM_GEN
 
-#include <iostream>
+#include <cstdlib>
+#include <time.h>
 #include <algorithm>
 #include <vector>
 

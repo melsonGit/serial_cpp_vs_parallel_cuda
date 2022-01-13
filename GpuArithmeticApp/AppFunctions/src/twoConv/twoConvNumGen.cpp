@@ -7,9 +7,9 @@ void twoConvNumGen(int* vecToPop, const int& conSize)
 
     if (conSize > 10)
     {
-        for (auto rowIn{ 0 }; rowIn < conSize; rowIn++)
+        for (auto rowIn { 0 }; rowIn < conSize; rowIn++)
         {
-            for (auto colIn{ 0 }; colIn < conSize; colIn++)
+            for (auto colIn { 0 }; colIn < conSize; colIn++)
             {
                 vecToPop[conSize * rowIn + colIn] = rand() % 100;
             }
@@ -17,9 +17,9 @@ void twoConvNumGen(int* vecToPop, const int& conSize)
     }
     else
     {
-        for (auto rowIn{ 0 }; rowIn < conSize; rowIn++)
+        for (auto rowIn { 0 }; rowIn < conSize; rowIn++)
         {
-            for (auto colIn{ 0 }; colIn < conSize; colIn++)
+            for (auto colIn { 0 }; colIn < conSize; colIn++)
             {
                 vecToPop[conSize * rowIn + colIn] = rand() % 10;
             }
