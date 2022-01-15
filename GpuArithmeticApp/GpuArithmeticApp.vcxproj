@@ -11,9 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5B6FB0CE-7ACD-40DD-AC4C-7BF9843878D7}</ProjectGuid>
+    <ProjectGuid>{18DB3C97-52AF-4336-B345-406A3AEB2BAF}</ProjectGuid>
     <RootNamespace>GpuArithmeticApp</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -31,7 +30,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.2.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.6.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -48,12 +47,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cudart.lib;cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -66,29 +64,41 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>cudart.lib;cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="GpuArithmeticApp.cpp" />
+    <ClCompile Include="AppFunctions\src\core\opChoice.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddNumGen.cpp" />
+    <ClCompile Include="GpuArithmeticApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
     <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.cuh" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiFunc.cuh" />
-    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiNumGen.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvCheck.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvConSet.h" />
@@ -105,73 +115,19 @@
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCore.cuh" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.cuh" />
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddNumGen.h" />
-    <CudaCompile Include="AppFunctions\src\core\opChoice.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiCheck.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiConSet.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiCore.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiFunc.cu">
-      <FileType>CppCode</FileType>
-      <GPUDebugInfo Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GPUDebugInfo>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiNumGen.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\oneConv\oneConvCheck.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\oneConv\oneConvConSet.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\oneConv\oneConvCore.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\oneConv\oneConvFunc.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\oneConv\oneConvNumGen.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\twoConv\twoConvCheck.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\twoConv\twoConvCore.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\twoConv\twoConvFunc.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddCheck.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddConSet.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddCore.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddNumGen.cpp">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="AppFunctions\src\matMulti\matMultiCore.cu" />
+    <CudaCompile Include="AppFunctions\src\matMulti\matMultiFunc.cu" />
+    <CudaCompile Include="AppFunctions\src\oneConv\oneConvCore.cu" />
+    <CudaCompile Include="AppFunctions\src\oneConv\oneConvFunc.cu" />
+    <CudaCompile Include="AppFunctions\src\twoConv\twoConvCore.cu" />
+    <CudaCompile Include="AppFunctions\src\twoConv\twoConvFunc.cu" />
+    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddCore.cu" />
+    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.2.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.6.targets" />
   </ImportGroup>
 </Project>
