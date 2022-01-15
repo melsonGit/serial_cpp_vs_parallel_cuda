@@ -27,7 +27,7 @@ void vecAddCore()
 	vecAddCheck(a, b, c, conSize);
 
 	// Calculate overall time spent to complete operation
-	double completionTime { (opEnd - opStart) / (double)CLOCKS_PER_SEC };
+	double completionTime{ ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
 
 	// Output timing to complete operation and container size
 	std::cout << completionTime << "s Vector Addition computation time, with a container size of " << conSize << ".\n\n";

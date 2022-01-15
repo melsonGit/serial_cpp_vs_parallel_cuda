@@ -1,5 +1,10 @@
 #include "../../inc/oneConv/oneConvCore.cuh"
 
+// Number of elements in the convolution mask
+#ifndef MASK_ONE_DIM
+#define MASK_ONE_DIM 7
+#endif
+
 void oneConvCore()
 {
 	// Assign variable conSize with a user selected value
@@ -71,7 +76,7 @@ void oneConvCore()
 	cudaFree(deviceMainVec);
 
 	// Calculate overall time spent to complete operation
-	double completionTime{ (opEnd - opStart) / (double)CLOCKS_PER_SEC };
+	double completionTime{ ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
 
 	// Output timing to complete operation and container size
 	std::cout << completionTime << "s 1D Convolution computation time, with a container size of " << conSize << ".\n\n";
