@@ -16,10 +16,10 @@ __global__ void twoConvFunc(const int* deviceMainVec, int* deviceResVec, const i
     int startColPoint { colId - maskOffset };
 
     // Iterate over all the rows
-    for (auto rowIn { 0 }; rowIn < maskDim; rowIn++)
+    for (auto rowIn { 0 }; rowIn < maskDim; ++rowIn)
     {
         // Go over each column
-        for (auto colIn { 0 }; colIn < maskDim; colIn++)
+        for (auto colIn { 0 }; colIn < maskDim; ++colIn)
         {
             // Range check for rows
             if ((startRowPoint + rowIn) >= 0 && (startRowPoint + rowIn) < conSize)

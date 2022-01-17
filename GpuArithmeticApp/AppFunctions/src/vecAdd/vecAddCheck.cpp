@@ -6,7 +6,7 @@ void vecAddCheck(std::vector<int> const& inputA, std::vector<int> const& inputB,
 
 	bool doesMatch { true };
 
-	for (auto i { 0 }; i < conSize && doesMatch; i++)
+	for (auto i { 0 }; i < conSize && doesMatch; ++i)
 	{
 		if ((inputA[i] + inputB[i]) != resVec[i])
 			doesMatch = false;

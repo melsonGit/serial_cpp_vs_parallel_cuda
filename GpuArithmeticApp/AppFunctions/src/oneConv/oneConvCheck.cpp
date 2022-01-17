@@ -10,12 +10,12 @@ void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
 
     bool doesMatch { true };
 
-    for (auto i { 0 }; i < conSize && doesMatch; i++)
+    for (auto i { 0 }; i < conSize && doesMatch; ++i)
     {
         startPoint = i - maskRadius;
         resultVar = 0;
 
-        for (auto j { 0 }; j < maskDim; j++)
+        for (auto j { 0 }; j < maskDim; ++j)
         {
             if ((startPoint + j >= 0) && (startPoint + j < conSize)) 
             {

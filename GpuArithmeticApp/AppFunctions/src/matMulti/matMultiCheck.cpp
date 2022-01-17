@@ -7,15 +7,15 @@ void matMultiCheck(std::vector<int> const& inputA, std::vector<int> const& input
     bool doesMatch { true };
 
     // For each row
-    for (auto rowIn { 0 }; rowIn < conSize && doesMatch; rowIn++) 
+    for (auto rowIn { 0 }; rowIn < conSize && doesMatch; ++rowIn) 
     {
         // For every column...
-        for (auto colIn { 0 }; colIn < conSize; colIn++) 
+        for (auto colIn { 0 }; colIn < conSize; ++colIn) 
         {
             // For every element in the row-column pair
             int resultVar { 0 };
 
-            for (auto rowColPair { 0 }; rowColPair < conSize; rowColPair++) 
+            for (auto rowColPair { 0 }; rowColPair < conSize; ++rowColPair) 
             {
                 // Accumulate the partial results
                 resultVar += inputA[rowIn * conSize + rowColPair] * inputB[rowColPair * conSize + colIn];

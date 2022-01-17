@@ -17,22 +17,22 @@ void twoConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskV
     bool doesMatch { true };
 
     // Go over each row
-    for (auto rowIn { 0 }; rowIn < conSize; rowIn++)
+    for (auto rowIn { 0 }; rowIn < conSize; ++rowIn)
     {
         // Go over each column
-        for (auto colIn { 0 }; colIn < conSize && doesMatch; colIn++)
+        for (auto colIn { 0 }; colIn < conSize && doesMatch; ++colIn)
         {
             // Assign the tempResult variable a value
             tempResult = 0;
 
             // Go over each mask row
-            for (auto maskRowIn { 0 }; maskRowIn < maskDim; maskRowIn++)
+            for (auto maskRowIn { 0 }; maskRowIn < maskDim; ++maskRowIn)
             {
                 // Update offset value for row
                 radiusOffsetRows = rowIn - maskOffset + maskRowIn;
 
                 // Go over each mask column
-                for (auto maskColIn { 0 }; maskColIn < maskDim; maskColIn++)
+                for (auto maskColIn { 0 }; maskColIn < maskDim; ++maskColIn)
                 {
                     // Update offset value for column
                     radiusOffsetCols = colIn - maskOffset + maskColIn;

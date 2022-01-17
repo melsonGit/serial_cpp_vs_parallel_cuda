@@ -11,15 +11,15 @@ void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vect
 	int numCols { 2 };
 
 	// For each row
-	for (auto i { 0 }; i < numRows; i++)
+	for (auto i { 0 }; i < numRows; ++i)
 	{
 		// For each column in that row
-		for (auto j { 0 }; j < numCols && doesMatch; j++)
+		for (auto j { 0 }; j < numCols && doesMatch; ++j)
 		{
 			// For each row-column combination
 			int resultVar { 0 };
 
-			for (auto k { 0 }; k < numCols; k++)
+			for (auto k { 0 }; k < numCols; ++k)
 			{
 				resultVar += a[i][k] * b[k][j];
 			}

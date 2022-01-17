@@ -9,13 +9,13 @@ void matMultiFunc(std::vector<std::vector<int>> const& a, std::vector<std::vecto
     const int numCols { 2 };
 
     // For each row
-    for (auto i { 0 }; i < numRows; i++) 
+    for (auto i { 0 }; i < numRows; ++i) 
     {
         // For each column in that row
-        for (auto j { 0 }; j < numCols; j++) 
+        for (auto j { 0 }; j < numCols; ++j) 
         {
             // For each row-column combination
-            for (auto k { 0 }; k < numCols; k++)
+            for (auto k { 0 }; k < numCols; ++k)
                 c[i][j] += a[i][k] * b[k][j];       
         }
     }

@@ -13,22 +13,22 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
 
     bool doesMatch { true };
 
-    for (auto rowIn { 0 }; rowIn < conSize; rowIn++)
+    for (auto rowIn { 0 }; rowIn < conSize; ++rowIn)
     {
         // Go over each column
-        for (auto colIn { 0 }; colIn < conSize && doesMatch; colIn++)
+        for (auto colIn { 0 }; colIn < conSize && doesMatch; ++colIn)
         {
             // Reset the temp variable
             resultVar = 0;
 
             // Go over each mask row
-            for (auto maskRow { 0 }; maskRow < maskDim; maskRow++)
+            for (auto maskRow { 0 }; maskRow < maskDim; ++maskRow)
             {
                 // Update offset value for row
                 radiusOffsetRows = rowIn - maskOffset + maskRow;
 
                 // Go over each mask column
-                for (auto maskCol { 0 }; maskCol < maskDim; maskCol++)
+                for (auto maskCol { 0 }; maskCol < maskDim; ++maskCol)
                 {
                     // Update offset value for column
                     radiusOffsetCols = colIn - maskOffset + maskCol;

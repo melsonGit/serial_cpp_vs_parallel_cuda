@@ -6,7 +6,7 @@ void vecAddCheck(std::vector<int> const& a, std::vector<int> const& b, std::vect
 
 	bool doesMatch { true };
 
-	for (auto i{ 0 }; i < conSize && doesMatch; i++)
+	for (auto i { 0 }; i < conSize && doesMatch; ++i)
 	{
 		if ((a[i] + b[i]) != c[i])
 			doesMatch = false;

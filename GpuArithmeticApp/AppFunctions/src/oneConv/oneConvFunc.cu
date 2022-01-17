@@ -12,7 +12,7 @@ __global__ void oneConvFunc(const int* mainVec, const int* maskVec, int* resVec,
     int startPoint { rowId - maskRadius };
 
     // Go over each element of the mask
-    for (auto j { 0 }; j < maskDim; j++)
+    for (auto j { 0 }; j < maskDim; ++j)
     {
         // Ignore elements that hang off (0s don't contribute)
         if (((startPoint + j) >= 0) && (startPoint + j < conSize)) 

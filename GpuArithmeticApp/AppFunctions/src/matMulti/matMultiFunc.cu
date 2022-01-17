@@ -9,7 +9,7 @@ __global__ void matMultiFunc(const int* inputA, const int* inputB, int* outputVe
     // Iterate over row, and down column
     outputVec[rowId * conSize + colId] = 0;
 
-    for (auto rowColPairId { 0 }; rowColPairId < conSize; rowColPairId++)
+    for (auto rowColPairId { 0 }; rowColPairId < conSize; ++rowColPairId)
     {
         // Accumulate results for a single element
         outputVec[rowId * conSize + colId] += inputA[rowId * conSize + rowColPairId] * inputB[rowColPairId * conSize + colId];

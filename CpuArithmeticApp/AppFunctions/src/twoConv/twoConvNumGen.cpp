@@ -14,10 +14,10 @@ void twoConvNumGen(std::vector<int>& vecToPop)
 
 // Loop to populate 2D vector
 // For each row
-for (auto iRow { 0 }; iRow < vecToPop.size(); iRow++)
+for (auto iRow { 0 }; iRow < vecToPop.size(); ++iRow)
 {
     // For each column in that row
-    for (auto iCol { 0 }; iCol < vecToPop[iRow].size(); iCol++)
+    for (auto iCol { 0 }; iCol < vecToPop[iRow].size(); ++iCol)
     {
         // Assign random number to vector of vector of ints to columns iCol of rows iRows
         vecToPop[iRow][iCol] = rand() % 100;

@@ -12,12 +12,12 @@ void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskV
 	int startPoint { 0 };
 	int resultVar;
 
-	for (auto i { 0 }; i < conSize && doesMatch; i++)
+	for (auto i { 0 }; i < conSize && doesMatch; ++i)
 	{
 		startPoint = i - maskRadius;
 		resultVar = 0;
 
-		for (auto j { 0 }; j < maskDim; j++)
+		for (auto j { 0 }; j < maskDim; ++j)
 		{
 			if ((startPoint + j >= 0) && (startPoint + j < conSize))
 			{
