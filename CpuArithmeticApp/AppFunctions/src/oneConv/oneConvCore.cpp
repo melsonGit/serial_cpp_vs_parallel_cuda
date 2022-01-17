@@ -1,9 +1,6 @@
 #include "../../inc/oneConv/oneConvCore.h"
 
-#ifndef MASK_ONE_DIM
-// Number of elements in the convolution mask
-#define MASK_ONE_DIM 7
-#endif
+constexpr int maskOneDim { 7 };
 
 void oneConvCore()
 {
@@ -14,7 +11,7 @@ void oneConvCore()
     // Allocate main vector and resultant vector with size conSize
     std::vector<int> mainVec(conSize), resVec(conSize);
     // Allocate mask vector with maskSize
-    std::vector<int> maskVec(MASK_ONE_DIM);
+    std::vector<int> maskVec(maskOneDim);
 
     // Popluate main vector and mask vector
     std::cout << "\n1D Convolution: Populating main vector.\n";
@@ -26,12 +23,12 @@ void oneConvCore()
     clock_t opStart { clock() };
 
     // Start 1D Convolution operation
-    oneConvFunc(mainVec, maskVec, resVec, conSize);
+    oneConvFunc(mainVec, maskVec, resVec, conSize, maskOneDim);
 
     // Stop clock
     clock_t opEnd { clock() };
 
-    oneConvCheck(mainVec, maskVec, resVec, conSize);
+    oneConvCheck(mainVec, maskVec, resVec, conSize, maskOneDim);
 
     // Calculate overall time spent to complete operation
     double completionTime{ ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };

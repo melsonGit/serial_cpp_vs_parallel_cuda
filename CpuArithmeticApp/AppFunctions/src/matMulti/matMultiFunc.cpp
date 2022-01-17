@@ -6,7 +6,7 @@ void matMultiFunc(std::vector<std::vector<int>> const& a, std::vector<std::vecto
     std::cout << "\nMatrix Multiplication: Populating complete.\n";
     std::cout << "\nMatrix Multiplication: Starting operation.\n";
 
-    int numCols { 2 };
+    const int numCols { 2 };
 
     // For each row
     for (auto i { 0 }; i < numRows; i++) 

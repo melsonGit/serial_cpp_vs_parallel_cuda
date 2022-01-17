@@ -1,16 +1,6 @@
 #include "../../inc/twoConv/twoConvFunc.h"
 
-#ifndef MASK_TWO_DIM
-// 7 x 7 convolutional mask
-#define MASK_TWO_DIM 7
-#endif
-
-#ifndef MASK_OFFSET
-// Amount the the matrix will hang over the matrix
-#define MASK_OFFSET (MASK_TWO_DIM / 2)
-#endif
-
-void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, int const& conSize)
+void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, const int& conSize, const int& maskDim)
 {
     std::cout << "\n2D Convolution: Populating complete.\n";
     std::cout << "\n2D Convolution: Starting operation.\n";
@@ -20,8 +10,10 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
     int radiusOffsetRows { 0 };
     int radiusOffsetCols { 0 };
 
+    const int maskOffset { maskDim / 2};
+
     // Accumulate results
-    int tempResult { 0 };
+    int tempResult;
 
     // Go over each row
     for (auto rowIn { 0 }; rowIn < conSize; rowIn++)
@@ -33,16 +25,16 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
             tempResult = 0;
 
             // Go over each mask row
-            for (auto maskRowIn { 0 }; maskRowIn < MASK_TWO_DIM; maskRowIn++)
+            for (auto maskRowIn { 0 }; maskRowIn < maskDim; maskRowIn++)
             {
                 // Update offset value for row
-                radiusOffsetRows = rowIn - MASK_OFFSET + maskRowIn;
+                radiusOffsetRows = rowIn - maskOffset + maskRowIn;
 
                 // Go over each mask column
-                for (auto maskColIn { 0 }; maskColIn < MASK_TWO_DIM; maskColIn++)
+                for (auto maskColIn { 0 }; maskColIn < maskDim; maskColIn++)
                 {
                     // Update offset value for column
-                    radiusOffsetCols = colIn - MASK_OFFSET + maskColIn;
+                    radiusOffsetCols = colIn - maskOffset + maskColIn;
 
                     // Range checks if hanging off the matrix
                     if (radiusOffsetRows >= 0 && radiusOffsetRows < conSize)
@@ -50,7 +42,7 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
                         if (radiusOffsetCols >= 0 && radiusOffsetCols < conSize)
                         {
                             // Accumulate results into resVec
-                            tempResult += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowIn * MASK_TWO_DIM + maskColIn];
+                            tempResult += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowIn * maskDim + maskColIn];
                         }
                     }
                 }

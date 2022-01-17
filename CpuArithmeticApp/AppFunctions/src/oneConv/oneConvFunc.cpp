@@ -1,18 +1,13 @@
 #include "../../inc/oneConv/oneConvFunc.h"
 
-#ifndef MASK_ONE_DIM
-// Number of elements in the convolution mask
-#define MASK_ONE_DIM 7
-#endif
-
 void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, 
-                 int const& conSize)
+                 const int& conSize, const int& maskDim)
 {
     std::cout << "\n1D Convolution: Populating complete.\n";
     std::cout << "\n1D Convolution: Starting operation.\n";
 
     // Radius will determine when convolution occurs to prevent out of bound errors
-    int maskRadius { MASK_ONE_DIM / 2 };
+    const int maskRadius { maskDim / 2 };
     int start { 0 };
 
     for (auto i { 0 }; i < conSize; i++)
@@ -20,7 +15,7 @@ void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
         start = i - maskRadius;
         resVec[i] = 0;
 
-        for (auto j { 0 }; j < MASK_ONE_DIM; j++)
+        for (auto j { 0 }; j < maskDim; j++)
         {
             if ((start + j >= 0) && (start + j < conSize)) 
             {

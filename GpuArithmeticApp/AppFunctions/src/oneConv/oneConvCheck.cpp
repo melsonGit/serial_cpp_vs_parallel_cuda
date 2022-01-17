@@ -1,15 +1,10 @@
 #include "../../inc/oneConv/oneConvCheck.h"
 
-#ifndef MASK_ONE_DIM
-// Number of elements in the convolution mask
-#define MASK_ONE_DIM 7
-#endif
-
-void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize)
+void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize, const int& maskDim)
 {
     std::cout << "\n1D Convolution: Authenticating results.\n\n";
 
-    int maskRadius { MASK_ONE_DIM / 2 };
+    const int maskRadius { maskDim / 2 };
     int startPoint { 0 };
     int resultVar;
 
@@ -20,7 +15,7 @@ void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
         startPoint = i - maskRadius;
         resultVar = 0;
 
-        for (auto j { 0 }; j < MASK_ONE_DIM; j++)
+        for (auto j { 0 }; j < maskDim; j++)
         {
             if ((startPoint + j >= 0) && (startPoint + j < conSize)) 
             {

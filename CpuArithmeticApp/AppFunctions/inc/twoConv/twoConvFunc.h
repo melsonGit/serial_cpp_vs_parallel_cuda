@@ -5,6 +5,6 @@
 #include <iostream>
 #include <vector>
 
-void twoConvFunc(std::vector<int> const&, std::vector<int> const&, std::vector<int>&, int const&);
+void twoConvFunc(std::vector<int> const&, std::vector<int> const&, std::vector<int>&, const int&, const int&);
 
 #endif

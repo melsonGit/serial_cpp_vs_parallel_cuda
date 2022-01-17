@@ -1,14 +1,6 @@
 #include "../../inc/twoConv/twoConvCore.h"
 
-#ifndef MASK_TWO_DIM
-// 7 x 7 convolutional mask
-#define MASK_TWO_DIM 7
-#endif
-
-#ifndef MASK_OFFSET
-// Amount the the matrix will hang over the matrix
-#define MASK_OFFSET (MASK_TWO_DIM / 2)
-#endif
+constexpr int maskTwoDim { 7 };
 
 void twoConvCore()
 {
@@ -21,7 +13,7 @@ void twoConvCore()
 
     // Assign 2D vector mask vector (maskVec) a container size of MASK_DIM * MASK_DIM
     // NOTE: ensure conSize * conSize / MASK_DIM * MASK_DIM  persists when moving onto 2D vectors, this ensures func and check work
-    std::vector<int> maskVec(MASK_TWO_DIM * MASK_TWO_DIM);
+    std::vector<int> maskVec(maskTwoDim * maskTwoDim);
    
     // Populate mainVec and maskVec
     std::cout << "\n2D Convolution: Populating main vector.\n";
@@ -31,11 +23,11 @@ void twoConvCore()
 
     clock_t opStart { clock() };
 
-    twoConvFunc(mainVec, maskVec, resVec, conSize);
+    twoConvFunc(mainVec, maskVec, resVec, conSize, maskTwoDim);
 
     clock_t opEnd { clock() };
 
-    twoConvCheck(mainVec, maskVec, resVec, conSize);
+    twoConvCheck(mainVec, maskVec, resVec, conSize, maskTwoDim);
 
     // Calculate overall time spent to complete operation
     double completionTime{ ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };

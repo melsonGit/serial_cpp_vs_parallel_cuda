@@ -1,18 +1,11 @@
 #include "../../inc/twoConv/twoConvCheck.h"
 
-#ifndef MASK_TWO_DIM
-#define MASK_TWO_DIM 7
-#endif
-
-#ifndef MASK_OFFSET
-#define MASK_OFFSET (MASK_TWO_DIM / 2)
-#endif
-
-void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize)
+void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize, const int& maskDim)
 {
     std::cout << "\n2D Convolution: Authenticating results.\n\n";
 
     int resultVar;
+    const int maskOffset{ maskDim / 2 };
 
     // Intermediate value for more readable code
     int radiusOffsetRows { 0 };
@@ -29,16 +22,16 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
             resultVar = 0;
 
             // Go over each mask row
-            for (auto maskRow { 0 }; maskRow < MASK_TWO_DIM; maskRow++)
+            for (auto maskRow { 0 }; maskRow < maskDim; maskRow++)
             {
                 // Update offset value for row
-                radiusOffsetRows = rowIn - MASK_OFFSET + maskRow;
+                radiusOffsetRows = rowIn - maskOffset + maskRow;
 
                 // Go over each mask column
-                for (auto maskCol { 0 }; maskCol < MASK_TWO_DIM; maskCol++)
+                for (auto maskCol { 0 }; maskCol < maskDim; maskCol++)
                 {
                     // Update offset value for column
-                    radiusOffsetCols = colIn - MASK_OFFSET + maskCol;
+                    radiusOffsetCols = colIn - maskOffset + maskCol;
 
                     // Range checks if we are hanging off the matrix
                     if (radiusOffsetRows >= 0 && radiusOffsetRows < conSize) 
@@ -46,7 +39,7 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
                         if (radiusOffsetCols >= 0 && radiusOffsetCols < conSize) 
                         {
                             // Accumulate partial results
-                            resultVar += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRow * MASK_TWO_DIM + maskCol];
+                            resultVar += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRow * maskDim + maskCol];
                         }
                     }
                 }

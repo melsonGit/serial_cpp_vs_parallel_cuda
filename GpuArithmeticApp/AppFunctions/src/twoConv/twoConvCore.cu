@@ -3,10 +3,7 @@
 // Allocate mask in constant memory
 __constant__ int maskConstant[7 * 7];
 
-// Number of elements in the convolution mask
-#ifndef MASK_TWO_DIM
-#define MASK_TWO_DIM 7
-#endif
+constexpr int maskTwoDim { 7 };
 
 void twoConvCore()
 {
@@ -17,19 +14,19 @@ void twoConvCore()
     size_t bytesVecMem { conSize * conSize * sizeof(int) };
 
     // Size of the mask in bytes
-    size_t bytesMaskMem = MASK_TWO_DIM * MASK_TWO_DIM * sizeof(int);
+    size_t bytesMaskMem = maskTwoDim * maskTwoDim * sizeof(int);
 
     // Allocate the matrix and initialise it
     int* hostMainVec{ new int[conSize * conSize] };
     int* hostResVec{ new int[conSize * conSize] };
 
     // Allocate the mask and initialise it
-    int* hostMaskVec { new int[MASK_TWO_DIM * MASK_TWO_DIM] };
+    int* hostMaskVec { new int[maskTwoDim * maskTwoDim] };
 
     std::cout << "\n2D Convolution: Populating main vector.\n";
     twoConvNumGen(hostMainVec, conSize);
     std::cout << "\n2D Convolution: Populating mask vector.\n";
-    twoConvNumGen(hostMaskVec, MASK_TWO_DIM);
+    twoConvNumGen(hostMaskVec, maskTwoDim);
 
     std::cout << "\n2D Convolution: Populating complete.\n";
 
@@ -57,7 +54,7 @@ void twoConvCore()
     std::cout << "\n2D Convolution: Starting operation.\n";
 
     // Launch 2D convolution kernel
-    twoConvFunc <<< blocks, threads >>> (deviceMainVec, deviceResVec, conSize);
+    twoConvFunc <<< blocks, threads >>> (deviceMainVec, deviceResVec, conSize, maskTwoDim);
 
     std::cout << "\n2D Convolution: Operation complete.\n";
 
@@ -68,7 +65,7 @@ void twoConvCore()
     // Copy the result back to the CPU
     cudaMemcpy(hostResVec, deviceResVec, bytesVecMem, cudaMemcpyDeviceToHost);
 
-    twoConvCheck(hostMainVec, hostMaskVec, hostResVec, conSize);
+    twoConvCheck(hostMainVec, hostMaskVec, hostResVec, conSize, maskTwoDim);
     
     std::cout << "\n2D Convolution: Freeing host and device memory.\n\n";
 
