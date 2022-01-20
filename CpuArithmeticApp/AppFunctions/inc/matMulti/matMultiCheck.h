@@ -6,6 +6,6 @@
 #include <vector>
 
 void matMultiCheck(std::vector<std::vector<int>> const&, std::vector<std::vector<int>> const&, 
-				   std::vector<std::vector<int>> const&, int const&);
+				   std::vector<std::vector<int>> const&, const int&);
 
 #endif

@@ -1,30 +1,37 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
-void matMultiCheck(std::vector<std::vector<int>> const& a, std::vector<std::vector<int>> const& b, 
-				   std::vector<std::vector<int>> const& c, int const& numRows)
+void matMultiCheck(std::vector<std::vector<int>> const& inputVecA, std::vector<std::vector<int>> const& inputVecB, 
+				   std::vector<std::vector<int>> const& resultVec, const int& numRows)
 {
 	std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 
-	bool doesMatch { true };
+	// 2 columns for 2D vector
+	const int numCols { 2 };
 
-	// Only 2 columns exist in a 2D vector
-	int numCols { 2 };
+	// Accumulates our results to check against resultVec
+	int resultVar {};
 
-	// For each row
-	for (auto i { 0 }; i < numRows; ++i)
+	// Determines result authenticity - Assigned false value when results don't match
+	bool doesMatch{ true };
+
+	// For each row in inputVecA/B
+	for (auto rowIn { 0 }; rowIn < numRows; ++rowIn)
 	{
 		// For each column in that row
-		for (auto j { 0 }; j < numCols && doesMatch; ++j)
+		for (auto colIn { 0 }; colIn < numCols && doesMatch; ++colIn)
 		{
-			// For each row-column combination
-			int resultVar { 0 };
+			// Reset resultVar to 0 on next element
+			resultVar = 0;
 
-			for (auto k { 0 }; k < numCols; ++k)
+			// For each row-column combination
+			for (auto rowColIn { 0 }; rowColIn < numCols; ++rowColIn)
 			{
-				resultVar += a[i][k] * b[k][j];
+				// Accumulate results into resultVar
+				resultVar += inputVecA[rowIn][rowColIn] * inputVecB[rowColIn][colIn];
 			}
 
-			if (resultVar != c[i][j])
+			// Check accumulated resultVar value with corresponding value in resultVec
+			if (resultVar != resultVec[rowIn][colIn])
 				doesMatch = false;
 			else
 				continue;

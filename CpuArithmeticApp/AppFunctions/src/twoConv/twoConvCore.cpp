@@ -1,6 +1,5 @@
 #include "../../inc/twoConv/twoConvCore.h"
-
-constexpr int maskTwoDim { 7 };
+#include "../../inc/maskAttributes.h"
 
 void twoConvCore()
 {
@@ -13,7 +12,7 @@ void twoConvCore()
 
     // Assign 2D vector mask vector (maskVec) a container size of MASK_DIM * MASK_DIM
     // NOTE: ensure conSize * conSize / MASK_DIM * MASK_DIM  persists when moving onto 2D vectors, this ensures func and check work
-    std::vector<int> maskVec(maskTwoDim * maskTwoDim);
+    std::vector<int> maskVec(maskAttributes::maskDim * maskAttributes::maskDim);
    
     // Populate mainVec and maskVec
     std::cout << "\n2D Convolution: Populating main vector.\n";
@@ -23,11 +22,11 @@ void twoConvCore()
 
     clock_t opStart { clock() };
 
-    twoConvFunc(mainVec, maskVec, resVec, conSize, maskTwoDim);
+    twoConvFunc(mainVec, maskVec, resVec, conSize);
 
     clock_t opEnd { clock() };
 
-    twoConvCheck(mainVec, maskVec, resVec, conSize, maskTwoDim);
+    twoConvCheck(mainVec, maskVec, resVec, conSize);
 
     // Calculate overall time spent to complete operation
     double completionTime{ ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };

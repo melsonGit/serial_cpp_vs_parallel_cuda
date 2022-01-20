@@ -1,31 +1,41 @@
 #include "../../inc/oneConv/oneConvCheck.h"
+#include "../../inc/maskAttributes.h"
 
-void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resVec, const int& conSize, const int& maskDim)
+void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resultVec, const int& conSize)
 {
-
 	std::cout << "\n1D Convolution: Authenticating results.\n\n";
 
+	// Assists in determining when convolution can occur to prevent out of bound errors
+	// Used in conjunction with maskAttributes::maskOffset
+	int radiusOffsetRows { 0 };
+
+	// Accumulates our results to check against resultVec
+	int resultVar {};
+
+	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch { true };
 
-	// Radius will determine when convolution occurs to prevent out of bound errors
-	const int maskRadius { maskDim / 2 };
-	int startPoint { 0 };
-	int resultVar;
 
-	for (auto i { 0 }; i < conSize && doesMatch; ++i)
+	for (auto rowIn { 0 }; rowIn < conSize && doesMatch; ++rowIn)
 	{
-		startPoint = i - maskRadius;
+		// Reset resultVar to 0 on next element
 		resultVar = 0;
 
-		for (auto j { 0 }; j < maskDim; ++j)
+		// Update offset value for that row
+		radiusOffsetRows = rowIn - maskAttributes::maskOffset;
+
+		// For each mask row in maskVec
+		for (auto maskRowIn { 0 }; maskRowIn < maskAttributes::maskDim; ++maskRowIn)
 		{
-			if ((startPoint + j >= 0) && (startPoint + j < conSize))
+			// Check if we're hanging off mask row
+			if ((radiusOffsetRows + maskRowIn >= 0) && (radiusOffsetRows + maskRowIn < conSize))
 			{
-				resultVar += mainVec[startPoint + j] * maskVec[j];
+				// Accumulate results into resultVar
+				resultVar += mainVec[radiusOffsetRows + maskRowIn] * maskVec[maskRowIn];
 			}
 		}
-
-		if (resultVar != resVec[i])
+		// Check accumulated resultVar value with corresponding value in resultVec
+		if (resultVar != resultVec[rowIn])
 			doesMatch = false;
 		else
 			continue;
@@ -37,5 +47,3 @@ void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskV
 		std::cout << "1D Convolution successful: output vector data matches expected results.\n"
 		<< "Timing results will be recorded.\n\n";
 }
-
-// Implement a feature that automatically inputs successful data into an excel spreadsheet - via python script or third-party library

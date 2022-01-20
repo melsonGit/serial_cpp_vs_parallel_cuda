@@ -1,6 +1,7 @@
 #include "../../inc/twoConv/twoConvFunc.h"
+#include "../../inc/maskAttributes.h"
 
-void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, const int& conSize, const int& maskDim)
+void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, const int& conSize)
 {
     std::cout << "\n2D Convolution: Populating complete.\n";
     std::cout << "\n2D Convolution: Starting operation.\n";
@@ -9,8 +10,6 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
     // twoConv utilises one for rows AND columns as we're dealing with a 2D mask vector
     int radiusOffsetRows { 0 };
     int radiusOffsetCols { 0 };
-
-    const int maskOffset { maskDim / 2};
 
     // Accumulate results
     int tempResult;
@@ -25,16 +24,16 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
             tempResult = 0;
 
             // Go over each mask row
-            for (auto maskRowIn { 0 }; maskRowIn < maskDim; ++maskRowIn)
+            for (auto maskRowIn { 0 }; maskRowIn < maskAttributes::maskDim; ++maskRowIn)
             {
                 // Update offset value for row
-                radiusOffsetRows = rowIn - maskOffset + maskRowIn;
+                radiusOffsetRows = rowIn - maskAttributes::maskOffset + maskRowIn;
 
                 // Go over each mask column
-                for (auto maskColIn { 0 }; maskColIn < maskDim; ++maskColIn)
+                for (auto maskColIn { 0 }; maskColIn < maskAttributes::maskDim; ++maskColIn)
                 {
                     // Update offset value for column
-                    radiusOffsetCols = colIn - maskOffset + maskColIn;
+                    radiusOffsetCols = colIn - maskAttributes::maskOffset + maskColIn;
 
                     // Range checks if hanging off the matrix
                     if (radiusOffsetRows >= 0 && radiusOffsetRows < conSize)
@@ -42,7 +41,7 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
                         if (radiusOffsetCols >= 0 && radiusOffsetCols < conSize)
                         {
                             // Accumulate results into resVec
-                            tempResult += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowIn * maskDim + maskColIn];
+                            tempResult += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowIn * maskAttributes::maskDim + maskColIn];
                         }
                     }
                 }

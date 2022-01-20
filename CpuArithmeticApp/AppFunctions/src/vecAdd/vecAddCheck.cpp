@@ -1,14 +1,17 @@
 #include "../../inc/vecAdd/vecAddCheck.h"
 
-void vecAddCheck(std::vector<int> const& a, std::vector<int> const& b, std::vector<int> const& c, int const& conSize)
+void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, const int& conSize)
 {
 	std::cout << "\nVector Addition: Authenticating results.\n\n";
 
+	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch { true };
 
-	for (auto i { 0 }; i < conSize && doesMatch; ++i)
+	// For each row in inputVecA/B 
+	for (auto rowIn { 0 }; rowIn < conSize && doesMatch; ++rowIn)
 	{
-		if ((a[i] + b[i]) != c[i])
+		// Check addition of both rows matches value in corresponding row in resultVec
+		if ((inputVecA[rowIn] + inputVecB[rowIn]) != resultVec[rowIn])
 			doesMatch = false;
 		else
 			continue;
@@ -21,5 +24,3 @@ void vecAddCheck(std::vector<int> const& a, std::vector<int> const& b, std::vect
 		std::cout << "Vector addition successful: output vector data matches expected results.\n"
 		          << "Timing results will be recorded.\n\n";
 }
-
-// Implement a feature that automatically inputs successful data into an excel spreadsheet - via python script or third-party library
