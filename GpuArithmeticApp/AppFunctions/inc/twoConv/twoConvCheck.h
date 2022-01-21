@@ -4,6 +4,8 @@
 
 #include <iostream>
 
-void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize, const int& maskDim);
+#include "../maskAttributes/maskAttributes.h"
+
+void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize);
 
 #endif

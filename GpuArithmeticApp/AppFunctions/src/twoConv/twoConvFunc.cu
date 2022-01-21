@@ -1,15 +1,16 @@
 #include "../../inc/twoConv/twoConvFunc.cuh"
 
-__constant__ int maskConstant[7 * 7];
-
-__global__ void twoConvFunc(const int* deviceMainVec, int* deviceResVec, const int conSize, const int maskDim)
+__global__ void twoConvFunc(const int* deviceMainVec, const int* deviceMaskVec, int* deviceResVec, const int conSize)
 {
     // Calculate the global thread positions
     int rowId = blockIdx.y * blockDim.y + threadIdx.y;
     int colId = blockIdx.x * blockDim.x + threadIdx.x;
 
-    int resultVar { 0 };
-    const int maskOffset{ maskDim / 2 };
+    int resultVar {};
+
+    // Temp values to work around device code issue
+    const int maskDim { 7 };
+    const int maskOffset { maskDim / 2 };
 
     // Starting index for calculation
     int startRowPoint { rowId - maskOffset };
@@ -29,7 +30,7 @@ __global__ void twoConvFunc(const int* deviceMainVec, int* deviceResVec, const i
                 {
                     // Collate results
                     resultVar += deviceMainVec[(startRowPoint + rowIn) * conSize + (startColPoint + colIn)]
-                                                             * maskConstant[rowIn * maskDim + colIn];
+                                 * deviceMaskVec[rowIn * maskDim + colIn];
                 }
             }
         }

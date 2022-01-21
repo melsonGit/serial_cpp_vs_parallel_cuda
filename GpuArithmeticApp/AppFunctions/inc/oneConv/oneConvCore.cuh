@@ -11,6 +11,7 @@
 #include "oneConvNumGen.h"
 #include "oneConvFunc.cuh"
 #include "oneConvCheck.h"
+#include "../maskAttributes/maskAttributes.h"
 
 void oneConvCore();
 

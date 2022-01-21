@@ -3,8 +3,8 @@
 __global__ void matMultiFunc(const int* inputA, const int* inputB, int* outputVec, const int conSize)
 {
     // Compute each thread's global row and column index
-    int rowId { blockIdx.y * blockDim.y + threadIdx.y };
-    int colId { blockIdx.x * blockDim.x + threadIdx.x };
+    int rowId = blockIdx.y * blockDim.y + threadIdx.y;
+    int colId = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Iterate over row, and down column
     outputVec[rowId * conSize + colId] = 0;

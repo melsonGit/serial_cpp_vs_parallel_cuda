@@ -1,10 +1,9 @@
 #include "../../inc/oneConv/oneConvCheck.h"
 
-void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize, const int& maskDim)
+void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize)
 {
     std::cout << "\n1D Convolution: Authenticating results.\n\n";
 
-    const int maskRadius { maskDim / 2 };
     int startPoint { 0 };
     int resultVar;
 
@@ -12,10 +11,10 @@ void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
 
     for (auto i { 0 }; i < conSize && doesMatch; ++i)
     {
-        startPoint = i - maskRadius;
+        startPoint = i - maskAttributes::maskOffset;
         resultVar = 0;
 
-        for (auto j { 0 }; j < maskDim; ++j)
+        for (auto j { 0 }; j < maskAttributes::maskDim; ++j)
         {
             if ((startPoint + j >= 0) && (startPoint + j < conSize)) 
             {

@@ -5,6 +5,8 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-__global__ void oneConvFunc(const int*, const int*, int*, const int, const int);
+#include "../maskAttributes/maskAttributes.h"
+
+__global__ void oneConvFunc(const int*, const int*, int*, const int);
 
 #endif

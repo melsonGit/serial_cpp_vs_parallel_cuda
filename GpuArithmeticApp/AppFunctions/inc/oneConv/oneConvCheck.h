@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 
-void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize, const int& maskDim);
+#include "../maskAttributes/maskAttributes.h"
+
+void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize);
 
 #endif

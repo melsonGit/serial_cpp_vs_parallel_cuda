@@ -11,6 +11,7 @@
 #include "twoConvNumGen.h"
 #include "twoConvFunc.cuh"
 #include "twoConvCheck.h"
+#include "../maskAttributes/maskAttributes.h"
 
 void twoConvCore();
 

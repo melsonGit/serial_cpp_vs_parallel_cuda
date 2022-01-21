@@ -1,8 +1,5 @@
 #include "../../inc/oneConv/oneConvCore.cuh"
 
-// Number of elements in the convolution mask
-constexpr int maskOneDim { 7 };
-
 void oneConvCore()
 {
 	// Assign variable conSize with a user selected value
@@ -11,12 +8,12 @@ void oneConvCore()
 	// Size of the vector in bytes
 	size_t bytesVecMem { conSize * sizeof(int) };
 	// Size of mask in bytes
-	size_t bytesMaskMem { maskOneDim * sizeof(int) };
+	size_t bytesMaskMem { maskAttributes::maskDim * sizeof(int) };
 
 	// Allocate main vector and resultant vector with size conSize
 	std::vector<int> hostMainVec(conSize), hostResVec(conSize);
 	// Allocate mask vector with MASK_ONE_DIM
-	std::vector<int> hostMaskVec(maskOneDim);
+	std::vector<int> hostMaskVec(maskAttributes::maskDim);
 
 	// Popluate main vector and mask vector
 	std::cout << "\n1D Convolution: Populating main vector.\n";
@@ -52,7 +49,7 @@ void oneConvCore()
 	std::cout << "\n1D Convolution: Starting operation.\n";
 
 	// Call the kernel
-	oneConvFunc << <BLOCKS, THREADS >> > (deviceMainVec, deviceMaskVec, deviceResVec, conSize, maskOneDim);
+	oneConvFunc << <BLOCKS, THREADS >> > (deviceMainVec, deviceMaskVec, deviceResVec, conSize);
 
 	std::cout << "\n1D Convolution: Operation complete.\n";
 
@@ -64,7 +61,7 @@ void oneConvCore()
 	// Copy back to the host
 	cudaMemcpy(hostResVec.data(), deviceResVec, bytesVecMem, cudaMemcpyDeviceToHost);
 
-	oneConvCheck(hostMainVec.data(), hostMaskVec.data(), hostResVec.data(), conSize, maskOneDim);
+	oneConvCheck(hostMainVec.data(), hostMaskVec.data(), hostResVec.data(), conSize);
 
 	std::cout << "\n1D Convolution: Freeing device memory.\n\n";
 
