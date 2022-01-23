@@ -10,11 +10,11 @@ int matMultiConSet(int& conSize)
     do
     {
         std::cout << "Please select matrix multiplication element sample size from the options below:\n\n";
-        std::cout << "2,000 elements:        enter '1'\n";
-        std::cout << "3,000 elements:        enter '2'\n";
-        std::cout << "4,000 elements:        enter '3'\n";
-        std::cout << "5,000 elements:        enter '4'\n";
-        std::cout << "6,000 elements:        enter '5'\n";
+        std::cout << "1,048,576  elements:        enter '1'\n";
+        std::cout << "4,194,304  elements:        enter '2'\n";
+        std::cout << "9,437,184  elements:        enter '3'\n";
+        std::cout << "16,777,216 elements:        enter '4'\n";
+        std::cout << "26,214,400 elements:        enter '5'\n";
 
         std::cin.clear();
 
@@ -32,27 +32,27 @@ int matMultiConSet(int& conSize)
             }
             else if (userInput == 1)
             {
-                conSize = 1000; // 1,000 x 2 matrix
+                conSize = 524288;  // 524,288 X 2 = 1,048,576 elements
                 correctChoice = true;
             }
             else if (userInput == 2)
             {
-                conSize = 1500; // 1500 x 2 matrix
+                conSize = 2097152;  // 2,097,152 X 2 = 4,194,304 elements
                 correctChoice = true;
             }
             else if (userInput == 3)
             {
-                conSize = 2000; // 2000 x 2 matrix
+                conSize = 4718592;  // 4,718,592 X 2 = 9,437,184 elements
                 correctChoice = true;
             }
             else if (userInput == 4)
             {
-                conSize = 2500; // 2500 x 2 matrix
+                conSize = 8388608;  // 8,388,608 X 2 = 16,777,216 elements
                 correctChoice = true;
             }
             else if (userInput == 5)
             {
-                conSize = 3000; // 3000 x 2 matrix
+                conSize = 13107200; // 13,107,200 X 2 = 26,214,400 elements
                 correctChoice = true;
             }
         }
