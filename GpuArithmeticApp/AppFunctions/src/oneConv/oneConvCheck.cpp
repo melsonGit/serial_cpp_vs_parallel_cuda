@@ -1,6 +1,6 @@
 #include "../../inc/oneConv/oneConvCheck.h"
 
-void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize)
+void oneConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, const int& conSize)
 {
     std::cout << "\n1D Convolution: Authenticating results.\n\n";
 
@@ -22,7 +22,7 @@ void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, con
             }
         }
 
-        if (resultVar != resVec[i])
+        if (resultVar != resultVec[i])
             doesMatch = false;
         else
             continue;

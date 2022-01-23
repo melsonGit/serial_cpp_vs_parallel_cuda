@@ -7,6 +7,6 @@
 #include <time.h>
 #include <vector>
 
-void twoConvNumGen(std::vector<int>&);
+void twoConvNumGen(std::vector<int>& vecToPop);
 
 #endif

@@ -1,6 +1,6 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
-void matMultiCheck(std::vector<int> const& inputA, std::vector<int> const& inputB, std::vector<int> const& outputVec, const int& conSize) {
+void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, const int& conSize) {
 
     std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 
@@ -18,10 +18,10 @@ void matMultiCheck(std::vector<int> const& inputA, std::vector<int> const& input
             for (auto rowColPair { 0 }; rowColPair < conSize; ++rowColPair) 
             {
                 // Accumulate the partial results
-                resultVar += inputA[rowIn * conSize + rowColPair] * inputB[rowColPair * conSize + colIn];
+                resultVar += inputVecA[rowIn * conSize + rowColPair] * inputVecB[rowColPair * conSize + colIn];
             }
 
-            if (resultVar != outputVec[rowIn * conSize + colIn])
+            if (resultVar != resultVec[rowIn * conSize + colIn])
                 doesMatch = false;
             else
                 continue;

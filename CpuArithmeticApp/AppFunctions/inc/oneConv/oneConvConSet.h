@@ -4,6 +4,6 @@
 
 #include <iostream>
 
-int oneConvConSet(int&);
+int oneConvConSet(int& conSize);
 
 #endif

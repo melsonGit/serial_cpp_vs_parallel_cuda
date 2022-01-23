@@ -6,6 +6,6 @@
 #include <time.h>
 #include <algorithm>
 
-void twoConvNumGen(int*, const int&);
+void twoConvNumGen(int* vecToPop, const int& conSize);
 
 #endif

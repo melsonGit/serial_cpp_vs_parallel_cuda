@@ -1,6 +1,6 @@
 #include "../../inc/vecAdd/vecAddCheck.h"
 
-void vecAddCheck(std::vector<int> const& inputA, std::vector<int> const& inputB, std::vector<int> const& resVec, int const& conSize)
+void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, int const& conSize)
 {
 	std::cout << "\nVector Addition: Authenticating results.\n\n";
 
@@ -8,7 +8,7 @@ void vecAddCheck(std::vector<int> const& inputA, std::vector<int> const& inputB,
 
 	for (auto i { 0 }; i < conSize && doesMatch; ++i)
 	{
-		if ((inputA[i] + inputB[i]) != resVec[i])
+		if ((inputVecA[i] + inputVecB[i]) != resultVec[i])
 			doesMatch = false;
 		else
 			continue;

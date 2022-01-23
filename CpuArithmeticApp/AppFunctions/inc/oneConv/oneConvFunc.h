@@ -5,6 +5,6 @@
 #include <iostream>
 #include <vector>
 
-void oneConvFunc(std::vector<int> const&, std::vector<int> const&, std::vector<int>&, const int&);
+void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resultVec, const int& conSize);
 
 #endif

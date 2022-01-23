@@ -7,6 +7,6 @@
 #include <algorithm>
 #include <vector>
 
-void matMultiNumGen(std::vector<int>&);
+void matMultiNumGen(std::vector<int>& vecToPop);
 
 #endif

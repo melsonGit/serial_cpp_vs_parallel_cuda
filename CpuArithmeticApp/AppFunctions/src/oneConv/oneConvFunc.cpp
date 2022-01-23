@@ -1,7 +1,7 @@
 #include "../../inc/oneConv/oneConvFunc.h"
 #include "../../inc/maskAttributes.h"
 
-void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, const int& conSize)
+void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resultVec, const int& conSize)
 {
     std::cout << "\n1D Convolution: Populating complete.\n";
     std::cout << "\n1D Convolution: Starting operation.\n";
@@ -11,13 +11,13 @@ void oneConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
     for (auto i { 0 }; i < conSize; ++i)
     {
         start = i - maskAttributes::maskOffset;
-        resVec[i] = 0;
+        resultVec[i] = 0;
 
         for (auto j { 0 }; j < maskAttributes::maskDim; ++j)
         {
             if ((start + j >= 0) && (start + j < conSize)) 
             {
-                resVec[i] += mainVec[start + j] * maskVec[j];
+                resultVec[i] += mainVec[start + j] * maskVec[j];
             }
         }
     }

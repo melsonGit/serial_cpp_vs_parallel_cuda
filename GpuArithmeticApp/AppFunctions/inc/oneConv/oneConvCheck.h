@@ -7,6 +7,6 @@
 #include <iostream>
 #include <vector>
 
-void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize);
+void oneConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, const int& conSize);
 
 #endif

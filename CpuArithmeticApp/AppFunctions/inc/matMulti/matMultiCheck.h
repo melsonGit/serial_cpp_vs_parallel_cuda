@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-void matMultiCheck(std::vector<std::vector<int>> const&, std::vector<std::vector<int>> const&, 
-				   std::vector<std::vector<int>> const&, const int&);
+void matMultiCheck(std::vector<std::vector<int>> const& inputVecA, std::vector<std::vector<int>> const& inputVecB, 
+				   std::vector<std::vector<int>> const& resultVec, const int& numRows);
 
 #endif

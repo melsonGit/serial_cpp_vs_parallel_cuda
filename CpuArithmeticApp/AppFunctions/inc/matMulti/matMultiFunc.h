@@ -5,7 +5,8 @@
 #include <iostream>
 #include <vector>
 
-void matMultiFunc(std::vector<std::vector<int>> const&, std::vector<std::vector<int>> const&, std::vector<std::vector<int>>&, int const&);
+void matMultiFunc(std::vector<std::vector<int>> const& inputVecA, std::vector<std::vector<int>> const& inputVecB, 
+				  std::vector<std::vector<int>>& resultVec, const int& numRows);
 
 #endif
 

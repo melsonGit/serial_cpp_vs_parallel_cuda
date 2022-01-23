@@ -7,6 +7,6 @@
 #include <time.h>
 #include <vector>
 
-void vecAddNumGen(std::vector<int>&);
+void vecAddNumGen(std::vector<int>& vecToPop);
 
 #endif

@@ -1,6 +1,6 @@
 #include "../../inc/twoConv/twoConvFunc.cuh"
 
-__global__ void twoConvFunc(const int* deviceMainVec, const int* deviceMaskVec, int* deviceResVec, const int conSize)
+__global__ void twoConvFunc(const int* mainVec, const int* maskVec, int* resultVec, const int conSize)
 {
     // Calculate the global thread positions
     int rowId = blockIdx.y * blockDim.y + threadIdx.y;
@@ -29,12 +29,12 @@ __global__ void twoConvFunc(const int* deviceMainVec, const int* deviceMaskVec, 
                 if ((startColPoint + colIn) >= 0 && (startColPoint + colIn) < conSize)
                 {
                     // Collate results
-                    resultVar += deviceMainVec[(startRowPoint + rowIn) * conSize + (startColPoint + colIn)]
-                                 * deviceMaskVec[rowIn * maskDim + colIn];
+                    resultVar += mainVec[(startRowPoint + rowIn) * conSize + (startColPoint + colIn)]
+                                 * maskVec[rowIn * maskDim + colIn];
                 }
             }
         }
     }
 
-    deviceResVec[rowId * conSize + colId] = resultVar;
+    resultVec[rowId * conSize + colId] = resultVar;
 }

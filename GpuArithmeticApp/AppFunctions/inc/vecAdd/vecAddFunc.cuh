@@ -5,6 +5,6 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-__global__ void vecAddFunc(const int* __restrict, const int* __restrict, int* __restrict c, int);
+__global__ void vecAddFunc(const int* __restrict inputVecA, const int* __restrict inputVecB, int* __restrict resultVec, int conSize);
 
 #endif

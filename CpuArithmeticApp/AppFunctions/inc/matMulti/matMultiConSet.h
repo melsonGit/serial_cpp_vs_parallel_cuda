@@ -4,6 +4,6 @@
 
 #include <iostream>
 
-int matMultiConSet(int&);
+int matMultiConSet(int& conSize);
 
 #endif

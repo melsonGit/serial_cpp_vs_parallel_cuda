@@ -1,6 +1,6 @@
 #include "../../inc/oneConv/oneConvFunc.cuh"
 
-__global__ void oneConvFunc(const int* deviceMainVec, const int* deviceMaskVec, int* deviceResVec, const int conSize) 
+__global__ void oneConvFunc(const int* mainVec, const int* maskVec, int* resultVec, const int conSize) 
 {
     // Global thread ID calculation
     int rowId = blockIdx.x * blockDim.x + threadIdx.x;
@@ -19,7 +19,7 @@ __global__ void oneConvFunc(const int* deviceMainVec, const int* deviceMaskVec, 
         if (((startPoint + j) >= 0) && (startPoint + j < conSize)) 
         {
             // Collate results
-            deviceResVec[rowId] += deviceMainVec[startPoint + j] * deviceMaskVec[j];
+            resultVec[rowId] += mainVec[startPoint + j] * maskVec[j];
         }
     }
 }

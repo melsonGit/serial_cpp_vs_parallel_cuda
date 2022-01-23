@@ -122,14 +122,21 @@
     <ClInclude Include="AppFunctions\inc\vecAdd\vecAddNumGen.h" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiCore.cu" />
-    <CudaCompile Include="AppFunctions\src\matMulti\matMultiFunc.cu" />
+    <CudaCompile Include="AppFunctions\src\matMulti\matMultiCore.cu">
+      <DeploymentContent>false</DeploymentContent>
+    </CudaCompile>
+    <CudaCompile Include="AppFunctions\src\matMulti\matMultiFunc.cu">
+      <DeploymentContent>false</DeploymentContent>
+      <FileType>CppCode</FileType>
+    </CudaCompile>
     <CudaCompile Include="AppFunctions\src\oneConv\oneConvCore.cu" />
     <CudaCompile Include="AppFunctions\src\oneConv\oneConvFunc.cu" />
     <CudaCompile Include="AppFunctions\src\twoConv\twoConvCore.cu" />
     <CudaCompile Include="AppFunctions\src\twoConv\twoConvFunc.cu" />
     <CudaCompile Include="AppFunctions\src\vecAdd\vecAddCore.cu" />
-    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cu" />
+    <CudaCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

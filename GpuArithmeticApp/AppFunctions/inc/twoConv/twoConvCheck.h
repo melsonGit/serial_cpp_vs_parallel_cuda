@@ -6,6 +6,6 @@
 
 #include <iostream>
 
-void twoConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize);
+void twoConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, const int& conSize);
 
 #endif

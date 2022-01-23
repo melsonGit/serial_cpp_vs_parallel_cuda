@@ -4,6 +4,6 @@
 
 #include <iostream>
 
-void opChoice(int&);
+void opChoice(int& userInput);
 
 #endif

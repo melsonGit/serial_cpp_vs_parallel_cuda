@@ -6,6 +6,6 @@
 #include <iostream>
 #include <vector>
 
-void vecAddFunc(std::vector<int> const&, std::vector<int> const&, std::vector<int>&);
+void vecAddFunc(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int>& resultVec);
 
 #endif

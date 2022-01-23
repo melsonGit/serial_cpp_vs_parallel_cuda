@@ -1,7 +1,7 @@
 #include "../../inc/twoConv/twoConvFunc.h"
 #include "../../inc/maskAttributes.h"
 
-void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resVec, const int& conSize)
+void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int>& resultVec, const int& conSize)
 {
     std::cout << "\n2D Convolution: Populating complete.\n";
     std::cout << "\n2D Convolution: Starting operation.\n";
@@ -47,7 +47,7 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
                 }
             }
         }
-        resVec[rowIn] = tempResult;
+        resultVec[rowIn] = tempResult;
     }
     std::cout << "\n2D Convolution: Operation complete.\n";
 }

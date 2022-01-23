@@ -5,6 +5,6 @@
 #include <iostream>
 #include <vector>
 
-void oneConvCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, const int&);
+void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resultVec, const int& conSize);
 
 #endif

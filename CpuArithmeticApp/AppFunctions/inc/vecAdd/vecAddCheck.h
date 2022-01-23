@@ -5,6 +5,6 @@
 #include <iostream>
 #include <vector>
 
-void vecAddCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, const int& conSize);
+void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, const int& conSize);
 
 #endif
