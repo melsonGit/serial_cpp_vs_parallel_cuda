@@ -2,13 +2,13 @@
 #ifndef MAT_MULTI_CORE
 #define MAT_MULTI_CORE
 
+#include "matMultiCheck.h"
+#include "matMultiConSet.h"
+#include "matMultiFunc.h"
+#include "matMultiNumGen.h"
+
 #include <iostream>
 #include <vector>
-
-#include "matMultiConSet.h"
-#include "matMultiNumGen.h"
-#include "matMultiFunc.h"
-#include "matMultiCheck.h"
 
 void matMultiCore();
 
