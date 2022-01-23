@@ -2,10 +2,10 @@
 #ifndef CHECK_ONE_CONV
 #define CHECK_ONE_CONV
 
+#include "../maskAttributes/maskAttributes.h"
+
 #include <iostream>
 #include <vector>
-
-#include "../maskAttributes/maskAttributes.h"
 
 void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize);
 

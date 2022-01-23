@@ -2,15 +2,16 @@
 #ifndef VEC_ADD_CORE
 #define VEC_ADD_CORE
 
-#include <iostream>
-#include <vector>
+#include "vecAddCheck.h"
+#include "vecAddConSet.h"
+#include "vecAddFunc.cuh"
+#include "vecAddNumGen.h"
+
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-#include "vecAddConSet.h"
-#include "vecAddNumGen.h"
-#include "vecAddFunc.cuh"
-#include "vecAddCheck.h"
+#include <iostream>
+#include <vector>
 
 void vecAddCore();
 
