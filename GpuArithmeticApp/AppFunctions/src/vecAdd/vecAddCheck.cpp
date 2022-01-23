@@ -6,9 +6,9 @@ void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inpu
 
 	bool doesMatch { true };
 
-	for (auto i { 0 }; i < conSize && doesMatch; ++i)
+	for (auto rowIn { 0 }; rowIn < conSize && doesMatch; ++rowIn)
 	{
-		if ((inputVecA[i] + inputVecB[i]) != resultVec[i])
+		if ((inputVecA[rowIn] + inputVecB[rowIn]) != resultVec[rowIn])
 			doesMatch = false;
 		else
 			continue;
