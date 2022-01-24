@@ -17,7 +17,7 @@ My first hurdle was overcoming the technical issues that came with setting up CU
 
 # Future of this project
 
-With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became familiar with CUDA. I would consider a pure OOP approach to be somewhat unnecessary for this particular project, partly due to the overhead involved. However, I wish to integrate all programs into a one or two programs (serial and parallel), and an OOP approach will help in that regard. As it stands, I believe each program serves the purpose it was made for at the time I worked on my thesis. There are noticable areas of improvement to be made, namely in <s>serial Matrix Multiplication</s> (now implemented) and 2-D Convolution operations, lacking semantically _true_ 2-D containers.
+With regards to the overall design of the code; being more acclimated to an OOP approach, I found myself steering more towards procedural programming as I became familiar with CUDA. I would consider a pure OOP approach to be somewhat unnecessary for this particular project, partly due to the lifetime of objects (which are very short) and the benefits of stack read/access times over the heap. However, I wish to integrate all programs into a one or two programs (serial and parallel), and an OOP approach will help in that regard. As it stands, I believe each program serves the purpose it was made for at the time I worked on my thesis. There are noticable areas of improvement to be made, namely in <s>serial Matrix Multiplication</s> (now implemented) and 2-D Convolution operations, lacking semantically _true_ 2-D containers.
 
 # Program Logic: Vector Addition
 
