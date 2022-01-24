@@ -2,39 +2,41 @@
 
 __global__ void twoConvFunc(const int* mainVec, const int* maskVec, int* resultVec, const int conSize)
 {
-    // Calculate the global thread positions
-    int rowId = blockIdx.y * blockDim.y + threadIdx.y;
-    int colId = blockIdx.x * blockDim.x + threadIdx.x;
-
-    int resultVar {};
+    // Calculate and assign x / y dimensional thread a global thread ID
+    int gThreadRowId = blockIdx.y * blockDim.y + threadIdx.y;
+    int gThreadColId = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Temp values to work around device code issue
     const int maskDim { 7 };
     const int maskOffset { maskDim / 2 };
 
-    // Starting index for calculation
-    int startRowPoint { rowId - maskOffset };
-    int startColPoint { colId - maskOffset };
+    // Radius rows/cols will determine when convolution occurs to prevent out of bound errors
+    // twoConv utilises one for rows AND columns as we're dealing with a 2D mask vector
+    int radiusOffsetRows { gThreadRowId - maskOffset };
+    int radiusOffsetCols { gThreadColId - maskOffset };
 
-    // Iterate over all the rows
-    for (auto rowIn { 0 }; rowIn < maskDim; ++rowIn)
+    // Accumulate results
+    int resultVar{};
+
+    // For each row
+    for (auto rowId { 0 }; rowId < maskDim; ++rowId)
     {
-        // Go over each column
-        for (auto colIn { 0 }; colIn < maskDim; ++colIn)
+        // For each column in that row
+        for (auto colId { 0 }; colId < maskDim; ++colId)
         {
             // Range check for rows
-            if ((startRowPoint + rowIn) >= 0 && (startRowPoint + rowIn) < conSize)
+            if ((radiusOffsetRows + rowId) >= 0 && (radiusOffsetRows + rowId) < conSize)
             {
                 // Range check for columns
-                if ((startColPoint + colIn) >= 0 && (startColPoint + colIn) < conSize)
+                if ((radiusOffsetCols + colId) >= 0 && (radiusOffsetCols + colId) < conSize)
                 {
-                    // Collate results
-                    resultVar += mainVec[(startRowPoint + rowIn) * conSize + (startColPoint + colIn)]
-                                 * maskVec[rowIn * maskDim + colIn];
+                    // Accumulate results into resultVar
+                    resultVar += mainVec[(radiusOffsetRows + rowId) * conSize + (radiusOffsetCols + colId)]
+                                 * maskVec[rowId * maskDim + colId];
                 }
             }
         }
     }
-
-    resultVec[rowId * conSize + colId] = resultVar;
+    // Assign resultVec the accumulated value of resultVar
+    resultVec[gThreadRowId * conSize + gThreadColId] = resultVar;
 }

@@ -5,23 +5,31 @@ void twoConvNumGen(int* vecToPop, const int& conSize)
     // Re-seed rand() function for each run
     srand((unsigned int)time(NULL));
 
+    // Loop for mask vector
     if (conSize > 10)
     {
-        for (auto rowIn { 0 }; rowIn < conSize; ++rowIn)
+        // For every row
+        for (auto rowId{ 0 }; rowId < conSize; ++rowId)
         {
-            for (auto colIn { 0 }; colIn < conSize; ++colIn)
+            // For every column in that row
+            for (auto colId{ 0 }; colId < conSize; ++colId)
             {
-                vecToPop[conSize * rowIn + colIn] = rand() % 100;
+                // Generate random number and place into array
+                vecToPop[conSize * rowId + colId] = rand() % 100;
             }
         }
     }
     else
     {
-        for (auto rowIn { 0 }; rowIn < conSize; ++rowIn)
+        // Loop for main vector
+        // For every row
+        for (auto rowId{ 0 }; rowId < conSize; ++rowId)
         {
-            for (auto colIn { 0 }; colIn < conSize; ++colIn)
+            // For every column in that row
+            for (auto colId{ 0 }; colId < conSize; ++colId)
             {
-                vecToPop[conSize * rowIn + colIn] = rand() % 10;
+                // Generate random number and place into array
+                vecToPop[conSize * rowId + colId] = rand() % 10;
             }
         }
     }

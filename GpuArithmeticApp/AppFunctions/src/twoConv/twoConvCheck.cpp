@@ -4,46 +4,52 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, 
 {
     std::cout << "\n2D Convolution: Authenticating results.\n\n";
 
-    int resultVar {};
+    // Determines result authenticity - Assigned false value when results don't match
+    bool doesMatch { true };
 
-    // Intermediate value for more readable code
+    // Assists in determining when convolution can occur to prevent out of bound errors
+    // Used in conjunction with maskAttributes::maskOffset
     int radiusOffsetRows { 0 };
     int radiusOffsetCols { 0 };
 
-    bool doesMatch { true };
+    // Accumulates our results to check against resultVec
+    int resultVar{};
 
-    for (auto rowIn { 0 }; rowIn < conSize; ++rowIn)
+    // For each row
+    for (auto rowId { 0 }; rowId < conSize; ++rowId)
     {
-        // Go over each column
-        for (auto colIn { 0 }; colIn < conSize && doesMatch; ++colIn)
+        // For each column in that row
+        for (auto colId { 0 }; colId < conSize && doesMatch; ++colId)
         {
-            // Reset the temp variable
+            // Reset resultVar to 0 on next element
             resultVar = 0;
 
-            // Go over each mask row
-            for (auto maskRow { 0 }; maskRow < maskAttributes::maskDim; ++maskRow)
+            // For each mask row
+            for (auto maskRowId { 0 }; maskRowId < maskAttributes::maskDim; ++maskRowId)
             {
                 // Update offset value for row
-                radiusOffsetRows = rowIn - maskAttributes::maskOffset + maskRow;
+                radiusOffsetRows = rowId - maskAttributes::maskOffset + maskRowId;
 
-                // Go over each mask column
-                for (auto maskCol { 0 }; maskCol < maskAttributes::maskDim; ++maskCol)
+                // For each mask column in that mask row
+                for (auto maskColId { 0 }; maskColId < maskAttributes::maskDim; ++maskColId)
                 {
                     // Update offset value for column
-                    radiusOffsetCols = colIn - maskAttributes::maskOffset + maskCol;
+                    radiusOffsetCols = colId - maskAttributes::maskOffset + maskColId;
 
-                    // Range checks if we are hanging off the matrix
+                    // Check if we're hanging off mask row
                     if (radiusOffsetRows >= 0 && radiusOffsetRows < conSize) 
                     {
+                        // Check if we're hanging off mask column
                         if (radiusOffsetCols >= 0 && radiusOffsetCols < conSize) 
                         {
-                            // Accumulate partial results
-                            resultVar += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRow * maskAttributes::maskDim + maskCol];
+                            // Accumulate results into resultVar
+                            resultVar += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowId * maskAttributes::maskDim + maskColId];
                         }
                     }
                 }
             }
-            if (resultVar != resultVec[rowIn * conSize + colIn])
+            // Check accumulated resultVar value with corresponding value in resultVec
+            if (resultVar != resultVec[rowId * conSize + colId])
                 doesMatch = false;
             else
                 continue;

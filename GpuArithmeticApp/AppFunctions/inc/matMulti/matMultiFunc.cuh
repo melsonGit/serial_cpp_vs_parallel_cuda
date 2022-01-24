@@ -8,5 +8,3 @@
 __global__ void matMultiFunc(const int* inputVecA, const int* inputVecB, int* resultVec, const int conSize);
 
 #endif
-
-

@@ -2,15 +2,15 @@
 
 __global__ void oneConvFunc(const int* mainVec, const int* maskVec, int* resultVec, const int conSize) 
 {
-    // Global thread ID calculation
-    int rowId = blockIdx.x * blockDim.x + threadIdx.x;
+    // Calculate and assign x dimensional thread a global thread ID
+    int gThreadRowId = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Temp values to work around device code issue
     const int maskDim { 7 };
     const int maskOffset { maskDim / 2 };
 
     // Calculate the starting point for the element
-    int startPoint { rowId - maskOffset };
+    int startPoint { gThreadRowId - maskOffset };
 
     // Go over each element of the mask
     for (auto j { 0 }; j < maskDim; ++j)
@@ -19,7 +19,7 @@ __global__ void oneConvFunc(const int* mainVec, const int* maskVec, int* resultV
         if (((startPoint + j) >= 0) && (startPoint + j < conSize)) 
         {
             // Collate results
-            resultVec[rowId] += mainVec[startPoint + j] * maskVec[j];
+            resultVec[gThreadRowId] += mainVec[startPoint + j] * maskVec[j];
         }
     }
 }

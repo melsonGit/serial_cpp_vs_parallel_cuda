@@ -2,16 +2,19 @@
 
 __global__ void matMultiFunc(const int* inputVecA, const int* inputVecB, int* resultVec, const int conSize)
 {
-    // Compute each thread's global row and column index
-    int rowId = blockIdx.y * blockDim.y + threadIdx.y;
-    int colId = blockIdx.x * blockDim.x + threadIdx.x;
+    // Calculate and assign x / y dimensional thread a global thread ID
+    int gThreadRowId = blockIdx.y * blockDim.y + threadIdx.y;
+    int gThreadColId = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Iterate over row, and down column
-    resultVec[rowId * conSize + colId] = 0;
+    resultVec[gThreadRowId * conSize + gThreadColId] = 0;
 
+    // Above gThreadRow/ColId calculation skips traversal of row and col as it has already been calculated
+    // This allows us to start straight at the rowColPairId
     for (auto rowColPairId { 0 }; rowColPairId < conSize; ++rowColPairId)
     {
-        // Accumulate results for a single element
-        resultVec[rowId * conSize + colId] += inputVecA[rowId * conSize + rowColPairId] * inputVecB[rowColPairId * conSize + colId];
+        // Accumulate results into resultVec
+        resultVec[gThreadRowId * conSize + gThreadColId] += inputVecA[gThreadRowId * conSize + rowColPairId] 
+                                                          * inputVecB[rowColPairId * conSize + gThreadColId];
     }
 }

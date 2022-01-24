@@ -60,5 +60,3 @@ int vecAddConSet(int& conSize)
 
     return conSize;
 }
-
-

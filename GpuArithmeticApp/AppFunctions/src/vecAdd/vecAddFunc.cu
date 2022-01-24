@@ -1,12 +1,12 @@
 #include "../../inc/vecAdd/vecAddFunc.cuh"
 
-// CUDA kernel for vector addition || Function that computes the sum of two vectors
-__global__ void vecAddFunc(const int* __restrict inputVecA, const int* __restrict inputVecB, int* __restrict resultVec, int conSize) 
+__global__ void vecAddFunc(const int* __restrict inputVecA, const int* __restrict inputVecB, int* __restrict resultVec, const int conSize) 
 {
-    // Calculate global thread ID
-    int tid = (blockIdx.x * blockDim.x) + threadIdx.x;
+    // Calculate and assign x dimensional thread a global thread ID
+    int gThreadRowId = blockIdx.x * blockDim.x + threadIdx.x;
 
-    // Boundary check
-    if (tid < conSize) resultVec[tid] = inputVecA[tid] + inputVecB[tid];
-
+    // If the threads gThreadRowId is below conSize
+    // Add contents from inputVecA and inputVecB into resultVec 
+    if (gThreadRowId < conSize) 
+        resultVec[gThreadRowId] = inputVecA[gThreadRowId] + inputVecB[gThreadRowId];
 }

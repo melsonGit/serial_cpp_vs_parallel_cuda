@@ -12,42 +12,44 @@ void twoConvFunc(std::vector<int> const& mainVec, std::vector<int> const& maskVe
     int radiusOffsetCols { 0 };
 
     // Accumulate results
-    int tempResult;
+    int resultVar{};
 
-    // Go over each row
-    for (auto rowIn { 0 }; rowIn < conSize; ++rowIn)
+    // For each row
+    for (auto rowId { 0 }; rowId < conSize; ++rowId)
     {
-        // Go over each column
-        for (auto colIn { 0 }; colIn < conSize; ++colIn)
+        // For each column in that row
+        for (auto colId { 0 }; colId < conSize; ++colId)
         {
             // Assign the tempResult variable a value
-            tempResult = 0;
+            resultVar = 0;
 
-            // Go over each mask row
-            for (auto maskRowIn { 0 }; maskRowIn < maskAttributes::maskDim; ++maskRowIn)
+            // For each mask row
+            for (auto maskRowId { 0 }; maskRowId < maskAttributes::maskDim; ++maskRowId)
             {
                 // Update offset value for row
-                radiusOffsetRows = rowIn - maskAttributes::maskOffset + maskRowIn;
+                radiusOffsetRows = rowId - maskAttributes::maskOffset + maskRowId;
 
-                // Go over each mask column
-                for (auto maskColIn { 0 }; maskColIn < maskAttributes::maskDim; ++maskColIn)
+                // For each mask column in that row
+                for (auto maskColId { 0 }; maskColId < maskAttributes::maskDim; ++maskColId)
                 {
                     // Update offset value for column
-                    radiusOffsetCols = colIn - maskAttributes::maskOffset + maskColIn;
+                    radiusOffsetCols = colId - maskAttributes::maskOffset + maskColId;
 
-                    // Range checks if hanging off the matrix
+                    // Range check for rows
                     if (radiusOffsetRows >= 0 && radiusOffsetRows < conSize)
                     {
+                        // Range check for columns
                         if (radiusOffsetCols >= 0 && radiusOffsetCols < conSize)
                         {
-                            // Accumulate results into resVec
-                            tempResult += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowIn * maskAttributes::maskDim + maskColIn];
+                            // Accumulate results into resultVar
+                            resultVar += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowId * maskAttributes::maskDim + maskColId];
                         }
                     }
                 }
             }
         }
-        resultVec[rowIn] = tempResult;
+        // Assign resultVec the accumulated value of resultVar 
+        resultVec[rowId] = resultVar;
     }
     std::cout << "\n2D Convolution: Operation complete.\n";
 }

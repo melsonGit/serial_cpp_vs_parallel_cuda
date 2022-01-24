@@ -2,75 +2,79 @@
 
 void matMultiCore()
 {
-	// Assign variable conSize with a user selected value
+	// Initialise and allocate variable conSize with a user selected value
 	int conSize { matMultiConSet(conSize) };
 
-	// Initialise memory allocation variable
-	size_t vecMem { conSize * conSize * sizeof(int) };
-
-	// Assign native host input vectors (hostA & hostB) and the native host output vector (hostC) a container size of conSize * conSize
-	std::vector<int> hostVecA(conSize * conSize), hostVecB(conSize * conSize), hostResultVec(conSize * conSize);
+	// Initialise and allocate native host input vectors (hostInputVecA & hostInputVecB) and the native host output vector (hostResultVec) a container size of conSize * conSize
+	std::vector<int> hostInputVecA(conSize * conSize), hostInputVecB(conSize * conSize), hostResultVec(conSize * conSize);
 	
-	// Populate vectors
+	// Populate input vectors
 	std::cout << "\nMatrix Multiplication: Populating 1 of 2 host input vectors.\n";
-	matMultiNumGen(hostVecA);
+	matMultiNumGen(hostInputVecA);
 	std::cout << "\nMatrix Multiplication: Populating 2 of 2 host input vectors.\n";
-	matMultiNumGen(hostVecB);
+	matMultiNumGen(hostInputVecB);
 
 	std::cout << "\nMatrix Multiplication: Populating complete.\n";
 
-	// Assign input device pointers (deviceA & deviceB) and output device pointer (deviceC) memory size of vecMem
-	int* deviceVecA, * deviceVecB, * deviceResultVec;
-	cudaMalloc(&deviceVecA, vecMem);
-	cudaMalloc(&deviceVecB, vecMem);
-	cudaMalloc(&deviceResultVec, vecMem);
+	// Initialise bytesVecMem to used for allocating memory to device vars
+	// This allows us to copy data host to device and vice versa.
+	size_t bytesVecMem { conSize * conSize * sizeof(int) };
 
-	// Copy host input vector data to the device input pointers
+	// Allocate memory on the device using cudaMalloc
+	int* deviceInputVecA, * deviceInputVecB, * deviceResultVec;
+	cudaMalloc(&deviceInputVecA, bytesVecMem);
+	cudaMalloc(&deviceInputVecB, bytesVecMem);
+	cudaMalloc(&deviceResultVec, bytesVecMem);
+
 	std::cout << "\nMatrix Multiplication: Copying data from host to device.\n";
 
-	cudaMemcpy(deviceVecA, hostVecA.data(), vecMem, cudaMemcpyHostToDevice);
-	cudaMemcpy(deviceVecB, hostVecB.data(), vecMem, cudaMemcpyHostToDevice);
+	// Copy data from the host to the device using cudaMemcpy | .data() returns pointer to memory used by vector/array to store its owned elements
+	cudaMemcpy(deviceInputVecA, hostInputVecA.data(), bytesVecMem, cudaMemcpyHostToDevice);
+	cudaMemcpy(deviceInputVecB, hostInputVecB.data(), bytesVecMem, cudaMemcpyHostToDevice);
 
-	// Initialise threads per CTA (Compute Thread Array) dimension
+	// Threads per Cooperative Thread Array
 	int THREADS { 32 };
 
-	// Initialise blocks per grid dimension for threads to operate in
+	// No. CTAs per grid
+	// Add padding | Enables compatibility with sample sizes not divisible by 32
 	int BLOCKS { (conSize + THREADS - 1) / THREADS };
 
-	// Use dim3 structs for block and grid dimensions
+	// Use dim3 structs for BLOCKS and THREADS dimensions | Passed to kernal lauch as launch arguments
 	dim3 threads(THREADS, THREADS);
 	dim3 blocks(BLOCKS, BLOCKS);
 
 	// Start the clock
 	clock_t opStart { clock() };
 
-	// Launch kernel
 	std::cout << "\nMatrix Multiplication: Starting operation.\n";
 
-	matMultiFunc<<<blocks, threads>>>(deviceVecA, deviceVecB, deviceResultVec, conSize);
+	// Launch kernel on device
+	matMultiFunc<<<blocks, threads>>>(deviceInputVecA, deviceInputVecB, deviceResultVec, conSize);
 
 	std::cout << "\nMatrix Multiplication: Operation complete.\n";
+
+	// Stop clock
+	clock_t opEnd { clock() };
+
 	std::cout << "\nMatrix Multiplication: Copying results from device to host.\n";
 
-	// Copy back to the host
-	cudaMemcpy(hostResultVec.data(), deviceResultVec, vecMem, cudaMemcpyDeviceToHost);
+	// Copy data from device back to host using cudaMemcpy
+	cudaMemcpy(hostResultVec.data(), deviceResultVec, bytesVecMem, cudaMemcpyDeviceToHost);
 
 	std::cout << "\nMatrix Multiplication: Copying complete.\n";
 
-	clock_t opEnd{ clock() };
-
-	// Verify result on CPU
-	matMultiCheck(hostVecA, hostVecB, hostResultVec, conSize);
+	// Authenticate results on host
+	matMultiCheck(hostInputVecA, hostInputVecB, hostResultVec, conSize);
 
 	std::cout << "\nMatrix Multiplication: Freeing device memory.\n\n";
 
 	// Free memory on device
-	cudaFree(deviceVecA);
-	cudaFree(deviceVecB);
+	cudaFree(deviceInputVecA);
+	cudaFree(deviceInputVecB);
 	cudaFree(deviceResultVec);
 
 	// Calculate overall time spent to complete operation
-	double completionTime{ ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
+	double completionTime { ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
 
 	// Output timing to complete operation and container size
 	std::cout << completionTime << "s Matrix Multiplication computation time, with a container size of " << conSize * conSize << ".\n\n";

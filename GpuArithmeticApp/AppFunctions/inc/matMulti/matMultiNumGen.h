@@ -2,9 +2,9 @@
 #ifndef MULTI_NUM_GEN
 #define MULTI_NUM_GEN
 
+#include <algorithm>
 #include <cstdlib>
 #include <time.h>
-#include <algorithm>
 #include <vector>
 
 void matMultiNumGen(std::vector<int>& vecToPop);

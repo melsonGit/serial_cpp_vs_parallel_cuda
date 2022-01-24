@@ -5,7 +5,7 @@ void vecAddFunc(std::vector<int> const &inputVecA, std::vector<int> const &input
 	std::cout << "\nVector Addition: Populating complete.\n";
 	std::cout << "\nVector Addition: Starting operation.\n";
 
-	// Add contents from vector 'a' and 'b' into vector 'c' || Transform using a Lambda C++11
+	// Add contents from inputVecA and inputVecB into resultVec || Transform using a Lambda C++11
 	transform(inputVecA.begin(), inputVecA.end(), inputVecB.begin(), resultVec.begin(),
 		[](int a, int b) {return a + b; });
 

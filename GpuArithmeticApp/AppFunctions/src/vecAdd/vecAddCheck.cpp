@@ -1,14 +1,17 @@
 #include "../../inc/vecAdd/vecAddCheck.h"
 
-void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, int const& conSize)
+void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, const int& conSize)
 {
 	std::cout << "\nVector Addition: Authenticating results.\n\n";
 
+	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch { true };
 
-	for (auto rowIn { 0 }; rowIn < conSize && doesMatch; ++rowIn)
+	// For each row 
+	for (auto rowId { 0 }; rowId < conSize && doesMatch; ++rowId)
 	{
-		if ((inputVecA[rowIn] + inputVecB[rowIn]) != resultVec[rowIn])
+		// Check addition of both rows matches value in corresponding row in resultVec
+		if ((inputVecA[rowId] + inputVecB[rowId]) != resultVec[rowId])
 			doesMatch = false;
 		else
 			continue;

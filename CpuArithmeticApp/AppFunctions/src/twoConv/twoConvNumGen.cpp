@@ -5,8 +5,8 @@ void twoConvNumGen(std::vector<int>& vecToPop)
     // Re-seed rand() function for each run
     srand((unsigned int)time(NULL));
 
-    // Generate random numbers via Lambda C++11 function, and place into vector
-    std::generate(vecToPop.begin(), vecToPop.end(), []() { return rand() % 100; });
+    // Generate random number via Lambda C++11 function, and place into vector
+    generate(vecToPop.begin(), vecToPop.end(), []() { return rand() % 100; });
 }
 
 #if 0 

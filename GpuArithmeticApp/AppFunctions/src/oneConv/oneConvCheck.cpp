@@ -4,25 +4,36 @@ void oneConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, 
 {
     std::cout << "\n1D Convolution: Authenticating results.\n\n";
 
-    int startPoint { 0 };
-    int resultVar;
-
+    // Determines result authenticity - Assigned false value when results don't match
     bool doesMatch { true };
 
-    for (auto i { 0 }; i < conSize && doesMatch; ++i)
+    // Assists in determining when convolution can occur to prevent out of bound errors
+    // Used in conjunction with maskAttributes::maskOffset
+    int radiusOffsetRows { 0 };
+
+    // Accumulates our results to check against resultVec
+    int resultVar{};
+
+    // For each row
+    for (auto rowId { 0 }; rowId < conSize && doesMatch; ++rowId)
     {
-        startPoint = i - maskAttributes::maskOffset;
+        radiusOffsetRows = rowId - maskAttributes::maskOffset;
+
+        // Reset resultVar to 0 on next element
         resultVar = 0;
 
-        for (auto j { 0 }; j < maskAttributes::maskDim; ++j)
+        // For each mask row
+        for (auto maskRowId { 0 }; maskRowId < maskAttributes::maskDim; ++maskRowId)
         {
-            if ((startPoint + j >= 0) && (startPoint + j < conSize)) 
+            // Check if we're hanging off mask row
+            if ((radiusOffsetRows + maskRowId >= 0) && (radiusOffsetRows + maskRowId < conSize)) 
             {
-                resultVar += mainVec[startPoint + j] * maskVec[j];
+                // Accumulate results into resultVar
+                resultVar += mainVec[radiusOffsetRows + maskRowId] * maskVec[maskRowId];
             }
         }
-
-        if (resultVar != resultVec[i])
+        // Check accumulated resultVar value with corresponding value in resultVec
+        if (resultVar != resultVec[rowId])
             doesMatch = false;
         else
             continue;

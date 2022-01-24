@@ -8,10 +8,10 @@ void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inpu
 	bool doesMatch { true };
 
 	// For each row in inputVecA/B 
-	for (auto rowIn { 0 }; rowIn < conSize && doesMatch; ++rowIn)
+	for (auto rowId { 0 }; rowId < conSize && doesMatch; ++rowId)
 	{
 		// Check addition of both rows matches value in corresponding row in resultVec
-		if ((inputVecA[rowIn] + inputVecB[rowIn]) != resultVec[rowIn])
+		if ((inputVecA[rowId] + inputVecB[rowId]) != resultVec[rowId])
 			doesMatch = false;
 		else
 			continue;

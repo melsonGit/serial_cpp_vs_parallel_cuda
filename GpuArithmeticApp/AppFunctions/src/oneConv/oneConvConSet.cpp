@@ -3,9 +3,9 @@
 int oneConvConSet(int& conSize)
 {
 
-    int userInput{ 0 };
+    int userInput { 0 };
 
-    bool correctChoice{ false };
+    bool correctChoice { false };
 
     do
     {
