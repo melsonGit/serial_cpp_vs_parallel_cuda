@@ -33,8 +33,6 @@ void matMultiCheck(std::vector<std::vector<int>> const& inputVecA, std::vector<s
 			// Check accumulated resultVar value with corresponding value in resultVec
 			if (resultVar != resultVec[rowIn][colIn])
 				doesMatch = false;
-			else
-				continue;
 		}
 	}
 

@@ -51,8 +51,6 @@ void twoConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, 
             // Check accumulated resultVar value with corresponding value in resultVec
             if (resultVar != resultVec[rowId * conSize + colId])
                 doesMatch = false;
-            else
-                continue;
         }
     }
 

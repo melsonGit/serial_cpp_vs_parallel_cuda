@@ -13,8 +13,6 @@ void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inpu
 		// Check addition of both rows matches value in corresponding row in resultVec
 		if ((inputVecA[rowId] + inputVecB[rowId]) != resultVec[rowId])
 			doesMatch = false;
-		else
-			continue;
 	}
 	
 	if (!doesMatch)

@@ -53,8 +53,6 @@ void twoConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskV
         // Check accumulated resultVar value with corresponding value in resultVec
         if (resultVar != resultVec[rowIn])
             doesMatch = false;
-        else
-            continue;
     }
 
     if (!doesMatch)

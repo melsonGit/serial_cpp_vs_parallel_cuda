@@ -28,8 +28,6 @@ void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& in
             // Check accumulated resultVar value with corresponding value in resultVec
             if (resultVar != resultVec[rowId * conSize + colId])
                 doesMatch = false;
-            else
-                continue;
         }
     }
 
