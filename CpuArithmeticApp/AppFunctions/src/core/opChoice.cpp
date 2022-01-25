@@ -2,10 +2,9 @@
 
 void opChoice(int& userInput)
 {
-
     bool correctChoice { false };
 
-    do 
+    do
     {
         std::cout << "Please select an arithmetic operation from the options below:\n\n";
         std::cout << "Vector Addition:           enter '1'\n";
@@ -24,36 +23,25 @@ void opChoice(int& userInput)
         }
         else
         {
-
-            if (userInput <= 0 || userInput >= 6)
+            switch (userInput)
             {
-                std::cout << "\n\nPlease select a valid option.\n\n";
-            }
-            else if (userInput == 1)
-            {
-                // load relevant vecAdd classes
+            case 1:
                 std::cout << "\nVector Addition has been selected.\n\n";
                 correctChoice = true;
-            }
-            else if (userInput == 2)
-            {
-                // load relevant matMulti classes
+                break;
+            case 2:
                 std::cout << "\nMatrix Multiplication has been selected.\n\n";
                 correctChoice = true;
-            }
-            else if (userInput == 3)
-            {
-                // load relevant oneConv classes
+                break;
+            case 3:
                 std::cout << "\n1D Convolution has been selected.\n\n";
                 correctChoice = true;
-            }
-            else if (userInput == 4)
-            {
-                // load relevant twoConv classes
+                break;
+            case 4:
                 std::cout << "\n2D Convolution has been selected.\n\n";
                 correctChoice = true;
-            }
-            else if (userInput == 5)
+                break;
+            case 5:
             {
                 bool closeChoice { false };
 
@@ -70,24 +58,31 @@ void opChoice(int& userInput)
                         std::cin.clear();
                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     }
-                    else if (userInput <= 0 || userInput >= 3)
+                    else
                     {
-                        std::cout << "\nNo correct option selected.\n\n";
+                        switch (userInput)
+                        {
+                        case 1:
+                            closeChoice = true;
+                            correctChoice = true;
+                            userInput = 5;
+                            std::cout << "\nClosing program.\n";
+                            break;
+                        case 2:
+                            std::cout << "\nReturning to arithmetic selection.\n\n";
+                            closeChoice = true;
+                            break;
+                        default:
+                            std::cout << "\nNo correct option selected.\n\n";
+                            break;
+                        }
                     }
-                    else if (userInput == 1)
-                    {
-                        closeChoice = true;
-                        correctChoice = true;
-                        userInput = 5;
-                        std::cout << "\nClosing program.\n";
-                    }
-                    else if (userInput == 2)
-                    {
-                        std::cout << "\nReturning to arithmetic selection.\n\n";
-                        closeChoice = true;
-                    }
-
                 } while (!closeChoice);
+            }
+            break;
+            default:
+                std::cout << "\n\nPlease select a valid option.\n\n";
+                break;
             }
         }
     } while (!correctChoice);
