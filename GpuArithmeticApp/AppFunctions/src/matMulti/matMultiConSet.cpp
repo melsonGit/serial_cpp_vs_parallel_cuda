@@ -2,7 +2,6 @@
 
 int matMultiConSet(int& conSize)
 {
-
     int userInput { 0 };
 
     bool correctChoice { false };
@@ -26,34 +25,31 @@ int matMultiConSet(int& conSize)
         }
         else
         {
-            if (userInput <= 0 || userInput >= 6)
+            switch (userInput)
             {
-                std::cout << "\nPlease select a valid option.\n\n";
-            }
-            else if (userInput == 1)
-            {
+            case 1:
                 conSize = 1024;  // 1,024 x 1,024 = 1,048,576 elements
                 correctChoice = true;
-            }
-            else if (userInput == 2)
-            {
+                break;
+            case 2:
                 conSize = 2048;  // 2,048 x 2,048 = 4,194,304 elements
                 correctChoice = true;
-            }
-            else if (userInput == 3)
-            {
+                break;
+            case 3:
                 conSize = 3072;  // 3,072 x 3,072 = 9,437,184 elements
                 correctChoice = true;
-            }
-            else if (userInput == 4)
-            {
+                break;
+            case 4:
                 conSize = 4096;  // 4,096 x 4,096 = 16,777,216 elements
                 correctChoice = true;
-            }
-            else if (userInput == 5)
-            {
+                break;
+            case 5:
                 conSize = 5120;  // 5,120 x 5,120 = 26,214,400 elements
                 correctChoice = true;
+                break;
+            default:
+                std::cout << "\nPlease select a valid option.\n\n";
+                break;
             }
         }
     } while (!correctChoice);

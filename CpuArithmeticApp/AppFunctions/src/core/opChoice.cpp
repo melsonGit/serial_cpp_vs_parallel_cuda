@@ -45,11 +45,11 @@ void opChoice(int& userInput)
             {
                 bool closeChoice { false };
 
-                std::cout << "\nAre you sure you want to close the program?\n";
-                std::cout << "Yes (1) || No (2)\n";
-
                 do
                 {
+                    std::cout << "\nAre you sure you want to close the program?\n";
+                    std::cout << "Yes (1) || No (2)\n";
+
                     std::cin.clear();
 
                     if (!(std::cin >> userInput))
@@ -73,7 +73,7 @@ void opChoice(int& userInput)
                             closeChoice = true;
                             break;
                         default:
-                            std::cout << "\nNo correct option selected.\n\n";
+                            std::cout << "\nPlease select a valid option.\n\n";
                             break;
                         }
                     }

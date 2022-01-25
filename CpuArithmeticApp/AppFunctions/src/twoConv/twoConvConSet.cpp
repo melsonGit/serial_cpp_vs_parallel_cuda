@@ -1,6 +1,6 @@
 #include "../../inc/twoConv/twoConvConSet.h"
 
-int twoConvConSet (int& conSize) 
+int twoConvConSet(int& conSize)
 {
     int userInput { 0 };
 
@@ -25,34 +25,31 @@ int twoConvConSet (int& conSize)
         }
         else
         {
-            if (userInput <= 0 || userInput >= 6)
+            switch (userInput)
             {
+            case 1:
+                conSize = 4096; // 4,096 x 4,096 = 16,777,216 elements
+                correctChoice = true;
+                break;
+            case 2:
+                conSize = 5120; // 5,120 x 5,120 = 26,214,400 elements
+                correctChoice = true;
+                break;
+            case 3:
+                conSize = 6144; // 6,144 x 6,144 = 37,748,736 elements
+                correctChoice = true;
+                break;
+            case 4:
+                conSize = 8192; // 8,192 x 8,192 = 67,108,864 elements
+                correctChoice = true;
+                break;
+            case 5:
+                conSize = 10240; // 10,240 x 10,240 = 104,857,600 elements
+                correctChoice = true;
+                break;
+            default:
                 std::cout << "\nPlease select a valid option.\n\n";
-            }
-            else if (userInput == 1)
-            {
-                conSize = 4096; // 4,096 x 4,096
-                correctChoice = true;
-            }
-            else if (userInput == 2)
-            {
-                conSize = 5120; // 5,120 x 5,120
-                correctChoice = true;
-            }
-            else if (userInput == 3)
-            {
-                conSize = 6144; // 6,144 x 6,144
-                correctChoice = true;
-            }
-            else if (userInput == 4)
-            {
-                conSize = 8192; // 8,192 x 8,192
-                correctChoice = true;
-            }
-            else if (userInput == 5)
-            {
-                conSize = 10240; // 10,240 x 10,240
-                correctChoice = true;
+                break;
             }
         }
     } while (!correctChoice);
