@@ -14,7 +14,9 @@ void vecAddCheck(std::vector<int> const& inputVecA, std::vector<int> const& inpu
 		if ((inputVecA[rowId] + inputVecB[rowId]) != resultVec[rowId])
 			doesMatch = false;
 	}
-	
+	// Assert and abort when results don't match
+	assert(doesMatch && "Check failed! Addition of inputVecA / B values don't match corresponding values in resultVec (vecAdd).");
+
 	if (!doesMatch)
 		std::cout << "Vector addition unsuccessful: output vector data does not match expected results.\n"
 		          << "Timing results will be discarded.\n\n";

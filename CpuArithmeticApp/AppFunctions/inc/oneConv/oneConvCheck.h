@@ -2,6 +2,7 @@
 #ifndef CHECK_ONE_CONV
 #define CHECK_ONE_CONV
 
+#include <cassert>
 #include <iostream>
 #include <vector>
 

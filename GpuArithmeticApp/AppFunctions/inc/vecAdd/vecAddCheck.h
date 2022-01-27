@@ -2,6 +2,7 @@
 #ifndef VEC_ADD_CHECK
 #define VEC_ADD_CHECK
 
+#include <cassert>
 #include <iostream>
 #include <vector>
 

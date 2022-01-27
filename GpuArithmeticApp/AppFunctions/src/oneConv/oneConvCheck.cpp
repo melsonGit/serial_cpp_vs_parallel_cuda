@@ -36,6 +36,9 @@ void oneConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, 
         if (resultVar != resultVec[rowId])
             doesMatch = false;
     }
+    // Assert and abort when results don't match
+    assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in resultVec (oneConv).");
+
     if (!doesMatch)
         std::cout << "1D Convolution unsuccessful: output vector data does not match the expected result.\n"
         << "Timing results will be discarded.\n";

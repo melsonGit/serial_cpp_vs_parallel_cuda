@@ -5,7 +5,7 @@ void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& in
     std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 
     // Determines result authenticity - Assigned false value when results don't match
-    bool doesMatch{ true };
+    bool doesMatch { true };
 
     // Accumulates our results to check against resultVec
     int resultVar{};
@@ -30,6 +30,8 @@ void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& in
                 doesMatch = false;
         }
     }
+    // Assert and abort when results don't match
+    assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in resultVec (matMulti).");
 
     if (!doesMatch)
         std::cout << "Matrix multiplication unsuccessful: output vector data does not match expected results.\n"
