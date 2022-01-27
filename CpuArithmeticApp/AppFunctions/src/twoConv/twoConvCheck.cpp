@@ -58,7 +58,7 @@ void twoConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskV
     assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in resultVec (twoConv).");
 
     if (!doesMatch)
-        std::cout << "2D Convolution unsuccessful: output vector data does not match the expected result.\n"
+        std::cerr << "2D Convolution unsuccessful: output vector data does not match the expected result.\n"
         << "Timing results will be discarded.\n\n";
     else
         std::cout << "2D Convolution successful: output vector data matches expected results.\n"

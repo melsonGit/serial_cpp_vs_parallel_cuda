@@ -39,7 +39,7 @@ void matMultiCheck(std::vector<std::vector<int>> const& inputVecA, std::vector<s
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in resultVec (matMulti).");
 
 	if (!doesMatch)
-		std::cout << "Matrix multiplication unsuccessful: output vector data does not match expected results.\n"
+		std::cerr << "Matrix multiplication unsuccessful: output vector data does not match expected results.\n"
 		          << "Timing results will be discarded.\n\n";
 	else
 		std::cout << "Matrix multiplication successful: output vector data matches expected results.\n"
