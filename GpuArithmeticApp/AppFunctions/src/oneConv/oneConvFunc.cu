@@ -1,6 +1,6 @@
 #include "../../inc/oneConv/oneConvFunc.cuh"
 
-__global__ void oneConvFunc(const int* mainVec, const int* maskVec, int* resultVec, const int conSize) 
+__global__ void oneConvFunc(const int* __restrict mainVec, const int* __restrict maskVec, int* __restrict resultVec, const int conSize) 
 {
     // Calculate and assign x dimensional thread a global thread ID
     int gThreadRowId = blockIdx.x * blockDim.x + threadIdx.x;

@@ -1,6 +1,6 @@
 #include "../../inc/twoConv/twoConvFunc.cuh"
 
-__global__ void twoConvFunc(const int* mainVec, const int* maskVec, int* resultVec, const int conSize)
+__global__ void twoConvFunc(const int* __restrict mainVec, const int* __restrict maskVec, int* __restrict resultVec, const int conSize)
 {
     // Calculate and assign x / y dimensional thread a global thread ID
     int gThreadRowId = blockIdx.y * blockDim.y + threadIdx.y;

@@ -5,6 +5,6 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-__global__ void matMultiFunc(const int* inputVecA, const int* inputVecB, int* resultVec, const int conSize);
+__global__ void matMultiFunc(const int* __restrict inputVecA, const int* __restrict inputVecB, int* __restrict resultVec, const int conSize);
 
 #endif
