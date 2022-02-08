@@ -2,6 +2,7 @@
 #ifndef TWO_CONV_CORE
 #define TWO_CONV_CORE
 
+#include "../maskAttributes.h"
 #include "twoConvCheck.h"
 #include "twoConvConSet.h"
 #include "twoConvFunc.h"

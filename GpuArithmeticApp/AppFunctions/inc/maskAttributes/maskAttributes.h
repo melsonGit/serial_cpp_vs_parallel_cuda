@@ -14,5 +14,4 @@ namespace maskAttributes
 	// Used to prevent out of bound errors by determining when convolution should occur
 	extern const int maskOffset;
 }
-
 #endif

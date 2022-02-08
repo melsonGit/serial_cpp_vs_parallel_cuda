@@ -2,11 +2,22 @@
 
 void twoConvNumGen(std::vector<int>& vecToPop)
 {
-    // Create local distribution on stack
-    std::uniform_int_distribution randNum { randNumGen::minRand, randNumGen::maxRand };
+    if (vecToPop.size() > (maskAttributes::maskDim * maskAttributes::maskDim))
+    {
+        // Create local distribution on stack
+        std::uniform_int_distribution randNum { randNumGen::minRand, randNumGen::maxRand };
 
-    // Generate random numbers via Lambda C++11 function, and place into vector
-    generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
+        // Generate random numbers via Lambda C++11 function, and place into vector
+        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
+    }
+    else
+    {
+        // Create local distribution on stack
+        std::uniform_int_distribution randNum { randNumGen::minMaskRand, randNumGen::maxMaskRand };
+
+        // Generate random numbers via Lambda C++11 function, and place into vector
+        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
+    }
 }
 
 #if 0 

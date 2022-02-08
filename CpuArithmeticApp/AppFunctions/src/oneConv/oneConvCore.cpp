@@ -1,5 +1,4 @@
 #include "../../inc/oneConv/oneConvCore.h"
-#include "../../inc/maskAttributes.h"
 
 void oneConvCore()
 {

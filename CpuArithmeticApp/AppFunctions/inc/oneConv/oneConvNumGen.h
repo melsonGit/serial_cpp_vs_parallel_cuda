@@ -2,6 +2,7 @@
 #ifndef ONE_CONV_NUM_GEN
 #define ONE_CONV_NUM_GEN
 
+#include "../maskAttributes.h"
 #include "../randNumGen.h"
 
 #include <algorithm>

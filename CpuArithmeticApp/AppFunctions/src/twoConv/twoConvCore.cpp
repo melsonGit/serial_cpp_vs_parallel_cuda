@@ -1,5 +1,4 @@
 #include "../../inc/twoConv/twoConvCore.h"
-#include "../../inc/maskAttributes.h"
 
 void twoConvCore()
 {

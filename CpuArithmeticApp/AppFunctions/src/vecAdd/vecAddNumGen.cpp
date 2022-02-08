@@ -7,5 +7,4 @@ void vecAddNumGen(std::vector<int>& vecToPop)
 
 	// Generate random numbers via Lambda C++11 function, and place into vector
 	generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
-	
 }

@@ -88,6 +88,7 @@
     <ClCompile Include="AppFunctions\src\oneConv\oneConvCheck.cpp" />
     <ClCompile Include="AppFunctions\src\oneConv\oneConvConSet.cpp" />
     <ClCompile Include="AppFunctions\src\oneConv\oneConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\randNumGen\randNumGen.cpp" />
     <ClCompile Include="AppFunctions\src\twoConv\twoConvCheck.cpp" />
     <ClCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp" />
     <ClCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.cuh" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvFunc.cuh" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\randNumGen\randNumGen.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.cuh" />
