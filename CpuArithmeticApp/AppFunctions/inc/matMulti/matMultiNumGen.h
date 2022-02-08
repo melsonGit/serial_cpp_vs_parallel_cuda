@@ -2,6 +2,8 @@
 #ifndef MULTI_NUM_GEN
 #define MULTI_NUM_GEN
 
+#include "../randNumGen.h"
+
 #include <cstdlib>
 #include <time.h>
 #include <vector>

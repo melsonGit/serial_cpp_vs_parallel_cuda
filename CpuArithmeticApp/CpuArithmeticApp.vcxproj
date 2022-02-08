@@ -184,6 +184,7 @@
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvFunc.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\randNumGen.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.h" />

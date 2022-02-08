@@ -2,8 +2,8 @@
 
 void matMultiNumGen(std::vector<std::vector<int>>& vecToPop)
 {
-    // Re-seed rand() function for each run
-    srand((unsigned int)time(NULL));
+    // Create local distribution on stack
+    std::uniform_int_distribution randNum { randNumGen::minRand, randNumGen::maxRand };
 
     // Loop to populate 2D vector vecToPop
     // For each row
@@ -13,7 +13,7 @@ void matMultiNumGen(std::vector<std::vector<int>>& vecToPop)
         for (auto iCol { 0 }; iCol < vecToPop[iRow].size(); ++iCol)
         {
             // Assign random number to vector of vector of ints to columns iCol of rows iRows
-            vecToPop[iRow][iCol] = rand() % 100;
+            vecToPop[iRow][iCol] = randNum(randNumGen::mersenne);
         }
     }
 }
