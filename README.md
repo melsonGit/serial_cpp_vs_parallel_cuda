@@ -5,6 +5,7 @@ This application (currently split between CpuApp and GpuApp) aims to demonstrate
 
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/appExample.png" alt="App image"/>
+    <p align="center"><i>Application Window</i></p>
 </p>
 
 The written portion of this project explored GPU/GPGPU and CPU roles and architecture, using CUDA/C++ as tools to develop an application. I originally developed 8 programs: 4 programs were developed in traditional C++ and executed by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, executed by the GPU/GPGPU.
