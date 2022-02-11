@@ -13,7 +13,7 @@ The 4 arithmetic operations are: [Vector Addition](https://github.com/melsonGit/
 
 I plan to implement more arithmetic operations in the future.
 
-Please refer to the [wiki](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/wiki)(currently a WIP) for a more detailed overview on the inner workings of this project.
+Please refer to the [wiki](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/wiki) (currently a WIP) for a more detailed overview on the inner workings of this project.
 
 # Overview
 
