@@ -1,17 +1,21 @@
-# serial_cpp_vs_parallel_cuda
-Dissertation work for completion of MSc ICT. This implementation, alongside my written thesis, achieved a 77% mark. I achieved a Distinction for my MSc overall.
+# serial_cpp_vs_parallel_cuda application
+Thesis code for completion of my MSc ICT. This application, alongside my written thesis, achieved a 77% mark; I achieved a Distinction for my MSc overall.
 
-Please refer to the [wiki](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/wiki) for a more detailed overview on the inner workings of this project. 
+This application (currently split between CpuApp and GpuApp) aims to demonstrate computational differences in CPUs and GPU/GPGPUs by executing numerous arithmetic operations with substantial sample sizes. I developed this application using C++ and CUDA. Despite completing my MSc, I continue to develop this application.
 
-# Basic Overview
+<p align="center">
+  <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/appExample.png" alt="App image"/>
+</p>
 
-This project focuses on the GPU/GPGPU and CPU components, as well as the CUDA and C++ languages. I wanted to test and compare the computational power of both the GPU/GPGPU and CPU. To do this, I developed 8 programs: 4 programs were developed in traditional C++, and were to be executed solely by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, and were to be executed by the GPU/GPGPU. 
+The written portion of this project explored GPU/GPGPU and CPU roles and architecture, using CUDA/C++ as tools to develop an application. I originally developed 8 programs: 4 programs were developed in traditional C++ and executed by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, executed by the GPU/GPGPU.
 
 The 4 arithmetic operations are: [Vector Addition](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-vector-addition), [Matrix Multiplication](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-matrix-multiplication), [1-D Convolution](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-1-d-convolution) and [2-D Convolution](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-2-d-convolution). 
 
 I plan to implement more arithmetic operations in the future.
 
-# Detailed Overview
+Please refer to the [wiki](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/wiki)(currently a WIP) for a more detailed overview on the inner workings of this project.
+
+# Overview
 
 I started this project to not only fulfill my MSc, but I also hold a keen interest in the roles of the GPU/GPGPU and CPU. I wanted to test the capabilities of both components in numerous environments that were computationally intensive enough to determine where the strengths of GPU/GPGPUs and CPUs lie anecdotally (this area is heavily documented). Combining that with my passion for coding; I went down the rabbit hole that is CUDA (compute unified device architecture; CUDA is Nvidia's propriety GPU programming language).  
 
