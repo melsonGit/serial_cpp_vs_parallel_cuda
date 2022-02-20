@@ -12,7 +12,7 @@ void matMultiCheck(std::vector<std::vector<int>> const& inputVecA, std::vector<s
 	int resultVar {};
 
 	// Determines result authenticity - Assigned false value when results don't match
-	bool doesMatch{ true };
+	bool doesMatch { true };
 
 	// For each row in inputVecA/B
 	for (auto rowIn { 0 }; rowIn < numRows; ++rowIn)

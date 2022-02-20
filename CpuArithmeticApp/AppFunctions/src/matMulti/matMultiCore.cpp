@@ -1,5 +1,7 @@
 #include "../../inc/matMulti/matMultiCore.h"
 
+using Clock = std::chrono::steady_clock;
+
 void matMultiCore()
 {
 	// Assign variable conSize with a user selected value
@@ -18,22 +20,20 @@ void matMultiCore()
 	matMultiNumGen(inputVecB);
 
 	// Start clock
-	clock_t opStart { clock() };
+	auto opStart { Clock::now() };
 
 	// Begin sequential matrix multiplication operation
 	matMultiFunc(inputVecA, inputVecB, resultVec, conSize);
 
 	// Stop clock
-	clock_t opEnd { clock() };
+	auto opEnd { Clock::now() };
 
 	// Check output vector contents
 	matMultiCheck(inputVecA, inputVecB, resultVec, conSize);
 
-	// Calculate overall time spent to complete operation
-	double completionTime { ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
-
 	// Output timing to complete operation and container size
-	std::cout << completionTime << "s Matrix Multiplication computation time, with a container size of " << conSize * 2 << ".\n\n";
+	std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count()
+			  << "ms Matrix Multiplication computation time, with a container size of " << conSize * 2 << ".\n\n";
 	std::cout << "Returning to selection screen.\n\n";
 
 	std::cout << "#########################################################################\n" <<

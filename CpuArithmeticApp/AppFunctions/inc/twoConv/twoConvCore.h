@@ -8,6 +8,7 @@
 #include "twoConvFunc.h"
 #include "twoConvNumGen.h"
 
+#include <chrono>
 #include <iostream>
 #include <vector>
 

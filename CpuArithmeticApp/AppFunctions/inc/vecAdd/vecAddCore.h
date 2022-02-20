@@ -7,6 +7,7 @@
 #include "vecAddFunc.h"
 #include "vecAddNumGen.h"
 
+#include <chrono>
 #include <iostream>
 #include <vector>
 

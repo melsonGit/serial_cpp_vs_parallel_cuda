@@ -1,5 +1,7 @@
 #include "../../inc/twoConv/twoConvCore.h"
 
+using Clock = std::chrono::steady_clock;
+
 void twoConvCore()
 {
     // Assign variable conSize with a user selected value
@@ -19,19 +21,19 @@ void twoConvCore()
     std::cout << "\n2D Convolution: Populating mask vector.\n";
     twoConvNumGen(maskVec);
 
-    clock_t opStart { clock() };
+    // Start clock
+    auto opStart { Clock::now() };
 
     twoConvFunc(mainVec, maskVec, resVec, conSize);
 
-    clock_t opEnd { clock() };
+    // Stop clock
+    auto opEnd { Clock::now() };
 
     twoConvCheck(mainVec, maskVec, resVec, conSize);
 
-    // Calculate overall time spent to complete operation
-    double completionTime{ ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
-
     // Output timing to complete operation and container size
-    std::cout << completionTime << "s 2D Convolution computation time, with a container size of " << conSize * conSize << ".\n\n";
+    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count()
+              << "ms 2D Convolution computation time, with a container size of " << conSize * conSize << ".\n\n";
     std::cout << "Returning to selection screen.\n\n";
 
     std::cout << "#########################################################################\n" <<
