@@ -2,10 +2,14 @@
 #ifndef TWO_CONV_NUM_GEN
 #define TWO_CONV_NUM_GEN
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include "../maskAttributes.h"
+#include "../randNumGen.h"
 
-void twoConvNumGen(std::vector<int>&);
+#include <algorithm>
+#include <cstdlib>
+#include <time.h>
+#include <vector>
+
+void twoConvNumGen(std::vector<int>& vecToPop);
 
 #endif

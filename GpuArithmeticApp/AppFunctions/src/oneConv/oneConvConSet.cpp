@@ -2,10 +2,9 @@
 
 int oneConvConSet(int& conSize)
 {
+    int userInput { 0 };
 
-    int userInput{ 0 };
-
-    bool correctChoice{ false };
+    bool correctChoice { false };
 
     do
     {
@@ -26,34 +25,31 @@ int oneConvConSet(int& conSize)
         }
         else
         {
-            if (userInput <= 0 || userInput >= 6)
+            switch (userInput)
             {
-                std::cout << "\nPlease select a valid option.\n\n";
-            }
-            else if (userInput == 1)
-            {
+            case 1:
                 conSize = 10000000; // 10 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 2)
-            {
+                break;
+            case 2:
                 conSize = 25000000; // 25 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 3)
-            {
+                break;
+            case 3:
                 conSize = 55000000; // 55 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 4)
-            {
+                break;
+            case 4:
                 conSize = 75000000; // 75 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 5)
-            {
+                break;
+            case 5:
                 conSize = 90000000; // 90 million elements
                 correctChoice = true;
+                break;
+            default:
+                std::cout << "\nPlease select a valid option.\n\n";
+                break;
             }
         }
     } while (!correctChoice);

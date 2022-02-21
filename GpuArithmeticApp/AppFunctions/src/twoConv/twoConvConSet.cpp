@@ -2,18 +2,18 @@
 
 int twoConvConSet(int& conSize)
 {
-    int userInput{ 0 };
+    int userInput { 0 };
 
-    bool correctChoice{ false };
+    bool correctChoice { false };
 
     do
     {
         std::cout << "Please select 2D Convolution element sample size from the options below:\n\n";
-        std::cout << "4,096  elements:        enter '1'\n";
-        std::cout << "5,184  elements:        enter '2'\n";
-        std::cout << "6,400  elements:        enter '3'\n";
-        std::cout << "8,836  elements:        enter '4'\n";
-        std::cout << "10,201 elements:        enter '5'\n";
+        std::cout << "16,777,216  elements:        enter '1'\n";
+        std::cout << "26,214,400  elements:        enter '2'\n";
+        std::cout << "37,748,736  elements:        enter '3'\n";
+        std::cout << "67,108,864  elements:        enter '4'\n";
+        std::cout << "104,857,600 elements:        enter '5'\n";
 
         std::cin.clear();
 
@@ -25,38 +25,34 @@ int twoConvConSet(int& conSize)
         }
         else
         {
-            if (userInput <= 0 || userInput >= 6)
+            switch (userInput)
             {
+            case 1:
+                conSize = 4096; // 4,096 x 4,096 = 16,777,216 elements
+                correctChoice = true;
+                break;
+            case 2:
+                conSize = 5120; // 5,120 x 5,120 = 26,214,400 elements
+                correctChoice = true;
+                break;
+            case 3:
+                conSize = 6144; // 6,144 x 6,144 = 37,748,736 elements
+                correctChoice = true;
+                break;
+            case 4:
+                conSize = 8192; // 8,192 x 8,192 = 67,108,864 elements
+                correctChoice = true;
+                break;
+            case 5:
+                conSize = 10240; // 10,240 x 10,240 = 104,857,600 elements
+                correctChoice = true;
+                break;
+            default:
                 std::cout << "\nPlease select a valid option.\n\n";
-            }
-            else if (userInput == 1)
-            {
-                conSize = 1 << 10; // 2 ^ 10 x 2 ^ 10 elements - use this one
-                correctChoice = true;
-            }
-            else if (userInput == 2)
-            {
-                conSize = 72; // - ignore for now
-                correctChoice = true;
-            }
-            else if (userInput == 3)
-            {
-                conSize = 80; // - ignore for now
-                correctChoice = true;
-            }
-            else if (userInput == 4)
-            {
-                conSize = 94; // - ignore for now
-                correctChoice = true;
-            }
-            else if (userInput == 5)
-            {
-                conSize = 101; // - ignore for now
-                correctChoice = true;
+                break;
             }
         }
     } while (!correctChoice);
 
     return conSize;
 }
-

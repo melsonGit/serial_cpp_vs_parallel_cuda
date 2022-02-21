@@ -2,14 +2,12 @@
 #ifndef CHECK_ONE_CONV
 #define CHECK_ONE_CONV
 
-#ifndef MASK_ONE_DIM
-// Number of elements in the convolution mask
-#define MASK_ONE_DIM 7
-#endif
+#include "../maskAttributes/maskAttributes.h"
 
+#include <cassert>
 #include <iostream>
 #include <vector>
 
-void oneConvCheck(int const*, int const*, int const*, int const&);
+void oneConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, const int& conSize);
 
 #endif

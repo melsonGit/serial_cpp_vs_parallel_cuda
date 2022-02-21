@@ -1,61 +1,64 @@
 #include "../../inc/twoConv/twoConvCheck.h"
+#include "../../inc/maskAttributes.h"
 
-void twoConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resVec, int const& conSize)
+void twoConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resultVec, const int& conSize)
 {
     std::cout << "\n2D Convolution: Authenticating results.\n\n";
 
-    // Radius rows/cols will determine when convolution occurs to prevent out of bound errors
-    // twoConv utilises one for rows AND columns as we're dealing with a 2D mask vector
+    // Assists in determining when convolution can occur to prevent out of bound errors
+    // Used in conjunction with maskAttributes::maskOffset
     int radiusOffsetRows { 0 };
     int radiusOffsetCols { 0 };
+   
+    // Accumulates our results to check against resultVec
+    int resultVar {};
 
-    // Accumulate results
-    int tempResult { 0 };
-
+    // Determines result authenticity - Assigned false value when results don't match
     bool doesMatch { true };
 
-    // Go over each row
-    for (auto rowIn { 0 }; rowIn < conSize; rowIn++)
+    // For each row in mainVec
+    for (auto rowIn { 0 }; rowIn < conSize; ++rowIn)
     {
-        // Go over each column
-        for (auto colIn { 0 }; colIn < conSize && doesMatch; colIn++)
+        // For each column in that row
+        for (auto colIn { 0 }; colIn < conSize && doesMatch; ++colIn)
         {
-            // Assign the tempResult variable a value
-            tempResult = 0;
+            // Reset resultVar to 0 on next element
+            resultVar = 0;
 
-            // Go over each mask row
-            for (auto maskRowIn { 0 }; maskRowIn < MASK_TWO_DIM; maskRowIn++)
+            // For each mask row in maskVec
+            for (auto maskRowIn { 0 }; maskRowIn < maskAttributes::maskDim; ++maskRowIn)
             {
-                // Update offset value for row
-                radiusOffsetRows = rowIn - MASK_OFFSET + maskRowIn;
+                // Update offset value for that row
+                radiusOffsetRows = rowIn - maskAttributes::maskOffset + maskRowIn;
 
-                // Go over each mask column
-                for (auto maskColIn { 0 }; maskColIn < MASK_TWO_DIM; maskColIn++)
+                // For each column in that mask row
+                for (auto maskColIn { 0 }; maskColIn < maskAttributes::maskDim; ++maskColIn)
                 {
-                    // Update offset value for column
-                    radiusOffsetCols = colIn - MASK_OFFSET + maskColIn;
+                    // Update offset value for that column
+                    radiusOffsetCols = colIn - maskAttributes::maskOffset + maskColIn;
 
-                    // Range checks if hanging off the matrix
+                    // Check if we're hanging off mask row
                     if (radiusOffsetRows >= 0 && radiusOffsetRows < conSize)
                     {
+                        // Check if we're hanging off mask column
                         if (radiusOffsetCols >= 0 && radiusOffsetCols < conSize)
                         {
-                            // Accumulate results into resVec
-                            tempResult += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowIn * MASK_TWO_DIM + maskColIn];
+                            // Accumulate results into resultVar
+                            resultVar += mainVec[radiusOffsetRows * conSize + radiusOffsetCols] * maskVec[maskRowIn * maskAttributes::maskDim + maskColIn];
                         }
                     }
                 }
             }
         }
-
-        if (resVec[rowIn] != tempResult)
+        // Check accumulated resultVar value with corresponding value in resultVec
+        if (resultVar != resultVec[rowIn])
             doesMatch = false;
-        else
-            continue;
     }
+    // Assert and abort when results don't match
+    assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in resultVec (twoConv).");
 
     if (!doesMatch)
-        std::cout << "2D Convolution unsuccessful: output vector data does not match the expected result.\n"
+        std::cerr << "2D Convolution unsuccessful: output vector data does not match the expected result.\n"
         << "Timing results will be discarded.\n\n";
     else
         std::cout << "2D Convolution successful: output vector data matches expected results.\n"

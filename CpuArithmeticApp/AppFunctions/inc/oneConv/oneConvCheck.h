@@ -2,14 +2,10 @@
 #ifndef CHECK_ONE_CONV
 #define CHECK_ONE_CONV
 
-#ifndef MASK_ONE_DIM
-// Number of elements in the convolution mask
-#define MASK_ONE_DIM 7
-#endif
-
+#include <cassert>
 #include <iostream>
 #include <vector>
 
-void oneConvCheck(std::vector<int> const&, std::vector<int> const&, std::vector<int> const&, int const&);
+void oneConvCheck(std::vector<int> const& mainVec, std::vector<int> const& maskVec, std::vector<int> const& resultVec, const int& conSize);
 
 #endif

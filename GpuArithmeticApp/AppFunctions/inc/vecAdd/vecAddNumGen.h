@@ -2,10 +2,13 @@
 #ifndef VEC_NUM_GEN
 #define VEC_NUM_GEN
 
-#include <iostream>
+#include "../randNumGen/randNumGen.h"
+
 #include <algorithm>
+#include <cstdlib>
+#include <time.h>
 #include <vector>
 
-void vecAddNumGen(std::vector<int>&);
+void vecAddNumGen(std::vector<int>& vecToPop);
 
 #endif

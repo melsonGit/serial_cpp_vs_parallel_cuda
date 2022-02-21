@@ -1,93 +1,94 @@
 #include "../../inc/twoConv/twoConvCore.cuh"
 
-// Number of elements in the convolution mask
-#ifndef MASK_TWO_DIM
-#define MASK_TWO_DIM 7
-#endif
-
-// Allocate mask in constant memory
-__constant__ int maskConstant[7 * 7];
+using Clock = std::chrono::steady_clock;
 
 void twoConvCore()
 {
-	// Assign variable conSize with a user selected value
+    // Initialise and allocate variable conSize with a user selected value
 	int conSize { twoConvConSet(conSize) };
 
-    // Size of the matrix in bytes
-    size_t bytesVecMem { conSize * conSize * sizeof(int) };
+    // Initialise and allocate native arrays (hostMainVec; input) and (hostResultVec; output) a container size of conSize * conSize
+    int* hostMainVec { new int[conSize * conSize] };
+    int* hostResultVec { new int[conSize * conSize] };
 
-    // Size of the mask in bytes
-    size_t bytesMaskMem = MASK_TWO_DIM * MASK_TWO_DIM * sizeof(int);
+    // Initialise and allocate the mask a container size of maskDim * maskDim
+    int* hostMaskVec { new int[maskAttributes::maskDim * maskAttributes::maskDim] };
 
-    // Allocate the matrix and initialise it
-    int* hostMainVec{ new int[conSize * conSize] };
-    int* hostResVec{ new int[conSize * conSize] };
-
-    // Allocate the mask and initialise it
-    int* hostMaskVec { new int[MASK_TWO_DIM * MASK_TWO_DIM] };
-
+    // Populate input arrays
     std::cout << "\n2D Convolution: Populating main vector.\n";
     twoConvNumGen(hostMainVec, conSize);
     std::cout << "\n2D Convolution: Populating mask vector.\n";
-    twoConvNumGen(hostMaskVec, MASK_TWO_DIM);
+    twoConvNumGen(hostMaskVec, maskAttributes::maskDim);
 
     std::cout << "\n2D Convolution: Populating complete.\n";
 
-    // Allocate device memory
-    int* deviceMainVec, * deviceResVec;
+    // Initialise bytesVecMem/MaskMem to used for allocating memory to device vars
+    // This allows us to copy data host to device and vice versa.
+    size_t bytesVecMem { conSize * conSize * sizeof(int) };
+    size_t bytesMaskMem { maskAttributes::maskDim * maskAttributes::maskDim * sizeof(int) };
+
+    // Allocate memory on the device using cudaMalloc
+    int* deviceMainVec, * deviceMaskVec, * deviceResultVec;
     cudaMalloc(&deviceMainVec, bytesVecMem);
-    cudaMalloc(&deviceResVec, bytesVecMem);
+    cudaMalloc(&deviceMaskVec, bytesMaskMem);
+    cudaMalloc(&deviceResultVec, bytesVecMem);
 
     std::cout << "\n2D Convolution: Copying data from host to device.\n";
 
-    // Copy data to the device
+    // Copy data from the host to the device using cudaMemcpy | .data() returns pointer to memory used by vector/array to store its owned elements
     cudaMemcpy(deviceMainVec, hostMainVec, bytesVecMem, cudaMemcpyHostToDevice);
-    cudaMemcpyToSymbol(maskConstant, hostMaskVec, bytesMaskMem);
+    cudaMemcpy(deviceMaskVec, hostMaskVec, bytesMaskMem, cudaMemcpyHostToDevice);
 
-    // Calculate grid dimensions + block buffer to avoid off by one errors
-    int THREADS { 16 };
+    // Threads per Cooperative Thread Array
+    int THREADS { 32 };
+
+    // No. CTAs per grid
+    // Add padding | Enables compatibility with sample sizes not divisible by 32
     int BLOCKS { (conSize + THREADS - 1) / THREADS };
 
-    // Dimension launch arguments
+    // Use dim3 structs for BLOCKS and THREADS dimensions | Passed to kernal lauch as launch arguments
     dim3 threads(THREADS, THREADS);
     dim3 blocks(BLOCKS, BLOCKS);
 
-    clock_t opStart{ clock() };
-
     std::cout << "\n2D Convolution: Starting operation.\n";
 
-    // Launch 2D convolution kernel
-    twoConvFunc <<< blocks, threads >>> (deviceMainVec, deviceResVec, conSize);
+    // Start clock
+    auto opStart { Clock::now() };
+
+    // Launch kernel on device
+    twoConvFunc <<< blocks, threads >>> (deviceMainVec, deviceMaskVec, deviceResultVec, conSize);
+
+    // Stop clock
+    auto opEnd { Clock::now() };
 
     std::cout << "\n2D Convolution: Operation complete.\n";
-
-    clock_t opEnd{ clock() };
-
     std::cout << "\n2D Convolution: Copying results from device to host.\n";
 
-    // Copy the result back to the CPU
-    cudaMemcpy(hostResVec, deviceResVec, bytesVecMem, cudaMemcpyDeviceToHost);
+    // Copy data from device back to host using cudaMemcpy
+    cudaMemcpy(hostResultVec, deviceResultVec, bytesVecMem, cudaMemcpyDeviceToHost);
 
-    twoConvCheck(hostMainVec, hostMaskVec, hostResVec, conSize);
+    std::cout << "\n2D Convolution: Copying complete.\n";
+
+    // Authenticate results on host
+    twoConvCheck(hostMainVec, hostMaskVec, hostResultVec, conSize);
     
     std::cout << "\n2D Convolution: Freeing host and device memory.\n\n";
 
     // Free allocated memory on the host and device
     delete[] hostMainVec;
-    delete[] hostResVec;
+    delete[] hostResultVec;
     delete[] hostMaskVec;
 
     cudaFree(deviceMainVec);
-    cudaFree(deviceResVec);
-
-    // Calculate overall time spent to complete operation
-    double completionTime{ (opEnd - opStart) / (double)CLOCKS_PER_SEC };
+    cudaFree(deviceResultVec);
 
     // Output timing to complete operation and container size
-    std::cout << completionTime << "s 2D Convolution computation time, with a container size of " << conSize * conSize << ".\n\n";
-    std::cout << "Returning to selection screen.\n\n";
+    std::cout << "GPU 2D Convolution computation time (container size: " << conSize * conSize << "):\n"
+              << std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
+              << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() << " ms\n\n"
+              << "Returning to selection screen.\n\n"
 
-    std::cout << "#########################################################################\n" <<
+              << "#########################################################################\n" <<
                  "#########################################################################\n" <<
                  "#########################################################################\n\n";
 }

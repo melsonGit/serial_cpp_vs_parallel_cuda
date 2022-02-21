@@ -1,17 +1,20 @@
 #include "../../inc/matMulti/matMultiFunc.cuh"
 
-__global__ void matMultiFunc(const int* inputA, const int* inputB, int* outputVec, const int conSize)
+__global__ void matMultiFunc(const int* __restrict inputVecA, const int* __restrict inputVecB, int* __restrict resultVec, const int conSize)
 {
-    // Compute each thread's global row and column index
-    int rowId { blockIdx.y * blockDim.y + threadIdx.y };
-    int colId { blockIdx.x * blockDim.x + threadIdx.x };
+    // Calculate and assign x / y dimensional thread a global thread ID
+    int gThreadRowId = blockIdx.y * blockDim.y + threadIdx.y;
+    int gThreadColId = blockIdx.x * blockDim.x + threadIdx.x;
 
     // Iterate over row, and down column
-    outputVec[rowId * conSize + colId] = 0;
+    resultVec[gThreadRowId * conSize + gThreadColId] = 0;
 
-    for (auto rowColPairId { 0 }; rowColPairId < conSize; rowColPairId++)
+    // Above gThreadRow/ColId calculation skips traversal of row and col as it has already been calculated
+    // This allows us to start straight at the rowColPairId
+    for (auto rowColPairId { 0 }; rowColPairId < conSize; ++rowColPairId)
     {
-        // Accumulate results for a single element
-        outputVec[rowId * conSize + colId] += inputA[rowId * conSize + rowColPairId] * inputB[rowColPairId * conSize + colId];
+        // Accumulate results into resultVec
+        resultVec[gThreadRowId * conSize + gThreadColId] += inputVecA[gThreadRowId * conSize + rowColPairId] 
+                                                          * inputVecB[rowColPairId * conSize + gThreadColId];
     }
 }

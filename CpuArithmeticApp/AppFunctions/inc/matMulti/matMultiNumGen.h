@@ -2,10 +2,12 @@
 #ifndef MULTI_NUM_GEN
 #define MULTI_NUM_GEN
 
-#include <iostream>
-#include <algorithm>
+#include "../randNumGen.h"
+
+#include <cstdlib>
+#include <time.h>
 #include <vector>
 
-void matMultiNumGen(std::vector<std::vector<int>>&);
+void matMultiNumGen(std::vector<std::vector<int>>& vecToPop);
 
 #endif

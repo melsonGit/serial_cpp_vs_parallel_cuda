@@ -1,9 +1,6 @@
 #include "../../inc/twoConv/twoConvCore.h"
 
-// 7 x 7 convolutional mask
-#define MASK_TWO_DIM 7
-// Amount the the matrix will hang over the matrix
-#define MASK_OFFSET (MASK_TWO_DIM / 2)
+using Clock = std::chrono::steady_clock;
 
 void twoConvCore()
 {
@@ -16,7 +13,7 @@ void twoConvCore()
 
     // Assign 2D vector mask vector (maskVec) a container size of MASK_DIM * MASK_DIM
     // NOTE: ensure conSize * conSize / MASK_DIM * MASK_DIM  persists when moving onto 2D vectors, this ensures func and check work
-    std::vector<int> maskVec(MASK_TWO_DIM * MASK_TWO_DIM);
+    std::vector<int> maskVec(maskAttributes::maskDim * maskAttributes::maskDim);
    
     // Populate mainVec and maskVec
     std::cout << "\n2D Convolution: Populating main vector.\n";
@@ -24,22 +21,23 @@ void twoConvCore()
     std::cout << "\n2D Convolution: Populating mask vector.\n";
     twoConvNumGen(maskVec);
 
-    clock_t opStart { clock() };
+    // Start clock
+    auto opStart { Clock::now() };
 
     twoConvFunc(mainVec, maskVec, resVec, conSize);
 
-    clock_t opEnd { clock() };
+    // Stop clock
+    auto opEnd { Clock::now() };
 
     twoConvCheck(mainVec, maskVec, resVec, conSize);
 
-    // Calculate overall time spent to complete operation
-    double completionTime { (opEnd - opStart) / (double)CLOCKS_PER_SEC };
-
     // Output timing to complete operation and container size
-    std::cout << completionTime << "s 2D Convolution computation time, with a container size of " << conSize * conSize << ".\n\n";
-    std::cout << "Returning to selection screen.\n\n";
+    std::cout << "CPU 2D Convolution computation time (container size: " << conSize * conSize << "):\n"
+              << std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
+              << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() << " ms\n\n"
+              << "Returning to selection screen.\n\n"
 
-    std::cout << "#########################################################################\n" <<
+              << "#########################################################################\n" <<
                  "#########################################################################\n" <<
                  "#########################################################################\n\n";
 }

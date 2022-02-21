@@ -1,10 +1,10 @@
 #include "../../inc/vecAdd/vecAddNumGen.h"
 
-void vecAddNumGen(std::vector<int> &vecToPop)
+void vecAddNumGen(std::vector<int>& vecToPop)
 {
-	// Re-seed rand() function for each run
-	srand((unsigned int)time(NULL));
+	// Create local distribution on stack
+	std::uniform_int_distribution randNum { randNumGen::minRand, randNumGen::maxRand };
 
 	// Generate random numbers via Lambda C++11 function, and place into vector
-	std::generate(vecToPop.begin(), vecToPop.end(), []() { return rand() % 100; });
+	generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
 }

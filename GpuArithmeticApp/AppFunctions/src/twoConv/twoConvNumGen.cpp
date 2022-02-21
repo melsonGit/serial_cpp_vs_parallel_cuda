@@ -2,26 +2,37 @@
 
 void twoConvNumGen(int* vecToPop, const int& conSize)
 {
-    // Re-seed rand() function for each run
-    srand((unsigned int)time(NULL));
-
-    if (conSize > 10)
+    // Loop for main vector
+    if (conSize > (maskAttributes::maskDim * maskAttributes::maskDim))
     {
-        for (auto rowIn{ 0 }; rowIn < conSize; rowIn++)
+        // Create local distribution on stack
+        std::uniform_int_distribution randNum { randNumGen::minRand, randNumGen::maxRand };
+
+        // For every row
+        for (auto rowId { 0 }; rowId < conSize; ++rowId)
         {
-            for (auto colIn{ 0 }; colIn < conSize; colIn++)
+            // For every column in that row
+            for (auto colId { 0 }; colId < conSize; ++colId)
             {
-                vecToPop[conSize * rowIn + colIn] = rand() % 100;
+                // Generate random number and place into array
+                vecToPop[conSize * rowId + colId] = randNum(randNumGen::mersenne);
             }
         }
     }
     else
     {
-        for (auto rowIn{ 0 }; rowIn < conSize; rowIn++)
+        // Create local distribution on stack
+        std::uniform_int_distribution randNum { randNumGen::minMaskRand, randNumGen::maxMaskRand };
+
+        // Loop for mask vector
+        // For every row
+        for (auto rowId { 0 }; rowId < conSize; ++rowId)
         {
-            for (auto colIn{ 0 }; colIn < conSize; colIn++)
+            // For every column in that row
+            for (auto colId { 0 }; colId < conSize; ++colId)
             {
-                vecToPop[conSize * rowIn + colIn] = rand() % 10;
+                // Generate random number and place into array
+                vecToPop[conSize * rowId + colId] = randNum(randNumGen::mersenne);
             }
         }
     }

@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -172,6 +172,7 @@
     <ClInclude Include="AppFunctions\conSet.h" />
     <ClInclude Include="AppFunctions\conSet\conSet.h" />
     <ClInclude Include="AppFunctions\inc\allHeaders.h" />
+    <ClInclude Include="AppFunctions\inc\maskAttributes.h" />
     <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
     <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvFunc.h" />
     <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\randNumGen.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h" />
     <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.h" />

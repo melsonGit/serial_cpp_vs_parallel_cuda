@@ -4,6 +4,6 @@
 
 #include <iostream>
 
-int vecAddConSet(int&);
+int vecAddConSet(int& conSize);
 
 #endif

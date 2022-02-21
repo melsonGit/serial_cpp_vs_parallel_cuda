@@ -1,13 +1,12 @@
 #include "../../inc/vecAdd/vecAddConSet.h"
 
-
 int vecAddConSet(int& conSize)
 {
     int userInput { 0 };
 
     bool correctChoice { false };
 
-    do 
+    do
     {
         std::cout << "Please select vector addition element sample size from the options below:\n\n";
         std::cout << "25,000,000 elements:        enter '1'\n";
@@ -26,39 +25,34 @@ int vecAddConSet(int& conSize)
         }
         else
         {
-            if (userInput <= 0 || userInput >= 6)
+            switch (userInput)
             {
-                std::cout << "\nPlease select a valid option.\n\n";
-            }
-            else if (userInput == 1)
-            {
+            case 1:
                 conSize = 25000000; // 25 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 2)
-            {
+                break;
+            case 2:
                 conSize = 35000000; // 35 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 3)
-            {
+                break;
+            case 3:
                 conSize = 45000000; // 45 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 4)
-            {
+                break;
+            case 4:
                 conSize = 55000000; // 55 million elements
                 correctChoice = true;
-            }
-            else if (userInput == 5)
-            {
+                break;
+            case 5:
                 conSize = 65000000; // 65 million elements
                 correctChoice = true;
+                break;
+            default:
+                std::cout << "\nPlease select a valid option.\n\n";
+                break;
             }
         }
     } while (!correctChoice);
 
     return conSize;
 }
-
-

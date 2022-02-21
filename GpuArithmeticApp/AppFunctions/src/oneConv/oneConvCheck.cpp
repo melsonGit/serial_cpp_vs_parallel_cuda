@@ -1,35 +1,46 @@
 #include "../../inc/oneConv/oneConvCheck.h"
 
-void oneConvCheck(const int* mainVec, const int* maskVec, const int* resVec, const int& conSize)
+void oneConvCheck(const int* mainVec, const int* maskVec, const int* resultVec, const int& conSize)
 {
     std::cout << "\n1D Convolution: Authenticating results.\n\n";
 
-    int maskRadius { MASK_ONE_DIM / 2 };
-    int startPoint { 0 };
-    int resultVar;
-
+    // Determines result authenticity - Assigned false value when results don't match
     bool doesMatch { true };
 
-    for (auto i { 0 }; i < conSize && doesMatch; i++)
+    // Assists in determining when convolution can occur to prevent out of bound errors
+    // Used in conjunction with maskAttributes::maskOffset
+    int radiusOffsetRows { 0 };
+
+    // Accumulates our results to check against resultVec
+    int resultVar{};
+
+    // For each row
+    for (auto rowId { 0 }; rowId < conSize && doesMatch; ++rowId)
     {
-        startPoint = i - maskRadius;
+        radiusOffsetRows = rowId - maskAttributes::maskOffset;
+
+        // Reset resultVar to 0 on next element
         resultVar = 0;
 
-        for (auto j { 0 }; j < MASK_ONE_DIM; j++)
+        // For each mask row
+        for (auto maskRowId { 0 }; maskRowId < maskAttributes::maskDim; ++maskRowId)
         {
-            if ((startPoint + j >= 0) && (startPoint + j < conSize)) 
+            // Check if we're hanging off mask row
+            if ((radiusOffsetRows + maskRowId >= 0) && (radiusOffsetRows + maskRowId < conSize)) 
             {
-                resultVar += mainVec[startPoint + j] * maskVec[j];
+                // Accumulate results into resultVar
+                resultVar += mainVec[radiusOffsetRows + maskRowId] * maskVec[maskRowId];
             }
         }
-
-        if (resultVar != resVec[i])
+        // Check accumulated resultVar value with corresponding value in resultVec
+        if (resultVar != resultVec[rowId])
             doesMatch = false;
-        else
-            continue;
     }
+    // Assert and abort when results don't match
+    assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in resultVec (oneConv).");
+
     if (!doesMatch)
-        std::cout << "1D Convolution unsuccessful: output vector data does not match the expected result.\n"
+        std::cerr << "1D Convolution unsuccessful: output vector data does not match the expected result.\n"
         << "Timing results will be discarded.\n";
     else
         std::cout << "1D Convolution successful: output vector data matches expected results.\n"

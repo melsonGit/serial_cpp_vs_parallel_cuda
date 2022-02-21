@@ -2,10 +2,10 @@
 #ifndef VEC_ADD_FUNC
 #define VEC_ADD_FUNC
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
-void vecAddFunc(std::vector<int> const&, std::vector<int> const&, std::vector<int>&);
+void vecAddFunc(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int>& resultVec);
 
 #endif

@@ -1,40 +1,40 @@
 #include "../../inc/vecAdd/vecAddCore.h"
 
+using Clock = std::chrono::steady_clock;
+
 void vecAddCore()
 {
-
 	// Assign variable conSize with a user selected value
 	int conSize { vecAddConSet(conSize) };
 
-	// Assign input vectors (a & b) and the output vector (c) a container size of conSize
-	std::vector<int> a(conSize), b(conSize), c(conSize);
+	// Assign input vectors (inputVecA & inputVecB) and the output vector (resultVec) a container size of conSize
+	std::vector<int> inputVecA(conSize), inputVecB(conSize), resultVec(conSize);
 
 	// Populate vectors
 	std::cout << "\nVector Addition: Populating 1 of 2 input vectors.\n";
-	vecAddNumGen(a);
+	vecAddNumGen(inputVecA);
 	std::cout << "\nVector Addition: Populating 2 of 2 input vectors.\n";
-	vecAddNumGen(b);
+	vecAddNumGen(inputVecB);
 
 	// Start clock
-	clock_t opStart { clock() };
+	auto opStart { Clock::now() };
 
 	// Begin sequential vector addition operation
-	vecAddFunc(a, b, c);
+	vecAddFunc(inputVecA, inputVecB, resultVec);
 
 	// Stop clock
-	clock_t opEnd { clock() };
+	auto opEnd { Clock::now() };
 
 	// Check output vector contents
-	vecAddCheck(a, b, c, conSize);
-
-	// Calculate overall time spent to complete operation
-	double completionTime { (opEnd - opStart) / (double)CLOCKS_PER_SEC };
+	vecAddCheck(inputVecA, inputVecB, resultVec, conSize);
 
 	// Output timing to complete operation and container size
-	std::cout << completionTime << "s Vector Addition computation time, with a container size of " << conSize << ".\n\n";
-	std::cout << "Returning to selection screen.\n\n";
+	std::cout << "CPU Vector Addition computation time (container size: " << conSize << "):\n"
+			  << std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
+			  << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() << " ms\n\n"
+			  << "Returning to selection screen.\n\n"
 
-	std::cout << "#########################################################################\n" <<
+			  << "#########################################################################\n" <<
 				 "#########################################################################\n" <<
 				 "#########################################################################\n\n";
 }
