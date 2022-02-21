@@ -1,5 +1,7 @@
 #include "../../inc/matMulti/matMultiCore.cuh"
 
+using Clock = std::chrono::steady_clock;
+
 void matMultiCore()
 {
 	// Initialise and allocate variable conSize with a user selected value
@@ -43,19 +45,18 @@ void matMultiCore()
 	dim3 threads(THREADS, THREADS);
 	dim3 blocks(BLOCKS, BLOCKS);
 
-	// Start the clock
-	clock_t opStart { clock() };
-
 	std::cout << "\nMatrix Multiplication: Starting operation.\n";
+
+	// Start clock
+	auto opStart { Clock::now() };
 
 	// Launch kernel on device
 	matMultiFunc<<<blocks, threads>>>(deviceInputVecA, deviceInputVecB, deviceResultVec, conSize);
 
-	std::cout << "\nMatrix Multiplication: Operation complete.\n";
-
 	// Stop clock
-	clock_t opEnd { clock() };
+	auto opEnd { Clock::now() };
 
+	std::cout << "\nMatrix Multiplication: Operation complete.\n";
 	std::cout << "\nMatrix Multiplication: Copying results from device to host.\n";
 
 	// Copy data from device back to host using cudaMemcpy
@@ -73,14 +74,13 @@ void matMultiCore()
 	cudaFree(deviceInputVecB);
 	cudaFree(deviceResultVec);
 
-	// Calculate overall time spent to complete operation
-	double completionTime { ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
-
 	// Output timing to complete operation and container size
-	std::cout << completionTime << "s Matrix Multiplication computation time, with a container size of " << conSize * conSize << ".\n\n";
-	std::cout << "Returning to selection screen.\n\n";
+	std::cout << "GPU Matrix Multiplication computation time (container size: " << conSize * conSize << "):\n"
+			  << std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
+			  << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() << " ms\n\n"
+			  << "Returning to selection screen.\n\n"
 
-	std::cout << "#########################################################################\n" <<
+			  << "#########################################################################\n" <<
 				 "#########################################################################\n" <<
 			     "#########################################################################\n\n";
 }

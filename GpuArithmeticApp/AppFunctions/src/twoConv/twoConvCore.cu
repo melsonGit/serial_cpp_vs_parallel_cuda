@@ -1,5 +1,7 @@
 #include "../../inc/twoConv/twoConvCore.cuh"
 
+using Clock = std::chrono::steady_clock;
+
 void twoConvCore()
 {
     // Initialise and allocate variable conSize with a user selected value
@@ -47,19 +49,19 @@ void twoConvCore()
     // Use dim3 structs for BLOCKS and THREADS dimensions | Passed to kernal lauch as launch arguments
     dim3 threads(THREADS, THREADS);
     dim3 blocks(BLOCKS, BLOCKS);
-    // Start the clock
-    clock_t opStart { clock() };
 
     std::cout << "\n2D Convolution: Starting operation.\n";
+
+    // Start clock
+    auto opStart { Clock::now() };
 
     // Launch kernel on device
     twoConvFunc <<< blocks, threads >>> (deviceMainVec, deviceMaskVec, deviceResultVec, conSize);
 
-    std::cout << "\n2D Convolution: Operation complete.\n";
-
     // Stop clock
-    clock_t opEnd { clock() };
+    auto opEnd { Clock::now() };
 
+    std::cout << "\n2D Convolution: Operation complete.\n";
     std::cout << "\n2D Convolution: Copying results from device to host.\n";
 
     // Copy data from device back to host using cudaMemcpy
@@ -80,14 +82,13 @@ void twoConvCore()
     cudaFree(deviceMainVec);
     cudaFree(deviceResultVec);
 
-    // Calculate overall time spent to complete operation
-    double completionTime { ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
-
     // Output timing to complete operation and container size
-    std::cout << completionTime << "s 2D Convolution computation time, with a container size of " << conSize * conSize << ".\n\n";
-    std::cout << "Returning to selection screen.\n\n";
+    std::cout << "GPU 2D Convolution computation time (container size: " << conSize * conSize << "):\n"
+              << std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
+              << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() << " ms\n\n"
+              << "Returning to selection screen.\n\n"
 
-    std::cout << "#########################################################################\n" <<
+              << "#########################################################################\n" <<
                  "#########################################################################\n" <<
                  "#########################################################################\n\n";
 }

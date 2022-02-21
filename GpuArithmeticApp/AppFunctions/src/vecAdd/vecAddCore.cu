@@ -1,5 +1,7 @@
 #include "../../inc/vecAdd/vecAddCore.cuh"
 
+using Clock = std::chrono::steady_clock;
+
 void vecAddCore()
 {
 	// Initialise and allocate variable conSize with a user selected value
@@ -39,19 +41,18 @@ void vecAddCore()
 	// Add padding | Enables compatibility with sample sizes not divisible by 32
 	int BLOCKS { (conSize + THREADS - 1) / THREADS };
 
-	// Start the clock
-	clock_t opStart { clock() };
-
 	std::cout << "\nVector Addition: Starting operation.\n";
+
+	// Start clock
+	auto opStart { Clock::now() };
 
 	// Launch kernel on device
 	vecAddFunc << <BLOCKS, THREADS >> > (deviceInputVecA, deviceInputVecB, deviceResultVec, conSize);
 
-	std::cout << "\nVector Addition: Operation complete.\n";
-
 	// Stop clock
-	clock_t opEnd { clock() };
+	auto opEnd { Clock::now() };
 
+	std::cout << "\nVector Addition: Operation complete.\n";
 	std::cout << "\nVector Addition: Copying results from device to host.\n";
 
 	// Copy data from device back to host using cudaMemcpy
@@ -69,14 +70,13 @@ void vecAddCore()
 	cudaFree(deviceInputVecB);
 	cudaFree(deviceResultVec);
 
-	// Calculate overall time spent to complete operation
-	double completionTime { ((static_cast<double>(opEnd)) - (static_cast<double>(opStart))) / (double)CLOCKS_PER_SEC };
-
 	// Output timing to complete operation and container size
-	std::cout << completionTime << "s Vector Addition computation time, with a container size of " << conSize << ".\n\n";
-	std::cout << "Returning to selection screen.\n\n";
+	std::cout << "GPU Vector Addition computation time (container size: " << conSize << "):\n"
+			  << std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
+			  << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() << " ms\n\n"
+			  << "Returning to selection screen.\n\n"
 
-	std::cout << "#########################################################################\n" <<
-			     "#########################################################################\n" <<
+			  << "#########################################################################\n" <<
+				 "#########################################################################\n" <<
 				 "#########################################################################\n\n";
 }

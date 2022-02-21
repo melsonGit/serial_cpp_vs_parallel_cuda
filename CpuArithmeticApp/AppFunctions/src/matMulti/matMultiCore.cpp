@@ -32,11 +32,12 @@ void matMultiCore()
 	matMultiCheck(inputVecA, inputVecB, resultVec, conSize);
 
 	// Output timing to complete operation and container size
-	std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count()
-			  << "ms Matrix Multiplication computation time, with a container size of " << conSize * 2 << ".\n\n";
-	std::cout << "Returning to selection screen.\n\n";
+	std::cout << "CPU Matrix Multiplication computation time (container size: " << conSize * 2 << "):\n"
+			  << std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
+			  << std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() << " ms\n\n"
+			  << "Returning to selection screen.\n\n"
 
-	std::cout << "#########################################################################\n" <<
+			  << "#########################################################################\n" <<
 				 "#########################################################################\n" <<
 				 "#########################################################################\n\n";
 }

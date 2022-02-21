@@ -1,7 +1,7 @@
 #include "../../inc/matMulti/matMultiCheck.h"
 
-void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, const int& conSize) {
-
+void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& inputVecB, std::vector<int> const& resultVec, const int& conSize) 
+{
     std::cout << "\nMatrix Multiplication: Authenticating results.\n\n";
 
     // Determines result authenticity - Assigned false value when results don't match
