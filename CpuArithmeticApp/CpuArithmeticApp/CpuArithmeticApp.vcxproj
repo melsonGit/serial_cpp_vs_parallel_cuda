@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\ArithmeticOperation.h" />
+    <ClInclude Include="inc\ArithmeticSampleSizes.h" />
     <ClInclude Include="inc\MatrixMultiplication.h" />
     <ClInclude Include="inc\ProgramHandler.h" />
     <ClInclude Include="inc\randNumGen.h" />

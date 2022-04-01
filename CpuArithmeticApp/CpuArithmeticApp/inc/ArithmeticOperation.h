@@ -19,11 +19,8 @@ protected:
     const std::string operationName{};
     const std::array<int, 5> sampleSizes{};
 
-    ArithmeticOperation(const std::string& name) 
-        : operationName{ name } {}
-
-    // on-start
-    virtual void populateSampleArr() = 0; // populate our sampleSizes array
+    ArithmeticOperation(const std::string& name, const std::array<int, 5>& samples) 
+        : operationName{ name }, sampleSizes{ samples } {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
     virtual void startOperationSequence() = 0; // encompasses all operations inside it

@@ -12,7 +12,7 @@ static ProgramHandler handler{};
 
 int main()
 {
-	int choice{ 2 };
+	int choice{ 1 };
 
 	do // Enter main menu
 	{

@@ -3,14 +3,16 @@
 #define MATRIX_MULTIPLICATION
 
 #include "ArithmeticOperation.h"
+#include "ArithmeticSampleSizes.h"
+
+using namespace ArithmeticSampleSizes::MatrixMultiplicationSamples;
 
 class MatrixMultiplication final : public ArithmeticOperation
 {
 public:
     MatrixMultiplication(const std::string& name = "Matrix Multiplication")
-        : ArithmeticOperation{ name } {}
+        : ArithmeticOperation{ name, matMultiSamples } {}
 
-    void populateSampleArr() override final;
     void launchOperation() override final;
     void setContainer() override final;
     void startOperationSequence() override final;

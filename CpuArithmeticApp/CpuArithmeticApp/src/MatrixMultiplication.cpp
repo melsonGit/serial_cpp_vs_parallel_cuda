@@ -1,10 +1,5 @@
 #include "../inc/MatrixMultiplication.h"
 
-void MatrixMultiplication::populateSampleArr()
-{
-
-}
-
 void MatrixMultiplication::launchOperation()
 {
 

@@ -1,9 +1,5 @@
 #include "../inc/VectorAddition.h"
-
-void VectorAddition::populateSampleArr()
-{
-
-}
+#include "../inc/ArithmeticSampleSizes.h"
 
 void VectorAddition::launchOperation()
 {
