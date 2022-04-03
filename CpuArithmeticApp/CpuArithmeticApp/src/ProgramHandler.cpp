@@ -9,9 +9,25 @@
 #include <thread>
 #include <Windows.h>
 
-void ProgramHandler::startProgram() const
+void ProgramHandler::launchProgram()
 {
+	do // Enter main menu
+	{
+		int choice{};
+		std::cout << "\n\nOperation Selection: Please select an operation to execute:";
+		std::cin >> choice;
 
+		this->setDirective(choice);
+
+		do // Enter sample size menu here
+		{
+			std::cout << "\n\nSample Selection: Please select an operation to execute:";
+
+			//this->launchDirective();
+
+		} while (this->getDirective() != ProgramDirective::mainMenu);
+
+	} while (this->getDirective() != ProgramDirective::programExit);
 }
 
 void ProgramHandler::displayProgramStart() const

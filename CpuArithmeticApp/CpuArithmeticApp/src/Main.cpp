@@ -14,23 +14,6 @@ static ProgramHandler handler{};
 
 int main()
 {
-	do // Enter main menu
-	{
-		int choice{};
-		std::cout << "\n\nOperation Selection: Please select an operation to execute:";
-		std::cin >> choice;
-
-		handler.setDirective(choice);
-
-		do // Enter sample size menu here
-		{
-			std::cout << "\n\nSample Selection: Please select an operation to execute:";
-
-			handler.launchDirective();
-			
-		} while (handler.getDirective() != ProgramDirective::mainMenu); // maybe add check to see when operation is complete? this is a design decision
-
-	} while (handler.getDirective() != ProgramDirective::programExit);
-
+	handler.launchProgram();
 	EXIT_SUCCESS;
 }
