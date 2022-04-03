@@ -7,27 +7,45 @@
 #include <iostream>
 #include <string_view>
 #include <thread>
-#include <Windows.h>
 
 void ProgramHandler::launchProgram()
 {
 	do // Enter main menu
 	{
-		int choice{};
-		std::cout << "\n\nOperation Selection: Please select an operation to execute:";
-		std::cin >> choice;
-
-		this->setDirective(choice);
+		this->launchDirective();
+		this->setDirective(getInput());
 
 		do // Enter sample size menu here
 		{
-			std::cout << "\n\nSample Selection: Please select an operation to execute:";
-
-			//this->launchDirective();
+			this->launchDirective();
+			this->setDirective(getInput());
+			this->launchDirective();
 
 		} while (this->getDirective() != ProgramDirective::mainMenu);
 
 	} while (this->getDirective() != ProgramDirective::programExit);
+}
+
+const int& ProgramHandler::getInput() const
+{
+	int userInput{0};
+	bool correctChoice{ false };
+
+	do
+	{
+		if (!(std::cin >> userInput))
+		{
+			std::cout << "Please enter numbers only.\n";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+		else
+		{
+			correctChoice = true;
+		}
+	} while (!correctChoice);
+
+	return userInput;
 }
 
 void ProgramHandler::displayProgramStart() const
@@ -57,6 +75,8 @@ void ProgramHandler::displayMainMenu() const
 		<< "1D Convolution:            enter '3'\n"
 		<< "2D Convolution:            enter '4'\n\n"
 		<< "If you wish to close this program, please enter '5'\n";
+
+	// getter for retrieving op names?
 }
 
 void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) const
@@ -83,6 +103,8 @@ void ProgramHandler::displayProgramExit() const
 	std::cout << "\n\n\n\t\t\tClosing program";
 	clearScreen();
 }
+
+#include <Windows.h> // Included here to preveent clashing with getInput()
 
 const bool ProgramHandler::getKeyPress() const
 {

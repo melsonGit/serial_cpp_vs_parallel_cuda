@@ -36,6 +36,9 @@ private:
 	void displaySampleSelection(const ArithmeticOperation& operation) const;
 	void displayProgramExit() const;
 
+	// Input/Ouput Utilities
+	const int& getInput() const;
+
 	// Diretive Utilities
 	void setDirective(const int& userInput);
 	void launchDirective() const;
@@ -53,10 +56,9 @@ public:
 	{
 		if (directive == ProgramDirective::programStart)
 		{
-			// 1. Display starting screen 2. Set directive to main menu 3. Display our main menu
+			// 1. Display starting screen 2. Set directive to main menu
 			launchDirective();
 			setDirective(6);
-			launchDirective();
 		}
 		else // Only initialise ProgramHandler object with ProgramDirective::programStart
 			assert(directive == ProgramDirective::programStart 
