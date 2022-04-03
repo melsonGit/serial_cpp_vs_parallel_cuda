@@ -3,15 +3,15 @@
 #define VECTOR_ADDITION
 
 #include "ArithmeticOperation.h"
-#include "ArithmeticSampleSizes.h"
+#include "ArithmeticDetails.h"
 
-using namespace ArithmeticSampleSizes::VectorAdditionSamples;
+using namespace ArithmeticDetails::VectorAdditionDetails;
 
 class VectorAddition final : public ArithmeticOperation 
 {
 public:
-    VectorAddition(const std::string& name = "Vector Addition") 
-        : ArithmeticOperation{ name, vecAddSamples } {}
+    VectorAddition() 
+        : ArithmeticOperation{ vecAddName, vecAddSamples } {}
 
     void launchOperation() override final;
     void setContainer(const int& sampleChoice) override final;

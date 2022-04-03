@@ -9,6 +9,11 @@
 #include <thread>
 #include <Windows.h>
 
+void ProgramHandler::startProgram() const
+{
+
+}
+
 void ProgramHandler::displayProgramStart() const
 {
 	std::cout << "\n\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
@@ -48,7 +53,8 @@ void ProgramHandler::displaySampleSelection(const ArithmeticOperation& operation
 {
 	int elementOptions{ 1 };
 
-	std::cout << "Choose " << operation.getOperationName() << " element sample size from the options below (enter corresponding number):\n\n"
+	std::cout << "Choose " << operation.getOperationName() << " element sample size from the options below.\n"
+		<< "Enter corresponding number to make selection: \n\n"
 		<< "[1] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
 		<< "[2] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
 		<< "[3] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"

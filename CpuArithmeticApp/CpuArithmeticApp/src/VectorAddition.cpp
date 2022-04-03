@@ -1,5 +1,5 @@
 #include "../inc/VectorAddition.h"
-#include "../inc/ArithmeticSampleSizes.h"
+#include "../inc/ArithmeticDetails.h"
 
 void VectorAddition::launchOperation()
 {

@@ -26,9 +26,11 @@ class ProgramHandler
 {
 private:
 
+	// Navigates our ProgramDirective functions
 	ProgramDirective mDisplay{};
 
 	// Display Utilities
+	void startProgram() const;
 	void displayProgramStart() const;
 	void displayMainMenu() const;
 	void displayOperationName(const ArithmeticOperation& operation) const;
@@ -47,12 +49,12 @@ public:
 	{
 		if (directive == ProgramDirective::programStart)
 		{
-			// Display starting screen - set directive to main menu - display our main menu
+			// 1. Display starting screen 2. Set directive to main menu 3. Display our main menu
 			launchDirective();
 			setDirective(6);
 			launchDirective();
 		}
-		else // We only want to initialise our ProgramHandler object with ProgramDirective::programStart
+		else // Only initialise ProgramHandler object with ProgramDirective::programStart
 			assert(directive == ProgramDirective::programStart 
 				   && "ProgramHandler object initialised with a ProgramDirective value that is not programStart!");
 	}
