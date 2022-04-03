@@ -14,8 +14,15 @@
 void ProgramHandler::clearScreen() const
 {
 	fakeLoad();
-	// String of special characters (translates to clear screen command) that clears CMD window (Linux & Windows ONLY)
+
+	// String of special characters (translates to clear screen command) that clears CMD window
+#ifdef _WIN32
 	std::cout << "\033[2J\033[1;1H";
+#elif defined __linux__
+	std::cout << "\033[2J\033[1;1H";
+#elif defined __APPLE__
+	// do something for mac
+#endif
 }
 
 void ProgramHandler::displayMainMenu() const
@@ -40,7 +47,7 @@ void ProgramHandler::displayProgramExit() const
 
 void ProgramHandler::displayProgramStart() const
 {
-	std::cout << "\n\n\n\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
+	std::cout << "\n\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
 		<< "\t\t\t|/|         Version: CPU      |\\|\n"
 		<< "\t\t\t=================================\n"
 		<< "\t\t\t Developed for my MSc ICT thesis\n"
@@ -74,14 +81,20 @@ ProgramDirective& ProgramHandler::getDirective()
 
 const bool ProgramHandler::getKeyPress() const
 {
+#ifdef _WIN32
 	bool isKeyPressed{ false };
 	while (!isKeyPressed)
 	{
-		if (GetKeyState(VK_RETURN) & 0x8000) // Prevent progression until user has pressed ENTER/RETURN key (Windows ONLY)
+		if (GetKeyState(VK_RETURN) & 0x8000) // Prevent progression until user has pressed ENTER/RETURN key
 			isKeyPressed = true;
-	}
+}
 
 	return isKeyPressed;
+#elif defined __linux__
+	// do something for linux
+#elif defined __APPLE__
+	// do something for mac
+#endif
 }
 
 void ProgramHandler::launchDirective() const

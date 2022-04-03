@@ -5,21 +5,20 @@
 #include "randNumGen.h"
 
 #include <algorithm>
-#include <array>
 #include <random>
 #include <ctime>
 #include <string>
 #include <string_view>
-#include <vector> 
+#include <array>
 
 class ArithmeticOperation
 {
 protected:
 
     const std::string operationName{};
-    const std::array<int, 5> sampleSizes{};
+    const std::array<unsigned int, 5> sampleSizes{};
 
-    ArithmeticOperation(const std::string& name, const std::array<int, 5>& samples) 
+    ArithmeticOperation(const std::string& name, const std::array<unsigned int, 5>& samples)
         : operationName{ name }, sampleSizes{ samples } {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
