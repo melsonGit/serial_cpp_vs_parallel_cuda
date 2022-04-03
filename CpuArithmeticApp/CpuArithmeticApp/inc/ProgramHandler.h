@@ -28,13 +28,17 @@ private:
 
 	ProgramDirective mDisplay{};
 
-	void clearScreen() const;
-	void displayMainMenu() const;
-	void displayProgramExit() const;
+	// Display Utilities
 	void displayProgramStart() const;
+	void displayMainMenu() const;
 	void displayOperationName(const ArithmeticOperation& operation) const;
-	void fakeLoad() const;
+	void displaySampleSelection(const ArithmeticOperation& operation) const;
+	void displayProgramExit() const;
+
+	// Core Utilities
 	const bool getKeyPress() const;
+	void fakeLoad() const;
+	void clearScreen() const;
 
 public:
 
@@ -53,8 +57,8 @@ public:
 				   && "ProgramHandler object initialised with a ProgramDirective value that is not programStart!");
 	}
 
-	ProgramDirective& getDirective();
-	void launchDirective() const;
 	void setDirective(const int& userInput);
+	void launchDirective() const;
+	const ProgramDirective& getDirective() const;
 };
 #endif

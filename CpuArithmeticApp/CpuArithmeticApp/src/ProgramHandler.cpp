@@ -9,20 +9,19 @@
 #include <thread>
 #include <Windows.h>
 
-// Ordered alphabetically
-
-void ProgramHandler::clearScreen() const
+void ProgramHandler::displayProgramStart() const
 {
-	fakeLoad();
+	std::cout << "\n\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
+		<< "\t\t\t|/|         Version: CPU      |\\|\n"
+		<< "\t\t\t=================================\n"
+		<< "\t\t\t Developed for my MSc ICT thesis\n"
+		<< "\t\t      This app is in continuous development\n\n"
+		<< "\t\t      Follow link below for future updates:\n"
+		<< "\t\t\t       github.com/melsonGit\n\n"
+		<< "\t\t\tPress Enter/Return key to Proceed";
 
-	// String of special characters (translates to clear screen command) that clears CMD window
-#ifdef _WIN32
-	std::cout << "\033[2J\033[1;1H";
-#elif defined __linux__
-	std::cout << "\033[2J\033[1;1H";
-#elif defined __APPLE__
-	// do something for mac
-#endif
+	// Proceed only when ENTER/RETURN key is pressed
+	while (!getKeyPress());
 }
 
 void ProgramHandler::displayMainMenu() const
@@ -39,44 +38,28 @@ void ProgramHandler::displayMainMenu() const
 		<< "If you wish to close this program, please enter '5'\n";
 }
 
-void ProgramHandler::displayProgramExit() const
-{
-	std::cout << "\n\n\n\t\t\tClosing program";
-	clearScreen();
-}
-
-void ProgramHandler::displayProgramStart() const
-{
-	std::cout << "\n\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
-		<< "\t\t\t|/|         Version: CPU      |\\|\n"
-		<< "\t\t\t=================================\n"
-		<< "\t\t\t Developed for my MSc ICT thesis\n"
-		<< "\t\t      This app is in continuous development\n\n"
-		<< "\t\t      Follow link below for future updates:\n"
-		<< "\t\t\t       github.com/melsonGit\n\n"
-		<< "\t\t\tPress Enter/Return key to Proceed";
-
-	// Proceed only when ENTER/RETURN key is pressed
-	while (!getKeyPress());
-}
-
 void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) const
 {
 	std::cout << "\n\n\n\t\t\tLaunching " << operation.getOperationName() << " operation";
 	clearScreen();
 }
 
-void ProgramHandler::fakeLoad() const
+void ProgramHandler::displaySampleSelection(const ArithmeticOperation& operation) const
 {
-	for (int i = 0; i < 3; ++i) {
-		std::cout << ". ";
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
+	int elementOptions{ 1 };
+
+	std::cout << "Choose " << operation.getOperationName() << " element sample size from the options below (enter corresponding number):\n\n"
+		<< "[1] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
+		<< "[2] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
+		<< "[3] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
+		<< "[4] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
+		<< "[5] " << operation.getOperationSampleSize(elementOptions) << " elements\n";
 }
 
-ProgramDirective& ProgramHandler::getDirective()
+void ProgramHandler::displayProgramExit() const
 {
-	return mDisplay;
+	std::cout << "\n\n\n\t\t\tClosing program";
+	clearScreen();
 }
 
 const bool ProgramHandler::getKeyPress() const
@@ -87,7 +70,7 @@ const bool ProgramHandler::getKeyPress() const
 	{
 		if (GetKeyState(VK_RETURN) & 0x8000) // Prevent progression until user has pressed ENTER/RETURN key
 			isKeyPressed = true;
-}
+	}
 
 	return isKeyPressed;
 #elif defined __linux__
@@ -97,33 +80,26 @@ const bool ProgramHandler::getKeyPress() const
 #endif
 }
 
-void ProgramHandler::launchDirective() const
+void ProgramHandler::fakeLoad() const
 {
-	using enum ProgramDirective;
+	for (int i = 0; i < 3; ++i) {
+		std::cout << ". ";
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
+}
 
-	switch (mDisplay)
-	{
-	case programStart: { displayProgramStart(); break; }
-	case mainMenu: { displayMainMenu(); break; }
-	case programExit: { displayProgramExit(); break; }
-	case vectorAddition: { VectorAddition vecAdd{}; displayOperationName(vecAdd); vecAdd.startOperationSequence(); break; }
-	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationName(matMulti); matMulti.startOperationSequence(); break; }
-	case oneConvolution:
-	{
-		std::cout << "\n\n\n\t\t\tLaunching 1D Convolution operation";
-		clearScreen();
-		// start oneConv op
-		break;
-	}
-	case twoConvolution:
-	{
-		std::cout << "\n\n\n\t\t\tLaunching 2D Convolution operation";
-		clearScreen();
-		// start twoConv op
-		break;
-	}
-	default: { std::cout << "\nInvalid selection!\n\n"; break; }
-	}
+void ProgramHandler::clearScreen() const
+{
+	fakeLoad();
+
+	// String of special characters (translates to clear screen command) that clears CMD window
+#ifdef _WIN32
+	std::cout << "\033[2J\033[1;1H";
+#elif defined __linux__
+	std::cout << "\033[2J\033[1;1H";
+#elif defined __APPLE__
+	// do something for mac
+#endif
 }
 
 void ProgramHandler::setDirective(const int& userInput)
@@ -140,4 +116,24 @@ void ProgramHandler::setDirective(const int& userInput)
 	case programExit: { mDisplay = programExit; break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }
 	}
+}
+
+void ProgramHandler::launchDirective() const
+{
+	using enum ProgramDirective;
+
+	switch (mDisplay)
+	{
+	case programStart: { displayProgramStart(); break; }
+	case mainMenu: { displayMainMenu(); break; }
+	case programExit: { displayProgramExit(); break; }
+	case vectorAddition: { VectorAddition vecAdd{}; displayOperationName(vecAdd); vecAdd.startOperationSequence(); break; }
+	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationName(matMulti); matMulti.startOperationSequence(); break; }
+	default: { std::cout << "\nInvalid selection!\n\n"; break; }
+	}
+}
+
+const ProgramDirective& ProgramHandler::getDirective() const
+{
+	return mDisplay;
 }

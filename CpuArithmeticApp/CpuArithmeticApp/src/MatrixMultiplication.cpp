@@ -5,14 +5,14 @@ void MatrixMultiplication::launchOperation()
 
 }
 
-void MatrixMultiplication::setContainer()
+void MatrixMultiplication::setContainer(const int& sampleChoice)
 {
 
 }
 
 void MatrixMultiplication::startOperationSequence()
 {
-	setContainer();
+	//setContainer();
 	launchOperation();
 	validateResults();
 }

@@ -6,14 +6,15 @@ void VectorAddition::launchOperation()
 
 }
 
-void VectorAddition::setContainer()
+void VectorAddition::setContainer(const int& sampleChoice)
 {
+
 
 }
 
 void VectorAddition::startOperationSequence()
 {
-	setContainer();
+	//setContainer();
 	launchOperation();
 	validateResults();
 }

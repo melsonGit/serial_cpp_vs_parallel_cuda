@@ -14,7 +14,7 @@ public:
         : ArithmeticOperation{ name, vecAddSamples } {}
 
     void launchOperation() override final;
-    void setContainer() override final;
+    void setContainer(const int& sampleChoice) override final;
     void startOperationSequence() override final;
     void validateResults() override final;
 };
