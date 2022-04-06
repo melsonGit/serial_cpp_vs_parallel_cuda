@@ -91,7 +91,7 @@ void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) 
 	clearScreen();
 }
 
-void ProgramHandler::displaySampleSelection(const ArithmeticOperation& operation) const
+void ProgramHandler::displayOperationSampleSelection(const ArithmeticOperation& operation) const
 {
 	int elementOptions{ 1 };
 
@@ -102,6 +102,12 @@ void ProgramHandler::displaySampleSelection(const ArithmeticOperation& operation
 		<< "[3] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
 		<< "[4] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
 		<< "[5] " << operation.getOperationSampleSize(elementOptions) << " elements\n";
+}
+
+void ProgramHandler::displayOperationDetails(const ArithmeticOperation& operation) const
+{
+	displayOperationName(operation);
+	displayOperationSampleSelection(operation);
 }
 
 void ProgramHandler::displayProgramExit() const
@@ -150,11 +156,6 @@ void ProgramHandler::clearScreen() const
 #elif defined __APPLE__
 	// do something for mac
 #endif
-}
-
-void ProgramHandler::clearLine() const
-{
-
 }
 
 void ProgramHandler::userSetDirective()
@@ -206,8 +207,8 @@ void ProgramHandler::launchDirective() const
 	case programStart: { displayProgramStart(); break; }
 	case mainMenu: { displayMainMenu(); break; }
 	case programExit: { displayProgramExit(); break; }
-	case vectorAddition: { VectorAddition vecAdd{}; displayOperationName(vecAdd); vecAdd.startOperationSequence(); break; }
-	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationName(matMulti); matMulti.startOperationSequence(); break; }
+	case vectorAddition: { VectorAddition vecAdd{}; displayOperationDetails(vecAdd); vecAdd.startOperationSequence(); break; }
+	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationDetails(matMulti); matMulti.startOperationSequence(); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }
 	}
 }

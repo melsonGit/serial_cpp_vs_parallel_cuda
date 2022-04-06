@@ -33,7 +33,8 @@ private:
 	void displayProgramStart() const;
 	void displayMainMenu() const;
 	void displayOperationName(const ArithmeticOperation& operation) const;
-	void displaySampleSelection(const ArithmeticOperation& operation) const;
+	void displayOperationSampleSelection(const ArithmeticOperation& operation) const;
+	void displayOperationDetails(const ArithmeticOperation& operation) const;
 	void displayProgramExit() const;
 
 	// Input/Ouput Utilities
@@ -50,7 +51,6 @@ private:
 	const bool getKeyPress() const;
 	void fakeLoad() const;
 	void clearScreen() const;
-	void clearLine() const;
 
 public:
 
