@@ -38,9 +38,11 @@ private:
 
 	// Input/Ouput Utilities
 	const int& getInput() const;
+	void clearInputStream() const;
 
 	// Diretive Utilities
-	void setDirective(const int& userInput);
+	void userSetDirective();
+	void sudoSetDirective(const ProgramDirective&);
 	void launchDirective() const;
 	const ProgramDirective& getDirective() const;
 
@@ -48,6 +50,7 @@ private:
 	const bool getKeyPress() const;
 	void fakeLoad() const;
 	void clearScreen() const;
+	void clearLine() const;
 
 public:
 
@@ -58,7 +61,7 @@ public:
 		{
 			// 1. Display starting screen 2. Set directive to main menu
 			launchDirective();
-			setDirective(6);
+			sudoSetDirective(ProgramDirective::mainMenu);
 		}
 		else // Only initialise ProgramHandler object with ProgramDirective::programStart
 			assert(directive == ProgramDirective::programStart 

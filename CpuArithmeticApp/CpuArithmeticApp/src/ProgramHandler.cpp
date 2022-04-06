@@ -3,6 +3,7 @@
 #include "../inc/VectorAddition.h"
 #include "../inc/MatrixMultiplication.h"
 
+#include <cassert>
 #include <chrono>
 #include <iostream>
 #include <string_view>
@@ -13,12 +14,12 @@ void ProgramHandler::launchProgram()
 	do // Enter main menu
 	{
 		this->launchDirective();
-		this->setDirective(getInput());
+		this->userSetDirective();
 
 		do // Enter sample size menu here
 		{
 			this->launchDirective();
-			this->setDirective(getInput());
+			this->userSetDirective();
 			this->launchDirective();
 
 		} while (this->getDirective() != ProgramDirective::mainMenu);
@@ -26,31 +27,36 @@ void ProgramHandler::launchProgram()
 	} while (this->getDirective() != ProgramDirective::programExit);
 }
 
+void ProgramHandler::clearInputStream() const
+{
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
 const int& ProgramHandler::getInput() const
 {
-	int userInput{0};
-	bool correctChoice{ false };
+	int userInput{ 0 };
+	bool validSelection{ false };
 
 	do
 	{
 		if (!(std::cin >> userInput))
 		{
 			std::cout << "Please enter numbers only.\n";
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			clearInputStream();
 		}
 		else
 		{
-			correctChoice = true;
+			validSelection = true;
 		}
-	} while (!correctChoice);
+	} while (!validSelection);
 
 	return userInput;
 }
 
 void ProgramHandler::displayProgramStart() const
 {
-	std::cout << "\n\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
+	std::cout << "\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
 		<< "\t\t\t|/|         Version: CPU      |\\|\n"
 		<< "\t\t\t=================================\n"
 		<< "\t\t\t Developed for my MSc ICT thesis\n"
@@ -146,11 +152,38 @@ void ProgramHandler::clearScreen() const
 #endif
 }
 
-void ProgramHandler::setDirective(const int& userInput)
+void ProgramHandler::clearLine() const
+{
+
+}
+
+void ProgramHandler::userSetDirective()
 {
 	using enum ProgramDirective;
+	bool validSelection{ false };
 
-	switch (static_cast<ProgramDirective>(userInput))
+	do
+	{
+		switch (static_cast<ProgramDirective>(getInput()))
+		{
+		case mainMenu: { mDisplay = mainMenu; validSelection = true; break; }
+		case vectorAddition: { mDisplay = vectorAddition; validSelection = true; break; }
+		case matrixMultiplication: { mDisplay = matrixMultiplication; validSelection = true; break; }
+		case oneConvolution: { mDisplay = oneConvolution; validSelection = true; break; }
+		case twoConvolution: { mDisplay = twoConvolution; validSelection = true; break; }
+		case programExit: { mDisplay = programExit; validSelection = true; break; }
+		default: { std::cout << "\nInvalid selection!\n\n"; break; }
+		}
+
+	} while (!validSelection);
+}
+
+void ProgramHandler::sudoSetDirective(const ProgramDirective& sudoChoice)
+{
+	using enum ProgramDirective;
+	bool validSudoSelection{ true };
+
+	switch (sudoChoice)
 	{
 	case mainMenu: { mDisplay = mainMenu; break; }
 	case vectorAddition: { mDisplay = vectorAddition; break; }
@@ -158,8 +191,10 @@ void ProgramHandler::setDirective(const int& userInput)
 	case oneConvolution: { mDisplay = oneConvolution; break; }
 	case twoConvolution: { mDisplay = twoConvolution; break; }
 	case programExit: { mDisplay = programExit; break; }
-	default: { std::cout << "\nInvalid selection!\n\n"; break; }
+	default: { std::cout << "\nInvalid selection!\n\n"; validSudoSelection = false; break; }
 	}
+
+	assert(validSudoSelection && "Invalid sudoSetDirective() argument!");
 }
 
 void ProgramHandler::launchDirective() const

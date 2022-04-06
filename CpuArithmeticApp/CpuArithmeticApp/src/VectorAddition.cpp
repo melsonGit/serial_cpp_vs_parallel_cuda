@@ -1,17 +1,6 @@
 #include "../inc/VectorAddition.h"
 #include "../inc/ArithmeticDetails.h"
 
-void VectorAddition::launchOperation()
-{
-
-}
-
-void VectorAddition::setContainer(const int& sampleChoice)
-{
-
-
-}
-
 void VectorAddition::startOperationSequence()
 {
 	//setContainer();
@@ -19,7 +8,14 @@ void VectorAddition::startOperationSequence()
 	validateResults();
 }
 
+void VectorAddition::launchOperation()
+{
+}
+
+void VectorAddition::setContainer(const int& sampleChoice)
+{
+}
+
 void VectorAddition::validateResults() 
 {
-
 }
