@@ -11,6 +11,7 @@
 
 void ProgramHandler::launchProgram()
 {
+	// First we display intitial program message when initialising programHandler object
 	do // Enter main menu
 	{
 		this->launchDirective();
@@ -207,8 +208,8 @@ void ProgramHandler::launchDirective() const
 	case programStart: { displayProgramStart(); break; }
 	case mainMenu: { displayMainMenu(); break; }
 	case programExit: { displayProgramExit(); break; }
-	case vectorAddition: { VectorAddition vecAdd{}; displayOperationDetails(vecAdd); vecAdd.startOperationSequence(); break; }
-	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationDetails(matMulti); matMulti.startOperationSequence(); break; }
+	case vectorAddition: { VectorAddition vecAdd{}; displayOperationDetails(vecAdd); vecAdd.startOperationSequence(*this); break; }
+	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationDetails(matMulti); matMulti.startOperationSequence(*this); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }
 	}
 }

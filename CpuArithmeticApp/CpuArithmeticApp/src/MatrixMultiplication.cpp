@@ -1,18 +1,19 @@
 #include "../inc/MatrixMultiplication.h"
+#include "../inc/ProgramHandler.h"
 
-void MatrixMultiplication::startOperationSequence()
+void MatrixMultiplication::startOperationSequence(const ProgramHandler& handler)
 {
-	//setContainer();
+	setContainer(handler.getInput());
 	launchOperation();
 	validateResults();
 }
 
-void MatrixMultiplication::launchOperation()
+void MatrixMultiplication::setContainer(const int& sampleChoice)
 {
 
 }
 
-void MatrixMultiplication::setContainer(const int& sampleChoice)
+void MatrixMultiplication::launchOperation()
 {
 
 }

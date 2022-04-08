@@ -5,7 +5,7 @@
 
 const std::string_view ArithmeticOperation::getOperationName() const
 {
-	return operationName;
+	return mOperationName;
 }
 
 const int& ArithmeticOperation::getOperationSampleSize(const int& option) const
@@ -13,15 +13,15 @@ const int& ArithmeticOperation::getOperationSampleSize(const int& option) const
 	switch (option)
 	{
 	case 1:
-		return this->sampleSizes[0];
+		return this->mSampleSizes[0];
 	case 2:
-		return this->sampleSizes[1];
+		return this->mSampleSizes[1];
 	case 3:
-		return this->sampleSizes[2];
+		return this->mSampleSizes[2];
 	case 4:
-		return this->sampleSizes[3];
+		return this->mSampleSizes[3];
 	case 5:
-		return this->sampleSizes[4];
+		return this->mSampleSizes[4];
 	default:
 	{
 		std::cout << "Invalid option!\n";
