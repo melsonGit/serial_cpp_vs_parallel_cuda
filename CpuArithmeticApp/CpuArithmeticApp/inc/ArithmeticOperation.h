@@ -11,27 +11,26 @@
 #include <string>
 #include <string_view>
 #include <array>
-#include <vector>
 
 class ArithmeticOperation
 {
 protected:
 
-    const std::string mOperationName{};
-    const std::array<unsigned int, 5> mSampleSizes{};
+    const std::string operationName{};
+    const std::array<unsigned int, 5> sampleSizes{};
 
     ArithmeticOperation(const std::string& name, const std::array<unsigned int, 5>& samples)
-        : mOperationName{ name }, mSampleSizes{ samples } {}
+        : operationName{ name }, sampleSizes{ samples } {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
     virtual void startOperationSequence(const ProgramHandler& handler) = 0; // encompasses all operations inside it
-    virtual void setContainer(const int& sampleChoice) = 0; // ask user - virtual as all displays to user will be different
+    virtual void setContainer(const int& sampleChoice) = 0; // ask user - virtual as all displays to user will be different  
     virtual void launchOperation() = 0; // once populated, execute operation - virtual as all operations will be different (zero code redundancy)
     virtual void validateResults() = 0; // valid results of launchOperation() - virtual as all validation methods will be different (zero code redundancy)
 
     // Functions used by all operations
-    template<typename P1> void populateContainer (std::vector<P1>& vecToPop);
-    template<typename P1> void populateContainer (std::vector<std::vector<P1>>& vecToPop);// populate input containers with random numbers - template as there may be similar containers (code redundancy)
+    template<typename P1> void populateContainer (std::vector<P1>&);
+    template<typename P1> void populateContainer (std::vector<std::vector<P1>>&);// populate input containers with random numbers - template as there may be similar containers (code redundancy)
     //void recordResults(); // If valid, output to csv file
 
     // virtual ~ArithmeticOperation() = default; implement if we start to use pointers
@@ -42,23 +41,18 @@ public:
     const int& getOperationSampleSize(const int& option) const;
 };
 
-/* Templates for each possible container used by children of ArithmeticOperation - Please update when a new container is required
-*  Template functions won't (can't) be inherited: 
-*  - children re-declare/define below functions (pertinent to operation)
-   - however, we re-use parent code by calling the parent function inside the child function
-*/
+// Templates for each possible container used by children of ArithmeticOperation
+// Please update when adding a new operation
 
-using namespace randNumGen;
-
-// Base case for 1D vectors
+// Base case for 1D vector
 template<typename P1>
 void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
 {
     // Create local distribution on stack
-    std::uniform_int_distribution randNum{ minRand, maxRand };
+    std::uniform_int_distribution randNum{ randNumGen::minRand, randNumGen::maxRand };
 
     // Generate random numbers via Lambda C++11 function, and place into vector
-    generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(mersenne); });
+    generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
 }
 
 // Recursive case for 1D vector
@@ -74,7 +68,7 @@ template<typename P1>
 void populateContainer(std::vector<std::vector<P1>>& vecToPop)
 {
     // Create local distribution on stack
-    std::uniform_int_distribution randNum{ minRand, maxRand };
+    std::uniform_int_distribution randNum{ randNumGen::minRand, randNumGen::maxRand };
 
     // Loop to populate 2D vector vecToPop
     // For each row
@@ -84,7 +78,7 @@ void populateContainer(std::vector<std::vector<P1>>& vecToPop)
         for (auto iCol{ 0 }; iCol < vecToPop[iRow].size(); ++iCol)
         {
             // Assign random number to vector of vector of ints to columns iCol of rows iRows
-            vecToPop[iRow][iCol] = randNum(mersenne);
+            vecToPop[iRow][iCol] = randNum(randNumGen::mersenne);
         }
     }
 }
