@@ -5,10 +5,10 @@
 
 const std::string_view ArithmeticOperation::getOperationName() const
 {
-	return operationName;
+	return this->mOperationName;
 }
 
 const int& ArithmeticOperation::getOperationSampleSize(const int& option) const
 {
-	return this->sampleSizes[option];
+	return this->mSampleSizes[option];
 }

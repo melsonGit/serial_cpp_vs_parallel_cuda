@@ -7,17 +7,14 @@ void MatrixMultiplication::startOperationSequence()
 	validateResults();
 }
 
-void MatrixMultiplication::launchOperation()
-{
-
-}
-
 void MatrixMultiplication::setContainer(const int& sampleChoice)
 {
+}
 
+void MatrixMultiplication::launchOperation()
+{
 }
 
 void MatrixMultiplication::validateResults()
 {
-
 }
