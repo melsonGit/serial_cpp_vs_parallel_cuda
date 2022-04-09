@@ -38,7 +38,7 @@ private:
 	void displayProgramExit() const;
 
 	// Input/Ouput Utilities
-	const int& getInput() const;
+	const int getInput() const;
 	void clearInputStream() const;
 
 	// Diretive Utilities

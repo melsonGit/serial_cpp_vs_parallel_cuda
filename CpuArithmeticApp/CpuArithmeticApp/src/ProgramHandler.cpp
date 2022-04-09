@@ -33,7 +33,7 @@ void ProgramHandler::clearInputStream() const
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-const int& ProgramHandler::getInput() const
+const int ProgramHandler::getInput() const
 {
 	int userInput{ 0 };
 	bool validSelection{ false };
@@ -93,7 +93,7 @@ void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) 
 
 void ProgramHandler::displayOperationSampleSelection(const ArithmeticOperation& operation) const
 {
-	int elementOptions{ 1 };
+	int elementOptions{ 0 };
 
 	std::cout << "Choose " << operation.getOperationName() << " element sample size from the options below.\n"
 		<< "Enter corresponding number to make selection: \n\n"
