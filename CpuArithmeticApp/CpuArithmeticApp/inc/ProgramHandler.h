@@ -38,6 +38,7 @@ private:
 	void displayProgramExit() const;
 
 	// Input/Ouput Utilities
+	const int& getInput() const;
 	void clearInputStream() const;
 
 	// Diretive Utilities
@@ -69,6 +70,5 @@ public:
 
 	// Begins program loop
 	void launchProgram();
-	const int& getInput() const;
 };
 #endif

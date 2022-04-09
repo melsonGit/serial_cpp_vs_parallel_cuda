@@ -3,7 +3,6 @@
 #define ARITHMETIC_OPERATION
 
 #include "randNumGen.h"
-#include "ProgramHandler.h"
 
 #include <algorithm>
 #include <random>
@@ -23,7 +22,7 @@ protected:
         : operationName{ name }, sampleSizes{ samples } {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
-    virtual void startOperationSequence(const ProgramHandler& handler) = 0; // encompasses all operations inside it
+    virtual void startOperationSequence() = 0; // encompasses all operations inside it
     virtual void setContainer(const int& sampleChoice) = 0; // ask user - virtual as all displays to user will be different  
     virtual void launchOperation() = 0; // once populated, execute operation - virtual as all operations will be different (zero code redundancy)
     virtual void validateResults() = 0; // valid results of launchOperation() - virtual as all validation methods will be different (zero code redundancy)

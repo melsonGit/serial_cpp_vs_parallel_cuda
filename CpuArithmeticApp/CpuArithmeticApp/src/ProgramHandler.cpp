@@ -116,7 +116,7 @@ void ProgramHandler::displayProgramExit() const
 	clearScreen();
 }
 
-#include <Windows.h> // Included here as it clashes with getInput()
+#include <Windows.h> // Included here to preveent clashing with getInput()
 
 const bool ProgramHandler::getKeyPress() const
 {
@@ -192,7 +192,7 @@ void ProgramHandler::sudoSetDirective(const ProgramDirective& sudoChoice)
 	case oneConvolution: { mDisplay = oneConvolution; break; }
 	case twoConvolution: { mDisplay = twoConvolution; break; }
 	case programExit: { mDisplay = programExit; break; }
-	default: { validSudoSelection = false; break; }
+	default: { std::cout << "\nInvalid selection!\n\n"; validSudoSelection = false; break; }
 	}
 
 	assert(validSudoSelection && "Invalid sudoSetDirective() argument!");
