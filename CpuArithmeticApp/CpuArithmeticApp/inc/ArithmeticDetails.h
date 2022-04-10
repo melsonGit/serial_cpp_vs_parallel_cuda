@@ -23,14 +23,14 @@ namespace ArithmeticDetails
 
 	namespace OneDConvolutionDetails
 	{
-		inline const std::string oneConvName{ "1-D Convolution" };
-		inline constexpr std::array<std::size_t, 5> oneConvamples{ 10000000, 25000000, 55000000, 75000000, 90000000 };
+		inline const std::string oneDConvName{ "1-D Convolution" };
+		inline constexpr std::array<std::size_t, 5> oneDConvSamples{ 10000000, 25000000, 55000000, 75000000, 90000000 };
 	}
 
 	namespace TwoDConvolutionDetails
 	{
-		inline const std::string twoConvName{ "2-D Convolution" };
-		inline constexpr std::array<std::size_t, 5> twoConvSamples{ 16777216, 26214400, 37748736, 67108864, 104857600 };
+		inline const std::string twoDConvName{ "2-D Convolution" };
+		inline constexpr std::array<std::size_t, 5> twoDConvSamples{ 16777216, 26214400, 37748736, 67108864, 104857600 };
 	}
 }
 #endif

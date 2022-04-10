@@ -36,7 +36,6 @@ protected:
 public:
 
     void startOpSeq(const int& userInput);
-
     const std::string_view getOpName() const;
     const std::size_t getOpSampleSize(const int& option) const;
 };

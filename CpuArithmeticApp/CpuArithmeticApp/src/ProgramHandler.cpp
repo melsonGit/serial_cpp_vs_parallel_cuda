@@ -3,6 +3,7 @@
 #include "../inc/ArithmeticOperation.h"
 #include "../inc/VectorAddition.h"
 #include "../inc/MatrixMultiplication.h"
+#include "../inc/OneDConvolution.h"
 
 #include <cassert>
 #include <chrono>
@@ -81,8 +82,8 @@ void ProgramHandler::displayMainMenu() const
 	std::cout << "Please select an arithmetic operation from the options below:\n\n"
 		<< VectorAdditionDetails::vecAddName << ":            enter '1'\n"
 		<< MatrixMultiplicationDetails::matMultiName << ":      enter '2'\n"
-		<< OneDConvolutionDetails::oneConvName << ":            enter '3'\n"
-		<< TwoDConvolutionDetails::twoConvName << ":            enter '4'\n\n"
+		<< OneDConvolutionDetails::oneDConvName << ":            enter '3'\n"
+		<< TwoDConvolutionDetails::twoDConvName << ":            enter '4'\n\n"
 		<< "If you wish to close this program, please enter '5'\n";
 }
 
@@ -210,6 +211,7 @@ void ProgramHandler::launchDirective() const
 	case programExit: { displayProgramExit(); break; }
 	case vectorAddition: { VectorAddition vecAdd{}; displayOpDetails(vecAdd); vecAdd.startOpSeq(this->getInput()); break; }
 	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOpDetails(matMulti); matMulti.startOpSeq(this->getInput()); break; }
+	case oneConvolution: {OneDConvolution oneConv{}; displayOpDetails(oneConv); oneConv.startOpSeq(this->getInput()); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }
 	}
 }
