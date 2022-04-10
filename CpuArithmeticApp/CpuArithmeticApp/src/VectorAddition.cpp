@@ -7,15 +7,11 @@
 
 void VectorAddition::setContainer(const int& userInput)
 {
-	switch (userInput)
-	{
-	case 1: { this->mVAInputVecA.resize(mSampleSizes[0]); this->mVAInputVecB.resize(mSampleSizes[0]); this->mVAOutputVec.resize(mSampleSizes[0]); break; }
-	case 2: { this->mVAInputVecA.resize(mSampleSizes[1]); this->mVAInputVecB.resize(mSampleSizes[1]); this->mVAOutputVec.resize(mSampleSizes[1]); break; }
-	case 3: { this->mVAInputVecA.resize(mSampleSizes[2]); this->mVAInputVecB.resize(mSampleSizes[2]); this->mVAOutputVec.resize(mSampleSizes[2]); break; }
-	case 4: { this->mVAInputVecA.resize(mSampleSizes[3]); this->mVAInputVecB.resize(mSampleSizes[3]); this->mVAOutputVec.resize(mSampleSizes[3]); break; }
-	case 5: { this->mVAInputVecA.resize(mSampleSizes[4]); this->mVAInputVecB.resize(mSampleSizes[4]); this->mVAOutputVec.resize(mSampleSizes[4]); break; }
-	default: break; // Something needs to go here....
-	}
+	int trueIndex{ userInput - 1 };
+	
+	this->mVAInputVecA.resize(mSampleSizes[trueIndex]); 
+	this->mVAInputVecB.resize(mSampleSizes[trueIndex]); 
+	this->mVAOutputVec.resize(mSampleSizes[trueIndex]);
 
 	populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 }

@@ -21,8 +21,6 @@ protected:
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples)
         : mOperationName{ name }, mSampleSizes{ samples } {}
 
-    // virtual ~ArithmeticOperation() = default; implement if we start to use pointers
-    
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
