@@ -87,7 +87,7 @@ void ProgramHandler::displayMainMenu() const
 
 void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) const
 {
-	std::cout << "\n\n\n\t\t\tLaunching " << operation.getOperationName() << " operation";
+	std::cout << "\n\n\n\t\t\tLaunching " << operation.getOpName() << " operation";
 	clearScreen();
 }
 
@@ -95,13 +95,13 @@ void ProgramHandler::displayOperationSampleSelection(const ArithmeticOperation& 
 {
 	int elementOptions{ 0 };
 
-	std::cout << "Choose " << operation.getOperationName() << " element sample size from the options below.\n"
+	std::cout << "Choose " << operation.getOpName() << " element sample size from the options below.\n"
 		<< "Enter corresponding number to make selection: \n\n"
-		<< "[1] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
-		<< "[2] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
-		<< "[3] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
-		<< "[4] " << operation.getOperationSampleSize(elementOptions++) << " elements\n"
-		<< "[5] " << operation.getOperationSampleSize(elementOptions) << " elements\n";
+		<< "[1] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
+		<< "[2] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
+		<< "[3] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
+		<< "[4] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
+		<< "[5] " << operation.getOpSampleSize(elementOptions) << " elements\n";
 }
 
 void ProgramHandler::displayOpDetails(const ArithmeticOperation& operation) const

@@ -26,8 +26,6 @@ public:
 
     VectorAddition() 
         : ArithmeticOperation{ vecAddName, vecAddSamples } {}
-
-    void startOpSeq(const int& userInput) override final;
 };
 
 template<typename P1>

@@ -5,14 +5,6 @@
 #include <iostream>
 #include <vector>
 
-// Worth defining this in ArithmeticOperations???
-void VectorAddition::startOpSeq(const int& userInput)
-{
-	setContainer(userInput);
-	launchOp();
-	validateResults();
-}
-
 void VectorAddition::setContainer(const int& userInput)
 {
 	switch (userInput)

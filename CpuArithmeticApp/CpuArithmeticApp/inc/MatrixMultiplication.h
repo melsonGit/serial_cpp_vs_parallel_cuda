@@ -23,7 +23,5 @@ public:
 
     MatrixMultiplication()
         : ArithmeticOperation{ matMultiName, matMultiSamples } {}
-
-    void startOpSeq(const int& userInput) override final;
 };
 #endif

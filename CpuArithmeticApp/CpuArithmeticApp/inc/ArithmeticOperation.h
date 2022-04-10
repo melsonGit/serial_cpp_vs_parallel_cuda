@@ -22,9 +22,8 @@ protected:
         : mOperationName{ name }, mSampleSizes{ samples } {}
 
     // virtual ~ArithmeticOperation() = default; implement if we start to use pointers
-
+    
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
-    virtual void startOpSeq(const int& userInput) = 0;
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0; // valid results of launchOp()
@@ -38,8 +37,10 @@ protected:
     
 public:
 
-    const std::string_view getOperationName() const; // return operation name
-    const std::size_t getOperationSampleSize(const int& option) const;
+    void startOpSeq(const int& userInput);
+
+    const std::string_view getOpName() const;
+    const std::size_t getOpSampleSize(const int& option) const;
 };
 
 /* Templates for each possible container used by children of ArithmeticOperation - Please update when a new container is required
