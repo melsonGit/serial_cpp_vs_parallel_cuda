@@ -2,16 +2,16 @@
 
 #include <vector>
 
-void VectorAddition::startOperationSequence()
+void VectorAddition::startOpSeq(const int& userInput)
 {
-	setContainer(1);
-	launchOperation();
+	setContainer(userInput);
+	launchOp();
 	validateResults();
 }
 
-void VectorAddition::setContainer(const int& sampleChoice)
+void VectorAddition::setContainer(const int& userInput)
 {
-	switch (sampleChoice)
+	switch (userInput)
 	{
 	case 1: { this->mVAInputVecA.resize(mSampleSizes[0]); this->mVAInputVecB.resize(mSampleSizes[0]); this->mVAOutputVec.resize(mSampleSizes[0]); break; }
 	case 2: { this->mVAInputVecA.resize(mSampleSizes[1]); this->mVAInputVecB.resize(mSampleSizes[1]); this->mVAOutputVec.resize(mSampleSizes[1]); break; }
@@ -26,7 +26,7 @@ void VectorAddition::setContainer(const int& sampleChoice)
 	populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 }
 
-void VectorAddition::launchOperation()
+void VectorAddition::launchOp()
 {
 }
 

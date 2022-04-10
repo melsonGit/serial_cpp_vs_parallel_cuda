@@ -33,7 +33,7 @@ private:
 	void displayMainMenu() const;
 	void displayOperationName(const ArithmeticOperation& operation) const;
 	void displayOperationSampleSelection(const ArithmeticOperation& operation) const;
-	void displayOperationDetails(const ArithmeticOperation& operation) const;
+	void displayOpDetails(const ArithmeticOperation& operation) const;
 	void displayProgramExit() const;
 
 	// Input/Ouput Utilities

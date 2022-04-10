@@ -104,7 +104,7 @@ void ProgramHandler::displayOperationSampleSelection(const ArithmeticOperation& 
 		<< "[5] " << operation.getOperationSampleSize(elementOptions) << " elements\n";
 }
 
-void ProgramHandler::displayOperationDetails(const ArithmeticOperation& operation) const
+void ProgramHandler::displayOpDetails(const ArithmeticOperation& operation) const
 {
 	displayOperationName(operation);
 	displayOperationSampleSelection(operation);
@@ -207,8 +207,8 @@ void ProgramHandler::launchDirective() const
 	case programStart: { displayProgramStart(); break; }
 	case mainMenu: { displayMainMenu(); break; }
 	case programExit: { displayProgramExit(); break; }
-	case vectorAddition: { VectorAddition vecAdd{}; displayOperationDetails(vecAdd); vecAdd.startOperationSequence(); break; }
-	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationDetails(matMulti); matMulti.startOperationSequence(); break; }
+	case vectorAddition: { VectorAddition vecAdd{}; displayOpDetails(vecAdd); vecAdd.startOpSeq(this->getInput()); break; }
+	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOpDetails(matMulti); matMulti.startOpSeq(this->getInput()); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }
 	}
 }

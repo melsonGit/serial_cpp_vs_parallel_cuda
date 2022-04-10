@@ -15,8 +15,8 @@ private:
 
     std::vector<std::size_t> mVAInputVecA, mVAInputVecB, mVAOutputVec;
 
-    void setContainer(const int& sampleChoice) override final;
-    void launchOperation() override final;
+    void setContainer(const int& userInput) override final;
+    void launchOp() override final;
     void validateResults() override final;
 
     template<typename P1> void populateContainer(std::vector<P1>& vecToPop);
@@ -27,7 +27,7 @@ public:
     VectorAddition() 
         : ArithmeticOperation{ vecAddName, vecAddSamples } {}
 
-    void startOperationSequence() override final;
+    void startOpSeq(const int& userInput) override final;
 };
 
 template<typename P1>

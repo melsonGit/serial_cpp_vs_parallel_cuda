@@ -1,17 +1,17 @@
 #include "../inc/MatrixMultiplication.h"
 
-void MatrixMultiplication::startOperationSequence()
+void MatrixMultiplication::startOpSeq(const int& userInput)
 {
 	//setContainer();
-	launchOperation();
+	launchOp();
 	validateResults();
 }
 
-void MatrixMultiplication::setContainer(const int& sampleChoice)
+void MatrixMultiplication::setContainer(const int& userInput)
 {
 }
 
-void MatrixMultiplication::launchOperation()
+void MatrixMultiplication::launchOp()
 {
 }
 

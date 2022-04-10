@@ -21,21 +21,21 @@ protected:
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples)
         : mOperationName{ name }, mSampleSizes{ samples } {}
 
-    // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
-    virtual void startOperationSequence() = 0; // encompasses all operations inside it
-    virtual void setContainer(const int& sampleChoice) = 0; // ask user - virtual as all displays to user will be different  
-    virtual void launchOperation() = 0; // once populated, execute operation - virtual as all operations will be different (zero code redundancy)
-    virtual void validateResults() = 0; // valid results of launchOperation() - virtual as all validation methods will be different (zero code redundancy)
+    // virtual ~ArithmeticOperation() = default; implement if we start to use pointers
 
-    // Functions used by all operations - populate input containers with random numbers - template as there may be similar containers (code redundancy)
+    // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
+    virtual void startOpSeq(const int& userInput) = 0;
+    virtual void setContainer(const int& userInput) = 0;
+    virtual void launchOp() = 0;
+    virtual void validateResults() = 0; // valid results of launchOp()
+    //void recordResults(); // If valid, output to csv file
+
+    // Functions used by all operations - template as there may be similar containers
     template<typename P1> void populateContainer (std::vector<P1>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<P1>& vecToPop, Args&... args);
     template<typename P1> void populateContainer (std::vector<std::vector<P1>>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<std::vector<P1>>& vecToPop, Args&... args);
-    //void recordResults(); // If valid, output to csv file
-
-    // virtual ~ArithmeticOperation() = default; implement if we start to use pointers
-
+    
 public:
 
     const std::string_view getOperationName() const; // return operation name
