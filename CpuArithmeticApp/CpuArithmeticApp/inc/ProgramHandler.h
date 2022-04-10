@@ -21,7 +21,6 @@ enum class ProgramDirective
 };
 
 // Handles program events
-
 class ProgramHandler
 {
 private:

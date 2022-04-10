@@ -4,7 +4,7 @@
 
 void VectorAddition::startOperationSequence()
 {
-	//setContainer();
+	setContainer(1);
 	launchOperation();
 	validateResults();
 }

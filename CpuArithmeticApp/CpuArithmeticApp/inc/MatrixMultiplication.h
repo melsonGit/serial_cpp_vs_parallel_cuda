@@ -13,7 +13,7 @@ class MatrixMultiplication final : public ArithmeticOperation
 {
 private:
 
-    std::vector<int> mMMInputVecA, mMMInputVecB, mMMOutputVec;
+    std::vector<std::size_t> mMMInputVecA, mMMInputVecB, mMMOutputVec;
 
     void setContainer(const int& sampleChoice) override final;
     void launchOperation() override final;

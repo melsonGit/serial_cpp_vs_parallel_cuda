@@ -5,20 +5,20 @@
 #include "randNumGen.h"
 
 #include <algorithm>
-#include <random>
+#include <array>
 #include <ctime>
+#include <random>
 #include <string>
 #include <string_view>
-#include <array>
 
 class ArithmeticOperation
 {
 protected:
 
     const std::string mOperationName{};
-    const std::array<unsigned int, 5> mSampleSizes{};
+    const std::array<std::size_t, 5> mSampleSizes{};
 
-    ArithmeticOperation(const std::string& name, const std::array<unsigned int, 5>& samples)
+    ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples)
         : mOperationName{ name }, mSampleSizes{ samples } {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
@@ -39,7 +39,7 @@ protected:
 public:
 
     const std::string_view getOperationName() const; // return operation name
-    const int& getOperationSampleSize(const int& option) const;
+    const std::size_t getOperationSampleSize(const int& option) const;
 };
 
 /* Templates for each possible container used by children of ArithmeticOperation - Please update when a new container is required

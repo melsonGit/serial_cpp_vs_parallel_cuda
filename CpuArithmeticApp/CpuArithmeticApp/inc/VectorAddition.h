@@ -13,7 +13,7 @@ class VectorAddition final : public ArithmeticOperation
 {
 private:
 
-    std::vector<int> mVAInputVecA, mVAInputVecB, mVAOutputVec;
+    std::vector<std::size_t> mVAInputVecA, mVAInputVecB, mVAOutputVec;
 
     void setContainer(const int& sampleChoice) override final;
     void launchOperation() override final;
