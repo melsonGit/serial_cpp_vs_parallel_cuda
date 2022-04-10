@@ -70,20 +70,20 @@ void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop, Args&... 
 
 // Base case for 2D vector
 template<typename P1> 
-void populateContainer(std::vector<std::vector<P1>>& vecToPop)
+void ArithmeticOperation::populateContainer(std::vector<std::vector<P1>>& vecToPop)
 {
     // Create local distribution on stack
     std::uniform_int_distribution randNum{ minRand, maxRand };
 
     // Loop to populate 2D vector vecToPop
     // For each row
-    for (auto iRow{ 0 }; iRow < vecToPop.size(); ++iRow)
+    for (auto rowIn{ 0 }; rowIn < vecToPop.size(); ++rowIn)
     {
         // For each column in that row
-        for (auto iCol{ 0 }; iCol < vecToPop[iRow].size(); ++iCol)
+        for (auto colIn{ 0 }; colIn < vecToPop[rowIn].size(); ++colIn)
         {
-            // Assign random number to vector of vector of ints to columns iCol of rows iRows
-            vecToPop[iRow][iCol] = randNum(mersenne);
+            // Assign random number to vector of vector of ints to columns colIn of rows iRows
+            vecToPop[rowIn][colIn] = randNum(mersenne);
         }
     }
 }

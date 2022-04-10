@@ -7,11 +7,11 @@
 
 void VectorAddition::setContainer(const int& userInput)
 {
-	int trueIndex{ userInput - 1 };
+	int actualIndex{ userInput - 1 };
 	
-	this->mVAInputVecA.resize(mSampleSizes[trueIndex]); 
-	this->mVAInputVecB.resize(mSampleSizes[trueIndex]); 
-	this->mVAOutputVec.resize(mSampleSizes[trueIndex]);
+	this->mVAInputVecA.resize(mSampleSizes[actualIndex]); 
+	this->mVAInputVecB.resize(mSampleSizes[actualIndex]); 
+	this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
 
 	populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 }
