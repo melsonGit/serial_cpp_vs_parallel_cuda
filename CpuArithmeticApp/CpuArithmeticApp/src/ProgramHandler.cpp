@@ -1,4 +1,5 @@
 #include "../inc/ProgramHandler.h"
+#include "../inc/ArithmeticDetails.h"
 #include "../inc/ArithmeticOperation.h"
 #include "../inc/VectorAddition.h"
 #include "../inc/MatrixMultiplication.h"
@@ -71,18 +72,18 @@ void ProgramHandler::displayProgramStart() const
 
 void ProgramHandler::displayMainMenu() const
 {
+	using namespace ArithmeticDetails;
+
 	std::cout << "\n\n\n\t\t\tRedirecting to Main Menu";
 
 	clearScreen();
 
 	std::cout << "Please select an arithmetic operation from the options below:\n\n"
-		<< "Vector Addition:           enter '1'\n"
-		<< "Matrix Multiplication:     enter '2'\n"
-		<< "1D Convolution:            enter '3'\n"
-		<< "2D Convolution:            enter '4'\n\n"
+		<< VectorAdditionDetails::vecAddName << ":            enter '1'\n"
+		<< MatrixMultiplicationDetails::matMultiName << ":      enter '2'\n"
+		<< OneDConvolutionDetails::oneConvName << ":            enter '3'\n"
+		<< TwoDConvolutionDetails::twoConvName << ":            enter '4'\n\n"
 		<< "If you wish to close this program, please enter '5'\n";
-
-	// getter for retrieving op names?
 }
 
 void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) const
