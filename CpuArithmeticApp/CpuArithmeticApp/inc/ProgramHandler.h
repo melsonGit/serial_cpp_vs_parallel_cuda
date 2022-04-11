@@ -14,10 +14,8 @@ enum class ProgramDirective
 	matrixMultiplication,
 	oneConvolution,
 	twoConvolution,
-	/*<----Add new operations here---->*/
-	programExit,
 	mainMenu,
-	exitProgramFromOperation,
+	programExit
 };
 
 // Handles program events
