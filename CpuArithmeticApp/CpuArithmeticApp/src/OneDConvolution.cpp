@@ -23,17 +23,24 @@ void OneDConvolution::launchOp()
     std::cout << "\n1D Convolution: Populating complete.\n";
     std::cout << "\n1D Convolution: Starting operation.\n";
 
-    int start{ 0 };
+	// Assists in determining when convolution can occur to prevent out of bound errors
+	// Used in conjunction with maskAttributes::maskOffset
+    std::size_t radiusOffsetRows{ 0 };
 
-    for (auto i{ 0 }; i < this->mOCOutputVec.size(); ++i)
+	// For each row in our input vector
+    for (auto rowIn{ 0 }; rowIn < this->mOCOutputVec.size(); ++rowIn)
     {
-        start = i - MaskAttributes::maskOffset;
+		// Update offset value for that row
+        radiusOffsetRows = rowIn - MaskAttributes::maskOffset;
 
-        for (auto j{ 0 }; j < MaskAttributes::maskDim; ++j)
+		// For each mask row in mOCMaskVec
+        for (auto maskRowIn{ 0 }; maskRowIn < MaskAttributes::maskDim; ++maskRowIn)
         {
-            if ((start + j >= 0) && (start + j < this->mOCOutputVec.size()))
+			// Check if we're hanging off mask row
+            if ((radiusOffsetRows + maskRowIn >= 0) && (radiusOffsetRows + maskRowIn < this->mOCOutputVec.size()))
             {
-                this->mOCOutputVec[i] += this->mOCInputVec[start + j] * this->mOCMaskVec[j];
+				// Accumulate results into resultVar
+                this->mOCOutputVec[rowIn] += this->mOCInputVec[radiusOffsetRows + maskRowIn] * this->mOCMaskVec[maskRowIn];
             }
         }
     }
@@ -46,14 +53,13 @@ void OneDConvolution::validateResults()
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
-	int radiusOffsetRows{ 0 };
+	std::size_t radiusOffsetRows{ 0 };
 
 	// Accumulates our results to check against resultVec
-	auto resultVar{0};
+	std::size_t resultVar{0};
 
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };
-
 
 	for (auto rowIn{ 0 }; rowIn < this->mOCOutputVec.size() && doesMatch; ++rowIn)
 	{
@@ -63,18 +69,18 @@ void OneDConvolution::validateResults()
 		// Update offset value for that row
 		radiusOffsetRows = rowIn - MaskAttributes::maskOffset;
 
-		// For each mask row in maskVec
+		// For each mask row in mOCMaskVec
 		for (auto maskRowIn{ 0 }; maskRowIn < MaskAttributes::maskDim; ++maskRowIn)
 		{
 			// Check if we're hanging off mask row
 			if ((radiusOffsetRows + maskRowIn >= 0) && (radiusOffsetRows + maskRowIn < this->mOCOutputVec.size()))
 			{
 				// Accumulate results into resultVar
-				resultVar += mOCInputVec[radiusOffsetRows + maskRowIn] * mOCMaskVec[maskRowIn];
+				resultVar += this->mOCInputVec[radiusOffsetRows + maskRowIn] * this->mOCMaskVec[maskRowIn];
 			}
 		}
 		// Check accumulated resultVar value with corresponding value in resultVec
-		if (resultVar != mOCOutputVec[rowIn])
+		if (resultVar != this->mOCOutputVec[rowIn])
 			doesMatch = false;
 	}
 	// Assert and abort when results don't match

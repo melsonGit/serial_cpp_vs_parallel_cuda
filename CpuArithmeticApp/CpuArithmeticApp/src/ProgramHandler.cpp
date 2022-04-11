@@ -18,14 +18,15 @@ void ProgramHandler::launchProgram()
 		this->launchDirective();
 		this->userSetDirective();
 
-		do // Enter sample size menu here
+		if (this->getDirective() != ProgramDirective::programExit)
 		{
-			this->launchDirective();
-			this->userSetDirective();
-			this->launchDirective();
+			do // Enter sample size menu here
+			{
+				this->userSetDirective();
+				this->launchDirective();
 
-		} while (this->getDirective() != ProgramDirective::mainMenu);
-
+			} while ((this->getDirective() != ProgramDirective::mainMenu) || (this->getDirective() != ProgramDirective::programExit));
+		}
 	} while (this->getDirective() != ProgramDirective::programExit);
 }
 
