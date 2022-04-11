@@ -13,33 +13,36 @@
 
 void ProgramHandler::launchProgram()
 {
+	bool inMainMenu{ true };
+
 	do // Enter main menu
 	{
 		this->launchDirective();
-		this->userSetDirective();
+		this->userSetDirective(inMainMenu);
+
+		inMainMenu = false;
 
 		if (this->getDirective() != ProgramDirective::programExit)
 		{
+			this->launchDirective(); // Show operation sample sizes
+
 			do
 			{
-				this->launchDirective(); // Show operation sample sizes
-				this->userSetDirective(); // Get users input
+				this->userSetDirective(inMainMenu); // Get users input
 				this->launchDirective(); // Launch Operation / Exit back to main menu or exit program
 
 			} while ((this->getDirective() != ProgramDirective::mainMenu) || (this->getDirective() != ProgramDirective::programExit));
 		}
 	} while (this->getDirective() != ProgramDirective::programExit);
 
-	assert(this->getDirective() == ProgramDirective::programExit && "We should only exit program on programExit directive!!");
+	assert(this->getDirective() == ProgramDirective::programExit && "We should only be here if our directive is set to programExit!");
 	this->launchDirective();
 }
-
 void ProgramHandler::clearInputStream() const
 {
 	std::cin.clear();
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
-
 const int ProgramHandler::getInput() const
 {
 	int userInput{ 0 };
@@ -60,7 +63,6 @@ const int ProgramHandler::getInput() const
 
 	return userInput;
 }
-
 void ProgramHandler::displayProgramStart() const
 {
 	std::cout << "\n\n\n\n\t\t\t|/| CPU vs GPU Arithmetic App |\\|\n"
@@ -75,7 +77,6 @@ void ProgramHandler::displayProgramStart() const
 	// Proceed only when ENTER/RETURN key is pressed
 	while (!getKeyPress());
 }
-
 void ProgramHandler::displayMainMenu() const
 {
 	using namespace ArithmeticDetails;
@@ -95,33 +96,33 @@ void ProgramHandler::displayMainMenu() const
 		<< '[' << static_cast<int>(mainMenu) << "]\tReturn to Main Menu\n"
 		<< '[' << static_cast<int>(programExit) << "]\tClose Program\n";
 }
-
 void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) const
 {
 	std::cout << "\n\n\n\t\t\tLaunching " << operation.getOpName() << " operation";
 	clearScreen();
 }
-
 void ProgramHandler::displayOperationSampleSelection(const ArithmeticOperation& operation) const
 {
+	using enum ProgramDirective;
+
 	int elementOptions{ 0 };
 
 	std::cout << "Choose " << operation.getOpName() << " element sample size from the options below.\n"
-		<< "Enter corresponding number to make selection: \n\n"
+		<< "Enter corresponding number to make selection: \n\nSample Sizes\n\n"
 		<< "[1] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
 		<< "[2] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
 		<< "[3] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
 		<< "[4] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
-		<< "[5] " << operation.getOpSampleSize(elementOptions) << " elements\n"
-		<< "If you wish to close this program, please enter '10'\n";
+		<< "[5] " << operation.getOpSampleSize(elementOptions) << " elements\n\n"
+		<< "Program Navigation\n\n"
+		<< '[' << static_cast<int>(inOpMainMenu) << "]\tReturn to Main Menu\n"
+		<< '[' << static_cast<int>(inOpProgramExit) << "]\tClose Program\n";
 }
-
 void ProgramHandler::displayOpDetails(const ArithmeticOperation& operation) const
 {
 	displayOperationName(operation);
 	displayOperationSampleSelection(operation);
 }
-
 void ProgramHandler::displayProgramExit() const
 {
 	std::cout << "\n\n\n\t\t\tClosing program";
@@ -147,7 +148,6 @@ const bool ProgramHandler::getKeyPress() const
 	// do something for mac
 #endif
 }
-
 void ProgramHandler::fakeLoad() const
 {
 	for (int i = 0; i < 3; ++i) {
@@ -155,7 +155,6 @@ void ProgramHandler::fakeLoad() const
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 }
-
 void ProgramHandler::clearScreen() const
 {
 	fakeLoad();
@@ -169,28 +168,40 @@ void ProgramHandler::clearScreen() const
 	// do something for mac
 #endif
 }
-
-void ProgramHandler::userSetDirective()
+void ProgramHandler::userSetDirective(const bool& isMainMenu)
 {
 	using enum ProgramDirective;
 	bool validSelection{ false };
 
-	do
+	if (isMainMenu)
 	{
-		switch (static_cast<ProgramDirective>(getInput()))
+		do
 		{
-		case vectorAddition: { this->mDisplay = vectorAddition; validSelection = true; break; }
-		case matrixMultiplication: { this->mDisplay = matrixMultiplication; validSelection = true; break; }
-		case oneConvolution: { this->mDisplay = oneConvolution; validSelection = true; break; }
-		case twoConvolution: { this->mDisplay = twoConvolution; validSelection = true; break; }
-		case mainMenu: { this->mDisplay = mainMenu; validSelection = true; break; }
-		case programExit: { this->mDisplay = programExit; validSelection = true; break; }
-		default: { std::cout << "\nInvalid selection!\n\n"; break; }
-		}
-
-	} while (!validSelection);
+			switch (static_cast<ProgramDirective>(getInput()))
+			{
+			case vectorAddition: { this->mDisplay = vectorAddition; validSelection = true; break; }
+			case matrixMultiplication: { this->mDisplay = matrixMultiplication; validSelection = true; break; }
+			case oneConvolution: { this->mDisplay = oneConvolution; validSelection = true; break; }
+			case twoConvolution: { this->mDisplay = twoConvolution; validSelection = true; break; }
+			case mainMenu: { this->mDisplay = mainMenu; validSelection = true; break; }
+			case programExit: { this->mDisplay = programExit; validSelection = true; break; }
+			default: { std::cout << "\nInvalid selection!\n\n"; break; }
+			}
+		} while (!validSelection);
+	}
+	else
+	{
+		do
+		{
+			switch (static_cast<ProgramDirective>(getInput()))
+			{
+			case inOpMainMenu: { this->mDisplay = mainMenu; validSelection = true; break; }
+			case inOpProgramExit: { this->mDisplay = programExit; validSelection = true; break; }
+			default: { std::cout << "\nInvalid selection!\n\n"; break; }
+			}
+		} while (!validSelection);
+	}
 }
-
 void ProgramHandler::sudoSetDirective(const ProgramDirective& sudoChoice)
 {
 	using enum ProgramDirective;
@@ -209,23 +220,21 @@ void ProgramHandler::sudoSetDirective(const ProgramDirective& sudoChoice)
 
 	assert(validSudoSelection && "Invalid sudoSetDirective() argument!");
 }
-
 void ProgramHandler::launchDirective() const
 {
 	using enum ProgramDirective;
 
-	switch (mDisplay)
+	switch (this->mDisplay)
 	{
 	case programStart: { displayProgramStart(); break; }
-	case programExit: { displayProgramExit(); break; }
 	case vectorAddition: { VectorAddition vecAdd{}; displayOpDetails(vecAdd); vecAdd.startOpSeq(this->getInput()); break; }
 	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOpDetails(matMulti); matMulti.startOpSeq(this->getInput()); break; }
 	case oneConvolution: {OneDConvolution oneConv{}; displayOpDetails(oneConv); oneConv.startOpSeq(this->getInput()); break; }
 	case mainMenu: { displayMainMenu(); break; }
+	case programExit: { displayProgramExit(); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }
 	}
 }
-
 const ProgramDirective& ProgramHandler::getDirective() const
 {
 	return this->mDisplay;

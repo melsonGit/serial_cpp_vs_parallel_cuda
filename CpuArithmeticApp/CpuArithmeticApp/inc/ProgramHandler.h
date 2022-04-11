@@ -14,8 +14,13 @@ enum class ProgramDirective
 	matrixMultiplication,
 	oneConvolution,
 	twoConvolution,
+					// <-- Next new operation here
 	mainMenu,
-	programExit
+	programExit,
+
+	// Navigation options within operation sample size selection only
+	inOpMainMenu = 6,
+	inOpProgramExit,
 };
 
 // Handles program events
@@ -38,8 +43,8 @@ private:
 	const int getInput() const;
 	void clearInputStream() const;
 
-	// Diretive Utilities
-	void userSetDirective();
+	// Directive Utilities
+	void userSetDirective(const bool& isMainMenu);
 	void sudoSetDirective(const ProgramDirective&);
 	void launchDirective() const;
 	const ProgramDirective& getDirective() const;
