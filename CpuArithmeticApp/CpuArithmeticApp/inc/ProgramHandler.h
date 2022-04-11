@@ -41,12 +41,13 @@ private:
 
 	// Input/Ouput Utilities
 	const int getInput() const;
+	const int getOpSampleSelection();
 	void clearInputStream() const;
 
 	// Directive Utilities
 	void userSetDirective(const bool& isMainMenu);
 	void sudoSetDirective(const ProgramDirective&);
-	void launchDirective() const;
+	void launchDirective();
 	const ProgramDirective& getDirective() const;
 
 	// Display Helper Utilities

@@ -20,18 +20,13 @@ void ProgramHandler::launchProgram()
 		this->launchDirective();
 		this->userSetDirective(inMainMenu);
 
-		inMainMenu = false;
-
 		if (this->getDirective() != ProgramDirective::programExit)
 		{
-			this->launchDirective(); // Show operation sample sizes
-
 			do
 			{
-				this->userSetDirective(inMainMenu); // Get users input
 				this->launchDirective(); // Launch Operation / Exit back to main menu or exit program
 
-			} while ((this->getDirective() != ProgramDirective::mainMenu) || (this->getDirective() != ProgramDirective::programExit));
+			} while ((this->getDirective() != ProgramDirective::mainMenu) && (this->getDirective() != ProgramDirective::programExit));
 		}
 	} while (this->getDirective() != ProgramDirective::programExit);
 
@@ -62,6 +57,31 @@ const int ProgramHandler::getInput() const
 	} while (!validSelection);
 
 	return userInput;
+}
+const int ProgramHandler::getOpSampleSelection()
+{
+	using enum ProgramDirective;
+	int validSelection{ false };
+	int selectionRange{};
+
+	do
+	{
+		selectionRange = getInput();
+
+		if (selectionRange >= 1 && selectionRange <= 5)
+			validSelection = true;
+		else
+		{
+			switch (static_cast<ProgramDirective>(selectionRange))
+			{ // should be using sudoSetDirective() here!
+			case inOpMainMenu: { this->mDisplay = mainMenu; selectionRange = static_cast<int>(mainMenu); validSelection = true; break; }
+			case inOpProgramExit: { this->mDisplay = programExit;  selectionRange = static_cast<int>(programExit); validSelection = true; break; }
+			default: { std::cout << "\nInvalid selection!\n\n"; break; }
+			}
+		}
+	} while (!validSelection);
+
+	return selectionRange;
 }
 void ProgramHandler::displayProgramStart() const
 {
@@ -209,25 +229,47 @@ void ProgramHandler::sudoSetDirective(const ProgramDirective& sudoChoice)
 
 	switch (sudoChoice)
 	{
-	case mainMenu: { this->mDisplay = mainMenu; break; }
 	case vectorAddition: { this->mDisplay = vectorAddition; break; }
 	case matrixMultiplication: { this->mDisplay = matrixMultiplication; break; }
 	case oneConvolution: { this->mDisplay = oneConvolution; break; }
 	case twoConvolution: { this->mDisplay = twoConvolution; break; }
+	case mainMenu: { this->mDisplay = mainMenu; break; }
 	case programExit: { this->mDisplay = programExit; break; }
 	default: { validSudoSelection = false; break; }
 	}
 
 	assert(validSudoSelection && "Invalid sudoSetDirective() argument!");
 }
-void ProgramHandler::launchDirective() const
+void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 functions - bending DRY rules a bit here
 {
 	using enum ProgramDirective;
 
 	switch (this->mDisplay)
 	{
 	case programStart: { displayProgramStart(); break; }
-	case vectorAddition: { VectorAddition vecAdd{}; displayOpDetails(vecAdd); vecAdd.startOpSeq(this->getInput()); break; }
+	case vectorAddition: 
+	{ 
+		VectorAddition vecAdd{}; 
+		bool validSelection{};
+
+		do
+		{
+			displayOpDetails(vecAdd);
+			validSelection = false;
+			int userSampleDisplaySelection{ this->getOpSampleSelection() };
+
+			if (userSampleDisplaySelection == static_cast<int>(mainMenu) || userSampleDisplaySelection == static_cast<int>(programExit))
+			{
+				validSelection = true;
+			}
+			else
+			{
+				vecAdd.startOpSeq(userSampleDisplaySelection);
+			}
+		} while (!validSelection);
+
+		break; 
+	}
 	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOpDetails(matMulti); matMulti.startOpSeq(this->getInput()); break; }
 	case oneConvolution: {OneDConvolution oneConv{}; displayOpDetails(oneConv); oneConv.startOpSeq(this->getInput()); break; }
 	case mainMenu: { displayMainMenu(); break; }
