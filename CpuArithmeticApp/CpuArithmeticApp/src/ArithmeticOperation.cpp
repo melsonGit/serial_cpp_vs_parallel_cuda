@@ -18,3 +18,13 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 	launchOp();
 	validateResults();
 }
+
+const int ArithmeticOperation::getCurrentSize() const
+{
+	return this->currentVecSize;
+}
+
+void ArithmeticOperation::setCurrentSize(const int& newSize)
+{
+	this->currentVecSize = newSize;
+}

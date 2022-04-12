@@ -8,12 +8,22 @@
 void VectorAddition::setContainer(const int& userInput)
 {
 	int actualIndex{ userInput - 1 };
-	
-	this->mVAInputVecA.resize(mSampleSizes[actualIndex]); 
-	this->mVAInputVecB.resize(mSampleSizes[actualIndex]); 
-	this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
 
-	populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+	// If user selected same sample size as last run - don't resize
+	if (actualIndex == this->getCurrentSize())
+	{
+		populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+	}
+	else
+	{
+		this->setCurrentSize(actualIndex);
+
+		this->mVAInputVecA.resize(mSampleSizes[actualIndex]);
+		this->mVAInputVecB.resize(mSampleSizes[actualIndex]);
+		this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
+
+		populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+	}
 }
 
 void VectorAddition::launchOp()

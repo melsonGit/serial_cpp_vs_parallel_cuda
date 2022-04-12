@@ -17,6 +17,7 @@ protected:
 
     const std::string mOperationName{};
     const std::array<std::size_t, 5> mSampleSizes{};
+    int currentVecSize{10};
 
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples)
         : mOperationName{ name }, mSampleSizes{ samples } {}
@@ -36,8 +37,12 @@ protected:
 public:
 
     void startOpSeq(const int& userInput);
+
+    const int getCurrentSize() const;
     const std::string_view getOpName() const;
     const std::size_t getOpSampleSize(const int& option) const;
+
+    void setCurrentSize(const int& newSize);
 };
 
 /* Templates for each possible container used by children of ArithmeticOperation - Please update when a new container is required
