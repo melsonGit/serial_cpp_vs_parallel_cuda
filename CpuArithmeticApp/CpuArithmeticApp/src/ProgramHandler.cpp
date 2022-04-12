@@ -182,13 +182,13 @@ const int ProgramHandler::userOpSampleSelection()
 		// If user selections within sample range 1 - 5, we return that value
 		if (selectionRange >= 1 && selectionRange <= 5)
 			validSelection = true;
-		// If the user selection is outside sample range, we check aganst out directives
+		// If the user selection is outside sample range, we check against our directives
 		else
 		{
 			switch (static_cast<ProgramDirective>(selectionRange))
 			{
-			case inOpMainMenu: { this->setSudoDirective(mainMenu); selectionRange = static_cast<int>(mainMenu); validSelection = true; break; }
-			case inOpProgramExit: { this->setSudoDirective(programExit);  selectionRange = static_cast<int>(programExit); validSelection = true; break; }
+			case inOpMainMenu: { this->setSudoDirective(mainMenu); selectionRange = static_cast<int>(inOpMainMenu); validSelection = true; break; }
+			case inOpProgramExit: { this->setSudoDirective(programExit);  selectionRange = static_cast<int>(inOpProgramExit); validSelection = true; break; }
 			default: { std::cout << "\nInvalid selection!\n\n"; break; }
 			}
 		}
@@ -258,7 +258,9 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 			validSelection = false;
 			int userSampleDisplaySelection{ this->userOpSampleSelection() };
 
-			if (userSampleDisplaySelection == static_cast<int>(mainMenu) || userSampleDisplaySelection == static_cast<int>(programExit))
+			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
+			// ...so we skip startOpSeq() and launchDirective()
+			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
 			{
 				validSelection = true;
 			}

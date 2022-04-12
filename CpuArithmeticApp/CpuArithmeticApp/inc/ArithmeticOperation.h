@@ -17,7 +17,7 @@ protected:
 
     const std::string mOperationName{};
     const std::array<std::size_t, 5> mSampleSizes{};
-    int currentVecSize{10};
+    int currentVecSize{ 99 }; // Default first run value (see setContainer()). Any number outside 0 - 6 is fine but just to be safe
 
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples)
         : mOperationName{ name }, mSampleSizes{ samples } {}

@@ -7,14 +7,41 @@
 
 void VectorAddition::setContainer(const int& userInput)
 {
+	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
+	// First run check - any number outside 0 - 6 is fine but just to be safe
+	constexpr int firstRun{ 99 }; 
 
-	// If user selected same sample size as last run - don't resize
-	if (actualIndex == this->getCurrentSize())
+	// If first run - we'll re-size regardless
+	if (this->getCurrentSize() == firstRun)
 	{
+		this->setCurrentSize(actualIndex);
+
+		this->mVAInputVecA.resize(mSampleSizes[actualIndex]);
+		this->mVAInputVecB.resize(mSampleSizes[actualIndex]);
+		this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
+
 		populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 	}
-	else
+	else if (actualIndex == this->getCurrentSize()) // If user selected same sample size as last run - don't resize, just re-populate vectors
+	{	
+		populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+	}
+	else if (actualIndex < this->getCurrentSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
+	{
+		this->setCurrentSize(actualIndex);
+
+		this->mVAInputVecA.resize(mSampleSizes[actualIndex]);
+		this->mVAInputVecB.resize(mSampleSizes[actualIndex]);
+		this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
+
+		this->mVAInputVecA.shrink_to_fit();
+		this->mVAInputVecB.shrink_to_fit();
+		this->mVAOutputVec.shrink_to_fit();
+
+		populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+	}
+	else // If selection is higher than last run
 	{
 		this->setCurrentSize(actualIndex);
 
@@ -25,7 +52,6 @@ void VectorAddition::setContainer(const int& userInput)
 		populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 	}
 }
-
 void VectorAddition::launchOp()
 {
 	// Reminder: These event outputs could be placed into a class somewhere.......
@@ -38,7 +64,6 @@ void VectorAddition::launchOp()
 
 	std::cout << "\nVector Addition: Operation complete.\n";
 }
-
 void VectorAddition::validateResults() 
 {
 	std::cout << "\nVector Addition: Authenticating results.\n\n";

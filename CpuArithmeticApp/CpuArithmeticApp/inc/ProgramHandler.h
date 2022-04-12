@@ -18,7 +18,7 @@ enum class ProgramDirective
 	programExit,
 	mainMenu,
 
-	// Navigation options within operation sample size selection only
+	// Navigation options within operation sample size selection only - never setSudo/setUser directives to these
 	inOpMainMenu = 6,
 	inOpProgramExit,
 };
