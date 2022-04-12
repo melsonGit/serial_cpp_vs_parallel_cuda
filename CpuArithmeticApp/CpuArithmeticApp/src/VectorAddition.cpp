@@ -35,6 +35,7 @@ void VectorAddition::setContainer(const int& userInput)
 		this->mVAInputVecB.resize(mSampleSizes[actualIndex]);
 		this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
 
+		// Non-binding - IDE will decide if this will execute
 		this->mVAInputVecA.shrink_to_fit();
 		this->mVAInputVecB.shrink_to_fit();
 		this->mVAOutputVec.shrink_to_fit();
