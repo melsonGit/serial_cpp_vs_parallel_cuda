@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-void VectorAddition::setContainer(const int& userInput)
+void VectorAddition::setContainer(const int& userInput) // another parameter pack for this?
 {
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };

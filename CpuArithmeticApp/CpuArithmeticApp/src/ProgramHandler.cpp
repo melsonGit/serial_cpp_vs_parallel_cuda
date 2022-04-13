@@ -250,30 +250,79 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 	case vectorAddition:
 	{
 		VectorAddition vecAdd{};
-		bool validSelection{};
+		// enterSampleSelectionLoop(const ArithmeticOperation& operation); best encapsulate this
+		bool toExitOp{};
 
 		do
 		{
 			displayOperationDetails(vecAdd);
-			validSelection = false;
+			toExitOp = false;
 			int userSampleDisplaySelection{ this->userOpSampleSelection() };
 
 			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
 			// ...so we skip startOpSeq() and launchDirective()
 			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
 			{
-				validSelection = true;
+				toExitOp = true;
 			}
 			else
 			{
 				vecAdd.startOpSeq(userSampleDisplaySelection);
 			}
-		} while (!validSelection);
+		} while (!toExitOp);
 
 		break;
 	}
-	case matrixMultiplication: { MatrixMultiplication matMulti{}; displayOperationDetails(matMulti); matMulti.startOpSeq(this->getInput()); break; }
-	case oneConvolution: {OneDConvolution oneConv{}; displayOperationDetails(oneConv); oneConv.startOpSeq(this->getInput()); break; }
+	case matrixMultiplication: 
+	{
+		MatrixMultiplication matMulti{};
+		bool toExitOp{};
+
+		do
+		{
+			displayOperationDetails(matMulti);
+			toExitOp = false;
+			int userSampleDisplaySelection{ this->userOpSampleSelection() };
+
+			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
+			// ...so we skip startOpSeq() and launchDirective()
+			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
+			{
+				toExitOp = true;
+			}
+			else
+			{
+				matMulti.startOpSeq(userSampleDisplaySelection);
+			}
+		} while (!toExitOp);
+
+		break;
+	}
+	case oneConvolution: 
+	{
+		OneDConvolution oneConv{};
+		bool toExitOp{};
+
+		do
+		{
+			displayOperationDetails(oneConv);
+			toExitOp = false;
+			int userSampleDisplaySelection{ this->userOpSampleSelection() };
+
+			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
+			// ...so we skip startOpSeq() and launchDirective()
+			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
+			{
+				toExitOp = true;
+			}
+			else
+			{
+				oneConv.startOpSeq(userSampleDisplaySelection);
+			}
+		} while (!toExitOp);
+
+		break;
+	}
 	case mainMenu: { displayMainMenu(); break; }
 	case programExit: { displayProgramExit(); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }

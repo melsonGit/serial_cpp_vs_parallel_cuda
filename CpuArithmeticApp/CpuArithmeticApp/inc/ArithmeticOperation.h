@@ -3,6 +3,7 @@
 #define ARITHMETIC_OPERATION
 
 #include "randNumGen.h"
+#include "MaskAttributes.h"
 
 #include <algorithm>
 #include <array>
@@ -52,16 +53,28 @@ public:
 */
 
 using namespace randNumGen;
+using namespace MaskAttributes;
 
 // Base case for 1D vector
 template<typename P1>
 void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
 {
-    // Create local distribution on stack
-    std::uniform_int_distribution randNum{ minRand, maxRand };
+    if (vecToPop.size() > maskDim)
+    {
+        // Create local distribution on stack
+        std::uniform_int_distribution randNum{ minRand, maxRand };
 
-    // Generate random numbers via Lambda C++11 function, and place into vector
-    generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(mersenne); });
+        // Generate random numbers via Lambda C++11 function, and place into vector
+        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(mersenne); });
+    }
+    else // If we're passed a mask vector
+    {
+        // Create local distribution on stack
+        std::uniform_int_distribution randNum{ minMaskRand, maxMaskRand };
+
+        // Generate random numbers via Lambda C++11 function, and place into vector
+        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
+    }
 }
 
 // Recursive case for 1D vector
