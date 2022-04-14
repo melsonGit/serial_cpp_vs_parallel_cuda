@@ -58,7 +58,7 @@ The above image displays this process; values 1, 4, 6 and 3 populate the input v
 
 # Program Logic: 2-D Convolution
 
-Presented below, 2-D convolution follows an identical operation (of 1-D convolution) albeit with a 2-D mask vector, increasing value population twofold through rows and columns. Once more, each corresponding element of input and mask vectors will multiply (represented by orange arrows; e.g. 3x1, 3x1, 2x4, 2x4, 1x6, 1x6.) and summation of this operation is pushed to the output vector (e.g. 3 + 3 + 8 + 8 + 6 + 6 = 34).
+Presented below, 2-D convolution follows an identical operation (of 1-D convolution) albeit with a 2-D input and mask vector (NOTE: the below image displays only a 1-D vector, not a 2-D. This is incorrect), increasing value population twofold through rows and columns. Once more, each corresponding element of input and mask vectors will multiply (represented by orange arrows; e.g. 3x1, 3x1, 2x4, 2x4, 1x6, 1x6.) and summation of this operation is pushed to the output vector (e.g. 3 + 3 + 8 + 8 + 6 + 6 = 34).
 
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/2d.png" alt="2-D Convolution"/>
