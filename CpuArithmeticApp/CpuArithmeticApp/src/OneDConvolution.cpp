@@ -56,6 +56,8 @@ void OneDConvolution::setContainer(const int& userInput)
 }
 void OneDConvolution::launchOp()
 {
+	using namespace MaskAttributes;
+
     std::cout << "\n1D Convolution: Populating complete.\n";
     std::cout << "\n1D Convolution: Starting operation.\n";
 
@@ -67,11 +69,11 @@ void OneDConvolution::launchOp()
     for (auto rowIn{ 0 }; rowIn < this->mOCOutputVec.size(); ++rowIn)
     {
 		// Update offset value for that row
-        radiusOffsetRows = rowIn - MaskAttributes::maskOffset;
+        radiusOffsetRows = rowIn - maskOffset;
 		mOCOutputVec[rowIn] = 0;
 
 		// For each mask row in mOCMaskVec
-        for (auto maskRowIn{ 0 }; maskRowIn < MaskAttributes::maskDim; ++maskRowIn)
+        for (auto maskRowIn{ 0 }; maskRowIn < maskDim; ++maskRowIn)
         {
 			// Check if we're hanging off mask row
             if ((radiusOffsetRows + maskRowIn >= 0) && (radiusOffsetRows + maskRowIn < this->mOCOutputVec.size()))

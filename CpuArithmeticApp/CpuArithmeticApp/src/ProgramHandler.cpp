@@ -4,6 +4,7 @@
 #include "../inc/VectorAddition.h"
 #include "../inc/MatrixMultiplication.h"
 #include "../inc/OneDConvolution.h"
+#include "../inc/TwoDConvolution.h"
 
 #include <cassert>
 #include <chrono>

@@ -160,6 +160,7 @@
     <ClCompile Include="src\OneDConvolution.cpp" />
     <ClCompile Include="src\ProgramHandler.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\TwoDConvolution.cpp" />
     <ClCompile Include="src\VectorAddition.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="inc\OneDConvolution.h" />
     <ClInclude Include="inc\ProgramHandler.h" />
     <ClInclude Include="inc\randNumGen.h" />
+    <ClInclude Include="inc\TwoDConvolution.h" />
     <ClInclude Include="inc\VectorAddition.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
