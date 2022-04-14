@@ -324,6 +324,31 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 
 		break;
 	}
+	case twoConvolution:
+	{
+		TwoDConvolution twoConv{};
+		bool toExitOp{};
+
+		do
+		{
+			displayOperationDetails(twoConv);
+			toExitOp = false;
+			int userSampleDisplaySelection{ this->userOpSampleSelection() };
+
+			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
+			// ...so we skip startOpSeq() and launchDirective()
+			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
+			{
+				toExitOp = true;
+			}
+			else
+			{
+				twoConv.startOpSeq(userSampleDisplaySelection);
+			}
+		} while (!toExitOp);
+
+		break;
+	}
 	case mainMenu: { displayMainMenu(); break; }
 	case programExit: { displayProgramExit(); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }

@@ -5,6 +5,27 @@
 #include <iostream>
 #include <vector>
 
+using namespace MaskAttributes; 
+
+// Reminder: When we switch from using native arrays to 2d vectors, Remove this when we implement 2d vectors
+const std::size_t TwoDConvolution::tempConSizeInit()
+{
+	// Return values represent true native vector size i.e 4096^2 = 16777216
+	// So our container size is really 4096
+
+	switch (this->mTCOutputVec.size())
+	{
+	case 16777216: {return 4096;  break; }
+	case 26214400: {return 5120; break; }
+	case 37748736: {return 6144; break; }
+	case 67108864: {return 8192; break; }
+	case 104857600: {return 10240; break; }
+	default:break;
+	}
+
+	return -1;
+}
+
 void TwoDConvolution::setContainer(const int& userInput)
 {
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
@@ -15,15 +36,15 @@ void TwoDConvolution::setContainer(const int& userInput)
 	// Convolution-specific mask vector size allocation - remains the same size regardless
 	// If empty (first run), resize the mask vector - if already resized (second run), ignore
 	if (mTCMaskVec.empty())
-		this->mTCMaskVec.resize(MaskAttributes::maskDim * MaskAttributes::maskDim);
+		this->mTCMaskVec.resize(maskDim * maskDim);
 
 	// If first run - we'll re-size regardless
 	if (this->getCurrentSize() == firstRun)
 	{
 		this->setCurrentSize(actualIndex);
 
-		this->mTCInputVec.resize(mSampleSizes[actualIndex] * mSampleSizes[actualIndex]);
-		this->mTCOutputVec.resize(mSampleSizes[actualIndex] * mSampleSizes[actualIndex]);
+		this->mTCInputVec.resize(mSampleSizes[actualIndex]);
+		this->mTCOutputVec.resize(mSampleSizes[actualIndex]);
 
 		populateContainer(this->mTCInputVec, this->mTCMaskVec);
 	}
@@ -56,8 +77,6 @@ void TwoDConvolution::setContainer(const int& userInput)
 }
 void TwoDConvolution::launchOp()
 {
-	using namespace MaskAttributes;
-
 	std::cout << "\n2D Convolution: Populating complete.\n";
 	std::cout << "\n2D Convolution: Starting operation.\n";
 
@@ -66,14 +85,17 @@ void TwoDConvolution::launchOp()
 	int radiusOffsetRows{ 0 };
 	int radiusOffsetCols{ 0 };
 
+	// Replace this var with mTCOutputVec.size() in all if loop conditional statements when we use 2d vectors
+	std::size_t tempConSize{ tempConSizeInit() };
+
 	// Accumulate results
-	int resultVar{};
+	std::size_t resultVar{};
 
 	// For each row
-	for (auto rowIn{ 0 }; rowIn < this->mTCOutputVec.size(); ++rowIn)
+	for (auto rowIn{ 0 }; rowIn < tempConSize; ++rowIn)
 	{
 		// For each column in that row
-		for (auto colIn{ 0 }; colIn < this->mTCOutputVec.size(); ++colIn)
+		for (auto colIn{ 0 }; colIn < tempConSize; ++colIn)
 		{
 			// Assign the tempResult variable a value
 			resultVar = 0;
@@ -91,13 +113,13 @@ void TwoDConvolution::launchOp()
 					radiusOffsetCols = colIn - maskOffset + maskColIn;
 
 					// Range check for rows
-					if (radiusOffsetRows >= 0 && radiusOffsetRows < mTCOutputVec.size())
+					if (radiusOffsetRows >= 0 && radiusOffsetRows < tempConSize)
 					{
 						// Range check for columns
-						if (radiusOffsetCols >= 0 && radiusOffsetCols < mTCOutputVec.size())
+						if (radiusOffsetCols >= 0 && radiusOffsetCols < tempConSize)
 						{
 							// Accumulate results into resultVar
-							resultVar += this->mTCInputVec[radiusOffsetRows * mTCOutputVec.size()+ radiusOffsetCols]
+							resultVar += this->mTCInputVec[radiusOffsetRows * tempConSize + radiusOffsetCols]
 								* this->mTCMaskVec[maskRowIn * maskDim + maskColIn];
 						}
 					}
@@ -111,8 +133,6 @@ void TwoDConvolution::launchOp()
 }
 void TwoDConvolution::validateResults()
 {
-	using namespace MaskAttributes;
-
 	std::cout << "\n2D Convolution: Authenticating results.\n\n";
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
@@ -120,17 +140,20 @@ void TwoDConvolution::validateResults()
 	int radiusOffsetRows{ 0 };
 	int radiusOffsetCols{ 0 };
 
+	// Replace this var with mTCOutputVec.size() in all if loop conditional statements when we use 2d vectors
+	std::size_t tempConSize{ tempConSizeInit() };
+
 	// Accumulates our results
-	int resultVar{};
+	std::size_t resultVar{};
 
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };
 
 	// For each row in mainVec
-	for (auto rowIn{ 0 }; rowIn < mTCOutputVec.size(); ++rowIn)
+	for (auto rowIn{ 0 }; rowIn < tempConSize; ++rowIn)
 	{
 		// For each column in that row
-		for (auto colIn{ 0 }; colIn < mTCOutputVec.size() && doesMatch; ++colIn)
+		for (auto colIn{ 0 }; colIn < tempConSize && doesMatch; ++colIn)
 		{
 			// Reset resultVar to 0 on next element
 			resultVar = 0;
@@ -148,13 +171,13 @@ void TwoDConvolution::validateResults()
 					radiusOffsetCols = colIn - maskOffset + maskColIn;
 
 					// Check if we're hanging off mask row
-					if (radiusOffsetRows >= 0 && radiusOffsetRows < mTCOutputVec.size())
+					if (radiusOffsetRows >= 0 && radiusOffsetRows < tempConSize)
 					{
 						// Check if we're hanging off mask column
-						if (radiusOffsetCols >= 0 && radiusOffsetCols < mTCOutputVec.size())
+						if (radiusOffsetCols >= 0 && radiusOffsetCols < tempConSize)
 						{
 							// Accumulate results into resultVar
-							resultVar += this->mTCInputVec[radiusOffsetRows * mTCOutputVec.size() + radiusOffsetCols]
+							resultVar += this->mTCInputVec[radiusOffsetRows * tempConSize + radiusOffsetCols]
 								* this->mTCMaskVec[maskRowIn * maskDim + maskColIn];
 						}
 					}

@@ -18,6 +18,7 @@ private:
     void setContainer(const int& userInput) override final;
     void launchOp() override final;
     void validateResults() override final;
+    const std::size_t tempConSizeInit(); // remove when we use 2d vectors
 
     template<typename P1> void populateContainer(std::vector<P1>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<P1>&, Args&... args);

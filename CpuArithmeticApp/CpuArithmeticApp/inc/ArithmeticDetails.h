@@ -29,7 +29,7 @@ namespace ArithmeticDetails
 
 	namespace TwoDConvolutionDetails
 	{
-		inline const std::string twoDConvName{ "2-D Convolution" };
+		inline const std::string twoDConvName{ "2-D Convolution" }; 
 		inline constexpr std::array<std::size_t, 5> twoDConvSamples{ 16777216, 26214400, 37748736, 67108864, 104857600 };
 	}
 }
