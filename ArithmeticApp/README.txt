@@ -1,0 +1,2 @@
+Basis for a single program to then call either the CPU or GPU version depending on user selection.
+Makes overall program package neater and easier to maintain if we can access both versions through a proxy program.
