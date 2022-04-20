@@ -1,6 +1,6 @@
 #include "../inc/ProgramHandler.h"
 
-static ProgramHandler handler{};
+ProgramHandler handler{};
 
 int main()
 {

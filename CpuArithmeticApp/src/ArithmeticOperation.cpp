@@ -12,9 +12,9 @@ const std::size_t ArithmeticOperation::getOpSampleSize(const int& option) const
 }
 void ArithmeticOperation::startOpSeq(const int& userInput)
 {
-	setContainer(userInput);
-	launchOp();
-	validateResults();
+	this->setContainer(userInput);
+	this->launchOp();
+	this->validateResults();
 }
 const int ArithmeticOperation::getCurrentVecSize() const
 {

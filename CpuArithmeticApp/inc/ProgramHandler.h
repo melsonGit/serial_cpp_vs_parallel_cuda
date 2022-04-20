@@ -67,8 +67,8 @@ public:
 		if (directive == ProgramDirective::programStart)
 		{
 			// 1. Display starting screen 2. Set directive to main menu
-			launchDirective();
-			setSudoDirective(ProgramDirective::mainMenu);
+			this->launchDirective();
+			this->setSudoDirective(ProgramDirective::mainMenu);
 		}
 		else // Only initialise ProgramHandler object with ProgramDirective::programStart
 			assert(directive == ProgramDirective::programStart 

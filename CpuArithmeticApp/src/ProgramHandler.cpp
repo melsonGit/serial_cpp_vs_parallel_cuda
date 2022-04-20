@@ -44,9 +44,9 @@ void ProgramHandler::clearInputStream() const
 }
 void ProgramHandler::clearScreen() const
 {
-	fakeLoad();
+	this->fakeLoad();
 
-	// String of special characters (translates to clear screen command) that clears CMD window
+	// Special VT100 escape codes to clear a CMD screen
 #ifdef _WIN32
 	std::cout << "\033[2J\033[1;1H";
 #elif defined __linux__
@@ -64,8 +64,8 @@ const int ProgramHandler::getInput() const
 	{
 		if (!(std::cin >> userInput))
 		{
-			std::cout << "Please enter numbers only.\n";
-			clearInputStream();
+			std::cout << "Please enter numbers only.\n\n";
+			this->clearInputStream();
 		}
 		else
 		{
@@ -77,7 +77,7 @@ const int ProgramHandler::getInput() const
 }
 void ProgramHandler::fakeLoad() const
 {
-	for (int i = 0; i < 3; ++i) {
+	for (auto i = 0; i < 3; ++i) {
 		std::cout << ". ";
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
@@ -111,7 +111,7 @@ void ProgramHandler::displayMainMenu() const
 
 	std::cout << "\n\n\t\t\tRedirecting to Main Menu";
 
-	clearScreen();
+	this->clearScreen();
 
 	std::cout << "Please select an arithmetic operation from the options below.\n"
 		<< "Enter corresponding number to make selection: \n\nArithmetic Operations\n\n"
@@ -124,7 +124,7 @@ void ProgramHandler::displayMainMenu() const
 void ProgramHandler::displayProgramExit() const
 {
 	std::cout << "\n\n\t\t\tShutting down program";
-	clearScreen();
+	this->clearScreen();
 }
 void ProgramHandler::displayProgramStart() const
 {
@@ -138,19 +138,19 @@ void ProgramHandler::displayProgramStart() const
 		<< "\t\t\tPress Enter/Return key to Proceed";
 
 	// Proceed only when ENTER/RETURN key is pressed
-	while (!getKeyPress());
+	while (!this->getKeyPress());
 }
 
 // Display Arithmetic Operation Events
 void ProgramHandler::displayOperationDetails(const ArithmeticOperation& operation) const
 {
-	displayOperationName(operation);
-	displayOperationSampleMenu(operation);
+	this->displayOperationName(operation);
+	this->displayOperationSampleMenu(operation);
 }
 void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) const
 {
 	std::cout << "\n\n\t\t\tLaunching " << operation.getOpName() << " operation";
-	clearScreen();
+	this->clearScreen();
 }
 void ProgramHandler::displayOperationSampleMenu(const ArithmeticOperation& operation) const
 {
@@ -179,7 +179,7 @@ const int ProgramHandler::userOpSampleSelection()
 
 	do
 	{
-		selectionRange = getInput();
+		selectionRange = this->getInput();
 		// If user selections within sample range 1 - 5, we return that value
 		if (selectionRange >= 1 && selectionRange <= 5)
 			validSelection = true;
@@ -204,7 +204,7 @@ void ProgramHandler::userSetMainMenuDirective()
 
 	do
 	{
-		switch (static_cast<ProgramDirective>(getInput()))
+		switch (static_cast<ProgramDirective>(this->getInput()))
 		{
 		case vectorAddition: { this->mDisplay = vectorAddition; validSelection = true; break; }
 		case matrixMultiplication: { this->mDisplay = matrixMultiplication; validSelection = true; break; }
@@ -247,7 +247,7 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 
 	switch (this->mDisplay)
 	{
-	case programStart: { displayProgramStart(); break; }
+	case programStart: { this->displayProgramStart(); break; }
 	case vectorAddition:
 	{
 		VectorAddition vecAdd{};
@@ -256,7 +256,7 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 
 		do
 		{
-			displayOperationDetails(vecAdd);
+			this->displayOperationDetails(vecAdd);
 			toExitOp = false;
 			int userSampleDisplaySelection{ this->userOpSampleSelection() };
 
@@ -281,7 +281,7 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 
 		do
 		{
-			displayOperationDetails(matMulti);
+			this->displayOperationDetails(matMulti);
 			toExitOp = false;
 			int userSampleDisplaySelection{ this->userOpSampleSelection() };
 
@@ -306,7 +306,7 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 
 		do
 		{
-			displayOperationDetails(oneConv);
+			this->displayOperationDetails(oneConv);
 			toExitOp = false;
 			int userSampleDisplaySelection{ this->userOpSampleSelection() };
 
@@ -331,7 +331,7 @@ void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 f
 
 		do
 		{
-			displayOperationDetails(twoConv);
+			this->displayOperationDetails(twoConv);
 			toExitOp = false;
 			int userSampleDisplaySelection{ this->userOpSampleSelection() };
 

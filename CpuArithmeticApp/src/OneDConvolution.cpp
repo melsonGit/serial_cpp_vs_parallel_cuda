@@ -16,26 +16,26 @@ void OneDConvolution::setContainer(const int& userInput)
 
 	
 	// If empty (first run), resize the mask vector - if already resized (second run), ignore
-	if (mOCMaskVec.empty())
+	if (this->mOCMaskVec.empty())
 		this->mOCMaskVec.resize(maskDim);
 
 	// If first run - we'll re-size regardless
 	if (this->getCurrentVecSize() == firstRun)
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mOCInputVec.resize(mSampleSizes[actualIndex]);
-		this->mOCOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
+		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 	else if (actualIndex == this->getCurrentVecSize())
 	{
 		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
-		populateContainer(this->mOCInputVec, this->mOCMaskVec);
+		this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
 	}
 	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mOCInputVec.resize(mSampleSizes[actualIndex]);
-		this->mOCOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
+		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 		// Non-binding - IDE will decide if this will execute
 		this->mOCInputVec.shrink_to_fit();
 		this->mOCOutputVec.shrink_to_fit();
@@ -43,11 +43,11 @@ void OneDConvolution::setContainer(const int& userInput)
 	else // If selection is higher than last run
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mOCInputVec.resize(mSampleSizes[actualIndex]);
-		this->mOCOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
+		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 
-	populateContainer(this->mOCInputVec, this->mOCMaskVec);
+	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
 }
 void OneDConvolution::launchOp()
 {
@@ -65,7 +65,7 @@ void OneDConvolution::launchOp()
     {
 		// Update offset value for that row
         radiusOffsetRows = rowIn - maskOffset;
-		mOCOutputVec[rowIn] = 0;
+		this->mOCOutputVec[rowIn] = 0;
 
 		// For each mask row in mOCMaskVec
         for (auto maskRowIn{ 0 }; maskRowIn < maskDim; ++maskRowIn)

@@ -37,7 +37,7 @@ void MatrixMultiplication::populateContainer(std::vector<std::vector<P1>>& vecTo
 template<typename P1, typename ... Args>
 void MatrixMultiplication::populateContainer(std::vector<std::vector<P1>>& vecToPop, Args&... args)
 {
-    populateContainer(vecToPop);
-    populateContainer(args...);
+    this->populateContainer(vecToPop);
+    this->populateContainer(args...);
 }
 #endif

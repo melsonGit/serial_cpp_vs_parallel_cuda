@@ -37,7 +37,7 @@ void VectorAddition::populateContainer(std::vector<P1>& vecToPop)
 template<typename P1, typename ... Args>
 void VectorAddition::populateContainer(std::vector<P1>& vecToPop, Args&... args)
 {
-    populateContainer(vecToPop);
-    populateContainer(args...);
+    this->populateContainer(vecToPop);
+    this->populateContainer(args...);
 }
 #endif

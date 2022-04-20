@@ -34,26 +34,26 @@ void TwoDConvolution::setContainer(const int& userInput)
 
 	// Convolution-specific mask vector size allocation - remains the same size regardless
 	// If empty (first run), resize the mask vector - if already resized (second run), ignore
-	if (mTCMaskVec.empty())
+	if (this->mTCMaskVec.empty())
 		this->mTCMaskVec.resize(maskDim * maskDim);
 
 	// If first run - we'll re-size regardless
 	if (this->getCurrentVecSize() == firstRun)
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mTCInputVec.resize(mSampleSizes[actualIndex]);
-		this->mTCOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mTCInputVec.resize(this->mSampleSizes[actualIndex]);
+		this->mTCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 	else if (actualIndex == this->getCurrentVecSize())
 	{
 		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
-		populateContainer(this->mTCInputVec, this->mTCMaskVec);
+		this->populateContainer(this->mTCInputVec, this->mTCMaskVec);
 	}
 	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mTCInputVec.resize(mSampleSizes[actualIndex]);
-		this->mTCOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mTCInputVec.resize(this->mSampleSizes[actualIndex]);
+		this->mTCOutputVec.resize(this->mSampleSizes[actualIndex]);
 		// Non-binding - IDE will decide if this will execute
 		this->mTCInputVec.shrink_to_fit();
 		this->mTCOutputVec.shrink_to_fit();
@@ -61,11 +61,11 @@ void TwoDConvolution::setContainer(const int& userInput)
 	else // If selection is higher than last run
 {
 		this->setCurrentVecSize(actualIndex);
-		this->mTCInputVec.resize(mSampleSizes[actualIndex]);
-		this->mTCOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mTCInputVec.resize(this->mSampleSizes[actualIndex]);
+		this->mTCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 
-	populateContainer(this->mTCInputVec, this->mTCMaskVec);
+	this->populateContainer(this->mTCInputVec, this->mTCMaskVec);
 }
 void TwoDConvolution::launchOp()
 {
@@ -78,7 +78,7 @@ void TwoDConvolution::launchOp()
 	int radiusOffsetCols{ 0 };
 
 	// Replace this var with mTCOutputVec.size() in all if loop conditional statements when we use 2d vectors
-	std::size_t tempConSize{ tempConSizeInit() };
+	std::size_t tempConSize{ this->tempConSizeInit() };
 
 	// Accumulate results
 	std::size_t resultVar{};
@@ -133,7 +133,7 @@ void TwoDConvolution::validateResults()
 	int radiusOffsetCols{ 0 };
 
 	// Replace this var with mTCOutputVec.size() in all if loop conditional statements when we use 2d vectors
-	std::size_t tempConSize{ tempConSizeInit() };
+	std::size_t tempConSize{ this->tempConSizeInit() };
 
 	// Accumulates our results
 	std::size_t resultVar{};

@@ -16,21 +16,21 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 	if (this->getCurrentVecSize() == firstRun)
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mVAInputVecA.resize(mSampleSizes[actualIndex]);
-		this->mVAInputVecB.resize(mSampleSizes[actualIndex]);
-		this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
+		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
+		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 	else if (actualIndex == this->getCurrentVecSize())
 	{
 		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
-		populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+		this->populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 	}
 	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mVAInputVecA.resize(mSampleSizes[actualIndex]);
-		this->mVAInputVecB.resize(mSampleSizes[actualIndex]);
-		this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
+		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
+		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
 		// Non-binding - IDE will decide if this will execute
 		this->mVAInputVecA.shrink_to_fit();
 		this->mVAInputVecB.shrink_to_fit();
@@ -39,12 +39,12 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 	else // If selection is higher than last run
 	{
 		this->setCurrentVecSize(actualIndex);
-		this->mVAInputVecA.resize(mSampleSizes[actualIndex]);
-		this->mVAInputVecB.resize(mSampleSizes[actualIndex]);
-		this->mVAOutputVec.resize(mSampleSizes[actualIndex]);
+		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
+		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
+		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 
-	populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+	this->populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 }
 void VectorAddition::launchOp()
 {
