@@ -39,11 +39,11 @@ public:
 
     void startOpSeq(const int& userInput);
 
-    const int getCurrentSize() const;
+    const int getCurrentVecSize() const;
     const std::string_view getOpName() const;
     const std::size_t getOpSampleSize(const int& option) const;
 
-    void setCurrentSize(const int& newSize);
+    void setCurrentVecSize(const int& newSize);
 };
 
 /* Templates for each possible container used by children of ArithmeticOperation - Please update when a new container is required

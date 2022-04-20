@@ -16,11 +16,11 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 	launchOp();
 	validateResults();
 }
-const int ArithmeticOperation::getCurrentSize() const
+const int ArithmeticOperation::getCurrentVecSize() const
 {
 	return this->currentVecSize;
 }
-void ArithmeticOperation::setCurrentSize(const int& newSize)
+void ArithmeticOperation::setCurrentVecSize(const int& newSize)
 {
 	this->currentVecSize = newSize;
 }

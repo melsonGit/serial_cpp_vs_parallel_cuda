@@ -7,7 +7,7 @@
 
 using namespace MaskAttributes; 
 
-// Reminder: When we switch from using native arrays to 2d vectors, Remove this when we implement 2d vectors
+// Reminder: When we switch from using native arrays to 2d vectors, Remove this
 const std::size_t TwoDConvolution::tempConSizeInit()
 {
 	// Return values represent true native vector size i.e 4096^2 = 16777216
@@ -25,7 +25,6 @@ const std::size_t TwoDConvolution::tempConSizeInit()
 
 	return -1;
 }
-
 void TwoDConvolution::setContainer(const int& userInput)
 {
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
@@ -39,41 +38,34 @@ void TwoDConvolution::setContainer(const int& userInput)
 		this->mTCMaskVec.resize(maskDim * maskDim);
 
 	// If first run - we'll re-size regardless
-	if (this->getCurrentSize() == firstRun)
+	if (this->getCurrentVecSize() == firstRun)
 	{
-		this->setCurrentSize(actualIndex);
-
+		this->setCurrentVecSize(actualIndex);
 		this->mTCInputVec.resize(mSampleSizes[actualIndex]);
 		this->mTCOutputVec.resize(mSampleSizes[actualIndex]);
-
+	}
+	else if (actualIndex == this->getCurrentVecSize())
+	{
+		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 		populateContainer(this->mTCInputVec, this->mTCMaskVec);
 	}
-	else if (actualIndex == this->getCurrentSize()) // If user selected same sample size as last run - don't resize, just re-populate vectors
+	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 	{
-		populateContainer(this->mTCInputVec, this->mTCMaskVec);
-	}
-	else if (actualIndex < this->getCurrentSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-	{
-		this->setCurrentSize(actualIndex);
-
+		this->setCurrentVecSize(actualIndex);
 		this->mTCInputVec.resize(mSampleSizes[actualIndex]);
 		this->mTCOutputVec.resize(mSampleSizes[actualIndex]);
-
 		// Non-binding - IDE will decide if this will execute
 		this->mTCInputVec.shrink_to_fit();
 		this->mTCOutputVec.shrink_to_fit();
-
-		populateContainer(this->mTCInputVec, this->mTCMaskVec);
 	}
 	else // If selection is higher than last run
-	{
-		this->setCurrentSize(actualIndex);
-
+{
+		this->setCurrentVecSize(actualIndex);
 		this->mTCInputVec.resize(mSampleSizes[actualIndex]);
 		this->mTCOutputVec.resize(mSampleSizes[actualIndex]);
-
-		populateContainer(this->mTCInputVec, this->mTCMaskVec);
 	}
+
+	populateContainer(this->mTCInputVec, this->mTCMaskVec);
 }
 void TwoDConvolution::launchOp()
 {

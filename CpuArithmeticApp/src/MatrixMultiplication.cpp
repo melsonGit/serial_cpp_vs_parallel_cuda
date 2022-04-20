@@ -13,45 +13,39 @@ void MatrixMultiplication::setContainer(const int& userInput)
 	constexpr int firstRun{ 99 };
 
 	// If first run - we'll re-size regardless
-	if (this->getCurrentSize() == firstRun)
+	if (this->getCurrentVecSize() == firstRun)
 	{
-		this->setCurrentSize(actualIndex);
+		this->setCurrentVecSize(actualIndex);
+		this->mMMInputVecA.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
+		this->mMMInputVecB.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
+		this->mMMOutputVec.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
+	}
+	else if (actualIndex == this->getCurrentVecSize())
+	{
+		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
+		populateContainer(this->mMMInputVecA, this->mMMInputVecB);
+	}
+	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
+	{
+		this->setCurrentVecSize(actualIndex);
 
 		this->mMMInputVecA.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMInputVecB.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMOutputVec.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
-
-		populateContainer(this->mMMInputVecA, this->mMMInputVecB);
-	}
-	else if (actualIndex == this->getCurrentSize()) // If user selected same sample size as last run - don't resize, just re-populate vectors
-	{
-		populateContainer(this->mMMInputVecA, this->mMMInputVecB);
-	}
-	else if (actualIndex < this->getCurrentSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-	{
-		this->setCurrentSize(actualIndex);
-
-		this->mMMInputVecA.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
-		this->mMMInputVecB.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
-		this->mMMOutputVec.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
-
 		// Non-binding - IDE will decide if this will execute
 		this->mMMInputVecA.shrink_to_fit();
 		this->mMMInputVecB.shrink_to_fit();
 		this->mMMOutputVec.shrink_to_fit();
-
-		populateContainer(this->mMMInputVecA, this->mMMInputVecB);
 	}
 	else // If selection is higher than last run
 	{
-		this->setCurrentSize(actualIndex);
-
+		this->setCurrentVecSize(actualIndex);
 		this->mMMInputVecA.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMInputVecB.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMOutputVec.resize(mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
-
-		populateContainer(this->mMMInputVecA, this->mMMInputVecB);
 	}
+
+	populateContainer(this->mMMInputVecA, this->mMMInputVecB);
 }
 void MatrixMultiplication::launchOp()
 {

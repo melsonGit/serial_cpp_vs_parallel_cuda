@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace MaskAttributes;
+
 void OneDConvolution::setContainer(const int& userInput)
 {
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
@@ -12,47 +14,40 @@ void OneDConvolution::setContainer(const int& userInput)
 	// First run check - any number outside 0 - 6 is fine but just to be safe
 	constexpr int firstRun{ 99 };
 
-	// Convolution-specific mask vector size allocation - remains the same size regardless
+	
 	// If empty (first run), resize the mask vector - if already resized (second run), ignore
 	if (mOCMaskVec.empty())
-		this->mOCMaskVec.resize(MaskAttributes::maskDim);
+		this->mOCMaskVec.resize(maskDim);
 
 	// If first run - we'll re-size regardless
-	if (this->getCurrentSize() == firstRun)
+	if (this->getCurrentVecSize() == firstRun)
 	{
-		this->setCurrentSize(actualIndex);
-
+		this->setCurrentVecSize(actualIndex);
 		this->mOCInputVec.resize(mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(mSampleSizes[actualIndex]);
-
+	}
+	else if (actualIndex == this->getCurrentVecSize())
+	{
+		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 		populateContainer(this->mOCInputVec, this->mOCMaskVec);
 	}
-	else if (actualIndex == this->getCurrentSize()) // If user selected same sample size as last run - don't resize, just re-populate vectors
+	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 	{
-		populateContainer(this->mOCInputVec, this->mOCMaskVec);
-	}
-	else if (actualIndex < this->getCurrentSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-	{
-		this->setCurrentSize(actualIndex);
-
+		this->setCurrentVecSize(actualIndex);
 		this->mOCInputVec.resize(mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(mSampleSizes[actualIndex]);
-
 		// Non-binding - IDE will decide if this will execute
 		this->mOCInputVec.shrink_to_fit();
 		this->mOCOutputVec.shrink_to_fit();
-
-		populateContainer(this->mOCInputVec, this->mOCMaskVec);
 	}
 	else // If selection is higher than last run
 	{
-		this->setCurrentSize(actualIndex);
-
+		this->setCurrentVecSize(actualIndex);
 		this->mOCInputVec.resize(mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(mSampleSizes[actualIndex]);
-
-		populateContainer(this->mOCInputVec, this->mOCMaskVec);
 	}
+
+	populateContainer(this->mOCInputVec, this->mOCMaskVec);
 }
 void OneDConvolution::launchOp()
 {
@@ -105,10 +100,10 @@ void OneDConvolution::validateResults()
 		resultVar = 0;
 
 		// Update offset value for that row
-		radiusOffsetRows = rowIn - MaskAttributes::maskOffset;
+		radiusOffsetRows = rowIn - maskOffset;
 
 		// For each mask row in mOCMaskVec
-		for (auto maskRowIn{ 0 }; maskRowIn < MaskAttributes::maskDim; ++maskRowIn)
+		for (auto maskRowIn{ 0 }; maskRowIn < maskDim; ++maskRowIn)
 		{
 			// Check if we're hanging off mask row
 			if ((radiusOffsetRows + maskRowIn >= 0) && (radiusOffsetRows + maskRowIn < this->mOCOutputVec.size()))
