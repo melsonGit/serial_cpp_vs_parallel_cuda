@@ -103,7 +103,7 @@ const bool ProgramHandler::getKeyPress() const
 #endif
 }
 
-// Display Non-Arithmetic Operation Events
+// Display Non-Arithmetic Operation OperationEvents
 void ProgramHandler::displayMainMenu() const
 {
 	using namespace ArithmeticDetails;
@@ -141,7 +141,7 @@ void ProgramHandler::displayProgramStart() const
 	while (!this->getKeyPress());
 }
 
-// Display Arithmetic Operation Events
+// Display Arithmetic Operation OperationEvents
 void ProgramHandler::displayOperationDetails(const ArithmeticOperation& operation) const
 {
 	this->displayOperationName(operation);
@@ -170,7 +170,7 @@ void ProgramHandler::displayOperationSampleMenu(const ArithmeticOperation& opera
 		<< '[' << static_cast<int>(inOpProgramExit) << "]\tClose Program\n";
 }
 
-// User Input Events
+// User Input OperationEvents
 const int ProgramHandler::userOpSampleSelection()
 {
 	using enum ProgramDirective;

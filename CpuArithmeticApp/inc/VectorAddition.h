@@ -25,7 +25,7 @@ private:
 public:
 
     VectorAddition() 
-        : ArithmeticOperation{ vecAddName, vecAddSamples } {}
+        : ArithmeticOperation{ vecAddName, vecAddSamples, vecAddMaskStatus } {}
 };
 
 template<typename P1>

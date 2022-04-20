@@ -48,15 +48,9 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 }
 void VectorAddition::launchOp()
 {
-	// Reminder: These event outputs could be placed into a class somewhere.......
-	std::cout << "\nVector Addition: Populating complete.\n";
-	std::cout << "\nVector Addition: Starting operation.\n";
-
 	// Add contents from inputVecA and inputVecB into resultVec
 	transform(this->mVAInputVecA.begin(), this->mVAInputVecA.end(), this->mVAInputVecB.begin(), this->mVAOutputVec.begin(),
 		[](auto a, auto b) {return a + b; });
-
-	std::cout << "\nVector Addition: Operation complete.\n";
 }
 void VectorAddition::validateResults() 
 {

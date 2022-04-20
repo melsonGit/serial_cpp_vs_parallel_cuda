@@ -26,7 +26,7 @@ private:
 public:
 
     TwoDConvolution()
-        : ArithmeticOperation{ twoDConvName, twoDConvSamples } {}
+        : ArithmeticOperation{ twoDConvName, twoDConvSamples, twoDConvMaskStatus } {}
 };
 
 template<typename P1>

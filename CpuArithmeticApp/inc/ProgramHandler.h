@@ -3,6 +3,7 @@
 #define PROGRAM_HANDLER
 
 #include "ArithmeticOperation.h"
+#include "OperationEventHandler.h"
 
 #include <cassert>
 #include <string_view>
@@ -31,6 +32,9 @@ private:
 	// Navigates our ProgramDirective functions
 	ProgramDirective mDisplay{};
 
+	// Handles our operation events, providing operation feedback to the user
+	OperationEventHandler mOperationHandler{};
+
 	// ProgramHandler Utilites (Windows.h incuded below as it clashes with getInput())
 	void clearInputStream() const;
 	void clearScreen() const;
@@ -38,17 +42,17 @@ private:
 	void fakeLoad() const;
 	const bool getKeyPress() const;
 
-	// Display Non-Arithmetic Operation Events
+	// Display Non-Arithmetic Operation OperationEvents
 	void displayMainMenu() const;
 	void displayProgramExit() const;
 	void displayProgramStart() const;
 
-	// Display Arithmetic Operation Events
+	// Display Arithmetic Operation OperationEvents
 	void displayOperationDetails(const ArithmeticOperation& operation) const;
 	void displayOperationName(const ArithmeticOperation& operation) const;
 	void displayOperationSampleMenu(const ArithmeticOperation& operation) const;
 
-	// User Input Events
+	// User Input OperationEvents
 	const int userOpSampleSelection();
 	void userSetMainMenuDirective();
 

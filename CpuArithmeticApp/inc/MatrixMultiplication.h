@@ -25,7 +25,7 @@ private:
 public:
 
     MatrixMultiplication()
-        : ArithmeticOperation{ matMultiName, matMultiSamples } {}
+        : ArithmeticOperation{ matMultiName, matMultiSamples, matMultiMaskStatus } {}
 };
 
 template<typename P1>

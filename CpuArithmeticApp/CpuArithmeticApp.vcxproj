@@ -156,7 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ArithmeticOperation.cpp" />
-    <ClCompile Include="src\EventHandler.cpp" />
+    <ClCompile Include="src\OperationEventHandler.cpp" />
     <ClCompile Include="src\MatrixMultiplication.cpp" />
     <ClCompile Include="src\OneDConvolution.cpp" />
     <ClCompile Include="src\OperationTimer.cpp" />
@@ -168,7 +168,7 @@
   <ItemGroup>
     <ClInclude Include="inc\ArithmeticOperation.h" />
     <ClInclude Include="inc\ArithmeticDetails.h" />
-    <ClInclude Include="inc\EventHandler.h" />
+    <ClInclude Include="inc\OperationEventHandler.h" />
     <ClInclude Include="inc\MaskAttributes.h" />
     <ClInclude Include="inc\MatrixMultiplication.h" />
     <ClInclude Include="inc\OneDConvolution.h" />

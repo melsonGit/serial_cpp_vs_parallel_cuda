@@ -18,10 +18,11 @@ protected:
 
     const std::string mOperationName{};
     const std::array<std::size_t, 5> mSampleSizes{};
+    const bool hasMask{};
     int currentVecSize{ 99 }; // Default first run value (see setContainer()). Any number outside 0 - 6 is fine but just to be safe
 
-    ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples)
-        : mOperationName{ name }, mSampleSizes{ samples } {}
+    ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
+        : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus } {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
     virtual void setContainer(const int& userInput) = 0;
@@ -37,13 +38,14 @@ protected:
     
 public:
 
-    void startOpSeq(const int& userInput);
-
     const int getCurrentVecSize() const;
+    const bool getMaskStatus() const;
     const std::string_view getOpName() const;
     const std::size_t getOpSampleSize(const int& option) const;
 
     void setCurrentVecSize(const int& newSize);
+
+    void startOpSeq(const int& userInput);
 };
 
 /* Templates for each possible container used by children of ArithmeticOperation - Please update when a new container is required

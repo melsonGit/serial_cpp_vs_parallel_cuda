@@ -27,7 +27,7 @@ private:
 public:
 
     OneDConvolution()
-        : ArithmeticOperation{ oneDConvName, oneDConvSamples } {}
+        : ArithmeticOperation{ oneDConvName, oneDConvSamples, oneDConvMaskStatus } {}
 };
 
 template<typename P1>
