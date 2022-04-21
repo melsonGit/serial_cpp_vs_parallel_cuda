@@ -3,7 +3,6 @@
 #define PROGRAM_HANDLER
 
 #include "ArithmeticOperation.h"
-#include "OperationEventHandler.h"
 
 #include <cassert>
 #include <string_view>
@@ -24,6 +23,11 @@ enum class ProgramDirective
 	inOpProgramExit,
 };
 
+
+// Split this class into multiple ones - has too much responsiblity. 
+// It should really only be responsible for directives, not displaying events etc.
+
+
 // Handles program events
 class ProgramHandler
 {
@@ -31,9 +35,6 @@ private:
 
 	// Navigates our ProgramDirective functions
 	ProgramDirective mDisplay{};
-
-	// Handles our operation events, providing operation feedback to the user
-	OperationEventHandler mOperationHandler{};
 
 	// ProgramHandler Utilites (Windows.h incuded below as it clashes with getInput())
 	void clearInputStream() const;

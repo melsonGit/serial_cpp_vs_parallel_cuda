@@ -7,26 +7,24 @@
 
 void VectorAddition::setContainer(const int& userInput) // another parameter pack for this?
 {
+	this->OperationEventHandler.processEvent(getOpName());
+
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
 	constexpr int firstRun{ 99 }; 
 
-	// If first run - we'll re-size regardless
 	if (this->getCurrentVecSize() == firstRun)
 	{
+		// If first run - we'll re-size regardless
 		this->setCurrentVecSize(actualIndex);
 		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
 		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
 		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
-	else if (actualIndex == this->getCurrentVecSize())
+	else if (actualIndex < this->getCurrentVecSize())
 	{
-		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
-		this->populateContainer(this->mVAInputVecA, this->mVAInputVecB);
-	}
-	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-	{
+		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 		this->setCurrentVecSize(actualIndex);
 		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
 		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
@@ -36,25 +34,33 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 		this->mVAInputVecB.shrink_to_fit();
 		this->mVAOutputVec.shrink_to_fit();
 	}
-	else // If selection is higher than last run
+	else if (actualIndex > this->getCurrentVecSize())
 	{
+		// If selection is higher than last run
 		this->setCurrentVecSize(actualIndex);
 		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
 		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
 		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 
+	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mVAInputVecA, this->mVAInputVecB);
+	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent(getOpName());
 }
 void VectorAddition::launchOp()
 {
+	this->OperationEventHandler.processEvent(getOpName());
+
 	// Add contents from inputVecA and inputVecB into resultVec
 	transform(this->mVAInputVecA.begin(), this->mVAInputVecA.end(), this->mVAInputVecB.begin(), this->mVAOutputVec.begin(),
 		[](auto a, auto b) {return a + b; });
+
+	this->OperationEventHandler.processEvent(getOpName());
 }
 void VectorAddition::validateResults() 
 {
-	std::cout << "\nVector Addition: Authenticating results.\n\n";
+	this->OperationEventHandler.processEvent(getOpName());
 
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };
@@ -69,10 +75,5 @@ void VectorAddition::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Addition of mVAInputVecA / mVAInputVecB values don't match corresponding values in mVAOutputVec (vecAdd).");
 
-	if (!doesMatch)
-		std::cerr << "Vector Addition unsuccessful: output vector data does not match expected results.\n"
-		<< "Timing results will be discarded.\n\n";
-	else
-		std::cout << "Vector Addition successful: output vector data matches expected results.\n"
-		<< "Timing results will be recorded.\n\n";
+	this->OperationEventHandler.processEvent(getOpName(), doesMatch);
 }

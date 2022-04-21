@@ -2,6 +2,7 @@
 #ifndef ARITHMETIC_OPERATION
 #define ARITHMETIC_OPERATION
 
+#include "OperationEventHandler.h"
 #include "randNumGen.h"
 #include "MaskAttributes.h"
 
@@ -10,7 +11,6 @@
 #include <ctime>
 #include <random>
 #include <string>
-#include <string_view>
 
 class ArithmeticOperation
 {
@@ -20,6 +20,7 @@ protected:
     const std::array<std::size_t, 5> mSampleSizes{};
     const bool hasMask{};
     int currentVecSize{ 99 }; // Default first run value (see setContainer()). Any number outside 0 - 6 is fine but just to be safe
+    OperationEventHandler OperationEventHandler{};
 
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus } {}
@@ -40,7 +41,8 @@ public:
 
     const int getCurrentVecSize() const;
     const bool getMaskStatus() const;
-    const std::string_view getOpName() const;
+    const std::string getOpName() const;
+    //const std::string_view viewOpName() const; may be of use when we just want to display our string
     const std::size_t getOpSampleSize(const int& option) const;
 
     void setCurrentVecSize(const int& newSize);

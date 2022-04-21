@@ -1,6 +1,6 @@
 #pragma once
-#ifndef EVENT_HANDLER
-#define EVENT_HANDLER
+#ifndef OPERATION_EVENT_HANDLER
+#define OPERATION_EVENT_HANDLER
 
 #include <string>
 #include <cassert>
@@ -15,7 +15,7 @@ namespace OperationEvents
 		maskPopulationComplete,
 		containerEventComplete,
 	};
-	enum class ArithmeticEvents
+	enum class LaunchOpEvents
 	{
 		operationStart,
 		arithmeticEventComplete,
@@ -23,13 +23,15 @@ namespace OperationEvents
 	enum class ValidationEvents
 	{
 		validationStart,
-		validationFailedComplete,
-		validationSuccessfulComplete,
 		validationEventComplete,
 	};
-	enum class OutputToFileEvents
+	//enum class OutputToFileEvents {};
+	enum class EventTriggers
 	{
-
+		startSetContainerEvent,
+		startLaunchOpEvent,
+		startValidationEvent,
+		//startOutputToFileEvent,
 	};
 }
 
@@ -37,19 +39,31 @@ class OperationEventHandler
 {
 private:
 
-	int mContainerEventTracker{ 0 };
-	int mArithmeticEventTracker{ 0 };
-	int mValidationEventTracker{ 0 };
-	int mOutputToFileEventTracker{ 0 };
+	// Navigates and determines events to be processed in processEvent()
+	int mEventController{ 0 };
+	
+	// Navigates specific events pertaining to corresponding name 
+	// e.g. mContainerEventController controls eventSetContainer() flow
+	int mContainerEventController{ 0 };
+	int mLaunchOpEventController{ 0 };
+	int mValidationEventController{ 0 };
+	//int mOutputToFileEventController{ 0 };
+
+	void eventSetContainer(const std::string& operation, const bool& hasMask);
+	void eventLaunchOp(const std::string& operation);
+	void eventValidateResults(const std::string& operation, const bool& passedValidation);
+	//void eventOutputToFile(const std::string& operation);
+
+	// Controller resetters
+	void resetEventController();
+	void resetContainerEventController();
+	void resetLaunchOpEventController();
+	void resetValidationEventController();
 
 public:
 
 	OperationEventHandler() = default;
 
-	void trackEvents(const std::string& operation, const bool& hasMask);
-	const bool containerPopulationEvent(const std::string& operation, const bool& hasMask);
-	const bool arithmeticEvent(const std::string& operation);
-	const bool validationEvent(const std::string& operation);
-	const bool outputToFileEvent(const std::string& operation);
+	void processEvent(const std::string& operation, const bool& hasMask = false, const bool& passedValidation = true);
 };
 #endif

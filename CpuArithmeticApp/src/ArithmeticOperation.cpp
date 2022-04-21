@@ -12,7 +12,7 @@ const bool ArithmeticOperation::getMaskStatus() const
 {
 	return this->hasMask;
 }
-const std::string_view ArithmeticOperation::getOpName() const
+const std::string ArithmeticOperation::getOpName() const
 {
 	return this->mOperationName;
 }
