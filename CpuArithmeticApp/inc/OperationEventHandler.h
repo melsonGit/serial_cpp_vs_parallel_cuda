@@ -40,7 +40,7 @@ class OperationEventHandler
 private:
 
 	// Navigates and determines events to be processed in processEvent()
-	int mEventController{ 0 };
+	int mMainEventController{ 0 };
 	
 	// Navigates specific events pertaining to corresponding name 
 	// e.g. mContainerEventController controls eventSetContainer() flow
@@ -55,7 +55,7 @@ private:
 	//void eventOutputToFile(const std::string& operation);
 
 	// Controller resetters
-	void resetEventController();
+	void resetMainEventController();
 	void resetContainerEventController();
 	void resetLaunchOpEventController();
 	void resetValidationEventController();

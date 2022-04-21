@@ -20,7 +20,7 @@ void OperationEventHandler::processEvent(const std::string& operation, const boo
 {
 	using enum EventTriggers;
 
-	switch (static_cast<EventTriggers>(this->mEventController))
+	switch (static_cast<EventTriggers>(this->mMainEventController))
 	{
 	case startSetContainerEvent: {eventSetContainer(operation, hasMask); break; }
 	case startLaunchOpEvent: {eventLaunchOp(operation); break; }
@@ -99,7 +99,7 @@ void OperationEventHandler::eventSetContainer(const std::string& operation, cons
 	{
 		std::cout << '\n' << operation << ": All containers populated.\n";
 		this->resetContainerEventController();
-		this->mEventController = static_cast<int>(EventTriggers::startLaunchOpEvent);
+		this->mMainEventController = static_cast<int>(EventTriggers::startLaunchOpEvent);
 		break;
 	}
 	default: {const bool isBadTrigger{ true }; assert(!isBadTrigger && "We've no matching event!(eventSetContainer)."); break; }
@@ -121,7 +121,7 @@ void OperationEventHandler::eventLaunchOp(const std::string& operation)
 	{
 		std::cout << '\n' << operation << ": Operation complete.\n";
 		this->resetLaunchOpEventController();
-		this->mEventController = static_cast<int>(EventTriggers::startValidationEvent);
+		this->mMainEventController = static_cast<int>(EventTriggers::startValidationEvent);
 		break;
 	}
 	default: {const bool isBadTrigger{ true }; assert(!isBadTrigger && "We've no matching event!(eventLaunchOp)."); break; }
@@ -144,13 +144,13 @@ void OperationEventHandler::eventValidateResults(const std::string& operation, c
 		std::cout << '\n' << operation << ": Result validation complete.\n";
 
 		if (passedValidation)
-			std::cout << '\n' << operation << ": Output data matches expected results.\n\t\t Timing results will be recorded.\n";
+			std::cout << '\n' << operation << ": Output data matches expected results. Timing results recorded.\n";
 		else
-			std::cout << '\n' << operation << ": Output data does not match the expected result. Timing results will be discarded.\n";
+			std::cout << '\n' << operation << ": Output data does not match the expected result. Timing results discarded.\n";
 
 		this->resetValidationEventController();
-		//this->mEventController = static_cast<int>(EventTriggers::startOutputToFileEvent); uncomment when we implement the feature
-		this->resetEventController(); // remove when the above is implemented
+		//this->mMainEventController = static_cast<int>(EventTriggers::startOutputToFileEvent); uncomment when we implement the feature
+		this->resetMainEventController(); // remove when the above is implemented
 		break;
 	}
 	default: {const bool isBadTrigger{ true }; assert(!isBadTrigger && "We've no matching event!(eventValidateResults)."); break; }
@@ -161,7 +161,7 @@ void OperationEventHandler::eventOutputToFile(const std::string& operation)
 {
 	using enum OutputToFileEvents;
 
-	resetEventController();
+	resetMainEventController();
 
 	switch (static_cast<OutputToFileEvents>(this->mOutputToFileEventController))
 	{
@@ -172,9 +172,9 @@ void OperationEventHandler::eventOutputToFile(const std::string& operation)
 
 // Controller resetters
 
-void OperationEventHandler::resetEventController()
+void OperationEventHandler::resetMainEventController()
 {
-	this->mEventController = 0;
+	this->mMainEventController = 0;
 }
 void OperationEventHandler::resetContainerEventController()
 {
