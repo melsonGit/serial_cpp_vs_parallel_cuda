@@ -41,7 +41,7 @@ void OperationEventHandler::processEvent(const std::string& operation, const boo
 
 	processEvent() is to only be called in ArithmeticOperation children class functions setContainer(), launchOp() and validateResults();
 
-	processEvent() assumes you operations have no mask and has passed validation (default arguments).... 
+	processEvent() assumes your operations have no mask and has passed validation (default arguments).... 
 	... so please ensure processEvent() is provided overriding arguments in areas where we need to specify if:
 	1 - the operation uses a mask
 	2 - processEvent() is being called from within validateResults();

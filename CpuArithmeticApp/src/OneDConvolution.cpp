@@ -9,6 +9,8 @@ using namespace MaskAttributes;
 
 void OneDConvolution::setContainer(const int& userInput)
 {
+	this->OperationEventHandler.processEvent(getOpName());
+
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
@@ -45,13 +47,16 @@ void OneDConvolution::setContainer(const int& userInput)
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
+	this->OperationEventHandler.processEvent(getOpName(), this->getMaskStatus());
+	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent(getOpName());
 }
 void OneDConvolution::launchOp()
 {
 	using namespace MaskAttributes;
 
-    std::cout << "\n1D Convolution: Populating complete.\n";
-    std::cout << "\n1D Convolution: Starting operation.\n";
+	this->OperationEventHandler.processEvent(getOpName());
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -75,11 +80,12 @@ void OneDConvolution::launchOp()
             }
         }
     }
-    std::cout << "\n1D Convolution: Operation complete.\n";
+
+	this->OperationEventHandler.processEvent(getOpName());
 }
 void OneDConvolution::validateResults()
 {
-	std::cout << "\n1D Convolution: Authenticating results.\n\n";
+	this->OperationEventHandler.processEvent(getOpName());
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -116,10 +122,5 @@ void OneDConvolution::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mOCOutputVec (oneConv).");
 
-	if (!doesMatch)
-		std::cerr << "1D Convolution unsuccessful: output vector data does not match the expected result.\n"
-		<< "Timing results will be discarded.\n\n";
-	else
-		std::cout << "1D Convolution successful: output vector data matches expected results.\n"
-		<< "Timing results will be recorded.\n\n";
+	this->OperationEventHandler.processEvent(getOpName(), doesMatch);
 }
