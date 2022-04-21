@@ -14,25 +14,20 @@ void OneDConvolution::setContainer(const int& userInput)
 	// First run check - any number outside 0 - 6 is fine but just to be safe
 	constexpr int firstRun{ 99 };
 
-	
 	// If empty (first run), resize the mask vector - if already resized (second run), ignore
 	if (this->mOCMaskVec.empty())
 		this->mOCMaskVec.resize(maskDim);
 
-	// If first run - we'll re-size regardless
 	if (this->getCurrentVecSize() == firstRun)
 	{
+		// If first run - we'll re-size regardless
 		this->setCurrentVecSize(actualIndex);
 		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
-	else if (actualIndex == this->getCurrentVecSize())
+	else if (actualIndex < this->getCurrentVecSize()) 
 	{
-		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
-		this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
-	}
-	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-	{
+		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 		this->setCurrentVecSize(actualIndex);
 		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
@@ -40,13 +35,15 @@ void OneDConvolution::setContainer(const int& userInput)
 		this->mOCInputVec.shrink_to_fit();
 		this->mOCOutputVec.shrink_to_fit();
 	}
-	else // If selection is higher than last run
+	else if (actualIndex > this->getCurrentVecSize())
 	{
+		// If selection is higher than last run
 		this->setCurrentVecSize(actualIndex);
 		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 
+	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
 }
 void OneDConvolution::launchOp()

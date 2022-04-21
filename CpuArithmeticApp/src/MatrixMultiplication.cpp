@@ -12,21 +12,17 @@ void MatrixMultiplication::setContainer(const int& userInput)
 	// First run check - any number outside 0 - 6 is fine but just to be safe
 	constexpr int firstRun{ 99 };
 
-	// If first run - we'll re-size regardless
 	if (this->getCurrentVecSize() == firstRun)
 	{
+		// If first run - we'll re-size regardless
 		this->setCurrentVecSize(actualIndex);
 		this->mMMInputVecA.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMInputVecB.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMOutputVec.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 	}
-	else if (actualIndex == this->getCurrentVecSize())
+	else if (actualIndex < this->getCurrentVecSize()) 
 	{
-		// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
-		this->populateContainer(this->mMMInputVecA, this->mMMInputVecB);
-	}
-	else if (actualIndex < this->getCurrentVecSize()) // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-	{
+		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 		this->setCurrentVecSize(actualIndex);
 
 		this->mMMInputVecA.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
@@ -37,14 +33,16 @@ void MatrixMultiplication::setContainer(const int& userInput)
 		this->mMMInputVecB.shrink_to_fit();
 		this->mMMOutputVec.shrink_to_fit();
 	}
-	else // If selection is higher than last run
+	else if (actualIndex > this->getCurrentVecSize())
 	{
+		// If selection is higher than last run
 		this->setCurrentVecSize(actualIndex);
 		this->mMMInputVecA.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMInputVecB.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMOutputVec.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 	}
 
+	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mMMInputVecA, this->mMMInputVecB);
 }
 void MatrixMultiplication::launchOp()
