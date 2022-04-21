@@ -36,6 +36,27 @@ void OperationEventHandler::processEvent(const std::string& operation, const boo
 	Controller movement is determined by specific arithmetic operation execution flow
 	e.g. if the operation uses a mask, if it fails result validation etc.
 */
+/*
+	=====****| Calling Instructions |****=====
+
+	processEvent() is to only be called in ArithmeticOperation children class functions setContainer(), launchOp() and validateResults();
+
+	processEvent() assumes you operations have no mask and has passed validation (default arguments).... 
+	... so please ensure processEvent() is provided overriding arguments in areas where we need to specify if:
+	1 - the operation uses a mask
+	2 - processEvent() is being called from within validateResults();
+
+	eventSetContainer()
+		with mask    : call processEvent() 5 times
+		without mask : call processEvent() 3 times
+	eventLaunchOp()
+		general use  : call processEvent() 2 times
+	eventValidateResults()
+		general use  : call processEvent() 2 times
+
+	Calls to process
+	This section will be updated for any newly implemented operations that require different call loads
+*/
 
 void OperationEventHandler::eventSetContainer(const std::string& operation, const bool& hasMask)
 {
