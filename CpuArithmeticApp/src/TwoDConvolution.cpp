@@ -27,6 +27,8 @@ const std::size_t TwoDConvolution::tempConSizeInit()
 }
 void TwoDConvolution::setContainer(const int& userInput)
 {
+	this->OperationEventHandler.processEvent(getOpName());
+
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
@@ -64,11 +66,14 @@ void TwoDConvolution::setContainer(const int& userInput)
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mTCInputVec, this->mTCMaskVec);
+	this->OperationEventHandler.processEvent(getOpName(), this->getMaskStatus());
+	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent(getOpName());
 }
 void TwoDConvolution::launchOp()
 {
-	std::cout << "\n2D Convolution: Populating complete.\n";
-	std::cout << "\n2D Convolution: Starting operation.\n";
+	this->OperationEventHandler.processEvent(getOpName());
 
 	// Radius rows/cols will determine when convolution occurs to prevent out of bound errors
 	// twoConv utilises one for rows AND columns as we're dealing with a 2D mask vector
@@ -119,11 +124,12 @@ void TwoDConvolution::launchOp()
 		// Assign resultVec the accumulated value of resultVar 
 		mTCOutputVec[rowIn] = resultVar;
 	}
-	std::cout << "\n2D Convolution: Operation complete.\n";
+
+	this->OperationEventHandler.processEvent(getOpName());
 }
 void TwoDConvolution::validateResults()
 {
-	std::cout << "\n2D Convolution: Authenticating results.\n\n";
+	this->OperationEventHandler.processEvent(getOpName());
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -181,10 +187,5 @@ void TwoDConvolution::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mTCOutputVec (twoConv).");
 
-	if (!doesMatch)
-		std::cerr << "2D Convolution unsuccessful: output vector data does not match the expected result.\n"
-		<< "Timing results will be discarded.\n\n";
-	else
-		std::cout << "2D Convolution successful: output vector data matches expected results.\n"
-		<< "Timing results will be recorded.\n\n";
+	this->OperationEventHandler.processEvent(getOpName(), doesMatch);
 }

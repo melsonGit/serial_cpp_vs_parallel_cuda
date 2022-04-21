@@ -54,8 +54,6 @@ void OneDConvolution::setContainer(const int& userInput)
 }
 void OneDConvolution::launchOp()
 {
-	using namespace MaskAttributes;
-
 	this->OperationEventHandler.processEvent(getOpName());
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
