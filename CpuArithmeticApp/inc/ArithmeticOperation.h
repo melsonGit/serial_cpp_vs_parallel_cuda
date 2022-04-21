@@ -77,7 +77,7 @@ void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
         std::uniform_int_distribution randNum{ minMaskRand, maxMaskRand };
 
         // Generate random numbers via Lambda C++11 function, and place into vector
-        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
+        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(mersenne); });
     }
 }
 
