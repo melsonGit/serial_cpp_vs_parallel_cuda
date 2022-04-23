@@ -142,6 +142,16 @@
       <FileType>CppCode</FileType>
     </CudaCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="AppFunctions\src\matMulti\matMultiCore.cu" />
+    <None Include="AppFunctions\src\matMulti\matMultiFunc.cu" />
+    <None Include="AppFunctions\src\oneConv\oneConvCore.cu" />
+    <None Include="AppFunctions\src\oneConv\oneConvFunc.cu" />
+    <None Include="AppFunctions\src\twoConv\twoConvCore.cu" />
+    <None Include="AppFunctions\src\twoConv\twoConvFunc.cu" />
+    <None Include="AppFunctions\src\vecAdd\vecAddCore.cu" />
+    <None Include="AppFunctions\src\vecAdd\vecAddFunc.cu" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.6.targets" />
