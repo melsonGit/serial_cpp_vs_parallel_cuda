@@ -1,19 +1,36 @@
 #include <chrono>
 
-using Clock = std::chrono::steady_clock;
-
 class OperationTimer
 {
+
+	using Clock = std::chrono::steady_clock;
+
 private:
 
+	// Creating OperationTimer object will start the clock
+	std::chrono::time_point<Clock> mStartTimer{ Clock::now() };
 
-	// Start clock
-	auto opStart{ Clock::now() };
-	// Stop clock
-	auto opEnd{ Clock::now() };
+	unsigned long long mElapsedTimeUs{};
+	unsigned long long mElapsedTimeMs{};
 
 public:
 
-	std::chrono::duration_cast<std::chrono::microseconds>(opEnd - opStart).count() << " us\n"
-		<< std::chrono::duration_cast<std::chrono::milliseconds>(opEnd - opStart).count() <<
+	void resetStartTimer()
+	{
+		mStartTimer = Clock::now();
+
+		// Reset elapsed vars to 0
+		mElapsedTimeUs = 0;
+		mElapsedTimeMs = 0;
+	}
+
+	void elapsedMicroseconds() // measured in us
+	{
+		this->mElapsedTimeUs = std::chrono::microseconds((Clock::now() - mStartTimer).count()).count();
+	}
+
+	void elapsedMilliseconds() // measured in ms
+	{
+		this->mElapsedTimeMs = std::chrono::milliseconds((Clock::now() - mStartTimer).count()).count();
+	}
 };
