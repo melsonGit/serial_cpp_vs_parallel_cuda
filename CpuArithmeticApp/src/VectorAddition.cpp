@@ -51,11 +51,13 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 void VectorAddition::launchOp()
 {
 	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationTimer.resetStartTimer();
 
 	// Add contents from inputVecA and inputVecB into resultVec
 	transform(this->mVAInputVecA.begin(), this->mVAInputVecA.end(), this->mVAInputVecB.begin(), this->mVAOutputVec.begin(),
 		[](auto a, auto b) {return a + b; });
 
+	this->OperationTimer.collateElapsedTimes();
 	this->OperationEventHandler.processEvent(getOpName());
 }
 void VectorAddition::validateResults() 

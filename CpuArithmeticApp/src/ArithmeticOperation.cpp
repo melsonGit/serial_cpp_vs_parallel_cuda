@@ -1,7 +1,5 @@
 #include "../inc/ArithmeticOperation.h"
 
-#include <string_view>
-
 // Getters
 
 const int ArithmeticOperation::getCurrentVecSize() const

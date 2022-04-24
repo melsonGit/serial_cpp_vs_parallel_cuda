@@ -1,3 +1,7 @@
+#pragma once
+#ifndef OPERATION_TIMER
+#define OPERATION_TIMER
+
 #include <chrono>
 
 class OperationTimer
@@ -13,24 +17,12 @@ private:
 	unsigned long long mElapsedTimeUs{};
 	unsigned long long mElapsedTimeMs{};
 
+	void elapsedMicroseconds();
+	void elapsedMilliseconds();
+
 public:
 
-	void resetStartTimer()
-	{
-		mStartTimer = Clock::now();
-
-		// Reset elapsed vars to 0
-		mElapsedTimeUs = 0;
-		mElapsedTimeMs = 0;
-	}
-
-	void elapsedMicroseconds() // measured in us
-	{
-		this->mElapsedTimeUs = std::chrono::microseconds((Clock::now() - mStartTimer).count()).count();
-	}
-
-	void elapsedMilliseconds() // measured in ms
-	{
-		this->mElapsedTimeMs = std::chrono::milliseconds((Clock::now() - mStartTimer).count()).count();
-	}
+	void resetStartTimer();
+	void collateElapsedTimes();
 };
+#endif

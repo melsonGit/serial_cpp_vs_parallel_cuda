@@ -3,6 +3,7 @@
 #define ARITHMETIC_OPERATION
 
 #include "OperationEventHandler.h"
+#include "OperationTimer.h"
 #include "randNumGen.h"
 #include "MaskAttributes.h"
 
@@ -20,7 +21,10 @@ protected:
     const std::array<std::size_t, 5> mSampleSizes{};
     const bool hasMask{};
     int currentVecSize{ 99 }; // Default first run value (see setContainer()). Any number outside 0 - 6 is fine but just to be safe
+
     OperationEventHandler OperationEventHandler{};
+    OperationTimer OperationTimer{};
+
 
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus } {}
