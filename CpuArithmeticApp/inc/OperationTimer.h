@@ -6,23 +6,29 @@
 
 class OperationTimer
 {
-
-	using Clock = std::chrono::steady_clock;
+	using operationClock = std::chrono::steady_clock;
+	using precisionType = unsigned long long;
 
 private:
 
 	// Creating OperationTimer object will start the clock
-	std::chrono::time_point<Clock> mStartTimer{ Clock::now() };
+	std::chrono::time_point<operationClock> mStartTimer{ operationClock::now() };
 
-	unsigned long long mElapsedTimeUs{};
-	unsigned long long mElapsedTimeMs{};
+	precisionType mElapsedTimeUs{};
+	precisionType mElapsedTimeMs{};
+	precisionType mElapsedTimeS{};
 
 	void elapsedMicroseconds();
 	void elapsedMilliseconds();
+	void elapsedSeconds();
 
 public:
 
 	void resetStartTimer();
-	void collateElapsedTimes();
+	void collectElapsedTimeData();
+
+	precisionType getElapsedMicroseconds() const;
+	precisionType getElapsedMilliseconds() const;
+	precisionType getElapsedSeconds() const;
 };
 #endif

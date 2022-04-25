@@ -27,7 +27,7 @@ const std::size_t TwoDConvolution::tempConSizeInit()
 }
 void TwoDConvolution::setContainer(const int& userInput)
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
 
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
@@ -39,41 +39,45 @@ void TwoDConvolution::setContainer(const int& userInput)
 	if (this->mTCMaskVec.empty())
 		this->mTCMaskVec.resize(maskDim * maskDim);
 
-	if (this->getCurrentVecSize() == firstRun)
+	if (this->getVecIndex() == firstRun)
 	{
 		// If first run - we'll re-size regardless
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mTCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mTCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
-	else if (actualIndex < this->getCurrentVecSize()) 
+	else if (actualIndex < this->getVecIndex()) 
 	{
 		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mTCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mTCOutputVec.resize(this->mSampleSizes[actualIndex]);
 		// Non-binding - IDE will decide if this will execute
 		this->mTCInputVec.shrink_to_fit();
 		this->mTCOutputVec.shrink_to_fit();
 	}
-	else if (actualIndex > this->getCurrentVecSize())
+	else if (actualIndex > this->getVecIndex())
 	{
 		// If selection is higher than last run
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mTCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mTCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mTCInputVec, this->mTCMaskVec);
-	this->OperationEventHandler.processEvent(getOpName(), this->getMaskStatus());
-	this->OperationEventHandler.processEvent(getOpName());
-	this->OperationEventHandler.processEvent(getOpName());
-	this->OperationEventHandler.processEvent(getOpName());
+
+	this->setCurrSampleSize(actualIndex);
+
+	this->OperationEventHandler.processEvent(); // <- This
+	this->OperationEventHandler.processEvent();	// <-	   looks
+	this->OperationEventHandler.processEvent();	// <-			 really
+	this->OperationEventHandler.processEvent();	// <-					ugly
 }
 void TwoDConvolution::launchOp()
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
+	this->OperationTimer.resetStartTimer();
 
 	// Radius rows/cols will determine when convolution occurs to prevent out of bound errors
 	// twoConv utilises one for rows AND columns as we're dealing with a 2D mask vector
@@ -125,11 +129,12 @@ void TwoDConvolution::launchOp()
 		mTCOutputVec[rowIn] = resultVar;
 	}
 
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationTimer.collectElapsedTimeData();
+	this->OperationEventHandler.processEvent();
 }
 void TwoDConvolution::validateResults()
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -184,8 +189,11 @@ void TwoDConvolution::validateResults()
 		if (resultVar != this->mTCOutputVec[rowIn])
 			doesMatch = false;
 	}
+
+	this->setValidationStatus(doesMatch);
+
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mTCOutputVec (twoConv).");
 
-	this->OperationEventHandler.processEvent(getOpName(), doesMatch);
+	this->OperationEventHandler.processEvent();
 }

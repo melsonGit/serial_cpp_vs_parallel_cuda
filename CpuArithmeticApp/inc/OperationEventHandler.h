@@ -2,8 +2,7 @@
 #ifndef OPERATION_EVENT_HANDLER
 #define OPERATION_EVENT_HANDLER
 
-#include <string>
-#include <cassert>
+#include "OperationTimer.h"
 
 namespace OperationEvents
 {
@@ -31,13 +30,16 @@ namespace OperationEvents
 		startSetContainerEvent,
 		startLaunchOpEvent,
 		startValidationEvent,
-		//startOutputToFileEvent,
+		startOutputToFileEvent,
 	};
 }
 
 class OperationEventHandler
 {
 private:
+
+	const class ArithmeticOperation* ArithemticOperationPtr;
+	const OperationTimer* OperationTimerPtr;
 
 	// Navigates and determines events to be processed in processEvent()
 	int mMainEventController{ 0 };
@@ -47,12 +49,12 @@ private:
 	int mContainerEventController{ 0 };
 	int mLaunchOpEventController{ 0 };
 	int mValidationEventController{ 0 };
-	//int mOutputToFileEventController{ 0 };
+	int mOutputToFileEventController{ 0 };
 
-	void eventSetContainer(const std::string& operation, const bool& hasMask);
-	void eventLaunchOp(const std::string& operation);
-	void eventValidateResults(const std::string& operation, const bool& passedValidation);
-	//void eventOutputToFile(const std::string& operation);
+	void eventSetContainer();
+	void eventLaunchOp();
+	void eventValidateResults();
+	//void eventOutputToFile();
 
 	// Controller resetters
 	void resetMainEventController();
@@ -62,8 +64,9 @@ private:
 
 public:
 
-	OperationEventHandler() = default;
+	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationTimer& opTimer)
+		: ArithemticOperationPtr{ &arithOp }, OperationTimerPtr{ &opTimer } {}
 
-	void processEvent(const std::string& operation, const bool& hasMask = false, const bool& passedValidation = true);
+	void processEvent();
 };
 #endif

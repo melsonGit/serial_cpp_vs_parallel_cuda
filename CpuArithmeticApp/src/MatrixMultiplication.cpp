@@ -7,25 +7,25 @@
 
 void MatrixMultiplication::setContainer(const int& userInput)
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
 
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
 	constexpr int firstRun{ 99 };
 
-	if (this->getCurrentVecSize() == firstRun)
+	if (this->getVecIndex() == firstRun)
 	{
 		// If first run - we'll re-size regardless
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mMMInputVecA.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMInputVecB.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMOutputVec.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 	}
-	else if (actualIndex < this->getCurrentVecSize()) 
+	else if (actualIndex < this->getVecIndex()) 
 	{
 		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 
 		this->mMMInputVecA.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMInputVecB.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
@@ -35,10 +35,10 @@ void MatrixMultiplication::setContainer(const int& userInput)
 		this->mMMInputVecB.shrink_to_fit();
 		this->mMMOutputVec.shrink_to_fit();
 	}
-	else if (actualIndex > this->getCurrentVecSize())
+	else if (actualIndex > this->getVecIndex())
 	{
 		// If selection is higher than last run
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mMMInputVecA.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMInputVecB.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
 		this->mMMOutputVec.resize(this->mSampleSizes[actualIndex], std::vector <std::size_t>(2, 0));
@@ -46,12 +46,16 @@ void MatrixMultiplication::setContainer(const int& userInput)
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mMMInputVecA, this->mMMInputVecB);
-	this->OperationEventHandler.processEvent(getOpName());
-	this->OperationEventHandler.processEvent(getOpName());
+
+	this->setCurrSampleSize(actualIndex);
+
+	this->OperationEventHandler.processEvent();
+	this->OperationEventHandler.processEvent();
 }
 void MatrixMultiplication::launchOp()
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
+	this->OperationTimer.resetStartTimer();
 
     for (auto rowIn{ 0 }; rowIn < this->mMMOutputVec.size(); ++rowIn) // For each row
 		for (auto colIn{ 0 }; colIn < this->mMMOutputVec[rowIn].size(); ++colIn) // For each column in that row
@@ -63,11 +67,12 @@ void MatrixMultiplication::launchOp()
 				this->mMMOutputVec[rowIn][colIn] += this->mMMInputVecA[rowIn][rowColPair] * this->mMMInputVecB[rowColPair][colIn];
 		}
 
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationTimer.collectElapsedTimeData();
+	this->OperationEventHandler.processEvent();
 }
 void MatrixMultiplication::validateResults()
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
 
 	// Accumulates our results to check against resultVec
 	std::size_t resultVar{};
@@ -95,8 +100,10 @@ void MatrixMultiplication::validateResults()
 		}
 	}
 
+	this->setValidationStatus(doesMatch);
+
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mMMOutputVec (matMulti).");
 
-	this->OperationEventHandler.processEvent(getOpName(), doesMatch);
+	this->OperationEventHandler.processEvent();
 }

@@ -17,25 +17,30 @@ class ArithmeticOperation
 {
 protected:
 
+    // Characteristics unique to every ArithmeticOperation child
     const std::string mOperationName{};
     const std::array<std::size_t, 5> mSampleSizes{};
     const bool hasMask{};
-    int currentVecSize{ 99 }; // Default first run value (see setContainer()). Any number outside 0 - 6 is fine but just to be safe
 
-    OperationEventHandler OperationEventHandler{};
+    // Var checks for ArithmeticOperation function checks 
+    bool hasPassedValidation{};
+    std::size_t currSampleSize{};
+    int vecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine but just to be safe
+
+    // Operation Tools
+    OperationEventHandler OperationEventHandler;
     OperationTimer OperationTimer{};
-
+    //void recordResultsClass();
 
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus } {}
+        : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus }, OperationEventHandler{*this, OperationTimer} {}
 
-    // Operation-specific functions (.... where a template doesn't feel like an appropriate solution)
+    // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
-    virtual void validateResults() = 0; // valid results of launchOp()
-    //void recordResults(); // If valid, output to csv file
+    virtual void validateResults() = 0;
 
-    // Functions used by all operations - template as there may be similar containers
+    // Functions used by all operations
     template<typename P1> void populateContainer (std::vector<P1>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<P1>& vecToPop, Args&... args);
     template<typename P1> void populateContainer (std::vector<std::vector<P1>>& vecToPop);
@@ -43,14 +48,17 @@ protected:
     
 public:
 
-    const int getCurrentVecSize() const;
+    const bool getValidationStatus() const;
+    const int getVecIndex() const;
+    const std::size_t getCurrSampleSize() const;
     const bool getMaskStatus() const;
     const std::string getOpName() const;
     //const std::string_view viewOpName() const; may be of use when we just want to display our string
     const std::size_t getOpSampleSize(const int& option) const;
-
-    void setCurrentVecSize(const int& newSize);
-
+    
+    void setCurrSampleSize(const int& index);
+    void setValidationStatus(const bool& validationResult);
+    void setVecIndex(const int& newIndex);
     void startOpSeq(const int& userInput);
 };
 

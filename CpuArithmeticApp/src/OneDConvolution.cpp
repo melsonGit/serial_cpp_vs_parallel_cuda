@@ -9,7 +9,7 @@ using namespace MaskAttributes;
 
 void OneDConvolution::setContainer(const int& userInput)
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
 
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
@@ -20,41 +20,45 @@ void OneDConvolution::setContainer(const int& userInput)
 	if (this->mOCMaskVec.empty())
 		this->mOCMaskVec.resize(maskDim);
 
-	if (this->getCurrentVecSize() == firstRun)
+	if (this->getVecIndex() == firstRun)
 	{
 		// If first run - we'll re-size regardless
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
-	else if (actualIndex < this->getCurrentVecSize()) 
+	else if (actualIndex < this->getVecIndex()) 
 	{
 		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 		// Non-binding - IDE will decide if this will execute
 		this->mOCInputVec.shrink_to_fit();
 		this->mOCOutputVec.shrink_to_fit();
 	}
-	else if (actualIndex > this->getCurrentVecSize())
+	else if (actualIndex > this->getVecIndex())
 	{
 		// If selection is higher than last run
-		this->setCurrentVecSize(actualIndex);
+		this->setVecIndex(actualIndex);
 		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
 		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
 	}
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
-	this->OperationEventHandler.processEvent(getOpName(), this->getMaskStatus());
-	this->OperationEventHandler.processEvent(getOpName());
-	this->OperationEventHandler.processEvent(getOpName());
-	this->OperationEventHandler.processEvent(getOpName());
+
+	this->setCurrSampleSize(actualIndex);
+
+	this->OperationEventHandler.processEvent(); // <- This
+	this->OperationEventHandler.processEvent();	// <-	   looks
+	this->OperationEventHandler.processEvent();	// <-			 really
+	this->OperationEventHandler.processEvent();	// <-					ugly
 }
 void OneDConvolution::launchOp()
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
+	this->OperationTimer.resetStartTimer();
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -79,11 +83,12 @@ void OneDConvolution::launchOp()
         }
     }
 
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationTimer.collectElapsedTimeData();
+	this->OperationEventHandler.processEvent();
 }
 void OneDConvolution::validateResults()
 {
-	this->OperationEventHandler.processEvent(getOpName());
+	this->OperationEventHandler.processEvent();
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -117,8 +122,11 @@ void OneDConvolution::validateResults()
 		if (resultVar != this->mOCOutputVec[rowIn])
 			doesMatch = false;
 	}
+
+	this->setValidationStatus(doesMatch);
+
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mOCOutputVec (oneConv).");
 
-	this->OperationEventHandler.processEvent(getOpName(), doesMatch);
+	this->OperationEventHandler.processEvent();
 }
