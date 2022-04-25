@@ -4,7 +4,7 @@ Thesis code for completion of my MSc ICT. This application, alongside my written
 This application (currently split between CpuApp and GpuApp) aims to demonstrate computational differences in CPUs and GPU/GPGPUs by executing numerous arithmetic operations with substantial sample sizes. I developed this application using C++ and CUDA. Despite completing my MSc, I continue to develop this application.
 
 <p align="center">
-  <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/OOP-design/img/appExample.gif" alt="App image"/>
+  <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/appExample.gif" alt="App image"/>
     <p align="center"><i>Application Window</i></p>
 </p>
 
