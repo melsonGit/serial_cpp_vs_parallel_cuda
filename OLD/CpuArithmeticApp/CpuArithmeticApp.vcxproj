@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1fedf36d-0ef7-4955-ad0d-314bb75b6175}</ProjectGuid>
+    <ProjectGuid>{b4ae96c8-1f65-4846-8903-e0293db8f204}</ProjectGuid>
     <RootNamespace>CpuArithmeticApp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -72,23 +72,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(Solution)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Solution)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(Solution)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Solution)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(Solution)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Solution)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(Solution)bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Solution)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,8 +88,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,8 +102,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +117,6 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,7 +132,6 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,28 +141,65 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ArithmeticOperation.cpp" />
-    <ClCompile Include="src\OperationEventHandler.cpp" />
-    <ClCompile Include="src\MatrixMultiplication.cpp" />
-    <ClCompile Include="src\OneDConvolution.cpp" />
-    <ClCompile Include="src\OperationTimer.cpp" />
-    <ClCompile Include="src\ProgramHandler.cpp" />
-    <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\TwoDConvolution.cpp" />
-    <ClCompile Include="src\VectorAddition.cpp" />
+    <ClCompile Include="AppFunctions\src\core\opChoice.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiCore.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\matMulti\matMultiNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvCore.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\oneConv\oneConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvCore.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\twoConv\twoConvNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddFunc.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddCheck.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddConSet.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddNumGen.cpp" />
+    <ClCompile Include="AppFunctions\src\vecAdd\vecAddCore.cpp" />
+    <ClCompile Include="CpuArithmeticApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc\ArithmeticOperation.h" />
-    <ClInclude Include="inc\ArithmeticDetails.h" />
-    <ClInclude Include="inc\OperationEventHandler.h" />
-    <ClInclude Include="inc\MaskAttributes.h" />
-    <ClInclude Include="inc\MatrixMultiplication.h" />
-    <ClInclude Include="inc\OneDConvolution.h" />
-    <ClInclude Include="inc\OperationTimer.h" />
-    <ClInclude Include="inc\ProgramHandler.h" />
-    <ClInclude Include="inc\randNumGen.h" />
-    <ClInclude Include="inc\TwoDConvolution.h" />
-    <ClInclude Include="inc\VectorAddition.h" />
+    <ClInclude Include="AppFunctions\addFunc.h" />
+    <ClInclude Include="AppFunctions\addFunc\addFunc.h" />
+    <ClInclude Include="AppFunctions\checkAdd.h" />
+    <ClInclude Include="AppFunctions\checkAdd\checkAdd.h" />
+    <ClInclude Include="AppFunctions\conSet.h" />
+    <ClInclude Include="AppFunctions\conSet\conSet.h" />
+    <ClInclude Include="AppFunctions\inc\allHeaders.h" />
+    <ClInclude Include="AppFunctions\inc\maskAttributes.h" />
+    <ClInclude Include="AppFunctions\inc\core\opChoice.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCheck.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiConSet.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiCore.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiFunc.h" />
+    <ClInclude Include="AppFunctions\inc\matMulti\matMultiNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvCheck.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvConSet.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvCore.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvFunc.h" />
+    <ClInclude Include="AppFunctions\inc\oneConv\oneConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\randNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCheck.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvConSet.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvCore.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvFunc.h" />
+    <ClInclude Include="AppFunctions\inc\twoConv\twoConvNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddFunc.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCheck.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddConSet.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddNumGen.h" />
+    <ClInclude Include="AppFunctions\inc\vecAdd\vecAddCore.h" />
+    <ClInclude Include="AppFunctions\numGen.h" />
+    <ClInclude Include="AppFunctions\numGen\numGen.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Debug\CpuArithmeticApp.tlog\unsuccessfulbuild" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
