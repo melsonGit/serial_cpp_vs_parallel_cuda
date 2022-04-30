@@ -1,9 +1,23 @@
 #include "../inc/ArithmeticOperation.h"
 
-//void ArithmeticOperation::recordResults()
-//{
-//	this->
-//}
+void ArithmeticOperation::recordResults()
+{
+	/*
+		Uses name, sample size and timing results from OperationTimer
+		Locate a folder and .csv file to output to
+		check if one exists or not
+		create one if needed or enter into existing file
+		record results, grouped by operation then grouped by sample size
+	*/
+}
+void ArithmeticOperation::bestOperationTimes()
+{
+	/*
+		Uses name, sample size and timing results from OperationTimer
+		Caches times into a hashmap (even when the program is closed), looks for results stored in files used by recordResults(),
+		and checks files for each operations fastest time in each sample size range
+	*/
+}
 
 // Getters
 

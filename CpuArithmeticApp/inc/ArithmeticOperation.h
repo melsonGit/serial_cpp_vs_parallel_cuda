@@ -30,8 +30,9 @@ protected:
     // Operation Tools
     OperationEventHandler OperationEventHandler;
     OperationTimer OperationTimer{};
-    //void recordResultsClass();
-
+    void recordResults();
+    void bestOperationTimes();
+    
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus }, OperationEventHandler{*this, OperationTimer} {}
 
