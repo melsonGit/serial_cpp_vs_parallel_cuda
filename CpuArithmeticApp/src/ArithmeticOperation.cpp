@@ -1,14 +1,28 @@
 #include "../inc/ArithmeticOperation.h"
 
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+
 void ArithmeticOperation::recordResults()
 {
-	/*
-		Uses name, sample size and timing results from OperationTimer
-		Locate a folder and .csv file to output to
-		check if one exists or not
-		create one if needed or enter into existing file
-		record results, grouped by operation then grouped by sample size
-	*/
+
+	const std::string resultStoragePath{"results/"};
+
+	// Check to see if we've already created a file for this operation
+	if (std::filesystem::exists(resultStoragePath + this->getOpName()+".csv"))
+	{
+		std::cout << "Exists!";
+	}
+	else
+	{
+		std::cout << "Doesn't Exist!";
+		std::ofstream newFile(resultStoragePath + this->getOpName() + ".csv");
+
+		newFile << "I am " << this->getOpName() << '.';
+
+		newFile.close();
+	}
 }
 void ArithmeticOperation::bestOperationTimes()
 {
