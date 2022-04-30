@@ -4,23 +4,44 @@
 #include <iostream>
 #include <filesystem>
 
-void ArithmeticOperation::recordResults()
+void ArithmeticOperation::recordResults() // this should be its own class
 {
+	const std::string resultFilePath{ "results/" };
+	const std::string resultFile{ this->getOpName() + ".csv" };
 
-	const std::string resultStoragePath{"results/"};
-
-	// Check to see if we've already created a file for this operation
-	if (std::filesystem::exists(resultStoragePath + this->getOpName()+".csv"))
+	// Check to see if results directory exists
+	if (!std::filesystem::exists(resultFilePath))
 	{
-		std::cout << "Exists!";
+		std::cout << "Results directory doesn't exist! Creating new results directory\n\n"; // move to EventHandler
+		std::filesystem::create_directory(resultFilePath);
+	}
+	else
+		std::cout << resultFilePath << " exists!\n\n";
+
+	// Check to see if our operation result file exists
+	if (std::filesystem::exists(resultFilePath + resultFile))
+	{
+		std::cout << "Results file exists!";
+
+		std::ofstream existingFile(resultFilePath + resultFile);
+
+		existingFile << "Hello, I aready exist!\n";
+		existingFile.close();
+
+		//this->OperationTimer.getElapsedMicroseconds();
+		//this->OperationTimer.getElapsedMilliseconds();
+		//this->OperationTimer.getElapsedSeconds();
 	}
 	else
 	{
-		std::cout << "Doesn't Exist!";
-		std::ofstream newFile(resultStoragePath + this->getOpName() + ".csv");
 
-		newFile << "I am " << this->getOpName() << '.';
+		// we should set categories here (op name, op sample size, slowest, average and fastest speed recorded)
 
+		std::cout << "Results file doesn't Exist! Creating new results file\n\n";
+
+		std::ofstream newFile(resultFilePath + resultFile);
+
+		newFile << "I am " << this->getOpName() << ".\n";
 		newFile.close();
 	}
 }
