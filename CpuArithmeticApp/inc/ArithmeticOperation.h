@@ -3,6 +3,7 @@
 #define ARITHMETIC_OPERATION
 
 #include "OperationEventHandler.h"
+#include "OperationResultHandler.h"
 #include "OperationTimer.h"
 #include "randNumGen.h"
 #include "MaskAttributes.h"
@@ -28,18 +29,19 @@ protected:
     int vecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine but just to be safe
 
     // Operation Tools
-    OperationEventHandler OperationEventHandler;
     OperationTimer OperationTimer{};
-    void recordResults();
-    void bestOperationTimes();
+    OperationEventHandler OperationEventHandler;
+    OperationResultHandler OperationResultHandler;
     
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus }, OperationEventHandler{*this, OperationTimer} {}
+        : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimer }, 
+        OperationResultHandler{*this, OperationEventHandler, OperationTimer, this->mOperationName} {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0;
+    void storeResults();
 
     // Functions used by all operations
     template<typename P1> void populateContainer (std::vector<P1>& vecToPop);
@@ -60,6 +62,7 @@ public:
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);
     void setVecIndex(const int& newIndex);
+
     void startOpSeq(const int& userInput);
 };
 

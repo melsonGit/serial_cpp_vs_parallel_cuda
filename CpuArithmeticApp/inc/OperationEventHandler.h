@@ -24,7 +24,20 @@ namespace OperationEvents
 		validationStart,
 		validationEventComplete,
 	};
-	//enum class OutputToFileEvents {};
+	enum class OutputToFileEvents 
+	{
+		outputToFileStart,
+		outputToFileCreateDirectoryStart,
+		outputToFileCreateDirectoryComplete,
+		outputToFileCreateFileWithDirStart,
+		outputToFileCreateFileWithDirComplete,
+		outputToFileCreateFileStart,
+		outputToFileCreateFileComplete,
+		outputToFileDirFileChecksComplete,
+		outputToFileRecordStart,
+		outputToFileRecordComplete,
+		outputToFileEventComplete,
+	};
 	enum class EventTriggers
 	{
 		startSetContainerEvent,
@@ -39,6 +52,7 @@ class OperationEventHandler
 private:
 
 	const class ArithmeticOperation* ArithemticOperationPtr;
+	const class OperationResultHandler* OperationResultHandlerPtr;
 	const OperationTimer* OperationTimerPtr;
 
 	// Navigates and determines events to be processed in processEvent()
@@ -54,19 +68,20 @@ private:
 	void eventSetContainer();
 	void eventLaunchOp();
 	void eventValidateResults();
-	//void eventOutputToFile();
+	void eventOutputToFile(const bool& componentPresent, const bool& isFile);
 
 	// Controller resetters
 	void resetMainEventController();
 	void resetContainerEventController();
 	void resetLaunchOpEventController();
 	void resetValidationEventController();
+	void resetOutputToFileEventController();
 
 public:
 
-	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationTimer& opTimer)
-		: ArithemticOperationPtr{ &arithOp }, OperationTimerPtr{ &opTimer } {}
+	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationResultHandler& opResultHandler, const OperationTimer& opTimer)
+		: ArithemticOperationPtr{ &arithOp }, OperationResultHandlerPtr{ &opResultHandler }, OperationTimerPtr{ &opTimer } {}
 
-	void processEvent();
+	void processEvent(const bool& eventOutputToFileValidation = true, const bool& isFile = true);
 };
 #endif

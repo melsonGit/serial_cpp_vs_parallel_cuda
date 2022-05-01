@@ -84,6 +84,4 @@ void VectorAddition::validateResults()
 	assert(doesMatch && "Check failed! Addition of mVAInputVecA / mVAInputVecB values don't match corresponding values in mVAOutputVec (vecAdd).");
 
 	this->OperationEventHandler.processEvent();
-
-	this->recordResults();
 }

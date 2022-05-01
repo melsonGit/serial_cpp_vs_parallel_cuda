@@ -9,7 +9,7 @@
 using namespace OperationEvents;
 
 // This function is called by ArithmeticOperation object functions throughout various stages of operation execution
-void OperationEventHandler::processEvent()
+void OperationEventHandler::processEvent(const bool& eventOutputToFileValidation, const bool& isFile)
 {
 	using enum EventTriggers;
 
@@ -18,7 +18,7 @@ void OperationEventHandler::processEvent()
 	case startSetContainerEvent: {eventSetContainer(); break; }
 	case startLaunchOpEvent: {eventLaunchOp(); break; }
 	case startValidationEvent: {eventValidateResults(); break; }
-	//case startOutputToFileEvent: {eventOutputToFile(); break; }
+	case startOutputToFileEvent: {eventOutputToFile(eventOutputToFileValidation, isFile); break; }
 	default: {const bool isBadTrigger{ true }; assert(!isBadTrigger && "We've no event to process!(OperationEventHandler->processEvent())."); break; }
 	}
 }
@@ -46,9 +46,8 @@ void OperationEventHandler::processEvent()
 		general use  : call processEvent() 2 times
 	eventValidateResults()
 		general use  : call processEvent() 2 times
-
-	Calls to process
-	This section will be updated for any newly implemented operations that require different call loads
+	eventOutputToFile()
+		general use  : call processEvent() ?? times
 */
 
 void OperationEventHandler::eventSetContainer()
@@ -148,31 +147,79 @@ void OperationEventHandler::eventValidateResults()
 		else
 			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Output data does not match the expected result. Timing results discarded.\n\n";
 
-		std::cout << "Press any key to continue.";
+		std::cout << "Press any key to continue.\n\n";
 		std::cin.get();
 		std::cin.ignore();
 
 		this->resetValidationEventController();
-		//this->mMainEventController = static_cast<int>(EventTriggers::startOutputToFileEvent); uncomment when we implement the feature
-		this->resetMainEventController(); // remove when the above is implemented
+		this->mMainEventController = static_cast<int>(EventTriggers::startOutputToFileEvent);
 		break;
 	}
 	default: {const bool isBadTrigger{ true }; assert(!isBadTrigger && "We've no matching event!(eventValidateResults)."); break; }
 	}
 }
-#if 0
-void OperationEventHandler::eventOutputToFile(const std::string& operation)
+void OperationEventHandler::eventOutputToFile(const bool& componentPresent, const bool& isFile)
 {
 	using enum OutputToFileEvents;
 
-	resetMainEventController();
-
 	switch (static_cast<OutputToFileEvents>(this->mOutputToFileEventController))
 	{
-	default: {assert(&& "We've no matching event!(eventOutputToFile)."); break; }
+	case outputToFileStart:
+	{
+		if (componentPresent && isFile)
+		{
+			int skipEvent{ 7 };
+			mOutputToFileEventController += skipEvent;
+
+			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": .\n";
+		}
+		else if (!componentPresent && !isFile)
+		{
+			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << this->OperationResultHandlerPtr->getResultFilePath()
+				<< " directory not found! Creating new " << this->OperationResultHandlerPtr->getResultFilePath() << " directory.\n";
+
+			this->mOutputToFileEventController++;
+		}
+		else if (!componentPresent && isFile)
+		{
+
+		}
+
+		break;
+	}
+	case outputToFileCreateDirectoryStart:
+	{
+
+		break;
+	}
+	case outputToFileCreateDirectoryComplete:
+		break;
+	case outputToFileCreateFileWithDirStart:
+	{
+		std::cout << this->ArithemticOperationPtr->getOpName() << ": " << "Result file doesn't exist! Creating and configuring new results file.\n";
+		break;
+	}
+	case outputToFileCreateFileWithDirComplete:
+		break;
+	case outputToFileCreateFileStart:
+		break;
+	case outputToFileCreateFileComplete:
+		break;
+	case outputToFileDirFileChecksComplete:
+		break;
+	case outputToFileRecordStart:
+		break;
+	case outputToFileRecordComplete:
+		break;
+	case outputToFileEventComplete:
+	{
+		this->resetOutputToFileEventController();
+		this->resetMainEventController();
+		break;
+	}
+	default: {const bool isBadTrigger{ true }; assert(!isBadTrigger && "We've no matching event!(eventOutputToFile)."); break; }
 	}
 }
-#endif
 
 // Controller resetters
 
@@ -191,4 +238,8 @@ void OperationEventHandler::resetLaunchOpEventController()
 void OperationEventHandler::resetValidationEventController()
 {
 	this->mValidationEventController = 0;
+}
+void OperationEventHandler::resetOutputToFileEventController()
+{
+	this->mOutputToFileEventController = 0;
 }
