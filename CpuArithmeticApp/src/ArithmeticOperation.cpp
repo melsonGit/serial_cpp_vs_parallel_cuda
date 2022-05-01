@@ -1,5 +1,6 @@
 #include "../inc/ArithmeticOperation.h"
 
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <filesystem>
@@ -7,43 +8,50 @@
 void ArithmeticOperation::recordResults() // this should be its own class
 {
 	const std::string resultFilePath{ "results/" };
-	const std::string resultFile{ this->getOpName() + ".csv" };
+	const std::string resultFile{ resultFilePath + this->getOpName() + ".csv" };
 
 	// Check to see if results directory exists
 	if (!std::filesystem::exists(resultFilePath))
 	{
-		std::cout << "Results directory doesn't exist! Creating new results directory\n\n"; // move to EventHandler
+		std::cout << resultFilePath << " not found! Creating new " << resultFilePath << " directory\n\n"; // move to EventHandler
 		std::filesystem::create_directory(resultFilePath);
 	}
 	else
-		std::cout << resultFilePath << " exists!\n\n";
+		std::cout << resultFilePath << " found!\n\n";
 
 	// Check to see if our operation result file exists
-	if (std::filesystem::exists(resultFilePath + resultFile))
+	if (!std::filesystem::exists(resultFile))
 	{
-		std::cout << "Results file exists!";
+		std::cout << "Result file doesn't exist! Creating new results file\n\n";
 
-		std::ofstream existingFile(resultFilePath + resultFile);
+		std::ofstream newFile(resultFile);
 
-		existingFile << "Hello, I aready exist!\n";
-		existingFile.close();
+		int sampleSizes{ 0 };
 
-		//this->OperationTimer.getElapsedMicroseconds();
-		//this->OperationTimer.getElapsedMilliseconds();
-		//this->OperationTimer.getElapsedSeconds();
-	}
-	else
-	{
+		newFile << "Sample Size, Slowest Time,,,,Average Time,,,,Fastest Time,,,,Lastest Time\n,us,ms,s,,us,ms,s,,us,ms,s,,us,ms,s\n"
+			<< this->getOpSampleSize(sampleSizes++) << '\n' << this->getOpSampleSize(sampleSizes++) << '\n'
+			<< this->getOpSampleSize(sampleSizes++) << '\n' << this->getOpSampleSize(sampleSizes++) << '\n'
+			<< this->getOpSampleSize(sampleSizes++);
 
-		// we should set categories here (op name, op sample size, slowest, average and fastest speed recorded)
-
-		std::cout << "Results file doesn't Exist! Creating new results file\n\n";
-
-		std::ofstream newFile(resultFilePath + resultFile);
-
-		newFile << "I am " << this->getOpName() << ".\n";
 		newFile.close();
 	}
+
+	std::cout << "Storing " << this->getOpName() << " results into " << resultFile << ".\n\n";
+
+	std::ofstream existingFile;
+	existingFile.open(resultFile, std::fstream::app);
+
+	existingFile << "\nHello, I aready exist! Time: " << std::chrono::system_clock::now() << '\n';
+	existingFile.close();
+
+	//this->OperationTimer.getElapsedMicroseconds();
+	//this->OperationTimer.getElapsedMilliseconds();
+	//this->OperationTimer.getElapsedSeconds();
+
+	//void insertSlowTime(const std::size_t sampleSize, const int time);
+	//void insertAvgTime(const std::size_t sampleSize, const int time);
+	//void insertFastTime(const std::size_t sampleSize, const int time);
+	//void insertLastestTime(const std::size_t sampleSize, const int time);
 }
 void ArithmeticOperation::bestOperationTimes()
 {
