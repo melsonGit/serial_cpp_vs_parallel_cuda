@@ -13,33 +13,36 @@ void OperationResultHandler::processOperationResults()
 		const bool directoryPresent{ false };
 		const bool isFile{ false };
 
-		this->OperationEventHandlerPtr->processEvent(directoryPresent, isFile); // dir not present, we create new
+		this->OperationEventHandlerPtr->processEvent(directoryPresent, isFile);
+		this->OperationEventHandlerPtr->processEvent();
 
 		this->createResultDirectory();
 
-		this->OperationEventHandlerPtr->processEvent(); // dir created
-		this->OperationEventHandlerPtr->processEvent(); // we create new file this dir
+		this->OperationEventHandlerPtr->processEvent();
+		this->OperationEventHandlerPtr->processEvent();
 
 		this->createResultFile();
 
-		this->OperationEventHandlerPtr->processEvent(); // file created
+		this->OperationEventHandlerPtr->processEvent();
 	}
 	else if (!this->doesResultFileExist())
 	{
 		const bool filePresent{ false };
 		const bool isFile{ true };
 
-		this->OperationEventHandlerPtr->processEvent(filePresent, isFile); // directory pres but file not. we create new
+		this->OperationEventHandlerPtr->processEvent(filePresent, isFile);
+
+		this->OperationEventHandlerPtr->processEvent();
 
 		this->createResultFile();
 
-		this->OperationEventHandlerPtr->processEvent(); // file created
+		this->OperationEventHandlerPtr->processEvent();
 	}
 
-	this->OperationEventHandlerPtr->processEvent(); // Directory and File Checks complete. 
-	this->OperationEventHandlerPtr->processEvent(); // Storing results.
-	this->OperationEventHandlerPtr->processEvent(); // results stored in file name here
-	this->OperationEventHandlerPtr->processEvent(); // Output successful.
+	this->OperationEventHandlerPtr->processEvent();
+	this->OperationEventHandlerPtr->processEvent();
+	this->OperationEventHandlerPtr->processEvent();
+	this->OperationEventHandlerPtr->processEvent();
 }
 const bool OperationResultHandler::doesResultDirectoryExist() const
 {
