@@ -22,7 +22,7 @@ private:
     // populateContainer - 1D
     template<typename P1> void populateContainer(std::vector<P1>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<P1>& vecToPop, Args&... args);
-    // resizeContainer
+    // resizeContainer - 1D
     template<typename P1> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize);
     template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args);
 
@@ -44,7 +44,7 @@ void VectorAddition::populateContainer(std::vector<P1>& vecToPop, Args&... args)
     this->populateContainer(vecToPop);
     this->populateContainer(args...);
 }
-// resizeContainer
+// resizeContainer - 1D
 template<typename P1> 
 void VectorAddition::resizeContainer(const P1& newSize, std::vector<P1>& vecToResize)
 {

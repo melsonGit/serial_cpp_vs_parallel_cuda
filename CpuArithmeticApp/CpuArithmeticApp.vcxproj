@@ -177,7 +177,7 @@
     <ClInclude Include="inc\OperationResultHandler.h" />
     <ClInclude Include="inc\OperationTimer.h" />
     <ClInclude Include="inc\ProgramHandler.h" />
-    <ClInclude Include="inc\randNumGen.h" />
+    <ClInclude Include="inc\RandNumGen.h" />
     <ClInclude Include="inc\TwoDConvolution.h" />
     <ClInclude Include="inc\VectorAddition.h" />
   </ItemGroup>

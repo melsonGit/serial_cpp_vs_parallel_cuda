@@ -5,7 +5,7 @@
 #include "OperationEventHandler.h"
 #include "OperationResultHandler.h"
 #include "OperationTimer.h"
-#include "randNumGen.h"
+#include "RandNumGen.h"
 #include "MaskAttributes.h"
 
 #include <algorithm>
@@ -52,6 +52,8 @@ protected:
     // resizeContainer
     template<typename P1> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize);
     template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args);
+    template<typename P1> void resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize);
+    template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize, Args&... args);
     
 public:
 
@@ -84,33 +86,33 @@ void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
     if (vecToPop.size() > MaskAttributes::maskDim)
     {
         // Create local distribution on stack
-        std::uniform_int_distribution randNum{ randNumGen::minRand, randNumGen::maxRand };
+        std::uniform_int_distribution randNum{ RandNumGen::minRand, RandNumGen::maxRand };
 
         // Generate random numbers via Lambda C++11 function, and place into vector
-        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
+        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(RandNumGen::mersenne); });
     }
     else // If we're passed a mask vector
     {
         // Create local distribution on stack
-        std::uniform_int_distribution randNum{ randNumGen::minMaskRand, randNumGen::maxMaskRand };
+        std::uniform_int_distribution randNum{ RandNumGen::minMaskRand, RandNumGen::maxMaskRand };
 
         // Generate random numbers via Lambda C++11 function, and place into vector
-        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(randNumGen::mersenne); });
+        generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(RandNumGen::mersenne); });
     }
 }
 // Recursive case for 1D vector
 template<typename P1, typename ... Args> 
 void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop, Args&... args)
 {
-    populateContainer(vecToPop);
-    populateContainer(args...);
+    this->populateContainer(vecToPop);
+    this->populateContainer(args...);
 }
 // Base case for 2D vector
 template<typename P1> 
 void ArithmeticOperation::populateContainer(std::vector<std::vector<P1>>& vecToPop)
 {
     // Create local distribution on stack
-    std::uniform_int_distribution randNum{ randNumGen::minRand, randNumGen::maxRand };
+    std::uniform_int_distribution randNum{ RandNumGen::minRand, RandNumGen::maxRand };
 
     // Loop to populate 2D vector vecToPop
     // For each row
@@ -120,7 +122,7 @@ void ArithmeticOperation::populateContainer(std::vector<std::vector<P1>>& vecToP
         for (auto colIn{ 0 }; colIn < vecToPop[rowIn].size(); ++colIn)
         {
             // Assign random number to vector of vector of ints to columns colIn of rows iRows
-            vecToPop[rowIn][colIn] = randNum(randNumGen::mersenne);
+            vecToPop[rowIn][colIn] = randNum(RandNumGen::mersenne);
         }
     }
 }
@@ -128,22 +130,35 @@ void ArithmeticOperation::populateContainer(std::vector<std::vector<P1>>& vecToP
 template<typename P1, typename ... Args> 
 void ArithmeticOperation::populateContainer(std::vector<std::vector<P1>>& vecToPop, Args&... args)
 {
-    populateContainer(vecToPop);
-    populateContainer(args...);
+    this->populateContainer(vecToPop);
+    this->populateContainer(args...);
 }
 
 // resizeContainer
-// Base case
+// Base case for 1D vector
 template<typename P1> 
 void ArithmeticOperation::resizeContainer(const P1& newSize, std::vector<P1>& vecToResize)
 {
     vecToResize.resize(newSize);
 }
-// Recursive case
+// Recursive case for 1D vector
 template<typename P1, typename ... Args> 
 void ArithmeticOperation::resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args)
 {
-    resizeContainer(newSize, vecToResize);
-    resizeContainer(newSize, args...);
+    this->resizeContainer(newSize, vecToResize);
+    this->resizeContainer(newSize, args...);
+}
+// Base case for 2D vector
+template<typename P1> 
+void ArithmeticOperation::resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize)
+{
+    vecToResize.resize(newSize, std::vector <P1>(2, 0));
+}
+// Recursive case for 2D vector
+template<typename P1, typename ... Args> 
+void ArithmeticOperation::resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize, Args&... args)
+{
+    this->resizeContainer(newSize, vecToResize);
+    this->resizeContainer(newSize, args...);
 }
 #endif

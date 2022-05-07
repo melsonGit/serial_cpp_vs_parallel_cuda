@@ -24,15 +24,13 @@ void OneDConvolution::setContainer(const int& userInput)
 	{
 		// If first run - we'll re-size regardless
 		this->setVecIndex(actualIndex);
-		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
-		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
+		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
 	}
 	else if (actualIndex < this->getVecIndex()) 
 	{
 		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 		this->setVecIndex(actualIndex);
-		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
-		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
+		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
 		// Non-binding - IDE will decide if this will execute
 		this->mOCInputVec.shrink_to_fit();
 		this->mOCOutputVec.shrink_to_fit();
@@ -41,8 +39,7 @@ void OneDConvolution::setContainer(const int& userInput)
 	{
 		// If selection is higher than last run
 		this->setVecIndex(actualIndex);
-		this->mOCInputVec.resize(this->mSampleSizes[actualIndex]);
-		this->mOCOutputVec.resize(this->mSampleSizes[actualIndex]);
+		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
 	}
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
