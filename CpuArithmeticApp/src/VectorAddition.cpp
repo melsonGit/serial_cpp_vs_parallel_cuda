@@ -18,17 +18,13 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 	{
 		// If first run - we'll re-size regardless
 		this->setVecIndex(actualIndex);
-		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
-		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
-		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
+		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
 	}
 	else if (actualIndex < this->getVecIndex())
 	{
 		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 		this->setVecIndex(actualIndex);
-		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
-		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
-		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
+		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
 		// Non-binding - IDE will decide if this will execute
 		this->mVAInputVecA.shrink_to_fit();
 		this->mVAInputVecB.shrink_to_fit();
@@ -38,9 +34,7 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 	{
 		// If selection is higher than last run
 		this->setVecIndex(actualIndex);
-		this->mVAInputVecA.resize(this->mSampleSizes[actualIndex]);
-		this->mVAInputVecB.resize(this->mSampleSizes[actualIndex]);
-		this->mVAOutputVec.resize(this->mSampleSizes[actualIndex]);
+		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
 	}
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
