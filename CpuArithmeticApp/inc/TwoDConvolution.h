@@ -26,6 +26,9 @@ private:
     // resizeContainer - 1D
     template<typename P1> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize);
     template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args);
+    // shrinkContainer - 1D
+    template<typename P1> void shrinkContainer(std::vector<P1>& vecToShrink);
+    template<typename P1, typename ... Args> void shrinkContainer(std::vector<P1>& vecToShrink, Args&... args);
 
 public:
 
@@ -56,5 +59,17 @@ void TwoDConvolution::resizeContainer(const P1& newSize, std::vector<P1>& vecToR
 {
     this->resizeContainer(newSize, vecToResize);
     this->resizeContainer(newSize, args...);
+}
+// shrinkContainer - 1D
+template<typename P1>
+void TwoDConvolution::shrinkContainer(std::vector<P1>& vecToShrink)
+{
+    ArithmeticOperation::shrinkContainer(vecToShrink);
+}
+template<typename P1, typename ... Args>
+void TwoDConvolution::shrinkContainer(std::vector<P1>& vecToShrink, Args&... args)
+{
+    this->shrinkContainer(vecToShrink);
+    this->shrinkContainer(args...);
 }
 #endif

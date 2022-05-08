@@ -32,8 +32,7 @@ void OneDConvolution::setContainer(const int& userInput)
 		this->setVecIndex(actualIndex);
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
 		// Non-binding - IDE will decide if this will execute
-		this->mOCInputVec.shrink_to_fit();
-		this->mOCOutputVec.shrink_to_fit();
+		this->shrinkContainer(this->mOCInputVec, this->mOCOutputVec);
 	}
 	else if (actualIndex > this->getVecIndex())
 	{

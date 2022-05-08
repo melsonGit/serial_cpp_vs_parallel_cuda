@@ -25,6 +25,9 @@ private:
     // resizeContainer - 2D
     template<typename P1> void resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize);
     template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize, Args&... args);
+    // shrinkContainer - 2D
+    template<typename P1> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink);
+    template<typename P1, typename ... Args> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink, Args&... args);
 
 public:
 
@@ -55,5 +58,17 @@ void MatrixMultiplication::resizeContainer(const P1& newSize, std::vector<std::v
 {
     this->resizeContainer(newSize, vecToResize);
     this->resizeContainer(newSize, args...);
+}
+// shrinkContainer - 2D
+template<typename P1> 
+void MatrixMultiplication::shrinkContainer(std::vector<std::vector<P1>>& vecToShrink)
+{
+    ArithmeticOperation::shrinkContainer(vecToShrink);
+}
+template<typename P1, typename ... Args> 
+void MatrixMultiplication::shrinkContainer(std::vector<std::vector<P1>>& vecToShrink, Args&... args)
+{
+    this->shrinkContainer(vecToShrink);
+    this->shrinkContainer(args...);
 }
 #endif

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-void VectorAddition::setContainer(const int& userInput) // another parameter pack for this?
+void VectorAddition::setContainer(const int& userInput)
 {
 	this->OperationEventHandler.processEvent();
 
@@ -26,9 +26,7 @@ void VectorAddition::setContainer(const int& userInput) // another parameter pac
 		this->setVecIndex(actualIndex);
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
 		// Non-binding - IDE will decide if this will execute
-		this->mVAInputVecA.shrink_to_fit();
-		this->mVAInputVecB.shrink_to_fit();
-		this->mVAOutputVec.shrink_to_fit();
+		this->shrinkContainer(mVAInputVecA, mVAInputVecB, mVAOutputVec);
 	}
 	else if (actualIndex > this->getVecIndex())
 	{

@@ -26,9 +26,7 @@ void MatrixMultiplication::setContainer(const int& userInput)
 		this->setVecIndex(actualIndex);
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mMMInputVecA, this->mMMInputVecB, this->mMMOutputVec);
 		// Non-binding - IDE will decide if this will execute
-		this->mMMInputVecA.shrink_to_fit();
-		this->mMMInputVecB.shrink_to_fit();
-		this->mMMOutputVec.shrink_to_fit();
+		this->shrinkContainer(this->mMMInputVecA, this->mMMInputVecB, this->mMMOutputVec);
 	}
 	else if (actualIndex > this->getVecIndex())
 	{

@@ -20,7 +20,7 @@ const std::size_t TwoDConvolution::tempConSizeInit()
 	case 37748736: {return 6144; break; }
 	case 67108864: {return 8192; break; }
 	case 104857600: {return 10240; break; }
-	default:break;
+	default: break;
 	}
 
 	return -1;
@@ -51,8 +51,7 @@ void TwoDConvolution::setContainer(const int& userInput)
 		this->setVecIndex(actualIndex);
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mTCInputVec, this->mTCOutputVec);
 		// Non-binding - IDE will decide if this will execute
-		this->mTCInputVec.shrink_to_fit();
-		this->mTCOutputVec.shrink_to_fit();
+		this->shrinkContainer(this->mTCInputVec, this->mTCOutputVec);
 	}
 	else if (actualIndex > this->getVecIndex())
 	{
