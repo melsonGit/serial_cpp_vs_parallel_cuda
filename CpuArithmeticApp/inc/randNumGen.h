@@ -5,7 +5,7 @@
 #include <ctime>
 #include <random>
 
-namespace randNumGen
+namespace RandNumGen
 {
 	// Our minimum and maximum range for number generation
 	inline constexpr int minRand{ 1 }, maxRand{ 100 };

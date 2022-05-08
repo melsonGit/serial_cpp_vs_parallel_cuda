@@ -29,8 +29,6 @@ namespace OperationEvents
 		outputToFileStart,
 		outputToFileCreateDirectoryStart,
 		outputToFileCreateDirectoryComplete,
-		outputToFileCreateFileWithDirStart,
-		outputToFileCreateFileWithDirComplete,
 		outputToFileCreateFileStart,
 		outputToFileCreateFileComplete,
 		outputToFileDirFileChecksComplete,

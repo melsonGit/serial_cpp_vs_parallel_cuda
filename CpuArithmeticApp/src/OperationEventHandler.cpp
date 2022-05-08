@@ -67,12 +67,11 @@ void OperationEventHandler::eventSetContainer()
 		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Main container population complete.\n";
 
 		// We want to skip processing mask population event if our operation doesn't have a mask vector
-		int skipEvent{ 3 };
 
 		if (this->ArithemticOperationPtr->getMaskStatus())
 			this->mContainerEventController++;
 		else
-			this->mContainerEventController += skipEvent;
+			this->mContainerEventController = static_cast<int>(containerEventComplete);
 		break;
 	}
 	case maskPopulationStart:
@@ -143,11 +142,15 @@ void OperationEventHandler::eventValidateResults()
 			<< this->OperationTimerPtr->getElapsedSeconds() << " s (seconds)\n";
 
 		if (this->ArithemticOperationPtr->getValidationStatus())
-			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Output data matches expected results. Timing results recorded.\n";
-		else
-			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Output data does not match the expected result. Timing results discarded.\n\n";
-
-		std::cout << "Press any key to continue.\n\n";
+			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Output passed validation. Timing results will now be recorded.\n";
+		else // No results to record
+		{
+			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Output failed validation. Timing results discarded.\n\n";
+			this->resetValidationEventController();
+			this->resetMainEventController();
+		}
+		
+		std::cout << "Press any key to record results.";
 		std::cin.get();
 		std::cin.ignore();
 
@@ -166,55 +169,84 @@ void OperationEventHandler::eventOutputToFile(const bool& componentPresent, cons
 	{
 	case outputToFileStart:
 	{
-		if (componentPresent && isFile)
-		{
-			int skipEvent{ 7 };
-			mOutputToFileEventController += skipEvent;
-
-			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": .\n";
-		}
-		else if (!componentPresent && !isFile)
+		if (componentPresent && isFile) // If both results directory and result file exist, no creation is required
 		{
 			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << this->OperationResultHandlerPtr->getResultFilePath()
-				<< " directory not found! Creating new " << this->OperationResultHandlerPtr->getResultFilePath() << " directory.\n";
+				<< "directory and " << this->OperationResultHandlerPtr->getResultFileName() << "file already exist.\n";
+
+			// Skip to outputToFileDirFileChecksComplete event
+			mOutputToFileEventController = static_cast<int>(outputToFileRecordStart);
+		}
+		else if (!componentPresent && !isFile) // If results directory doesn't exist, create both result directory and result file
+		{
+			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << this->OperationResultHandlerPtr->getResultFilePath()
+				<< " directory and " << this->OperationResultHandlerPtr->getResultFileName() << " not found!.\n";
 
 			this->mOutputToFileEventController++;
 		}
-		else if (!componentPresent && isFile)
+		else if (!componentPresent && isFile) // If results directory exists but result file doesn't, create file only
 		{
+			std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << this->OperationResultHandlerPtr->getResultFileName()
+				<< " file not found!\n";
 
+			// Skip to outputToFileCreateFileStart event
+			this->mOutputToFileEventController = static_cast<int>(outputToFileCreateFileStart);
 		}
 
 		break;
 	}
 	case outputToFileCreateDirectoryStart:
 	{
-
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Creating " << this->OperationResultHandlerPtr->getResultFilePath() << " directory.\n";
+		this->mOutputToFileEventController++;
 		break;
 	}
 	case outputToFileCreateDirectoryComplete:
-		break;
-	case outputToFileCreateFileWithDirStart:
 	{
-		std::cout << this->ArithemticOperationPtr->getOpName() << ": " << "Result file doesn't exist! Creating and configuring new results file.\n";
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << this->OperationResultHandlerPtr->getResultFilePath() << " directory created.\n";
+		this->mOutputToFileEventController++;
 		break;
 	}
-	case outputToFileCreateFileWithDirComplete:
-		break;
 	case outputToFileCreateFileStart:
+	{
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Creating " << this->OperationResultHandlerPtr->getResultFileName() << " file.\n";
+		this->mOutputToFileEventController++;
 		break;
+	}
 	case outputToFileCreateFileComplete:
+	{
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << this->OperationResultHandlerPtr->getResultFileName() << " file created.\n";
+		this->mOutputToFileEventController++;
 		break;
+	}
 	case outputToFileDirFileChecksComplete:
+	{
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << "Result directory and file checks complete.\n";
+		this->mOutputToFileEventController++;
 		break;
+	}
 	case outputToFileRecordStart:
+	{
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << "Recording results to " << this->OperationResultHandlerPtr->getResultFileName() << ".\n";
+		this->mOutputToFileEventController++;
 		break;
+	}
 	case outputToFileRecordComplete:
+	{
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << "Results successfully recorded to " 
+			<< this->OperationResultHandlerPtr->getResultFileName() << ".\n";
+		this->mOutputToFileEventController++;
 		break;
+	}
 	case outputToFileEventComplete:
 	{
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": " << "Output to file complete.\n";
 		this->resetOutputToFileEventController();
 		this->resetMainEventController();
+
+		std::cout << "Press any key to continue.";
+		std::cin.get();
+
 		break;
 	}
 	default: {const bool isBadTrigger{ true }; assert(!isBadTrigger && "We've no matching event!(eventOutputToFile)."); break; }
