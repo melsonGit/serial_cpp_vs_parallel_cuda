@@ -56,39 +56,15 @@ void OperationEventHandler::eventSetContainer()
 
 	switch (static_cast<ContainerEvents>(this->mContainerEventController))
 	{
-	case genericPopulationStart:
+	case containerEventStart:
 	{
-		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Populating main containers.\n";
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Populating containers.\n";
 		this->mContainerEventController++;
 		break;
 	}
-	case genericPopulationComplete:
+	case containerEventEnd:
 	{
-		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Main container population complete.\n";
-
-		// We want to skip processing mask population event if our operation doesn't have a mask vector
-
-		if (this->ArithemticOperationPtr->getMaskStatus())
-			this->mContainerEventController++;
-		else
-			this->mContainerEventController = static_cast<int>(containerEventComplete);
-		break;
-	}
-	case maskPopulationStart:
-	{
-		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Populating mask containers.\n";
-		this->mContainerEventController++;
-		break;
-	}
-	case maskPopulationComplete:
-	{
-		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Mask container population complete.\n";
-		this->mContainerEventController++;
-		break;
-	}
-	case containerEventComplete:
-	{
-		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": All containers populated.\n";
+		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Containers populated.\n";
 		this->resetContainerEventController();
 		this->mMainEventController = static_cast<int>(EventTriggers::startLaunchOpEvent);
 		break;
@@ -102,13 +78,13 @@ void OperationEventHandler::eventLaunchOp()
 
 	switch (static_cast<LaunchOpEvents>(this->mLaunchOpEventController))
 	{
-	case operationStart:
+	case operationEventStart:
 	{
 		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Starting operation.\n";
 		this->mLaunchOpEventController++;
 		break;
 	}
-	case arithmeticEventComplete:
+	case arithmeticEventEnd:
 	{
 		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Operation complete.\n";
 		this->resetLaunchOpEventController();
@@ -124,13 +100,13 @@ void OperationEventHandler::eventValidateResults()
 
 	switch (static_cast<ValidationEvents>(this->mValidationEventController))
 	{
-	case validationStart:
+	case validationEventStart:
 	{
 		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Starting result validation.\n";
 		this->mValidationEventController++;
 		break;
 	}
-	case validationEventComplete:
+	case validationEventEnd:
 	{
 		std::cout << '\n' << this->ArithemticOperationPtr->getOpName() << ": Result validation complete.\n\n";
 

@@ -65,10 +65,7 @@ void TwoDConvolution::setContainer(const int& userInput)
 
 	this->setCurrSampleSize(actualIndex);
 
-	this->OperationEventHandler.processEvent(); // <- This
-	this->OperationEventHandler.processEvent();	// <-	   looks
-	this->OperationEventHandler.processEvent();	// <-			 really
-	this->OperationEventHandler.processEvent();	// <-					ugly
+	this->OperationEventHandler.processEvent();
 }
 void TwoDConvolution::launchOp()
 {

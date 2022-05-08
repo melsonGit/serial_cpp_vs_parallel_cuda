@@ -8,21 +8,18 @@ namespace OperationEvents
 {
 	enum class ContainerEvents
 	{
-		genericPopulationStart,
-		genericPopulationComplete,
-		maskPopulationStart,
-		maskPopulationComplete,
-		containerEventComplete,
+		containerEventStart,
+		containerEventEnd,
 	};
 	enum class LaunchOpEvents
 	{
-		operationStart,
-		arithmeticEventComplete,
+		operationEventStart,
+		arithmeticEventEnd,
 	};
 	enum class ValidationEvents
 	{
-		validationStart,
-		validationEventComplete,
+		validationEventStart,
+		validationEventEnd,
 	};
 	enum class OutputToFileEvents 
 	{

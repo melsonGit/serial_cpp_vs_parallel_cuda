@@ -45,11 +45,8 @@ void OneDConvolution::setContainer(const int& userInput)
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
 
 	this->setCurrSampleSize(actualIndex);
-
-	this->OperationEventHandler.processEvent(); // <- This
-	this->OperationEventHandler.processEvent();	// <-	   looks
-	this->OperationEventHandler.processEvent();	// <-			 really
-	this->OperationEventHandler.processEvent();	// <-					ugly
+	
+	this->OperationEventHandler.processEvent();
 }
 void OneDConvolution::launchOp()
 {

@@ -41,7 +41,6 @@ void MatrixMultiplication::setContainer(const int& userInput)
 	this->setCurrSampleSize(actualIndex);
 
 	this->OperationEventHandler.processEvent();
-	this->OperationEventHandler.processEvent();
 }
 void MatrixMultiplication::launchOp()
 {
