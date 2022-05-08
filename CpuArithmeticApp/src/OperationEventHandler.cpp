@@ -23,33 +23,6 @@ void OperationEventHandler::processEvent(const bool& eventOutputToFileValidation
 	}
 }
 
-/*
-	We enter these functions through processEvent()
-	Corresponding events have a controller, which determines what process we control
-	Controller movement is determined by specific arithmetic operation execution flow
-	e.g. if the operation uses a mask, if it fails result validation etc.
-*/
-/*
-	=====****| Calling Instructions |****=====
-
-	processEvent() is to only be called in ArithmeticOperation children class functions setContainer(), launchOp() and validateResults();
-
-	processEvent() assumes your operations have no mask and has passed validation (default arguments).... 
-	... so please ensure processEvent() is provided overriding arguments in areas where we need to specify if:
-	1 - the operation uses a mask
-	2 - processEvent() is being called from within validateResults();
-
-	eventSetContainer()
-		with mask    : call processEvent() 5 times
-		without mask : call processEvent() 3 times
-	eventLaunchOp()
-		general use  : call processEvent() 2 times
-	eventValidateResults()
-		general use  : call processEvent() 2 times
-	eventOutputToFile()
-		general use  : call processEvent() ?? times
-*/
-
 void OperationEventHandler::eventSetContainer()
 {
 	using enum ContainerEvents;
