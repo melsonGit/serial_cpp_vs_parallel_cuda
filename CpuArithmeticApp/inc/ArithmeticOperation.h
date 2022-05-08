@@ -54,6 +54,11 @@ protected:
     template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args);
     template<typename P1> void resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize);
     template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<std::vector<P1>>& vecToResize, Args&... args);
+    // shrinkContainer
+    template<typename P1> void shrinkContainer(std::vector<P1>& vecToShrink);
+    template<typename P1, typename ... Args> void shrinkContainer(std::vector<P1>& vecToShrink, Args&... args);
+    template<typename P1> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink);
+    template<typename P1, typename ... Args> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink, Args&... args);
     
 public:
 
@@ -160,5 +165,33 @@ void ArithmeticOperation::resizeContainer(const P1& newSize, std::vector<std::ve
 {
     this->resizeContainer(newSize, vecToResize);
     this->resizeContainer(newSize, args...);
+}
+
+// shrinkContainer
+// Base case for 1D vector
+template<typename P1> 
+void ArithmeticOperation::shrinkContainer(std::vector<P1>& vecToShrink)
+{
+    vecToShrink.shrink_to_fit();
+}
+// Recursive case for 1D vector
+template<typename P1, typename ... Args> 
+void ArithmeticOperation::shrinkContainer(std::vector<P1>& vecToShrink, Args&... args)
+{
+    this->shrinkContainer(vecToShrink);
+    this->shrinkContainer(args...);
+}
+// Base case for 2D vector
+template<typename P1> 
+void ArithmeticOperation::shrinkContainer(std::vector<std::vector<P1>>& vecToShrink)
+{
+    vecToShrink.shrink_to_fit();
+}
+// Recursive case for 2D vector
+template<typename P1, typename ... Args> 
+void ArithmeticOperation::shrinkContainer(std::vector<std::vector<P1>>& vecToShrink, Args&... args)
+{
+    this->shrinkContainer(vecToShrink);
+    this->shrinkContainer(args...);
 }
 #endif
