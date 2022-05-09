@@ -12,7 +12,7 @@ private:
 	const std::string fileType{ ".csv" };
 	const std::string resultFileName{};
 
-	const class ArithmeticOperation* ArithemticOperationPtr;
+	const class ArithmeticOperation* ArithmeticOperationPtr;
 	class OperationEventHandler* OperationEventHandlerPtr;
 	const OperationTimer* OperationTimerPtr;
 
@@ -31,7 +31,7 @@ private:
 public:
 
 	OperationResultHandler(const ArithmeticOperation& arithOp, OperationEventHandler& opEventHandler, const OperationTimer& opTimer, const std::string opName)
-		: ArithemticOperationPtr{ &arithOp }, OperationEventHandlerPtr{ &opEventHandler }, 
+		: ArithmeticOperationPtr{ &arithOp }, OperationEventHandlerPtr{ &opEventHandler }, 
 		OperationTimerPtr{ &opTimer }, resultFileName{ resultFilePath + opName + fileType } {}
 
 	const std::string getResultFilePath() const;

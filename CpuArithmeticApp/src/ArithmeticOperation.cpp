@@ -6,6 +6,12 @@ void ArithmeticOperation::storeResults()
 	this->OperationResultHandler.processOperationResults();
 }
 
+void ArithmeticOperation::updateEventHandler(const OperationEvents& event)
+{
+	this->OperationEventHandler.setEvent(event);
+	this->OperationEventHandler.processEvent();
+}
+
 // Getters
 
 const bool ArithmeticOperation::getValidationStatus() const

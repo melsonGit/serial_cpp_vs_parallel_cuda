@@ -3,80 +3,38 @@
 #define OPERATION_EVENT_HANDLER
 
 #include "OperationTimer.h"
+#include "EventArchive.h"
 
-namespace OperationEvents
-{
-	enum class ContainerEvents
-	{
-		containerEventStart,
-		containerEventEnd,
-	};
-	enum class LaunchOpEvents
-	{
-		operationEventStart,
-		arithmeticEventEnd,
-	};
-	enum class ValidationEvents
-	{
-		validationEventStart,
-		validationEventEnd,
-	};
-	enum class OutputToFileEvents 
-	{
-		outputToFileStart,
-		outputToFileCreateDirectoryStart,
-		outputToFileCreateDirectoryComplete,
-		outputToFileCreateFileStart,
-		outputToFileCreateFileComplete,
-		outputToFileDirFileChecksComplete,
-		outputToFileRecordStart,
-		outputToFileRecordComplete,
-		outputToFileEventComplete,
-	};
-	enum class EventTriggers
-	{
-		startSetContainerEvent,
-		startLaunchOpEvent,
-		startValidationEvent,
-		startOutputToFileEvent,
-	};
-}
+#include <cassert>
+#include <iostream>
+#include <vector>
+#include <unordered_map>
 
 class OperationEventHandler
 {
 private:
 
-	const class ArithmeticOperation* ArithemticOperationPtr;
+	const class ArithmeticOperation* ArithmeticOperationPtr;
 	const class OperationResultHandler* OperationResultHandlerPtr;
 	const OperationTimer* OperationTimerPtr;
 
-	// Navigates and determines events to be processed in processEvent()
-	int mMainEventController{ 0 };
-	
-	// Navigates specific events pertaining to corresponding name 
-	// e.g. mContainerEventController controls eventSetContainer() flow
-	int mContainerEventController{ 0 };
-	int mLaunchOpEventController{ 0 };
-	int mValidationEventController{ 0 };
-	int mOutputToFileEventController{ 0 };
+	const std::unordered_map<OperationEvents, std::string> eventHolder{};
+	OperationEvents eventId{};
 
-	void eventSetContainer();
-	void eventLaunchOp();
-	void eventValidateResults();
-	void eventOutputToFile(const bool& componentPresent, const bool& isFile);
-
-	// Controller resetters
-	void resetMainEventController();
-	void resetContainerEventController();
-	void resetLaunchOpEventController();
-	void resetValidationEventController();
-	void resetOutputToFileEventController();
+	const bool checkEventExists() const;
+	const bool isResultsValidatedEvent() const;
+	const std::string getEventString() const;
+	void outputTimeResults() const;
+	void badEvent() const;
+	void outputEvent() const;
+	void processTimeResults();
 
 public:
 
 	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationResultHandler& opResultHandler, const OperationTimer& opTimer)
-		: ArithemticOperationPtr{ &arithOp }, OperationResultHandlerPtr{ &opResultHandler }, OperationTimerPtr{ &opTimer } {}
+		: ArithmeticOperationPtr{ &arithOp }, OperationResultHandlerPtr{ &opResultHandler }, OperationTimerPtr{ &opTimer }, eventHolder{ eventArchive } {}
 
-	void processEvent(const bool& eventOutputToFileValidation = true, const bool& isFile = true);
+	void setEvent(const OperationEvents& event);
+	void processEvent() const;
 };
 #endif

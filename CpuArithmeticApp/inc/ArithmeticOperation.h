@@ -69,7 +69,7 @@ public:
     const std::string getOpName() const;
     //const std::string_view viewOpName() const; may be of use when we just want to display our string
     const std::size_t getOpSampleSize(const int& option) const;
-    
+    void updateEventHandler(const OperationEvents& event);
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);
     void setVecIndex(const int& newIndex);

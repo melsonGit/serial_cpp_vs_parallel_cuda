@@ -5,12 +5,8 @@
 #include <iostream>
 #include <vector>
 
-using namespace MaskAttributes;
-
 void OneDConvolution::setContainer(const int& userInput)
 {
-	this->OperationEventHandler.processEvent();
-
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
@@ -18,7 +14,7 @@ void OneDConvolution::setContainer(const int& userInput)
 
 	// If empty (first run), resize the mask vector - if already resized (second run), ignore
 	if (this->mOCMaskVec.empty())
-		this->mOCMaskVec.resize(maskDim);
+		this->mOCMaskVec.resize(MaskAttributes::maskDim);
 
 	if (this->getVecIndex() == firstRun)
 	{
@@ -41,16 +37,19 @@ void OneDConvolution::setContainer(const int& userInput)
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
 	}
 
+	this->updateEventHandler(OperationEvents::populateContainer);
+
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
 
 	this->setCurrSampleSize(actualIndex);
-	
-	this->OperationEventHandler.processEvent();
+
+	this->updateEventHandler(OperationEvents::populateContainerComplete);
+
 }
 void OneDConvolution::launchOp()
 {
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::startOperation);
 	this->OperationTimer.resetStartTimer();
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
@@ -61,11 +60,11 @@ void OneDConvolution::launchOp()
     for (auto rowIn{ 0 }; rowIn < this->mOCOutputVec.size(); ++rowIn)
     {
 		// Update offset value for that row
-        radiusOffsetRows = rowIn - maskOffset;
+        radiusOffsetRows = rowIn - MaskAttributes::maskOffset;
 		this->mOCOutputVec[rowIn] = 0;
 
 		// For each mask row in mOCMaskVec
-        for (auto maskRowIn{ 0 }; maskRowIn < maskDim; ++maskRowIn)
+        for (auto maskRowIn{ 0 }; maskRowIn < MaskAttributes::maskDim; ++maskRowIn)
         {
 			// Check if we're hanging off mask row
             if ((radiusOffsetRows + maskRowIn >= 0) && (radiusOffsetRows + maskRowIn < this->mOCOutputVec.size()))
@@ -77,11 +76,11 @@ void OneDConvolution::launchOp()
     }
 
 	this->OperationTimer.collectElapsedTimeData();
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::endOperation);
 }
 void OneDConvolution::validateResults()
 {
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::validateResults);
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -99,10 +98,10 @@ void OneDConvolution::validateResults()
 		resultVar = 0;
 
 		// Update offset value for that row
-		radiusOffsetRows = rowIn - maskOffset;
+		radiusOffsetRows = rowIn - MaskAttributes::maskOffset;
 
 		// For each mask row in mOCMaskVec
-		for (auto maskRowIn{ 0 }; maskRowIn < maskDim; ++maskRowIn)
+		for (auto maskRowIn{ 0 }; maskRowIn < MaskAttributes::maskDim; ++maskRowIn)
 		{
 			// Check if we're hanging off mask row
 			if ((radiusOffsetRows + maskRowIn >= 0) && (radiusOffsetRows + maskRowIn < this->mOCOutputVec.size()))
@@ -121,5 +120,5 @@ void OneDConvolution::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mOCOutputVec (oneConv).");
 
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::resultsValidated);
 }

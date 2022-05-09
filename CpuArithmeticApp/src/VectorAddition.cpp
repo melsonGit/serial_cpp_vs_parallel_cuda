@@ -7,8 +7,6 @@
 
 void VectorAddition::setContainer(const int& userInput)
 {
-	this->OperationEventHandler.processEvent();
-
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
@@ -35,16 +33,18 @@ void VectorAddition::setContainer(const int& userInput)
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
 	}
 
+	this->updateEventHandler(OperationEvents::populateContainer);
+
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 
 	this->setCurrSampleSize(actualIndex);
 
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::populateContainerComplete);
 }
 void VectorAddition::launchOp()
 {
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::startOperation);
 	this->OperationTimer.resetStartTimer();
 
 	// Add contents from inputVecA and inputVecB into resultVec
@@ -52,11 +52,11 @@ void VectorAddition::launchOp()
 		[](auto a, auto b) {return a + b; });
 
 	this->OperationTimer.collectElapsedTimeData();
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::endOperation);
 }
 void VectorAddition::validateResults() 
 {
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::validateResults);
 
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };
@@ -74,5 +74,5 @@ void VectorAddition::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Addition of mVAInputVecA / mVAInputVecB values don't match corresponding values in mVAOutputVec (vecAdd).");
 
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::resultsValidated);
 }
