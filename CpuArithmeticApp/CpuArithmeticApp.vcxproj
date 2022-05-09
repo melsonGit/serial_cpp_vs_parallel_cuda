@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="inc\ArithmeticOperation.h" />
     <ClInclude Include="inc\ArithmeticDetails.h" />
+    <ClInclude Include="inc\EventArchive.h" />
     <ClInclude Include="inc\OperationEventHandler.h" />
     <ClInclude Include="inc\MaskAttributes.h" />
     <ClInclude Include="inc\MatrixMultiplication.h" />

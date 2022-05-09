@@ -4,12 +4,10 @@
 
 #include "ArithmeticOperation.h"
 #include "ArithmeticDetails.h"
-#include "MaskAttributes.h"
 
 #include <vector>
 
 using namespace ArithmeticDetails::OneDConvolutionDetails;
-using namespace MaskAttributes;
 
 class OneDConvolution final : public ArithmeticOperation
 {

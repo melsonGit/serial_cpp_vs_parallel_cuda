@@ -7,8 +7,6 @@
 
 void MatrixMultiplication::setContainer(const int& userInput)
 {
-	this->OperationEventHandler.processEvent();
-
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
@@ -35,17 +33,18 @@ void MatrixMultiplication::setContainer(const int& userInput)
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mMMInputVecA, this->mMMInputVecB, this->mMMOutputVec);
 	}
 
+	this->updateEventHandler(OperationEvents::populateContainer);
+
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mMMInputVecA, this->mMMInputVecB);
 
 	this->setCurrSampleSize(actualIndex);
 
-	this->OperationEventHandler.processEvent();
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::populateContainerComplete);
 }
 void MatrixMultiplication::launchOp()
 {
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::startOperation);
 	this->OperationTimer.resetStartTimer();
 
     for (auto rowIn{ 0 }; rowIn < this->mMMOutputVec.size(); ++rowIn) // For each row
@@ -59,11 +58,11 @@ void MatrixMultiplication::launchOp()
 		}
 
 	this->OperationTimer.collectElapsedTimeData();
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::endOperation);
 }
 void MatrixMultiplication::validateResults()
 {
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::validateResults);
 
 	// Accumulates our results to check against resultVec
 	std::size_t resultVar{};
@@ -96,5 +95,5 @@ void MatrixMultiplication::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mMMOutputVec (matMulti).");
 
-	this->OperationEventHandler.processEvent();
+	this->updateEventHandler(OperationEvents::resultsValidated);
 }
