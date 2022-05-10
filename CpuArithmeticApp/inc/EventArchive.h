@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <string>
 
+// Ignore Error C26812: Enum Class values aren't implicitly cast to int, which is what we want
 enum OperationEvents
 {
 	populateContainer,

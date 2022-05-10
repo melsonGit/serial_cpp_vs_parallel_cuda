@@ -23,7 +23,7 @@ private:
 
 	const bool checkEventExists() const;
 	const bool isResultsValidatedEvent() const;
-	const std::string getEventString() const;
+	const std::string& getEventString() const;
 	void outputTimeResults() const;
 	void badEvent() const;
 	void outputEvent() const;

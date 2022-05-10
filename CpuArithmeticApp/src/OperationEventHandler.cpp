@@ -50,7 +50,7 @@ void OperationEventHandler::outputTimeResults() const
 	std::cin.ignore();
 }
 
-const std::string OperationEventHandler::getEventString() const
+const std::string& OperationEventHandler::getEventString() const
 {
 	auto itr = this->eventHolder.find(this->eventId); return itr->second;
 }

@@ -27,8 +27,8 @@ public:
 	void resetStartTimer();
 	void collectElapsedTimeData();
 
-	precisionType getElapsedMicroseconds() const;
-	precisionType getElapsedMilliseconds() const;
-	precisionType getElapsedSeconds() const;
+	const precisionType& getElapsedMicroseconds() const;
+	const precisionType& getElapsedMilliseconds() const;
+	const precisionType& getElapsedSeconds() const;
 };
 #endif

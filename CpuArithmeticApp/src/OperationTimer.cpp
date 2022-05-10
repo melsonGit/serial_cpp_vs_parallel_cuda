@@ -30,15 +30,15 @@ void OperationTimer::collectElapsedTimeData()
 	this->elapsedSeconds();
 }
 
-precisionType OperationTimer::getElapsedMicroseconds() const
+const precisionType& OperationTimer::getElapsedMicroseconds() const
 {
 	return this->mElapsedTimeUs;
 }
-precisionType OperationTimer::getElapsedMilliseconds() const
+const precisionType& OperationTimer::getElapsedMilliseconds() const
 {
 	return this->mElapsedTimeMs;
 }
-precisionType OperationTimer::getElapsedSeconds() const
+const precisionType& OperationTimer::getElapsedSeconds() const
 {
 	return this->mElapsedTimeS;
 }

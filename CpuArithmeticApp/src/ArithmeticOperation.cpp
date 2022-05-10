@@ -14,27 +14,27 @@ void ArithmeticOperation::updateEventHandler(const OperationEvents& event)
 
 // Getters
 
-const bool ArithmeticOperation::getValidationStatus() const
+const bool& ArithmeticOperation::getValidationStatus() const
 {
 	return this->hasPassedValidation;
 }
-const int ArithmeticOperation::getVecIndex() const
+const int& ArithmeticOperation::getVecIndex() const
 {
 	return this->vecIndex;
 }
-const std::size_t ArithmeticOperation::getCurrSampleSize() const
+const std::size_t& ArithmeticOperation::getCurrSampleSize() const
 {
 	return this->currSampleSize;
 }
-const bool ArithmeticOperation::getMaskStatus() const
+const bool& ArithmeticOperation::getMaskStatus() const
 {
 	return this->hasMask;
 }
-const std::string ArithmeticOperation::getOpName() const
+const std::string& ArithmeticOperation::getOpName() const
 {
 	return this->mOperationName;
 }
-const std::size_t ArithmeticOperation::getOpSampleSize(const int& option) const
+const std::size_t& ArithmeticOperation::getOpSampleSize(const int& option) const
 {
 	return this->mSampleSizes[option];
 }
