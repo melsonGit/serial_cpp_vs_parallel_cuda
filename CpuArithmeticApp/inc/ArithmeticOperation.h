@@ -21,12 +21,12 @@ protected:
     // Characteristics unique to every ArithmeticOperation child
     const std::string mOperationName{};
     const std::array<std::size_t, 5> mSampleSizes{};
-    const bool hasMask{};
+    const bool mHasMask{};
 
     // Var checks for ArithmeticOperation function checks 
-    bool hasPassedValidation{};
-    std::size_t currSampleSize{};
-    int vecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine but just to be safe
+    bool mHasPassedValidation{};
+    std::size_t mCurrSampleSize{};
+    int mVecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine but just to be safe
 
     // Operation Tools
     OperationTimer OperationTimer{};
@@ -34,7 +34,7 @@ protected:
     OperationResultHandler OperationResultHandler;
     
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, hasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimer }, 
+        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimer }, 
         OperationResultHandler{*this, OperationEventHandler, OperationTimer, this->mOperationName} {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
@@ -69,7 +69,7 @@ public:
     const std::string& getOpName() const;
     //const std::string_view viewOpName() const; may be of use when we just want to display our string
     const std::size_t& getOpSampleSize(const int& option) const;
-    void updateEventHandler(const OperationEvents& event);
+    void updateEventHandler(const EventDirectives& event);
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);
     void setVecIndex(const int& newIndex);

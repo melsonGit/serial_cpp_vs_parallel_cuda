@@ -4,12 +4,12 @@
 
 const bool OperationEventHandler::checkEventExists() const
 {
-	return (this->eventHolder.contains(this->eventId));
+	return (this->mEventHolder.contains(this->mEventId));
 }
 
 const bool OperationEventHandler::isResultsValidatedEvent() const
 {
-	return (this->eventId == OperationEvents::resultsValidated);
+	return (this->mEventId == EventDirectives::resultsValidated);
 }
 
 void OperationEventHandler::badEvent() const
@@ -52,10 +52,10 @@ void OperationEventHandler::outputTimeResults() const
 
 const std::string& OperationEventHandler::getEventString() const
 {
-	auto itr = this->eventHolder.find(this->eventId); return itr->second;
+	auto itr = this->mEventHolder.find(this->mEventId); return itr->second;
 }
 
-void OperationEventHandler::setEvent(const OperationEvents& event)
+void OperationEventHandler::setEvent(const EventDirectives& event)
 {
-	this->eventId = event;
+	this->mEventId = event;
 }

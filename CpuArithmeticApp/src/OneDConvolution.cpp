@@ -7,6 +7,8 @@
 
 void OneDConvolution::setContainer(const int& userInput)
 {
+	this->updateEventHandler(EventDirectives::populateContainer);
+
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
@@ -37,19 +39,17 @@ void OneDConvolution::setContainer(const int& userInput)
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
 	}
 
-	this->updateEventHandler(OperationEvents::populateContainer);
-
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
 
 	this->setCurrSampleSize(actualIndex);
 
-	this->updateEventHandler(OperationEvents::populateContainerComplete);
+	this->updateEventHandler(EventDirectives::populateContainerComplete);
 
 }
 void OneDConvolution::launchOp()
 {
-	this->updateEventHandler(OperationEvents::startOperation);
+	this->updateEventHandler(EventDirectives::startOperation);
 	this->OperationTimer.resetStartTimer();
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
@@ -76,11 +76,11 @@ void OneDConvolution::launchOp()
     }
 
 	this->OperationTimer.collectElapsedTimeData();
-	this->updateEventHandler(OperationEvents::endOperation);
+	this->updateEventHandler(EventDirectives::endOperation);
 }
 void OneDConvolution::validateResults()
 {
-	this->updateEventHandler(OperationEvents::validateResults);
+	this->updateEventHandler(EventDirectives::validateResults);
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -120,5 +120,5 @@ void OneDConvolution::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mOCOutputVec (oneConv).");
 
-	this->updateEventHandler(OperationEvents::resultsValidated);
+	this->updateEventHandler(EventDirectives::resultsValidated);
 }

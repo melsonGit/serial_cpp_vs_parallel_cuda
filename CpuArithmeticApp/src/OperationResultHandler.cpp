@@ -26,19 +26,19 @@ void OperationResultHandler::processOperationResults()
 }
 const bool OperationResultHandler::doesResultDirectoryExist() const
 {
-	return std::filesystem::exists(this->resultFilePath);
+	return std::filesystem::exists(this->mResultFilePath);
 }
 void OperationResultHandler::createResultDirectory() const
 {
-	std::filesystem::create_directory(this->resultFilePath);
+	std::filesystem::create_directory(this->mResultFilePath);
 }
 const bool OperationResultHandler::doesResultFileExist() const
 {
-	return std::filesystem::exists(this->resultFileName);
+	return std::filesystem::exists(this->mResultFileName);
 }
 void OperationResultHandler::createResultFile()
 {
-	std::ofstream newFile(this->resultFileName);
+	std::ofstream newFile(this->mResultFileName);
 
 	int sampleSizes{ 0 };
 
@@ -51,10 +51,10 @@ void OperationResultHandler::createResultFile()
 }
 void OperationResultHandler::recordResults()
 {
-	std::cout << "Storing " << this->ArithmeticOperationPtr->getOpName() << " results into " << this->resultFileName << ".\n\n";
+	std::cout << "Storing " << this->ArithmeticOperationPtr->getOpName() << " results into " << this->mResultFileName << ".\n\n";
 
 	std::ofstream existingFile;
-	existingFile.open(resultFileName, std::fstream::app);
+	existingFile.open(mResultFileName, std::fstream::app);
 
 	existingFile.close();
 }
@@ -88,9 +88,9 @@ void OperationResultHandler::insertLastestTime()
 
 const std::string OperationResultHandler::getResultFilePath() const
 {
-	return this->resultFilePath;
+	return this->mResultFilePath;
 }
 const std::string OperationResultHandler::getResultFileName() const
 {
-	return this->resultFileName;
+	return this->mResultFileName;
 }

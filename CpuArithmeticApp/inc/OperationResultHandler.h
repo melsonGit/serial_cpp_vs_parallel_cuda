@@ -8,9 +8,9 @@ class OperationResultHandler
 {
 private:
 
-	const std::string resultFilePath{ "results/" };
-	const std::string fileType{ ".csv" };
-	const std::string resultFileName{};
+	const std::string mResultFilePath{ "results/" };
+	const std::string mFileType{ ".csv" };
+	const std::string mResultFileName{};
 
 	const class ArithmeticOperation* ArithmeticOperationPtr;
 	class OperationEventHandler* OperationEventHandlerPtr;
@@ -32,7 +32,7 @@ public:
 
 	OperationResultHandler(const ArithmeticOperation& arithOp, OperationEventHandler& opEventHandler, const OperationTimer& opTimer, const std::string opName)
 		: ArithmeticOperationPtr{ &arithOp }, OperationEventHandlerPtr{ &opEventHandler }, 
-		OperationTimerPtr{ &opTimer }, resultFileName{ resultFilePath + opName + fileType } {}
+		OperationTimerPtr{ &opTimer }, mResultFileName{ mResultFilePath + opName + mFileType } {}
 
 	const std::string getResultFilePath() const;
 	const std::string getResultFileName() const;
