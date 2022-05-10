@@ -33,18 +33,18 @@ void VectorAddition::setContainer(const int& userInput)
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
 	}
 
-	this->updateEventHandler(OperationEvents::populateContainer);
+	this->updateEventHandler(EventDirectives::populateContainer);
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 
 	this->setCurrSampleSize(actualIndex);
 
-	this->updateEventHandler(OperationEvents::populateContainerComplete);
+	this->updateEventHandler(EventDirectives::populateContainerComplete);
 }
 void VectorAddition::launchOp()
 {
-	this->updateEventHandler(OperationEvents::startOperation);
+	this->updateEventHandler(EventDirectives::startOperation);
 	this->OperationTimer.resetStartTimer();
 
 	// Add contents from inputVecA and inputVecB into resultVec
@@ -52,11 +52,11 @@ void VectorAddition::launchOp()
 		[](auto a, auto b) {return a + b; });
 
 	this->OperationTimer.collectElapsedTimeData();
-	this->updateEventHandler(OperationEvents::endOperation);
+	this->updateEventHandler(EventDirectives::endOperation);
 }
 void VectorAddition::validateResults() 
 {
-	this->updateEventHandler(OperationEvents::validateResults);
+	this->updateEventHandler(EventDirectives::validateResults);
 
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };
@@ -74,5 +74,5 @@ void VectorAddition::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Addition of mVAInputVecA / mVAInputVecB values don't match corresponding values in mVAOutputVec (vecAdd).");
 
-	this->updateEventHandler(OperationEvents::resultsValidated);
+	this->updateEventHandler(EventDirectives::resultsValidated);
 }

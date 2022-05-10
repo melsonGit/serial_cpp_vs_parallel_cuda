@@ -15,24 +15,24 @@
 // Program loop starts and ends exists here
 void ProgramHandler::launchProgram()
 {
-	using enum ProgramDirective;
+	using enum ProgramDirectives;
 
 	do // Enter main menu
 	{
 		this->launchDirective();
 		this->userSetMainMenuDirective();
 
-		if (this->getDirective() != programExit)
+		if (this->getCurrentDirective() != programExit)
 		{
 			do
 			{
 				this->launchDirective(); // Launch Operation / Exit back to main menu or exit program
 
-			} while ((this->getDirective() != mainMenu) && (this->getDirective() != programExit));
+			} while ((this->getCurrentDirective() != mainMenu) && (this->getCurrentDirective() != programExit));
 		}
-	} while (this->getDirective() != programExit);
+	} while (this->getCurrentDirective() != programExit);
 
-	assert(this->getDirective() == programExit && "We should only be here if our directive is set to programExit!");
+	assert(this->getCurrentDirective() == programExit && "We should only be here if our directive is set to programExit!");
 	this->launchDirective();
 }
 
@@ -103,11 +103,11 @@ const bool ProgramHandler::getKeyPress() const
 #endif
 }
 
-// Display Non-Arithmetic Operation OperationEvents
+// Display Non-Arithmetic Operation EventDirectives
 void ProgramHandler::displayMainMenu() const
 {
 	using namespace ArithmeticDetails;
-	using enum ProgramDirective;
+	using enum ProgramDirectives;
 
 	std::cout << "\n\n\t\t\tRedirecting to Main Menu";
 
@@ -115,11 +115,11 @@ void ProgramHandler::displayMainMenu() const
 
 	std::cout << "Please select an arithmetic operation from the options below.\n"
 		<< "Enter corresponding number to make selection: \n\nArithmetic Operations\n\n"
-		<< '[' << static_cast<int>(vectorAddition) << "]\t" << VectorAdditionDetails::vecAddName << '\n'
-		<< '[' << static_cast<int>(matrixMultiplication) << "]\t" << MatrixMultiplicationDetails::matMultiName << '\n'
-		<< '[' << static_cast<int>(oneConvolution) << "]\t" << OneDConvolutionDetails::oneDConvName << '\n'
-		<< '[' << static_cast<int>(twoConvolution) << "]\t" << TwoDConvolutionDetails::twoDConvName << "\n\n"
-		<< '[' << static_cast<int>(programExit) << "]\tClose Program\n";
+		<< '[' << vectorAddition << "]\t" << VectorAdditionDetails::vecAddName << '\n'
+		<< '[' << matrixMultiplication << "]\t" << MatrixMultiplicationDetails::matMultiName << '\n'
+		<< '[' << oneConvolution << "]\t" << OneDConvolutionDetails::oneDConvName << '\n'
+		<< '[' << twoConvolution << "]\t" << TwoDConvolutionDetails::twoDConvName << "\n\n"
+		<< '[' << programExit << "]\tClose Program\n";
 }
 void ProgramHandler::displayProgramExit() const
 {
@@ -141,7 +141,7 @@ void ProgramHandler::displayProgramStart() const
 	while (!this->getKeyPress());
 }
 
-// Display Arithmetic Operation OperationEvents
+// Display Arithmetic Operation EventDirectives
 void ProgramHandler::displayOperationDetails(const ArithmeticOperation& operation) const
 {
 	this->displayOperationName(operation);
@@ -154,7 +154,7 @@ void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) 
 }
 void ProgramHandler::displayOperationSampleMenu(const ArithmeticOperation& operation) const
 {
-	using enum ProgramDirective;
+	using enum ProgramDirectives;
 
 	int elementOptions{ 0 };
 
@@ -166,14 +166,14 @@ void ProgramHandler::displayOperationSampleMenu(const ArithmeticOperation& opera
 		<< "[4] " << operation.getOpSampleSize(elementOptions++) << " elements\n"
 		<< "[5] " << operation.getOpSampleSize(elementOptions) << " elements\n\n"
 		<< "Program Navigation\n\n"
-		<< '[' << static_cast<int>(inOpMainMenu) << "]\tReturn to Main Menu\n"
-		<< '[' << static_cast<int>(inOpProgramExit) << "]\tClose Program\n";
+		<< '[' << inOpMainMenu << "]\tReturn to Main Menu\n"
+		<< '[' << inOpProgramExit << "]\tClose Program\n";
 }
 
-// User Input OperationEvents
+// User Input EventDirectives
 const int ProgramHandler::userOpSampleSelection()
 {
-	using enum ProgramDirective;
+	using enum ProgramDirectives;
 	bool validSelection{ false };
 	int selectionRange{};
 
@@ -186,10 +186,10 @@ const int ProgramHandler::userOpSampleSelection()
 		// If the user selection is outside sample range, we check against our directives
 		else
 		{
-			switch (static_cast<ProgramDirective>(selectionRange))
+			switch (selectionRange)
 			{
-			case inOpMainMenu: { this->setSudoDirective(mainMenu); selectionRange = static_cast<int>(inOpMainMenu); validSelection = true; break; }
-			case inOpProgramExit: { this->setSudoDirective(programExit);  selectionRange = static_cast<int>(inOpProgramExit); validSelection = true; break; }
+			case inOpMainMenu: { this->setSudoDirective(mainMenu); selectionRange = inOpMainMenu; validSelection = true; break; }
+			case inOpProgramExit: { this->setSudoDirective(programExit);  selectionRange = inOpProgramExit; validSelection = true; break; }
 			default: { std::cout << "\nInvalid selection!\n\n"; break; }
 			}
 		}
@@ -199,156 +199,83 @@ const int ProgramHandler::userOpSampleSelection()
 }
 void ProgramHandler::userSetMainMenuDirective()
 {
-	using enum ProgramDirective;
+	using enum ProgramDirectives;
 	bool validSelection{ false };
 
 	do
 	{
-		switch (static_cast<ProgramDirective>(this->getInput()))
+		switch (static_cast<ProgramDirectives>(this->getInput()))
 		{
-		case vectorAddition: { this->mDisplay = vectorAddition; validSelection = true; break; }
-		case matrixMultiplication: { this->mDisplay = matrixMultiplication; validSelection = true; break; }
-		case oneConvolution: { this->mDisplay = oneConvolution; validSelection = true; break; }
-		case twoConvolution: { this->mDisplay = twoConvolution; validSelection = true; break; }
-		case programExit: { this->mDisplay = programExit; validSelection = true; break; }
+		case vectorAddition: { this->mDirectiveId = vectorAddition; validSelection = true; break; }
+		case matrixMultiplication: { this->mDirectiveId = matrixMultiplication; validSelection = true; break; }
+		case oneConvolution: { this->mDirectiveId = oneConvolution; validSelection = true; break; }
+		case twoConvolution: { this->mDirectiveId = twoConvolution; validSelection = true; break; }
+		case programExit: { this->mDirectiveId = programExit; validSelection = true; break; }
 		default: { std::cout << "\nInvalid selection!\n\n"; break; }
 		}
 	} while (!validSelection);
 }
 
 // Directive Getters/Setters
-const ProgramDirective& ProgramHandler::getDirective() const
+const ProgramDirectives& ProgramHandler::getCurrentDirective() const
 {
-	return this->mDisplay;
+	return this->mDirectiveId;
 }
-void ProgramHandler::setSudoDirective(const ProgramDirective& sudoChoice)
+void ProgramHandler::setSudoDirective(const ProgramDirectives& sudoChoice)
 {
-	using enum ProgramDirective;
+	using enum ProgramDirectives;
 	bool validSudoSelection{ true };
 
 	switch (sudoChoice)
 	{
-	case vectorAddition: { this->mDisplay = vectorAddition; break; }
-	case matrixMultiplication: { this->mDisplay = matrixMultiplication; break; }
-	case oneConvolution: { this->mDisplay = oneConvolution; break; }
-	case twoConvolution: { this->mDisplay = twoConvolution; break; }
-	case programExit: { this->mDisplay = programExit; break; }
-	case mainMenu: { this->mDisplay = mainMenu; break; }
+	case vectorAddition: { this->mDirectiveId = vectorAddition; break; }
+	case matrixMultiplication: { this->mDirectiveId = matrixMultiplication; break; }
+	case oneConvolution: { this->mDirectiveId = oneConvolution; break; }
+	case twoConvolution: { this->mDirectiveId = twoConvolution; break; }
+	case programExit: { this->mDirectiveId = programExit; break; }
+	case mainMenu: { this->mDirectiveId = mainMenu; break; }
 	default: { validSudoSelection = false; break; }
 	}
 
 	assert(validSudoSelection && "Invalid setSudoDirective() argument!");
 }
 
-// Launch Directive
-void ProgramHandler::launchDirective() // this should be encapsulated into 2/3 functions - bending DRY rules a bit here
+// Process Operation Directive
+void ProgramHandler::processOperationDirecitve(ArithmeticOperation& operation)
 {
-	using enum ProgramDirective;
+	bool toExitOp{};
 
-	switch (this->mDisplay)
+	do
+	{
+		this->displayOperationDetails(operation);
+		toExitOp = false;
+		int userSampleDisplaySelection{ this->userOpSampleSelection() };
+
+		// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
+		// ...so we skip startOpSeq() and launchDirective()
+		if (userSampleDisplaySelection == inOpMainMenu || userSampleDisplaySelection == inOpProgramExit)
+		{
+			toExitOp = true;
+		}
+		else
+		{
+			operation.startOpSeq(userSampleDisplaySelection);
+		}
+	} while (!toExitOp);
+}
+
+// Launch Directives
+void ProgramHandler::launchDirective()
+{
+	using enum ProgramDirectives;
+
+	switch (this->mDirectiveId)
 	{
 	case programStart: { this->displayProgramStart(); break; }
-	case vectorAddition:
-	{
-		VectorAddition vecAdd{};
-		// enterSampleSelectionLoop(const ArithmeticOperation& operation); best encapsulate this
-		bool toExitOp{};
-
-		do
-		{
-			this->displayOperationDetails(vecAdd);
-			toExitOp = false;
-			int userSampleDisplaySelection{ this->userOpSampleSelection() };
-
-			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
-			// ...so we skip startOpSeq() and launchDirective()
-			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
-			{
-				toExitOp = true;
-			}
-			else
-			{
-				vecAdd.startOpSeq(userSampleDisplaySelection);
-			}
-		} while (!toExitOp);
-
-		break;
-	}
-	case matrixMultiplication: 
-	{
-		MatrixMultiplication matMulti{};
-		bool toExitOp{};
-
-		do
-		{
-			this->displayOperationDetails(matMulti);
-			toExitOp = false;
-			int userSampleDisplaySelection{ this->userOpSampleSelection() };
-
-			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
-			// ...so we skip startOpSeq() and launchDirective()
-			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
-			{
-				toExitOp = true;
-			}
-			else
-			{
-				matMulti.startOpSeq(userSampleDisplaySelection);
-			}
-		} while (!toExitOp);
-
-		break;
-	}
-	case oneConvolution: 
-	{
-		OneDConvolution oneConv{};
-		bool toExitOp{};
-
-		do
-		{
-			this->displayOperationDetails(oneConv);
-			toExitOp = false;
-			int userSampleDisplaySelection{ this->userOpSampleSelection() };
-
-			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
-			// ...so we skip startOpSeq() and launchDirective()
-			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
-			{
-				toExitOp = true;
-			}
-			else
-			{
-				oneConv.startOpSeq(userSampleDisplaySelection);
-			}
-		} while (!toExitOp);
-
-		break;
-	}
-	case twoConvolution:
-	{
-		TwoDConvolution twoConv{};
-		bool toExitOp{};
-
-		do
-		{
-			this->displayOperationDetails(twoConv);
-			toExitOp = false;
-			int userSampleDisplaySelection{ this->userOpSampleSelection() };
-
-			// If userSampleDisplaySelection is outside sample selection, user either wants to return to main menu / close program...
-			// ...so we skip startOpSeq() and launchDirective()
-			if (userSampleDisplaySelection == static_cast<int>(inOpMainMenu) || userSampleDisplaySelection == static_cast<int>(inOpProgramExit))
-			{
-				toExitOp = true;
-			}
-			else
-			{
-				twoConv.startOpSeq(userSampleDisplaySelection);
-			}
-		} while (!toExitOp);
-
-		break;
-	}
+	case vectorAddition: { VectorAddition vecAdd{}; this->processOperationDirecitve(vecAdd); break; }
+	case matrixMultiplication: { MatrixMultiplication matMulti{}; this->processOperationDirecitve(matMulti); break; }
+	case oneConvolution: { OneDConvolution oneConv{}; this->processOperationDirecitve(oneConv); break; }
+	case twoConvolution: { TwoDConvolution twoConv{}; this->processOperationDirecitve(twoConv); break; }
 	case mainMenu: { displayMainMenu(); break; }
 	case programExit: { displayProgramExit(); break; }
 	default: { std::cout << "\nInvalid selection!\n\n"; break; }

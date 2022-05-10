@@ -56,18 +56,18 @@ void TwoDConvolution::setContainer(const int& userInput)
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mTCInputVec, this->mTCOutputVec);
 	}
 
-	this->updateEventHandler(OperationEvents::populateContainer);
+	this->updateEventHandler(EventDirectives::populateContainer);
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mTCInputVec, this->mTCMaskVec);
 
 	this->setCurrSampleSize(actualIndex);
 
-	this->updateEventHandler(OperationEvents::populateContainerComplete);
+	this->updateEventHandler(EventDirectives::populateContainerComplete);
 }
 void TwoDConvolution::launchOp()
 {
-	this->updateEventHandler(OperationEvents::startOperation);
+	this->updateEventHandler(EventDirectives::startOperation);
 	this->OperationTimer.resetStartTimer();
 
 	// Radius rows/cols will determine when convolution occurs to prevent out of bound errors
@@ -121,11 +121,11 @@ void TwoDConvolution::launchOp()
 	}
 
 	this->OperationTimer.collectElapsedTimeData();
-	this->updateEventHandler(OperationEvents::endOperation);
+	this->updateEventHandler(EventDirectives::endOperation);
 }
 void TwoDConvolution::validateResults()
 {
-	this->updateEventHandler(OperationEvents::validateResults);
+	this->updateEventHandler(EventDirectives::validateResults);
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -186,5 +186,5 @@ void TwoDConvolution::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mTCOutputVec (twoConv).");
 
-	this->updateEventHandler(OperationEvents::resultsValidated);
+	this->updateEventHandler(EventDirectives::resultsValidated);
 }

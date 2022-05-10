@@ -3,7 +3,7 @@
 #define OPERATION_EVENT_HANDLER
 
 #include "OperationTimer.h"
-#include "EventArchive.h"
+#include "EventDirectives.h"
 
 #include <cassert>
 #include <iostream>
@@ -18,8 +18,8 @@ private:
 	const class OperationResultHandler* OperationResultHandlerPtr;
 	const OperationTimer* OperationTimerPtr;
 
-	const std::unordered_map<OperationEvents, std::string> eventHolder{};
-	OperationEvents eventId{};
+	const std::unordered_map<EventDirectives, std::string> mEventHolder{};
+	EventDirectives mEventId{};
 
 	const bool checkEventExists() const;
 	const bool isResultsValidatedEvent() const;
@@ -32,9 +32,9 @@ private:
 public:
 
 	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationResultHandler& opResultHandler, const OperationTimer& opTimer)
-		: ArithmeticOperationPtr{ &arithOp }, OperationResultHandlerPtr{ &opResultHandler }, OperationTimerPtr{ &opTimer }, eventHolder{ eventArchive } {}
+		: ArithmeticOperationPtr{ &arithOp }, OperationResultHandlerPtr{ &opResultHandler }, OperationTimerPtr{ &opTimer }, mEventHolder{ eventDirectiveMap } {}
 
-	void setEvent(const OperationEvents& event);
+	void setEvent(const EventDirectives& event);
 	void processEvent() const;
 };
 #endif

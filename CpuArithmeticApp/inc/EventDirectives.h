@@ -1,14 +1,14 @@
 #pragma once
-#ifndef EVENT_ARCHIVE
-#define EVENT_ARCHIVE
+#ifndef EVENT_DIRECTIVES
+#define EVENT_DIRECTIVES
 
 #include <unordered_map>
 #include <string>
 
 // Ignore Error C26812: Enum Class values aren't implicitly cast to int, which is what we want
-enum OperationEvents
+enum EventDirectives
 {
-	populateContainer,
+	populateContainer = 0,
 	populateContainerComplete,
 	startOperation,
 	endOperation,
@@ -18,7 +18,7 @@ enum OperationEvents
 	resultsRecorded,
 };
 
-inline const std::unordered_map<OperationEvents, std::string> eventArchive
+inline const std::unordered_map<EventDirectives, std::string> eventDirectiveMap
 {
 	{populateContainer, "Populating containers."},
 	{populateContainerComplete, "Containers populated."},

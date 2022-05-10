@@ -33,18 +33,18 @@ void MatrixMultiplication::setContainer(const int& userInput)
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mMMInputVecA, this->mMMInputVecB, this->mMMOutputVec);
 	}
 
-	this->updateEventHandler(OperationEvents::populateContainer);
+	this->updateEventHandler(EventDirectives::populateContainer);
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mMMInputVecA, this->mMMInputVecB);
 
 	this->setCurrSampleSize(actualIndex);
 
-	this->updateEventHandler(OperationEvents::populateContainerComplete);
+	this->updateEventHandler(EventDirectives::populateContainerComplete);
 }
 void MatrixMultiplication::launchOp()
 {
-	this->updateEventHandler(OperationEvents::startOperation);
+	this->updateEventHandler(EventDirectives::startOperation);
 	this->OperationTimer.resetStartTimer();
 
     for (auto rowIn{ 0 }; rowIn < this->mMMOutputVec.size(); ++rowIn) // For each row
@@ -58,11 +58,11 @@ void MatrixMultiplication::launchOp()
 		}
 
 	this->OperationTimer.collectElapsedTimeData();
-	this->updateEventHandler(OperationEvents::endOperation);
+	this->updateEventHandler(EventDirectives::endOperation);
 }
 void MatrixMultiplication::validateResults()
 {
-	this->updateEventHandler(OperationEvents::validateResults);
+	this->updateEventHandler(EventDirectives::validateResults);
 
 	// Accumulates our results to check against resultVec
 	std::size_t resultVar{};
@@ -95,5 +95,5 @@ void MatrixMultiplication::validateResults()
 	// Assert and abort when results don't match
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mMMOutputVec (matMulti).");
 
-	this->updateEventHandler(OperationEvents::resultsValidated);
+	this->updateEventHandler(EventDirectives::resultsValidated);
 }

@@ -6,7 +6,7 @@ void ArithmeticOperation::storeResults()
 	this->OperationResultHandler.processOperationResults();
 }
 
-void ArithmeticOperation::updateEventHandler(const OperationEvents& event)
+void ArithmeticOperation::updateEventHandler(const EventDirectives& event)
 {
 	this->OperationEventHandler.setEvent(event);
 	this->OperationEventHandler.processEvent();
@@ -16,19 +16,19 @@ void ArithmeticOperation::updateEventHandler(const OperationEvents& event)
 
 const bool& ArithmeticOperation::getValidationStatus() const
 {
-	return this->hasPassedValidation;
+	return this->mHasPassedValidation;
 }
 const int& ArithmeticOperation::getVecIndex() const
 {
-	return this->vecIndex;
+	return this->mVecIndex;
 }
 const std::size_t& ArithmeticOperation::getCurrSampleSize() const
 {
-	return this->currSampleSize;
+	return this->mCurrSampleSize;
 }
 const bool& ArithmeticOperation::getMaskStatus() const
 {
-	return this->hasMask;
+	return this->mHasMask;
 }
 const std::string& ArithmeticOperation::getOpName() const
 {
@@ -42,15 +42,15 @@ const std::size_t& ArithmeticOperation::getOpSampleSize(const int& option) const
 // Setters
 void ArithmeticOperation::setCurrSampleSize(const int& index)
 {
-	this->currSampleSize = this->mSampleSizes[index];
+	this->mCurrSampleSize = this->mSampleSizes[index];
 }
 void ArithmeticOperation::setValidationStatus(const bool& validationResults)
 {
-	this->hasPassedValidation = validationResults;
+	this->mHasPassedValidation = validationResults;
 }
 void ArithmeticOperation::setVecIndex(const int& newIndex)
 {
-	this->vecIndex = newIndex;
+	this->mVecIndex = newIndex;
 }
 void ArithmeticOperation::startOpSeq(const int& userInput)
 {

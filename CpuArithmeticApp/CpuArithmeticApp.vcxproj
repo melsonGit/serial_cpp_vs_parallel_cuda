@@ -170,13 +170,14 @@
   <ItemGroup>
     <ClInclude Include="inc\ArithmeticOperation.h" />
     <ClInclude Include="inc\ArithmeticDetails.h" />
-    <ClInclude Include="inc\EventArchive.h" />
+    <ClInclude Include="inc\EventDirectives.h" />
     <ClInclude Include="inc\OperationEventHandler.h" />
     <ClInclude Include="inc\MaskAttributes.h" />
     <ClInclude Include="inc\MatrixMultiplication.h" />
     <ClInclude Include="inc\OneDConvolution.h" />
     <ClInclude Include="inc\OperationResultHandler.h" />
     <ClInclude Include="inc\OperationTimer.h" />
+    <ClInclude Include="inc\ProgramDirectives.h" />
     <ClInclude Include="inc\ProgramHandler.h" />
     <ClInclude Include="inc\RandNumGen.h" />
     <ClInclude Include="inc\TwoDConvolution.h" />
