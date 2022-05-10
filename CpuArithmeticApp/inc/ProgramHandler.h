@@ -3,6 +3,7 @@
 #define PROGRAM_HANDLER
 
 #include "ArithmeticOperation.h"
+#include "ProgramUtilities.h"
 #include "ProgramDirectives.h"
 
 #include <cassert>
@@ -16,12 +17,8 @@ private:
 	// Navigates our ProgramDirectives functions
 	ProgramDirectives mDirectiveId{};
 
-	// ProgramHandler Utilites (Windows.h incuded below as it clashes with getInput()) - move into separate class (ProgramUtilites)
-	void clearInputStream() const;
-	void clearScreen() const;
-	const int getInput() const;
-	void fakeLoad() const;
-	const bool getKeyPress() const;
+	// Handles Utility functionality
+	ProgramUtilities ProgramUtilities{};
 
 	// Display Non-Arithmetic Operation EventDirectives
 	void displayMainMenu() const;

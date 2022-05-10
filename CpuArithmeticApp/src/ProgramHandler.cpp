@@ -9,8 +9,6 @@
 #include <cassert>
 #include <chrono>
 #include <iostream>
-#include <string_view>
-#include <thread>
 
 // Program loop starts and ends exists here
 void ProgramHandler::launchProgram()
@@ -34,73 +32,6 @@ void ProgramHandler::launchProgram()
 	this->launchDirective();
 }
 
-// ProgramHandler Utilites (Windows.h incuded below as it clashes with getInput())
-void ProgramHandler::clearInputStream() const
-{
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-}
-void ProgramHandler::clearScreen() const
-{
-	this->fakeLoad();
-
-	// Special VT100 escape codes to clear a CMD screen
-#ifdef _WIN32
-	std::cout << "\033[2J\033[1;1H";
-#elif defined __linux__
-	std::cout << "\033[2J\033[1;1H";
-#elif defined __APPLE__
-	// do something for mac
-#endif
-}
-const int ProgramHandler::getInput() const
-{
-	int userInput{ 0 };
-	bool validSelection{ false };
-
-	do
-	{
-		if (!(std::cin >> userInput))
-		{
-			std::cout << "Please enter numbers only.\n\n";
-			this->clearInputStream();
-		}
-		else
-		{
-			validSelection = true;
-		}
-	} while (!validSelection);
-
-	return userInput;
-}
-void ProgramHandler::fakeLoad() const
-{
-	for (auto i = 0; i < 3; ++i) {
-		std::cout << ". ";
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
-}
-
-#include <Windows.h> 
-
-const bool ProgramHandler::getKeyPress() const
-{
-#ifdef _WIN32
-	bool isKeyPressed{ false };
-	while (!isKeyPressed)
-	{
-		if (GetKeyState(VK_RETURN) & 0x8000) // Prevent progression until user has pressed ENTER/RETURN key
-			isKeyPressed = true;
-	}
-
-	return isKeyPressed;
-#elif defined __linux__
-	// do something for linux
-#elif defined __APPLE__
-	// do something for mac
-#endif
-}
-
 // Display Non-Arithmetic Operation EventDirectives
 void ProgramHandler::displayMainMenu() const
 {
@@ -108,7 +39,7 @@ void ProgramHandler::displayMainMenu() const
 
 	std::cout << "\n\n\t\t\tRedirecting to Main Menu";
 
-	this->clearScreen();
+	this->ProgramUtilities.clearScreen();
 
 	std::cout << "Please select an arithmetic operation from the options below.\n"
 		<< "Enter corresponding number to make selection: \n\nArithmetic Operations\n\n"
@@ -121,7 +52,7 @@ void ProgramHandler::displayMainMenu() const
 void ProgramHandler::displayProgramExit() const
 {
 	std::cout << "\n\n\t\t\tShutting down program";
-	this->clearScreen();
+	this->ProgramUtilities.clearScreen();
 }
 void ProgramHandler::displayProgramStart() const
 {
@@ -135,7 +66,7 @@ void ProgramHandler::displayProgramStart() const
 		<< "\t\t\tPress Enter/Return key to Proceed";
 
 	// Proceed only when ENTER/RETURN key is pressed
-	while (!this->getKeyPress());
+	while (!this->ProgramUtilities.getKeyPress());
 }
 
 // Display Arithmetic Operation EventDirectives
@@ -147,7 +78,7 @@ void ProgramHandler::displayOperationDetails(const ArithmeticOperation& operatio
 void ProgramHandler::displayOperationName(const ArithmeticOperation& operation) const
 {
 	std::cout << "\n\n\t\t\tLaunching " << operation.getOpName() << " operation";
-	this->clearScreen();
+	this->ProgramUtilities.clearScreen();
 }
 void ProgramHandler::displayOperationSampleMenu(const ArithmeticOperation& operation) const
 {
@@ -173,7 +104,7 @@ const int ProgramHandler::userOpSampleSelection()
 
 	do
 	{
-		selectionRange = this->getInput();
+		selectionRange = this->ProgramUtilities.getInput();
 		// If user selections within sample range 1 - 5, we return that value
 		if (selectionRange >= 1 && selectionRange <= 5)
 			validSelection = true;
@@ -197,7 +128,7 @@ void ProgramHandler::userSetMainMenuDirective()
 
 	do
 	{
-		switch (this->getInput())
+		switch (this->ProgramUtilities.getInput())
 		{
 		case ProgramDirectives::vectorAddition: { this->mDirectiveId = ProgramDirectives::vectorAddition; validSelection = true; break; }
 		case ProgramDirectives::matrixMultiplication: { this->mDirectiveId = ProgramDirectives::matrixMultiplication; validSelection = true; break; }

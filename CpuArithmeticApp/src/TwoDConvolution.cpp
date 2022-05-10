@@ -25,6 +25,8 @@ const std::size_t TwoDConvolution::tempConSizeInit()
 }
 void TwoDConvolution::setContainer(const int& userInput)
 {
+	this->updateEventHandler(EventDirectives::populateContainer);
+
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 	// First run check - any number outside 0 - 6 is fine but just to be safe
@@ -55,8 +57,6 @@ void TwoDConvolution::setContainer(const int& userInput)
 		this->setVecIndex(actualIndex);
 		this->resizeContainer(this->mSampleSizes[actualIndex], this->mTCInputVec, this->mTCOutputVec);
 	}
-
-	this->updateEventHandler(EventDirectives::populateContainer);
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mTCInputVec, this->mTCMaskVec);
