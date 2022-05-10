@@ -18,6 +18,7 @@ private:
     void setContainer(const int& userInput) override final;
     void launchOp() override final;
     void validateResults() override final;
+    void processContainerSize(const int& newIndex) override final;
 
     // populateContainer - 2D
     template<typename P1> void populateContainer(std::vector<std::vector<P1>>& vecToPop);

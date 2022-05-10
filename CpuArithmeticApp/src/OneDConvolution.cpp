@@ -11,33 +11,8 @@ void OneDConvolution::setContainer(const int& userInput)
 
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
-	// First run check - any number outside 0 - 6 is fine but just to be safe
-	constexpr int firstRun{ 99 };
 
-	// If empty (first run), resize the mask vector - if already resized (second run), ignore
-	if (this->mOCMaskVec.empty())
-		this->mOCMaskVec.resize(MaskAttributes::maskDim);
-
-	if (this->getVecIndex() == firstRun)
-	{
-		// If first run - we'll re-size regardless
-		this->setVecIndex(actualIndex);
-		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
-	}
-	else if (actualIndex < this->getVecIndex()) 
-	{
-		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-		this->setVecIndex(actualIndex);
-		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
-		// Non-binding - IDE will decide if this will execute
-		this->shrinkContainer(this->mOCInputVec, this->mOCOutputVec);
-	}
-	else if (actualIndex > this->getVecIndex())
-	{
-		// If selection is higher than last run
-		this->setVecIndex(actualIndex);
-		this->resizeContainer(this->mSampleSizes[actualIndex], this->mOCInputVec, this->mOCOutputVec);
-	}
+	this->processContainerSize(actualIndex);
 
 	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
@@ -121,4 +96,27 @@ void OneDConvolution::validateResults()
 	assert(doesMatch && "Check failed! Accumulated resultVar value doesn't match corresponding value in mOCOutputVec (oneConv).");
 
 	this->updateEventHandler(EventDirectives::resultsValidated);
+}
+void OneDConvolution::processContainerSize(const int& newIndex)
+{
+	// Convolution-specific mask vector size allocation - remains the same size regardless
+	// If empty (first run), resize the mask vector - if already resized (second run +), ignore
+	if (this->mOCMaskVec.empty())
+		this->mOCMaskVec.resize(MaskAttributes::maskDim);
+
+	if (this->isNewContainer() || this->isContainerSmallerSize(newIndex))
+		this->resizeContainer(this->mSampleSizes[newIndex], this->mOCInputVec, this->mOCOutputVec);
+
+	else if (this->isContainerSameSize(newIndex))
+		return;
+
+	else if (this->isContainerLargerSize(newIndex))
+	{
+		this->resizeContainer(this->mSampleSizes[newIndex], this->mOCInputVec, this->mOCOutputVec);
+		// Non-binding - IDE will decide if this will execute
+		this->shrinkContainer(this->mOCInputVec, this->mOCOutputVec);
+	}
+
+	// Only set next vecIndex if current container is smaller / larger / new
+	this->setVecIndex(newIndex);
 }
