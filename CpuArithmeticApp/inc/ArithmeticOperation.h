@@ -41,7 +41,22 @@ protected:
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0;
+
+    // Container Checks
+    virtual void processContainerSize(const int& newIndex) = 0;
+    const bool isNewContainer();
+    const bool isContainerSameSize(const int& newIndex);
+    const bool isContainerSmallerSize(const int& newIndex);
+    const bool isContainerLargerSize(const int& newIndex);
+
     void storeResults();
+
+    void setCurrSampleSize(const int& index);
+    void setValidationStatus(const bool& validationResult);
+    void setVecIndex(const int& newIndex);
+    const int& getVecIndex() const;
+    void updateEventHandler(const EventDirectives& event);
+
 
     // Functions used by all operations
     // populateContainer
@@ -59,21 +74,14 @@ protected:
     template<typename P1, typename ... Args> void shrinkContainer(std::vector<P1>& vecToShrink, Args&... args);
     template<typename P1> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink);
     template<typename P1, typename ... Args> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink, Args&... args);
-    
+   
 public:
 
     const bool& getValidationStatus() const;
-    const int& getVecIndex() const;
     const std::size_t& getCurrSampleSize() const;
     const bool& getMaskStatus() const;
     const std::string& getOpName() const;
-    //const std::string_view viewOpName() const; may be of use when we just want to display our string
     const std::size_t& getOpSampleSize(const int& option) const;
-    void updateEventHandler(const EventDirectives& event);
-    void setCurrSampleSize(const int& index);
-    void setValidationStatus(const bool& validationResult);
-    void setVecIndex(const int& newIndex);
-
     void startOpSeq(const int& userInput);
 };
 

@@ -18,6 +18,7 @@ private:
     void setContainer(const int& userInput) override final;
     void launchOp() override final;
     void validateResults() override final;
+    void processContainerSize(const int& newIndex) override final;
     const std::size_t tempConSizeInit(); // remove when we use 2d vectors
 
     // populateContainer - 1D

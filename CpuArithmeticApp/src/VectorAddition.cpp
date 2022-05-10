@@ -11,31 +11,9 @@ void VectorAddition::setContainer(const int& userInput)
 
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
-	// First run check - any number outside 0 - 6 is fine but just to be safe
-	constexpr int firstRun{ 99 }; 
 
-	if (this->getVecIndex() == firstRun)
-	{
-		// If first run - we'll re-size regardless
-		this->setVecIndex(actualIndex);
-		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
-	}
-	else if (actualIndex < this->getVecIndex())
-	{
-		// If current sample selection is lower than previous run - resize() and then shrink_to_fit().
-		this->setVecIndex(actualIndex);
-		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
-		// Non-binding - IDE will decide if this will execute
-		this->shrinkContainer(mVAInputVecA, mVAInputVecB, mVAOutputVec);
-	}
-	else if (actualIndex > this->getVecIndex())
-	{
-		// If selection is higher than last run
-		this->setVecIndex(actualIndex);
-		this->resizeContainer(this->mSampleSizes[actualIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
-	}
+	this->processContainerSize(actualIndex);
 
-	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mVAInputVecA, this->mVAInputVecB);
 
 	this->setCurrSampleSize(actualIndex);
@@ -75,4 +53,22 @@ void VectorAddition::validateResults()
 	assert(doesMatch && "Check failed! Addition of mVAInputVecA / mVAInputVecB values don't match corresponding values in mVAOutputVec (vecAdd).");
 
 	this->updateEventHandler(EventDirectives::resultsValidated);
+}
+void VectorAddition::processContainerSize(const int& newIndex)
+{
+	if (this->isNewContainer() || this->isContainerSmallerSize(newIndex))
+		this->resizeContainer(this->mSampleSizes[newIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
+
+	else if (this->isContainerSameSize(newIndex))
+		return;
+
+	else if (this->isContainerLargerSize(newIndex))
+	{
+		this->resizeContainer(this->mSampleSizes[newIndex], this->mVAInputVecA, this->mVAInputVecB, this->mVAOutputVec);
+		// Non-binding - IDE will decide if this will execute
+		this->shrinkContainer(mVAInputVecA, mVAInputVecB, mVAOutputVec);
+	}
+
+	// Only set next vecIndex if current container is smaller / larger / new
+	this->setVecIndex(newIndex);
 }
