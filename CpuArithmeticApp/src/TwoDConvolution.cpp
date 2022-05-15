@@ -32,7 +32,6 @@ void TwoDConvolution::setContainer(const int& userInput)
 
 	this->processContainerSize(actualIndex);
 
-	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mTCInputVec, this->mTCMaskVec);
 
 	this->setCurrSampleSize(actualIndex);

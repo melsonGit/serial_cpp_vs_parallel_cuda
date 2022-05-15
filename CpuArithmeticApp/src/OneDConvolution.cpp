@@ -14,13 +14,11 @@ void OneDConvolution::setContainer(const int& userInput)
 
 	this->processContainerSize(actualIndex);
 
-	// or we jump straight to populating if user selected same sample size as last run - don't resize, just re-populate vectors
 	this->populateContainer(this->mOCInputVec, this->mOCMaskVec);
 
 	this->setCurrSampleSize(actualIndex);
 
 	this->updateEventHandler(EventDirectives::populateContainerComplete);
-
 }
 void OneDConvolution::launchOp()
 {
