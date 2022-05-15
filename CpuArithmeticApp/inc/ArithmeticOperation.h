@@ -10,8 +10,6 @@
 
 #include <algorithm>
 #include <array>
-#include <ctime>
-#include <random>
 #include <string>
 
 class ArithmeticOperation
@@ -78,10 +76,10 @@ protected:
 public:
 
     const bool& getValidationStatus() const;
-    const std::size_t& getCurrSampleSize() const;
     const bool& getMaskStatus() const;
-    const std::string& getOpName() const;
+    const std::size_t& getCurrSampleSize() const;
     const std::size_t& getOpSampleSize(const int& option) const;
+    const std::string& getOpName() const;
     void startOpSeq(const int& userInput);
 };
 
