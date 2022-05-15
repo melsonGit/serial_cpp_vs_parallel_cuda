@@ -2,7 +2,7 @@
 #ifndef OPERATION_RESULT_HANDLER
 #define OPERATION_RESULT_HANDLER
 
-#include "OperationTimer.h"
+#include "OperationTimeHandler.h"
 
 class OperationResultHandler
 {
@@ -14,7 +14,7 @@ private:
 
 	const class ArithmeticOperation* ArithmeticOperationPtr;
 	class OperationEventHandler* OperationEventHandlerPtr;
-	const OperationTimer* OperationTimerPtr;
+	const OperationTimeHandler* OperationTimerPtr;
 
 	const bool doesResultDirectoryExist() const;
 	const bool doesResultFileExist() const;
@@ -30,7 +30,7 @@ private:
 
 public:
 
-	OperationResultHandler(const ArithmeticOperation& arithOp, OperationEventHandler& opEventHandler, const OperationTimer& opTimer, const std::string opName)
+	OperationResultHandler(const ArithmeticOperation& arithOp, OperationEventHandler& opEventHandler, const OperationTimeHandler& opTimer, const std::string opName)
 		: ArithmeticOperationPtr{ &arithOp }, OperationEventHandlerPtr{ &opEventHandler }, 
 		OperationTimerPtr{ &opTimer }, mResultFileName{ mResultFilePath + opName + mFileType } {}
 

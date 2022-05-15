@@ -1,8 +1,8 @@
-#include "../inc/OperationTimer.h"
+#include "../inc/OperationTimeHandler.h"
 
 using precisionType = unsigned long long;
 
-void OperationTimer::resetStartTimer()
+void OperationTimeHandler::resetStartTimer()
 {
 	this->mStartTimer = operationClock::now();
 
@@ -11,35 +11,34 @@ void OperationTimer::resetStartTimer()
 	this->mElapsedTimeMs = 0;
 	this->mElapsedTimeS = 0;
 }
-void OperationTimer::elapsedMicroseconds() // measured in us
+void OperationTimeHandler::elapsedMicroseconds() // measured in us
 {
 	this->mElapsedTimeUs = std::chrono::duration_cast<std::chrono::microseconds>(operationClock::now() - this->mStartTimer).count();
 }
-void OperationTimer::elapsedMilliseconds() // measured in ms
+void OperationTimeHandler::elapsedMilliseconds() // measured in ms
 {
 	this->mElapsedTimeMs = std::chrono::duration_cast<std::chrono::milliseconds>(operationClock::now() - this->mStartTimer).count();
 }
-void OperationTimer::elapsedSeconds()
+void OperationTimeHandler::elapsedSeconds()
 {
 	this->mElapsedTimeS = std::chrono::duration_cast<std::chrono::seconds>(operationClock::now() - this->mStartTimer).count();
 }
-void OperationTimer::collectElapsedTimeData()
+void OperationTimeHandler::collectElapsedTimeData()
 {
 	this->elapsedMicroseconds();
 	this->elapsedMilliseconds();
 	this->elapsedSeconds();
 }
 
-const precisionType& OperationTimer::getElapsedMicroseconds() const
+const precisionType& OperationTimeHandler::getElapsedMicroseconds() const
 {
 	return this->mElapsedTimeUs;
 }
-const precisionType& OperationTimer::getElapsedMilliseconds() const
+const precisionType& OperationTimeHandler::getElapsedMilliseconds() const
 {
 	return this->mElapsedTimeMs;
 }
-const precisionType& OperationTimer::getElapsedSeconds() const
+const precisionType& OperationTimeHandler::getElapsedSeconds() const
 {
 	return this->mElapsedTimeS;
 }
-

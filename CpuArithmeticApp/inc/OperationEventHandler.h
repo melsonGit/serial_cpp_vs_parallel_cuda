@@ -2,7 +2,7 @@
 #ifndef OPERATION_EVENT_HANDLER
 #define OPERATION_EVENT_HANDLER
 
-#include "OperationTimer.h"
+#include "OperationTimeHandler.h"
 #include "EventDirectives.h"
 
 #include <cassert>
@@ -16,7 +16,7 @@ private:
 
 	const class ArithmeticOperation* ArithmeticOperationPtr;
 	const class OperationResultHandler* OperationResultHandlerPtr;
-	const OperationTimer* OperationTimerPtr;
+	const OperationTimeHandler* OperationTimerPtr;
 
 	const std::unordered_map<EventDirectives, std::string> mEventHolder{};
 	EventDirectives mEventId{};
@@ -31,7 +31,7 @@ private:
 
 public:
 
-	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationResultHandler& opResultHandler, const OperationTimer& opTimer)
+	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationResultHandler& opResultHandler, const OperationTimeHandler& opTimer)
 		: ArithmeticOperationPtr{ &arithOp }, OperationResultHandlerPtr{ &opResultHandler }, OperationTimerPtr{ &opTimer }, mEventHolder{ eventDirectiveMap } {}
 
 	void setEvent(const EventDirectives& event);

@@ -23,7 +23,7 @@ void MatrixMultiplication::setContainer(const int& userInput)
 void MatrixMultiplication::launchOp()
 {
 	this->updateEventHandler(EventDirectives::startOperation);
-	this->OperationTimer.resetStartTimer();
+	this->OperationTimeHandler.resetStartTimer();
 
     for (auto rowIn{ 0 }; rowIn < this->mMMOutputVec.size(); ++rowIn) // For each row
 		for (auto colIn{ 0 }; colIn < this->mMMOutputVec[rowIn].size(); ++colIn) // For each column in that row
@@ -35,7 +35,7 @@ void MatrixMultiplication::launchOp()
 				this->mMMOutputVec[rowIn][colIn] += this->mMMInputVecA[rowIn][rowColPair] * this->mMMInputVecB[rowColPair][colIn];
 		}
 
-	this->OperationTimer.collectElapsedTimeData();
+	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
 }
 void MatrixMultiplication::validateResults()

@@ -4,7 +4,7 @@
 
 #include "OperationEventHandler.h"
 #include "OperationResultHandler.h"
-#include "OperationTimer.h"
+#include "OperationTimeHandler.h"
 #include "RandNumGen.h"
 #include "MaskAttributes.h"
 
@@ -27,13 +27,13 @@ protected:
     int mVecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine but just to be safe
 
     // Operation Tools
-    OperationTimer OperationTimer{};
+    OperationTimeHandler OperationTimeHandler{};
     OperationEventHandler OperationEventHandler;
     OperationResultHandler OperationResultHandler;
     
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimer }, 
-        OperationResultHandler{*this, OperationEventHandler, OperationTimer, this->mOperationName} {}
+        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
+        OperationResultHandler{*this, OperationEventHandler, OperationTimeHandler, this->mOperationName} {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
     virtual void setContainer(const int& userInput) = 0;

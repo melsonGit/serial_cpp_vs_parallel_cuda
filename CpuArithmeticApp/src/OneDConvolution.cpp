@@ -23,7 +23,7 @@ void OneDConvolution::setContainer(const int& userInput)
 void OneDConvolution::launchOp()
 {
 	this->updateEventHandler(EventDirectives::startOperation);
-	this->OperationTimer.resetStartTimer();
+	this->OperationTimeHandler.resetStartTimer();
 
 	// Assists in determining when convolution can occur to prevent out of bound errors
 	// Used in conjunction with maskAttributes::maskOffset
@@ -48,7 +48,7 @@ void OneDConvolution::launchOp()
         }
     }
 
-	this->OperationTimer.collectElapsedTimeData();
+	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
 }
 void OneDConvolution::validateResults()
