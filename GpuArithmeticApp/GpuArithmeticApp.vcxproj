@@ -82,11 +82,8 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ArithmeticDetails.cpp" />
     <ClCompile Include="src\ArithmeticOperation.cpp" />
-    <ClCompile Include="src\EventDirectives.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\MaskAttributes.cpp" />
     <ClCompile Include="src\MatrixMultiplication.cpp" />
     <ClCompile Include="src\OneDConvolution.cpp" />
     <ClCompile Include="src\OperationEventHandler.cpp" />
@@ -94,7 +91,6 @@
     <ClCompile Include="src\OperationTimeHandler.cpp" />
     <ClCompile Include="src\ProgramHandler.cpp" />
     <ClCompile Include="src\ProgramUtilities.cpp" />
-    <ClCompile Include="src\RandNumGen.cpp" />
     <ClCompile Include="src\TwoDConvolution.cpp" />
     <ClCompile Include="src\VectorAddition.cpp" />
   </ItemGroup>
