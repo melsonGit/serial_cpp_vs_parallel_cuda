@@ -14,12 +14,22 @@ class VectorAddition final : public ArithmeticOperation
 private:
 
     std::vector<std::size_t> mVAHostInputVecA, mVAHostInputVecB, mVAHostOutputVec;
-    std::size_t* mVADeviceInputVecA, mVADeviceInputVecB, mVADeviceOutputVec;
 
     void setContainer(const int& userInput) override final;
     void launchOp() override final;
     void validateResults() override final;
     void processContainerSize(const int& newIndex) override final;
+
+    // CUDA Specific Variables
+    std::size_t* mVADeviceInputVecA{ nullptr };
+    std::size_t* mVADeviceInputVecB{ nullptr };
+    std::size_t* mVADeviceOutputVec{ nullptr };
+
+    // CUDA Specific Functions
+    void allocateMemToDevice() override final;
+    void copyHostToDevice() override final;
+    void copyDeviceToHost() override final;
+    void freeDeviceData() override final;
 
     // populateContainer - 1D
     template<typename P1> void populateContainer(std::vector<P1>& vecToPop);

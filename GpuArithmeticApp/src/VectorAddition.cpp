@@ -72,3 +72,28 @@ void VectorAddition::processContainerSize(const int& newIndex)
 	// Only set next vecIndex if current container is smaller / larger / new
 	this->setVecIndex(newIndex);
 }
+
+// CUDA Specific Functions
+void VectorAddition::allocateMemToDevice()
+{
+	cudaMalloc(&this->mVADeviceInputVecA, this->mMemSize);
+	cudaMalloc(&this->mVADeviceInputVecB, this->mMemSize);
+	cudaMalloc(&this->mVADeviceOutputVec, this->mMemSize);
+}
+void VectorAddition::copyHostToDevice()
+{
+	// Copy data from the host to the device using cudaMemcpy | .data() returns pointer to memory used by vector/array to store its owned elements
+	cudaMemcpy(this->mVADeviceInputVecA, this->mVAHostInputVecA.data(), this->mMemSize, cudaMemcpyHostToDevice);
+	cudaMemcpy(this->mVADeviceInputVecB, this->mVAHostInputVecB.data(), this->mMemSize, cudaMemcpyHostToDevice);
+}
+void VectorAddition::copyDeviceToHost()
+{
+	// Copy data from device back to host using cudaMemcpy
+	cudaMemcpy(this->mVAHostOutputVec.data(), this->mVADeviceOutputVec, this->mMemSize, cudaMemcpyDeviceToHost);
+}
+void VectorAddition::freeDeviceData()
+{
+	cudaFree(this->mVADeviceInputVecA);
+	cudaFree(this->mVADeviceInputVecB);
+	cudaFree(this->mVADeviceOutputVec);
+}

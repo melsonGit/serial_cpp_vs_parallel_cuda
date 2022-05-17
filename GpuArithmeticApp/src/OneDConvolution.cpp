@@ -118,3 +118,21 @@ void OneDConvolution::processContainerSize(const int& newIndex)
 	// Only set next vecIndex if current container is smaller / larger / new
 	this->setVecIndex(newIndex);
 }
+
+// CUDA Specific Functions
+void OneDConvolution::allocateMemToDevice()
+{
+
+}
+void OneDConvolution::copyHostToDevice()
+{
+
+}
+void OneDConvolution::copyDeviceToHost()
+{
+
+}
+void OneDConvolution::freeDeviceData()
+{
+
+}

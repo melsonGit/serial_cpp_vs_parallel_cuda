@@ -184,3 +184,21 @@ void TwoDConvolution::processContainerSize(const int& newIndex)
 	// Only set next vecIndex if current container is smaller / larger / new
 	this->setVecIndex(newIndex);
 }
+
+// CUDA Specific Functions
+void TwoDConvolution::allocateMemToDevice()
+{
+
+}
+void TwoDConvolution::copyHostToDevice()
+{
+
+}
+void TwoDConvolution::copyDeviceToHost()
+{
+
+}
+void TwoDConvolution::freeDeviceData()
+{
+
+}

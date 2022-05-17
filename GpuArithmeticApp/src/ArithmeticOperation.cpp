@@ -77,3 +77,18 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 	this->validateResults();
 	this->storeResults();
 }
+
+// CUDA Specific Functions
+void ArithmeticOperation::updateMemSize()
+{
+	this->mMemSize = sizeof(size_t) * this->mCurrSampleSize;
+}
+void ArithmeticOperation::updateBlockSize()
+{
+	this->mBLOCKS = (this->mCurrSampleSize + this->mTHREADS - 1) / mTHREADS;
+}
+void ArithmeticOperation::prepKernelVars()
+{
+	this->updateBlockSize();
+	this->updateMemSize();
+}

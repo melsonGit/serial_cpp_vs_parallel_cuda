@@ -21,6 +21,12 @@ private:
     void processContainerSize(const int& newIndex) override final;
     const std::size_t tempConSizeInit(); // remove when we use 2d vectors
 
+    // CUDA Specific Functions
+    void allocateMemToDevice() override final;
+    void copyHostToDevice() override final;
+    void copyDeviceToHost() override final;
+    void freeDeviceData() override final;
+
     // populateContainer - 1D
     template<typename P1> void populateContainer(std::vector<P1>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<P1>&, Args&... args);

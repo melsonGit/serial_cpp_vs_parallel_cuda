@@ -8,6 +8,9 @@
 #include "RandNumGen.h"
 #include "MaskAttributes.h"
 
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+
 #include <algorithm>
 #include <array>
 #include <string>
@@ -31,11 +34,11 @@ protected:
     OperationEventHandler OperationEventHandler;
     OperationResultHandler OperationResultHandler;
 
-    // CUDA Specific Vars / Funcs
-    std::size_t memSize{};
-    int THREADS{ 32 }; // Threads per Cooperative Thread Array
-    int BLOCKS{}; // No. CTAs per grid | Add padding | Enables compatibility with sample sizes not divisible by 32
-    
+    // CUDA Specific Variables
+    std::size_t mMemSize{};
+    std::size_t mTHREADS{ 32 }; // Threads per Cooperative Thread Array
+    std::size_t mBLOCKS{}; // No. CTAs per grid | Add padding | Enables compatibility with sample sizes not divisible by 32
+
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
         OperationResultHandler{*this, OperationEventHandler, OperationTimeHandler, this->mOperationName} {}
@@ -44,6 +47,7 @@ protected:
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0;
+    void storeResults();
 
     // Container Checks
     virtual void processContainerSize(const int& newIndex) = 0;
@@ -51,16 +55,22 @@ protected:
     const bool isContainerSameSize(const int& newIndex);
     const bool isContainerSmallerSize(const int& newIndex);
     const bool isContainerLargerSize(const int& newIndex);
-
-    void storeResults();
+    
+    // CUDA Specific Functions
+    virtual void allocateMemToDevice() = 0;
+    virtual void copyHostToDevice() = 0;
+    virtual void copyDeviceToHost() = 0;
+    virtual void freeDeviceData() = 0;
+    void prepKernelVars();
+    void updateMemSize();
+    void updateBlockSize();
 
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);
     void setVecIndex(const int& newIndex);
-    const int& getVecIndex() const;
     void updateEventHandler(const EventDirectives& event);
-
-
+    const int& getVecIndex() const;
+    
     // Functions used by all operations
     // populateContainer
     template<typename P1> void populateContainer (std::vector<P1>& vecToPop);

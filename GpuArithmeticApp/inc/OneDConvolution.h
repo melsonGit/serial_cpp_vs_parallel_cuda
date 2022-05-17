@@ -20,6 +20,12 @@ private:
     void validateResults() override final;
     void processContainerSize(const int& newIndex) override final;
 
+    // CUDA Specific Functions
+    void allocateMemToDevice() override final;
+    void copyHostToDevice() override final;
+    void copyDeviceToHost() override final;
+    void freeDeviceData() override final;
+
     // populateContainer - 1D
     template<typename P1> void populateContainer(std::vector<P1>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<P1>& vecToPop, Args&... args);
