@@ -30,6 +30,11 @@ protected:
     OperationTimeHandler OperationTimeHandler{};
     OperationEventHandler OperationEventHandler;
     OperationResultHandler OperationResultHandler;
+
+    // CUDA Specific Vars / Funcs
+    std::size_t memSize{};
+    int THREADS{ 32 }; // Threads per Cooperative Thread Array
+    int BLOCKS{}; // No. CTAs per grid | Add padding | Enables compatibility with sample sizes not divisible by 32
     
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
