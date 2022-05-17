@@ -18,7 +18,7 @@ enum EventDirectives
 	resultsRecorded,
 };
 
-inline const std::unordered_map<EventDirectives, std::string> eventDirectiveMap
+const std::unordered_map<EventDirectives, std::string> eventDirectiveMap
 {
 	{populateContainer, "Populating containers."},
 	{populateContainerComplete, "Containers populated."},

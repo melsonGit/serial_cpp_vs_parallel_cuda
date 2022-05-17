@@ -1,19 +1,13 @@
-#pragma once
-#ifndef RAND_NUM_GEN
-#define RAND_NUM_GEN
-
-#include <ctime>
-#include <random>
+#include "../inc/RandNumGen.h"
 
 namespace RandNumGen
 {
 	// Our minimum and maximum range for number generation (main input vectors only)
-	extern const int minRand, maxRand;
+	extern const int minRand{ 1 }, maxRand{ 100 };
 
 	// Our minimum and maximum range for number generation (convolution mask vectors only)
-	extern const int minMaskRand, maxMaskRand;
+	extern const int minMaskRand{ 1 }, maxMaskRand{ 10 };
 
 	// Seed based on clock time at system start-up
-	extern std::mt19937 mersenne;
+	extern std::mt19937 mersenne{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
 }
-#endif

@@ -2,7 +2,7 @@
 #ifndef PROGRAM_HANDLER
 #define PROGRAM_HANDLER
 
-#include "ArithmeticOperation.h"
+#include "ArithmeticOperation.cuh"
 #include "ProgramUtilities.h"
 #include "ProgramDirectives.h"
 

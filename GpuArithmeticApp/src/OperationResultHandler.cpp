@@ -1,5 +1,5 @@
 #include "../inc/OperationResultHandler.h"
-#include "../inc/ArithmeticOperation.h"
+#include "../inc/ArithmeticOperation.cuh"
 #include "../inc/OperationEventHandler.h"
 
 #include <fstream>

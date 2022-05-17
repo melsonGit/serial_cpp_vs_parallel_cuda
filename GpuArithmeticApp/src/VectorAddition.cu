@@ -1,9 +1,22 @@
-#include "../inc/VectorAddition.h"
+#include "../inc/VectorAddition.cuh"
 
 #include <algorithm>
 #include <cassert>
 #include <iostream>
 #include <vector>
+
+// Cannot be a member function
+__global__ void vecAddKernel(const std::size_t* __restrict inputVecA, const std::size_t* __restrict inputVecB, 
+	std::size_t* __restrict resultVec, const std::size_t conSize)
+{
+	// Calculate and assign x dimensional thread a global thread ID
+	std::size_t gThreadRowId = blockIdx.x * blockDim.x + threadIdx.x;
+
+	// If the threads gThreadRowId is below sample size
+	// Add contents from inputVecA and inputVecB into resultVec 
+	if (gThreadRowId < conSize)
+		resultVec[gThreadRowId] = inputVecA[gThreadRowId] + inputVecB[gThreadRowId];
+}
 
 void VectorAddition::setContainer(const int& userInput)
 {
@@ -12,11 +25,15 @@ void VectorAddition::setContainer(const int& userInput)
 	// Users are displayed options 1 - 5 which translates to 0 - 4 for indexing
 	int actualIndex{ userInput - 1 };
 
+	// Prepare host containers
 	this->processContainerSize(actualIndex);
-
 	this->populateContainer(this->mVAHostInputVecA, this->mVAHostInputVecB);
-
 	this->setCurrSampleSize(actualIndex);
+
+	// Prepare device containers
+	this->prepKernelVars();
+	this->allocateMemToDevice();
+	this->copyHostToDevice();
 
 	this->updateEventHandler(EventDirectives::populateContainerComplete);
 }
@@ -25,9 +42,9 @@ void VectorAddition::launchOp()
 	this->updateEventHandler(EventDirectives::startOperation);
 	this->OperationTimeHandler.resetStartTimer();
 
-	// Add contents from inputVecA and inputVecB into resultVec
-	transform(this->mVAHostInputVecA.begin(), this->mVAHostInputVecA.end(), this->mVAHostInputVecB.begin(), this->mVAHostOutputVec.begin(),
-		[](auto a, auto b) {return a + b; });
+	// Launch Kernel
+	vecAddKernel <<< this->mBLOCKS, this->mTHREADS >>> (this->mVADeviceInputVecA, this->mVADeviceInputVecB, 
+		this->mVADeviceOutputVec, this->mCurrSampleSize);
 
 	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
@@ -35,6 +52,8 @@ void VectorAddition::launchOp()
 void VectorAddition::validateResults() 
 {
 	this->updateEventHandler(EventDirectives::validateResults);
+	this->copyDeviceToHost();
+	this->freeDeviceData();
 
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };

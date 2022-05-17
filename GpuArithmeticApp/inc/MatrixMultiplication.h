@@ -2,7 +2,7 @@
 #ifndef MATRIX_MULTIPLICATION
 #define MATRIX_MULTIPLICATION
 
-#include "ArithmeticOperation.h"
+#include "ArithmeticOperation.cuh"
 #include "ArithmeticDetails.h"
 
 #include <vector>

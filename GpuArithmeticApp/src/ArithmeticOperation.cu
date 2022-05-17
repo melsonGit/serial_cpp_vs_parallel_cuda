@@ -1,4 +1,4 @@
-#include "../inc/ArithmeticOperation.h"
+#include "../inc/ArithmeticOperation.cuh"
 
 void ArithmeticOperation::storeResults()
 {

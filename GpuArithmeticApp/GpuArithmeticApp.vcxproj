@@ -82,8 +82,12 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ArithmeticOperation.cpp" />
+    <CudaCompile Include="src\ArithmeticOperation.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
+    <ClCompile Include="src\ArithmeticDetails.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MaskAttributes.cpp" />
     <ClCompile Include="src\MatrixMultiplication.cpp" />
     <ClCompile Include="src\OneDConvolution.cpp" />
     <ClCompile Include="src\OperationEventHandler.cpp" />
@@ -91,12 +95,15 @@
     <ClCompile Include="src\OperationTimeHandler.cpp" />
     <ClCompile Include="src\ProgramHandler.cpp" />
     <ClCompile Include="src\ProgramUtilities.cpp" />
+    <ClCompile Include="src\RandNumGen.cpp" />
     <ClCompile Include="src\TwoDConvolution.cpp" />
-    <ClCompile Include="src\VectorAddition.cpp" />
+    <CudaCompile Include="src\VectorAddition.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\ArithmeticDetails.h" />
-    <ClInclude Include="inc\ArithmeticOperation.h" />
+    <CudaCompile Include="inc\ArithmeticOperation.cuh" />
     <ClInclude Include="inc\EventDirectives.h" />
     <ClInclude Include="inc\MaskAttributes.h" />
     <ClInclude Include="inc\MatrixMultiplication.h" />
@@ -109,7 +116,7 @@
     <ClInclude Include="inc\ProgramUtilities.h" />
     <ClInclude Include="inc\RandNumGen.h" />
     <ClInclude Include="inc\TwoDConvolution.h" />
-    <ClInclude Include="inc\VectorAddition.h" />
+    <CudaCompile Include="inc\VectorAddition.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

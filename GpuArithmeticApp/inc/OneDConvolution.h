@@ -2,7 +2,7 @@
 #ifndef ONE_CONVOLUTION
 #define ONE_CONVOLUTION
 
-#include "ArithmeticOperation.h"
+#include "ArithmeticOperation.cuh"
 #include "ArithmeticDetails.h"
 
 #include <vector>

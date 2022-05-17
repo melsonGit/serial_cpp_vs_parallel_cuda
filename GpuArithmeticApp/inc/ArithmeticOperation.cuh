@@ -112,7 +112,7 @@ void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
     if (vecToPop.size() > MaskAttributes::maskDim)
     {
         // Create local distribution on stack
-        std::uniform_int_distribution randNum{ RandNumGen::minRand, RandNumGen::maxRand };
+        std::uniform_int_distribution<> randNum{ RandNumGen::minRand, RandNumGen::maxRand };
 
         // Generate random numbers via Lambda C++11 function, and place into vector
         generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(RandNumGen::mersenne); });
@@ -120,7 +120,7 @@ void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
     else // If we're passed a mask vector
     {
         // Create local distribution on stack
-        std::uniform_int_distribution randNum{ RandNumGen::minMaskRand, RandNumGen::maxMaskRand };
+        std::uniform_int_distribution<> randNum{ RandNumGen::minMaskRand, RandNumGen::maxMaskRand };
 
         // Generate random numbers via Lambda C++11 function, and place into vector
         generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(RandNumGen::mersenne); });
@@ -138,7 +138,7 @@ template<typename P1>
 void ArithmeticOperation::populateContainer(std::vector<std::vector<P1>>& vecToPop)
 {
     // Create local distribution on stack
-    std::uniform_int_distribution randNum{ RandNumGen::minRand, RandNumGen::maxRand };
+    std::uniform_int_distribution<> randNum{ RandNumGen::minRand, RandNumGen::maxRand };
 
     // Loop to populate 2D vector vecToPop
     // For each row

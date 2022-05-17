@@ -1,5 +1,5 @@
 #include "../inc/OperationEventHandler.h"
-#include "../inc/ArithmeticOperation.h"
+#include "../inc/ArithmeticOperation.cuh"
 #include "../inc/OperationTimeHandler.h"
 
 const bool OperationEventHandler::checkEventExists() const

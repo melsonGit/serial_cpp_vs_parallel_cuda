@@ -2,7 +2,7 @@
 #ifndef VECTOR_ADDITION
 #define VECTOR_ADDITION
 
-#include "ArithmeticOperation.h"
+#include "ArithmeticOperation.cuh"
 #include "ArithmeticDetails.h"
 
 #include <vector>
