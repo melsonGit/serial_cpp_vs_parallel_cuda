@@ -88,7 +88,9 @@
     <ClCompile Include="src\ArithmeticDetails.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MaskAttributes.cpp" />
-    <ClCompile Include="src\MatrixMultiplication.cpp" />
+    <CudaCompile Include="src\MatrixMultiplication.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
     <ClCompile Include="src\OneDConvolution.cpp" />
     <ClCompile Include="src\OperationEventHandler.cpp" />
     <ClCompile Include="src\OperationResultHandler.cpp" />
@@ -106,7 +108,7 @@
     <CudaCompile Include="inc\ArithmeticOperation.cuh" />
     <ClInclude Include="inc\EventDirectives.h" />
     <ClInclude Include="inc\MaskAttributes.h" />
-    <ClInclude Include="inc\MatrixMultiplication.h" />
+    <CudaCompile Include="inc\MatrixMultiplication.cuh" />
     <ClInclude Include="inc\OneDConvolution.h" />
     <ClInclude Include="inc\OperationEventHandler.h" />
     <ClInclude Include="inc\OperationResultHandler.h" />

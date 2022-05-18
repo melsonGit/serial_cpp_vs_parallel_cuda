@@ -35,9 +35,12 @@ protected:
     OperationResultHandler OperationResultHandler;
 
     // CUDA Specific Variables
+    std::size_t tempConSize{}; // temp
     std::size_t mMemSize{};
     std::size_t mTHREADS{ 32 }; // Threads per Cooperative Thread Array
     std::size_t mBLOCKS{}; // No. CTAs per grid | Add padding | Enables compatibility with sample sizes not divisible by 32
+    dim3 mDimThreads{};
+    dim3 mDimBlocks{};
 
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
@@ -61,9 +64,13 @@ protected:
     virtual void copyHostToDevice() = 0;
     virtual void copyDeviceToHost() = 0;
     virtual void freeDeviceData() = 0;
-    void prepKernelVars();
-    void updateMemSize();
-    void updateBlockSize();
+    void prep1DKernelVars();
+    void prep2DKernelVars();
+    void updateDimStructs();
+    void update1DMemSize();
+    void update2DMemSize(); // temp
+    void update1DBlockSize();
+    void update2DBlockSize(); // temp
 
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);

@@ -31,7 +31,7 @@ void VectorAddition::setContainer(const int& userInput)
 	this->setCurrSampleSize(actualIndex);
 
 	// Prepare device containers
-	this->prepKernelVars();
+	this->prep1DKernelVars();
 	this->allocateMemToDevice();
 	this->copyHostToDevice();
 
@@ -42,7 +42,7 @@ void VectorAddition::launchOp()
 	this->updateEventHandler(EventDirectives::startOperation);
 	this->OperationTimeHandler.resetStartTimer();
 
-	// Launch Kernel
+	// Launch Kernel on device
 	vecAddKernel <<< this->mBLOCKS, this->mTHREADS >>> (this->mVADeviceInputVecA, this->mVADeviceInputVecB, 
 		this->mVADeviceOutputVec, this->mCurrSampleSize);
 

@@ -10,6 +10,8 @@ void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& in
     // Accumulates our results to check against resultVec
     int resultVar{};
 
+    int count{ 0 };// temp check
+
     // For each row
     for (auto rowId { 0 }; rowId < conSize && doesMatch; ++rowId) 
     {
@@ -28,6 +30,8 @@ void matMultiCheck(std::vector<int> const& inputVecA, std::vector<int> const& in
             // Check accumulated resultVar value with corresponding value in resultVec
             if (resultVar != resultVec[rowId * conSize + colId])
                 doesMatch = false;
+            std::cout << count << '\n'; // temp check
+            ++count;// temp check
         }
     }
     // Assert and abort when results don't match

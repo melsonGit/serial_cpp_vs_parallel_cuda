@@ -2,7 +2,7 @@
 #include "../inc/ArithmeticDetails.h"
 #include "../inc/ArithmeticOperation.cuh"
 #include "../inc/VectorAddition.cuh"
-#include "../inc/MatrixMultiplication.h"
+#include "../inc/MatrixMultiplication.cuh"
 #include "../inc/OneDConvolution.h"
 #include "../inc/TwoDConvolution.h"
 

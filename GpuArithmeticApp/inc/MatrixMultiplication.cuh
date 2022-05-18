@@ -1,19 +1,19 @@
 #pragma once
-#ifndef TWO_CONVOLUTION
-#define TWO_CONVOLUTION
+#ifndef MATRIX_MULTIPLICATION
+#define MATRIX_MULTIPLICATION
 
 #include "ArithmeticOperation.cuh"
 #include "ArithmeticDetails.h"
 
 #include <vector>
 
-using namespace ArithmeticDetails::TwoDConvolutionDetails;
+using namespace ArithmeticDetails::MatrixMultiplicationDetails;
 
-class TwoDConvolution final : public ArithmeticOperation
+class MatrixMultiplication final : public ArithmeticOperation
 {
 private:
 
-    std::vector<std::size_t> mTCInputVec, mTCMaskVec, mTCOutputVec;
+    std::vector<std::size_t> mMMHostInputVecA, mMMHostInputVecB, mMMHostOutputVec;
 
     void setContainer(const int& userInput) override final;
     void launchOp() override final;
@@ -21,7 +21,12 @@ private:
     void processContainerSize(const int& newIndex) override final;
 
     // Temp measures to fix GPU issues
-    const std::size_t tempConSizeInitTEMP(); // remove when we use 2d vectors
+    void tempConSizeInitTEMP(); // remove when we use 2d vectors
+
+    // CUDA Specific Variables
+    std::size_t* mMMDeviceInputVecA{ nullptr };
+    std::size_t* mMMDeviceInputVecB{ nullptr };
+    std::size_t* mMMDeviceOutputVec{ nullptr };
 
     // CUDA Specific Functions
     void allocateMemToDevice() override final;
@@ -29,54 +34,54 @@ private:
     void copyDeviceToHost() override final;
     void freeDeviceData() override final;
 
-    // populateContainer - 1D
+    // populateContainer - Native 2D
     template<typename P1> void populateContainer(std::vector<P1>& vecToPop);
-    template<typename P1, typename ... Args> void populateContainer(std::vector<P1>&, Args&... args);
-    // resizeContainer - 1D
+    template<typename P1, typename ... Args> void populateContainer(std::vector<P1>& vecToPop, Args&... args);
+    // resizeContainer - Native 2D
     template<typename P1> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize);
     template<typename P1, typename ... Args> void resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args);
-    // shrinkContainer - 1D
+    // shrinkContainer - Native 2D
     template<typename P1> void shrinkContainer(std::vector<P1>& vecToShrink);
     template<typename P1, typename ... Args> void shrinkContainer(std::vector<P1>& vecToShrink, Args&... args);
 
 public:
 
-    TwoDConvolution()
-        : ArithmeticOperation{ twoDConvName, twoDConvSamples, twoDConvMaskStatus } {}
+    MatrixMultiplication()
+        : ArithmeticOperation{ matMultiName, matMultiSamples, matMultiMaskStatus } {}
 };
 
-// populateContainer - 1D
+// populateContainer - Native 2D
 template<typename P1>
-void TwoDConvolution::populateContainer(std::vector<P1>& vecToPop)
+void MatrixMultiplication::populateContainer(std::vector<P1>& vecToPop)
 {
     ArithmeticOperation::populateContainer<P1>(vecToPop);
 }
 template<typename P1, typename ... Args>
-void TwoDConvolution::populateContainer(std::vector<P1>& vecToPop, Args&... args)
+void MatrixMultiplication::populateContainer(std::vector<P1>& vecToPop, Args&... args)
 {
     this->populateContainer(vecToPop);
     this->populateContainer(args...);
 }
-// resizeContainer - 1D
+// resizeContainer - Native 2D
 template<typename P1>
-void TwoDConvolution::resizeContainer(const P1& newSize, std::vector<P1>& vecToResize)
+void MatrixMultiplication::resizeContainer(const P1& newSize, std::vector<P1>& vecToResize)
 {
     ArithmeticOperation::resizeContainer<P1>(newSize, vecToResize);
 }
 template<typename P1, typename ... Args>
-void TwoDConvolution::resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args)
+void MatrixMultiplication::resizeContainer(const P1& newSize, std::vector<P1>& vecToResize, Args&... args)
 {
     this->resizeContainer(newSize, vecToResize);
     this->resizeContainer(newSize, args...);
 }
-// shrinkContainer - 1D
+// shrinkContainer - Native 2D
 template<typename P1>
-void TwoDConvolution::shrinkContainer(std::vector<P1>& vecToShrink)
+void MatrixMultiplication::shrinkContainer(std::vector<P1>& vecToShrink)
 {
     ArithmeticOperation::shrinkContainer(vecToShrink);
 }
 template<typename P1, typename ... Args>
-void TwoDConvolution::shrinkContainer(std::vector<P1>& vecToShrink, Args&... args)
+void MatrixMultiplication::shrinkContainer(std::vector<P1>& vecToShrink, Args&... args)
 {
     this->shrinkContainer(vecToShrink);
     this->shrinkContainer(args...);

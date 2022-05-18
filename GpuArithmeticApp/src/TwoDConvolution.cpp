@@ -6,7 +6,7 @@
 #include <vector>
 
 // Reminder: When we switch from using native arrays to 2d vectors, Remove this
-const std::size_t TwoDConvolution::tempConSizeInit()
+const std::size_t TwoDConvolution::tempConSizeInitTEMP()
 {
 	// Return values represent true native vector size i.e 4096^2 = 16777216
 	// So our container size is really 4096
@@ -49,7 +49,7 @@ void TwoDConvolution::launchOp()
 	int radiusOffsetCols{ 0 };
 
 	// Replace this var with mTCOutputVec.size() in all if loop conditional statements when we use 2d vectors
-	std::size_t tempConSize{ this->tempConSizeInit() };
+	std::size_t tempConSize{ this->tempConSizeInitTEMP() };
 
 	// Accumulate results
 	std::size_t resultVar{};
@@ -106,7 +106,7 @@ void TwoDConvolution::validateResults()
 	int radiusOffsetCols{ 0 };
 
 	// Replace this var with mTCOutputVec.size() in all if loop conditional statements when we use 2d vectors
-	std::size_t tempConSize{ this->tempConSizeInit() };
+	std::size_t tempConSize{ this->tempConSizeInitTEMP() };
 
 	// Accumulates our results
 	std::size_t resultVar{};

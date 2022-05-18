@@ -79,16 +79,35 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 }
 
 // CUDA Specific Functions
-void ArithmeticOperation::updateMemSize()
+void ArithmeticOperation::update1DMemSize()
 {
 	this->mMemSize = sizeof(size_t) * this->mCurrSampleSize;
 }
-void ArithmeticOperation::updateBlockSize()
+void ArithmeticOperation::update2DMemSize()
 {
-	this->mBLOCKS = (this->mCurrSampleSize + this->mTHREADS - 1) / mTHREADS;
+	this->mMemSize = this->tempConSize * this->tempConSize * sizeof(std::size_t);
 }
-void ArithmeticOperation::prepKernelVars()
+void ArithmeticOperation::update1DBlockSize()
 {
-	this->updateBlockSize();
-	this->updateMemSize();
+	this->mBLOCKS = (this->mCurrSampleSize + this->mTHREADS - 1) / this->mTHREADS;
+}
+void ArithmeticOperation::update2DBlockSize()
+{
+	this->mBLOCKS = (this->tempConSize + this->mTHREADS - 1) / this->mTHREADS;
+}
+void ArithmeticOperation::prep1DKernelVars()
+{
+	this->update1DBlockSize();
+	this->update1DMemSize();
+}
+void ArithmeticOperation::prep2DKernelVars()
+{
+	this->update2DBlockSize();
+	this->update2DMemSize();
+}
+void ArithmeticOperation::updateDimStructs()
+{
+	// Use dim3 structs for BLOCKS and THREADS dimensions | Passed to kernal lauch as launch arguments
+	this->mDimThreads = this->mTHREADS, this->mTHREADS;
+	this->mDimBlocks = this->mBLOCKS, this->mBLOCKS;
 }
