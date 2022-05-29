@@ -30,6 +30,8 @@ protected:
     OperationTimeHandler OperationTimeHandler{};
     OperationEventHandler OperationEventHandler;
     OperationResultHandler OperationResultHandler;
+
+    ArithmeticOperation() = delete;
     
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
