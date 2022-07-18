@@ -13,19 +13,19 @@ void ArithmeticOperation::updateEventHandler(const EventDirectives& event)
 
 // Container Check
 
-const bool ArithmeticOperation::isNewContainer()
+bool ArithmeticOperation::isNewContainer()
 {
 	constexpr int firstRun{ 99 }; return (this->getVecIndex() == firstRun); // First run check - any number outside 0 - 6 is fine but just to be safe
 }
-const bool ArithmeticOperation::isContainerSameSize(const int& newIndex)
+bool ArithmeticOperation::isContainerSameSize(const int& newIndex)
 {
 	return (this->getVecIndex() == newIndex); // If the same, no changes are needed
 }
-const bool ArithmeticOperation::isContainerSmallerSize(const int& newIndex)
+bool ArithmeticOperation::isContainerSmallerSize(const int& newIndex)
 {
 	return (this->getVecIndex() < newIndex); // If current sample selection is higher than previous run - resize()
 }
-const bool ArithmeticOperation::isContainerLargerSize(const int& newIndex)
+bool ArithmeticOperation::isContainerLargerSize(const int& newIndex)
 {
 	return (this->getVecIndex() > newIndex); // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 }
@@ -75,7 +75,7 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 	this->setContainer(userInput);
 	this->launchOp();
 	this->validateResults();
-	this->storeResults();
+	//this->storeResults();
 }
 
 // CUDA Specific Functions
@@ -108,6 +108,9 @@ void ArithmeticOperation::prep2DKernelVars()
 void ArithmeticOperation::updateDimStructs()
 {
 	// Use dim3 structs for BLOCKS and THREADS dimensions | Passed to kernal lauch as launch arguments
-	this->mDimThreads = this->mTHREADS, this->mTHREADS;
-	this->mDimBlocks = this->mBLOCKS, this->mBLOCKS;
+	dim3 mTempThreads(this->mTHREADS, this->mTHREADS);
+	dim3 mTempBlocks(this->mBLOCKS, this->mBLOCKS);
+
+	this->mDimBlocks = mTempBlocks;
+	this->mDimThreads = mTempThreads;
 }

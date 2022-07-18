@@ -24,7 +24,7 @@ void OperationResultHandler::processOperationResults()
 		this->createResultFile();
 	}
 }
-const bool OperationResultHandler::doesResultDirectoryExist() const
+bool OperationResultHandler::doesResultDirectoryExist() const
 {
 	return std::filesystem::exists(this->mResultFilePath);
 }
@@ -32,7 +32,7 @@ void OperationResultHandler::createResultDirectory() const
 {
 	std::filesystem::create_directory(this->mResultFilePath);
 }
-const bool OperationResultHandler::doesResultFileExist() const
+bool OperationResultHandler::doesResultFileExist() const
 {
 	return std::filesystem::exists(this->mResultFileName);
 }

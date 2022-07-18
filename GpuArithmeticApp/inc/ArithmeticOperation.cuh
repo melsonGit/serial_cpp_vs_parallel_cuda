@@ -32,7 +32,7 @@ protected:
     // Operation Tools
     OperationTimeHandler OperationTimeHandler{};
     OperationEventHandler OperationEventHandler;
-    OperationResultHandler OperationResultHandler;
+    OperationResultHandler OperationResultHandler; // Remove this then add a seperate branch for it
 
     // CUDA Specific Variables
     std::size_t tempConSize{}; // temp
@@ -54,10 +54,10 @@ protected:
 
     // Container Checks
     virtual void processContainerSize(const int& newIndex) = 0;
-    const bool isNewContainer();
-    const bool isContainerSameSize(const int& newIndex);
-    const bool isContainerSmallerSize(const int& newIndex);
-    const bool isContainerLargerSize(const int& newIndex);
+    bool isNewContainer();
+    bool isContainerSameSize(const int& newIndex);
+    bool isContainerSmallerSize(const int& newIndex);
+    bool isContainerLargerSize(const int& newIndex);
     
     // CUDA Specific Functions
     virtual void allocateMemToDevice() = 0;

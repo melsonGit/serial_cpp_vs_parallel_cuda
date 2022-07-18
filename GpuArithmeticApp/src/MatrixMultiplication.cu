@@ -72,7 +72,8 @@ void MatrixMultiplication::launchOp()
 	this->OperationTimeHandler.resetStartTimer();
 
 	// Launch kernel on device
-	matMultiKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mMMDeviceInputVecA, this->mMMDeviceInputVecB, this->mMMDeviceOutputVec, this->tempConSize);
+	matMultiKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mMMDeviceInputVecA, this->mMMDeviceInputVecB, 
+		this->mMMDeviceOutputVec, this->tempConSize);
 
 	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
@@ -89,8 +90,6 @@ void MatrixMultiplication::validateResults()
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };
 
-	int count{0};// temp check
-
 	// For each row
 	for (auto rowIn{ 0 }; rowIn < this->tempConSize; ++rowIn)
 	{
@@ -103,15 +102,12 @@ void MatrixMultiplication::validateResults()
 			for (auto rowColPair{ 0 }; rowColPair < this->tempConSize; ++rowColPair)
 			{
 				// Accumulate results into resultVar
-				resultVar += this->mMMHostInputVecA[rowIn * this->tempConSize + rowColPair]
-					* this->mMMHostInputVecB[rowColPair * this->tempConSize + colIn];
+				resultVar += this->mMMHostInputVecA[rowIn * this->tempConSize + rowColPair] * this->mMMHostInputVecB[rowColPair * this->tempConSize + colIn];
 			}
 				
 			// Check accumulated resultVar value with corresponding value in resultVec
 			if (resultVar != this->mMMHostOutputVec[rowIn * this->tempConSize + colIn])
 				doesMatch = false;
-			std::cout << count << '\n';// temp check
-			++count;// temp check
 		}
 	}
 
