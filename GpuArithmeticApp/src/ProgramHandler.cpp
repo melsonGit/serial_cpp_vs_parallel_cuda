@@ -3,7 +3,7 @@
 #include "../inc/ArithmeticOperation.cuh"
 #include "../inc/VectorAddition.cuh"
 #include "../inc/MatrixMultiplication.cuh"
-#include "../inc/OneDConvolution.h"
+#include "../inc/OneDConvolution.cuh"
 #include "../inc/TwoDConvolution.h"
 
 #include <cassert>

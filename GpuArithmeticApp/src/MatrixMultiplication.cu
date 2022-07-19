@@ -5,8 +5,7 @@
 #include <iostream>
 #include <vector>
 
-__global__ void matMultiKernel(const std::size_t* __restrict inputVecA, const std::size_t* __restrict inputVecB, std::size_t* __restrict resultVec,
-	const std::size_t conSize)
+__global__ void matMultiKernel(const std::size_t* __restrict inputVecA, const std::size_t* __restrict inputVecB, std::size_t* __restrict resultVec, const std::size_t conSize)
 {
 	// Calculate and assign x / y dimensional thread a global thread ID
 	std::size_t gThreadRowId = blockIdx.y * blockDim.y + threadIdx.y;
@@ -20,8 +19,7 @@ __global__ void matMultiKernel(const std::size_t* __restrict inputVecA, const st
 	for (auto rowColPairId{ 0 }; rowColPairId < conSize; ++rowColPairId)
 	{
 		// Accumulate results into resultVec
-		resultVec[gThreadRowId * conSize + gThreadColId] += inputVecA[gThreadRowId * conSize + rowColPairId]
-														  * inputVecB[rowColPairId * conSize + gThreadColId];
+		resultVec[gThreadRowId * conSize + gThreadColId] += inputVecA[gThreadRowId * conSize + rowColPairId] * inputVecB[rowColPairId * conSize + gThreadColId];
 	}
 }
 
@@ -72,8 +70,7 @@ void MatrixMultiplication::launchOp()
 	this->OperationTimeHandler.resetStartTimer();
 
 	// Launch kernel on device
-	matMultiKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mMMDeviceInputVecA, this->mMMDeviceInputVecB, 
-		this->mMMDeviceOutputVec, this->tempConSize);
+	matMultiKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mMMDeviceInputVecA, this->mMMDeviceInputVecB, this->mMMDeviceOutputVec, this->tempConSize);
 
 	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);

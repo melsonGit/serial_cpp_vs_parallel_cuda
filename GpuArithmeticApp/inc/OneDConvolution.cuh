@@ -13,12 +13,17 @@ class OneDConvolution final : public ArithmeticOperation
 {
 private:
 
-    std::vector<std::size_t> mOCInputVec, mOCMaskVec, mOCOutputVec;
+    std::vector<std::size_t> mOCHostInputVec, mOCHostMaskVec, mOCHostOutputVec;
 
     void setContainer(const int& userInput) override final;
     void launchOp() override final;
     void validateResults() override final;
     void processContainerSize(const int& newIndex) override final;
+
+    // CUDA Specific Variables
+    std::size_t* mOCDeviceInputVec{ nullptr };
+    std::size_t* mOCDeviceMaskVec{ nullptr };
+    std::size_t* mOCDeviceOutputVec{ nullptr };
 
     // CUDA Specific Functions
     void allocateMemToDevice() override final;

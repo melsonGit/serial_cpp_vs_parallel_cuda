@@ -91,7 +91,9 @@
     <CudaCompile Include="src\MatrixMultiplication.cu">
       <FileType>CppCode</FileType>
     </CudaCompile>
-    <ClCompile Include="src\OneDConvolution.cpp" />
+    <CudaCompile Include="src\OneDConvolution.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
     <ClCompile Include="src\OperationEventHandler.cpp" />
     <ClCompile Include="src\OperationResultHandler.cpp" />
     <ClCompile Include="src\OperationTimeHandler.cpp" />
@@ -109,7 +111,7 @@
     <ClInclude Include="inc\EventDirectives.h" />
     <ClInclude Include="inc\MaskAttributes.h" />
     <CudaCompile Include="inc\MatrixMultiplication.cuh" />
-    <ClInclude Include="inc\OneDConvolution.h" />
+    <CudaCompile Include="inc\OneDConvolution.cuh" />
     <ClInclude Include="inc\OperationEventHandler.h" />
     <ClInclude Include="inc\OperationResultHandler.h" />
     <ClInclude Include="inc\OperationTimeHandler.h" />

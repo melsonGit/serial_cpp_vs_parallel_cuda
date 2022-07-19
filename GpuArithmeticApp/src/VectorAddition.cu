@@ -43,8 +43,7 @@ void VectorAddition::launchOp()
 	this->OperationTimeHandler.resetStartTimer();
 
 	// Launch Kernel on device
-	vecAddKernel <<< this->mBLOCKS, this->mTHREADS >>> (this->mVADeviceInputVecA, this->mVADeviceInputVecB, 
-		this->mVADeviceOutputVec, this->mCurrSampleSize);
+	vecAddKernel <<< this->mBLOCKS, this->mTHREADS >>> (this->mVADeviceInputVecA, this->mVADeviceInputVecB, this->mVADeviceOutputVec, this->mCurrSampleSize);
 
 	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
