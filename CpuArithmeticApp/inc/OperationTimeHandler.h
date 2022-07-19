@@ -4,14 +4,14 @@
 
 #include <chrono>
 
-class OperationTimer
+class OperationTimeHandler
 {
 	using operationClock = std::chrono::steady_clock;
 	using precisionType = unsigned long long;
 
 private:
 
-	// Creating OperationTimer object will start the clock
+	// Creating OperationTimeHandler object will start the clock
 	std::chrono::time_point<operationClock> mStartTimer{ operationClock::now() };
 
 	precisionType mElapsedTimeUs{};

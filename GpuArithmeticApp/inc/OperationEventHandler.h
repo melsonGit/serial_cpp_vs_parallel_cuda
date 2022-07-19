@@ -21,13 +21,13 @@ private:
 	const std::unordered_map<EventDirectives, std::string> mEventHolder{};
 	EventDirectives mEventId{};
 
-	const bool checkEventExists() const;
-	const bool isResultsValidatedEvent() const;
+	bool checkEventExists() const;
+	bool isResultsValidatedEvent() const;
 	const std::string& getEventString() const;
 	void outputTimeResults() const;
 	void badEvent() const;
 	void outputEvent() const;
-	void processTimeResults();
+	//void processTimeResults();
 
 public:
 

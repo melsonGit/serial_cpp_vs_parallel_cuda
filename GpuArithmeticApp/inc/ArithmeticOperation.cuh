@@ -8,6 +8,9 @@
 #include "RandNumGen.h"
 #include "MaskAttributes.h"
 
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+
 #include <algorithm>
 #include <array>
 #include <string>
@@ -29,10 +32,18 @@ protected:
     // Operation Tools
     OperationTimeHandler OperationTimeHandler{};
     OperationEventHandler OperationEventHandler;
-    OperationResultHandler OperationResultHandler;
+    OperationResultHandler OperationResultHandler; // Remove this then add a seperate branch for it
 
-    ArithmeticOperation() = delete;
-    
+    // CUDA Specific Variables
+    std::size_t tempConSize{}; // temp - currently used for MatMulti
+    std::size_t mMemSize{};
+    std::size_t m1DMaskMemSize{};
+    std::size_t m2DMaskMemSize{};
+    std::size_t mTHREADS{ 32 }; // Threads per Cooperative Thread Array
+    std::size_t mBLOCKS{}; // No. CTAs per grid | Add padding | Enables compatibility with sample sizes not divisible by 32
+    dim3 mDimThreads{};
+    dim3 mDimBlocks{};
+
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
         : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
         OperationResultHandler{*this, OperationEventHandler, OperationTimeHandler, this->mOperationName} {}
@@ -41,23 +52,36 @@ protected:
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0;
+    void storeResults();
 
     // Container Checks
     virtual void processContainerSize(const int& newIndex) = 0;
-    const bool isNewContainer();
-    const bool isContainerSameSize(const int& newIndex);
-    const bool isContainerSmallerSize(const int& newIndex);
-    const bool isContainerLargerSize(const int& newIndex);
-
-    void storeResults();
+    bool isNewContainer();
+    bool isContainerSameSize(const int& newIndex);
+    bool isContainerSmallerSize(const int& newIndex);
+    bool isContainerLargerSize(const int& newIndex);
+    
+    // CUDA Specific Functions
+    virtual void allocateMemToDevice() = 0;
+    virtual void copyHostToDevice() = 0;
+    virtual void copyDeviceToHost() = 0;
+    virtual void freeDeviceData() = 0;
+    void prep1DKernelVars();
+    void prep2DKernelVars();
+    void updateDimStructs();
+    void update1DMemSize();
+    void update2DMemSize(); // temp?
+    void update1DMaskMemSize();
+    void update2DMaskMemSize();
+    void update1DBlockSize();
+    void update2DBlockSize(); // temp?
 
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);
     void setVecIndex(const int& newIndex);
-    const int& getVecIndex() const;
     void updateEventHandler(const EventDirectives& event);
-
-
+    const int& getVecIndex() const;
+    
     // Functions used by all operations
     // populateContainer
     template<typename P1> void populateContainer (std::vector<P1>& vecToPop);
@@ -99,7 +123,7 @@ void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
     if (vecToPop.size() > MaskAttributes::maskDim)
     {
         // Create local distribution on stack
-        std::uniform_int_distribution randNum{ RandNumGen::minRand, RandNumGen::maxRand };
+        std::uniform_int_distribution<> randNum{ RandNumGen::minRand, RandNumGen::maxRand };
 
         // Generate random numbers via Lambda C++11 function, and place into vector
         generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(RandNumGen::mersenne); });
@@ -107,7 +131,7 @@ void ArithmeticOperation::populateContainer(std::vector<P1>& vecToPop)
     else // If we're passed a mask vector
     {
         // Create local distribution on stack
-        std::uniform_int_distribution randNum{ RandNumGen::minMaskRand, RandNumGen::maxMaskRand };
+        std::uniform_int_distribution<> randNum{ RandNumGen::minMaskRand, RandNumGen::maxMaskRand };
 
         // Generate random numbers via Lambda C++11 function, and place into vector
         generate(vecToPop.begin(), vecToPop.end(), [&randNum]() { return randNum(RandNumGen::mersenne); });
@@ -125,7 +149,7 @@ template<typename P1>
 void ArithmeticOperation::populateContainer(std::vector<std::vector<P1>>& vecToPop)
 {
     // Create local distribution on stack
-    std::uniform_int_distribution randNum{ RandNumGen::minRand, RandNumGen::maxRand };
+    std::uniform_int_distribution<> randNum{ RandNumGen::minRand, RandNumGen::maxRand };
 
     // Loop to populate 2D vector vecToPop
     // For each row

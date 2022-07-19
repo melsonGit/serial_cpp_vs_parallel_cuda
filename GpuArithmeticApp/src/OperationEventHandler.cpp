@@ -1,13 +1,13 @@
 #include "../inc/OperationEventHandler.h"
-#include "../inc/ArithmeticOperation.h"
+#include "../inc/ArithmeticOperation.cuh"
 #include "../inc/OperationTimeHandler.h"
 
-const bool OperationEventHandler::checkEventExists() const
+bool OperationEventHandler::checkEventExists() const
 {
 	return (this->mEventHolder.contains(this->mEventId));
 }
 
-const bool OperationEventHandler::isResultsValidatedEvent() const
+bool OperationEventHandler::isResultsValidatedEvent() const
 {
 	return (this->mEventId == EventDirectives::resultsValidated);
 }
@@ -34,7 +34,7 @@ void OperationEventHandler::processEvent() const
 
 void OperationEventHandler::outputTimeResults() const
 {
-	std::cout << "\n\nCPU " << this->ArithmeticOperationPtr->getOpName() << " computation time (container size : "
+	std::cout << "\n\nGPU " << this->ArithmeticOperationPtr->getOpName() << " computation time (container size : "
 		<< this->ArithmeticOperationPtr->getCurrSampleSize() << ") :\n"
 		<< this->OperationTimerPtr->getElapsedMicroseconds() << " us (microseconds)\n"
 		<< this->OperationTimerPtr->getElapsedMilliseconds() << " ms (milliseconds)\n"

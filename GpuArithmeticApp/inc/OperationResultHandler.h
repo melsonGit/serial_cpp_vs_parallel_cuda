@@ -16,8 +16,8 @@ private:
 	class OperationEventHandler* OperationEventHandlerPtr;
 	const OperationTimeHandler* OperationTimerPtr;
 
-	const bool doesResultDirectoryExist() const;
-	const bool doesResultFileExist() const;
+	bool doesResultDirectoryExist() const;
+	bool doesResultFileExist() const;
 	void createResultDirectory() const;
 	void createResultFile();
 	void recordResults();

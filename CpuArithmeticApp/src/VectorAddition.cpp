@@ -23,13 +23,13 @@ void VectorAddition::setContainer(const int& userInput)
 void VectorAddition::launchOp()
 {
 	this->updateEventHandler(EventDirectives::startOperation);
-	this->OperationTimer.resetStartTimer();
+	this->OperationTimeHandler.resetStartTimer();
 
 	// Add contents from inputVecA and inputVecB into resultVec
 	transform(this->mVAInputVecA.begin(), this->mVAInputVecA.end(), this->mVAInputVecB.begin(), this->mVAOutputVec.begin(),
 		[](auto a, auto b) {return a + b; });
 
-	this->OperationTimer.collectElapsedTimeData();
+	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
 }
 void VectorAddition::validateResults() 

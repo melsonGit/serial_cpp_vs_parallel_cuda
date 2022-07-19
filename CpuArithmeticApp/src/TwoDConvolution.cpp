@@ -41,7 +41,7 @@ void TwoDConvolution::setContainer(const int& userInput)
 void TwoDConvolution::launchOp()
 {
 	this->updateEventHandler(EventDirectives::startOperation);
-	this->OperationTimer.resetStartTimer();
+	this->OperationTimeHandler.resetStartTimer();
 
 	// Radius rows/cols will determine when convolution occurs to prevent out of bound errors
 	// twoConv utilises one for rows AND columns as we're dealing with a 2D mask vector
@@ -93,7 +93,7 @@ void TwoDConvolution::launchOp()
 		mTCOutputVec[rowIn] = resultVar;
 	}
 
-	this->OperationTimer.collectElapsedTimeData();
+	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
 }
 void TwoDConvolution::validateResults()
