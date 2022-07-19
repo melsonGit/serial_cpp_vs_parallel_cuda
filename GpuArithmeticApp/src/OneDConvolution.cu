@@ -8,14 +8,14 @@
 __global__ void oneConvKernel(const std::size_t* __restrict mainVec, const std::size_t* __restrict maskVec, std::size_t* __restrict resultVec, const std::size_t conSize)
 {
 	// Calculate and assign x dimensional thread a global thread ID
-	int gThreadRowId = blockIdx.x * blockDim.x + threadIdx.x;
+	std::size_t gThreadRowId = blockIdx.x * blockDim.x + threadIdx.x;
 
 	// Temp values to work around device code issue
-	const int maskDim{ 7 };
-	const int maskOffset{ maskDim / 2 };
+	const std::size_t maskDim{ 7 };
+	const std::size_t maskOffset{ maskDim / 2 };
 
 	// Calculate the starting point for the element
-	int radiusOffsetRows{ gThreadRowId - maskOffset };
+	std::size_t radiusOffsetRows{ gThreadRowId - maskOffset };
 
 	// Go over each element of the mask
 	for (auto maskRowIn{ 0 }; maskRowIn < maskDim; ++maskRowIn)
@@ -43,7 +43,7 @@ void OneDConvolution::setContainer(const int& userInput)
 
 	// Prepare device containers
 	this->prep1DKernelVars();
-	this->updateMaskMemSize();
+	this->update1DMaskMemSize();
 	this->allocateMemToDevice();
 	this->copyHostToDevice();
 
@@ -71,7 +71,7 @@ void OneDConvolution::validateResults()
 	std::size_t radiusOffsetRows{ 0 };
 
 	// Accumulates our results to check against resultVec
-	std::size_t resultVar{0};
+	std::size_t resultVar{ 0 };
 
 	// Determines result authenticity - Assigned false value when results don't match
 	bool doesMatch{ true };
@@ -134,14 +134,14 @@ void OneDConvolution::processContainerSize(const int& newIndex)
 void OneDConvolution::allocateMemToDevice()
 {
 	cudaMalloc(&this->mOCDeviceInputVec, this->mMemSize);
-	cudaMalloc(&this->mOCDeviceMaskVec, this->mMaskMemSize);
+	cudaMalloc(&this->mOCDeviceMaskVec, this->m1DMaskMemSize);
 	cudaMalloc(&this->mOCDeviceOutputVec, this->mMemSize);
 }
 void OneDConvolution::copyHostToDevice()
 {
 	// Copy data from the host to the device using cudaMemcpy | .data() returns pointer to memory used by vector/array to store its owned elements
 	cudaMemcpy(this->mOCDeviceInputVec, this->mOCHostInputVec.data(), this->mMemSize, cudaMemcpyHostToDevice);
-	cudaMemcpy(this->mOCDeviceMaskVec, this->mOCHostMaskVec.data(), this->mMaskMemSize, cudaMemcpyHostToDevice);
+	cudaMemcpy(this->mOCDeviceMaskVec, this->mOCHostMaskVec.data(), this->m1DMaskMemSize, cudaMemcpyHostToDevice);
 }
 void OneDConvolution::copyDeviceToHost()
 {

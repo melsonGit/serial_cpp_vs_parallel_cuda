@@ -100,7 +100,9 @@
     <ClCompile Include="src\ProgramHandler.cpp" />
     <ClCompile Include="src\ProgramUtilities.cpp" />
     <ClCompile Include="src\RandNumGen.cpp" />
-    <ClCompile Include="src\TwoDConvolution.cpp" />
+    <CudaCompile Include="src\TwoDConvolution.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
     <CudaCompile Include="src\VectorAddition.cu">
       <FileType>CppCode</FileType>
     </CudaCompile>
@@ -119,7 +121,7 @@
     <ClInclude Include="inc\ProgramHandler.h" />
     <ClInclude Include="inc\ProgramUtilities.h" />
     <ClInclude Include="inc\RandNumGen.h" />
-    <ClInclude Include="inc\TwoDConvolution.h" />
+    <CudaCompile Include="inc\TwoDConvolution.cuh" />
     <CudaCompile Include="inc\VectorAddition.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -13,15 +13,20 @@ class TwoDConvolution final : public ArithmeticOperation
 {
 private:
 
-    std::vector<std::size_t> mTCInputVec, mTCMaskVec, mTCOutputVec;
+    std::vector<std::size_t> mTCHostInputVec, mTCHostMaskVec, mTCHostOutputVec;
 
     void setContainer(const int& userInput) override final;
     void launchOp() override final;
     void validateResults() override final;
     void processContainerSize(const int& newIndex) override final;
 
+    // CUDA Specific Variables
+    std::size_t* mTCDeviceInputVec{ nullptr };
+    std::size_t* mTCDeviceMaskVec{ nullptr };
+    std::size_t* mTCDeviceOutputVec{ nullptr };
+
     // Temp measures to fix GPU issues
-    const std::size_t tempConSizeInitTEMP(); // remove when we use 2d vectors
+    void tempConSizeInitTEMP(); // remove when we use 2d vectors
 
     // CUDA Specific Functions
     void allocateMemToDevice() override final;
