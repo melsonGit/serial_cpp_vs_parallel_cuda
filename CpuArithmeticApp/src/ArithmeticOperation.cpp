@@ -1,10 +1,5 @@
 #include "../inc/ArithmeticOperation.h"
 
-void ArithmeticOperation::storeResults()
-{
-	this->OperationResultHandler.processOperationResults();
-}
-
 void ArithmeticOperation::updateEventHandler(const EventDirectives& event)
 {
 	this->OperationEventHandler.setEvent(event);
@@ -75,5 +70,4 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 	this->setContainer(userInput);
 	this->launchOp();
 	this->validateResults();
-	this->storeResults();
 }

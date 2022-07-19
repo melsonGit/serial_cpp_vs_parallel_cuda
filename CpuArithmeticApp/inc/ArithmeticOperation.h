@@ -3,7 +3,6 @@
 #define ARITHMETIC_OPERATION
 
 #include "OperationEventHandler.h"
-#include "OperationResultHandler.h"
 #include "OperationTimeHandler.h"
 #include "RandNumGen.h"
 #include "MaskAttributes.h"
@@ -29,13 +28,11 @@ protected:
     // Operation Tools
     OperationTimeHandler OperationTimeHandler{};
     OperationEventHandler OperationEventHandler;
-    OperationResultHandler OperationResultHandler;
 
     ArithmeticOperation() = delete;
     
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
-        OperationResultHandler{*this, OperationEventHandler, OperationTimeHandler, this->mOperationName} {}
+        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationTimeHandler }{}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
     virtual void setContainer(const int& userInput) = 0;
@@ -48,8 +45,6 @@ protected:
     const bool isContainerSameSize(const int& newIndex);
     const bool isContainerSmallerSize(const int& newIndex);
     const bool isContainerLargerSize(const int& newIndex);
-
-    void storeResults();
 
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);

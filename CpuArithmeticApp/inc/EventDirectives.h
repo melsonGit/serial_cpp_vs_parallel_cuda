@@ -14,8 +14,6 @@ enum EventDirectives
 	endOperation,
 	validateResults,
 	resultsValidated,
-	recordResults,
-	resultsRecorded,
 };
 
 inline const std::unordered_map<EventDirectives, std::string> eventDirectiveMap
@@ -26,7 +24,5 @@ inline const std::unordered_map<EventDirectives, std::string> eventDirectiveMap
 	{endOperation, "Operation complete."},
 	{validateResults, "Starting result validation."},
 	{resultsValidated, "Result validation complete."},
-	{recordResults, "Starting output to file."},
-	{resultsRecorded, "Output to file complete."},
 };
 #endif

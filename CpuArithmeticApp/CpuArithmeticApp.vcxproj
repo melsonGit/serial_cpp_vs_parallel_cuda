@@ -159,7 +159,6 @@
     <ClCompile Include="src\OperationEventHandler.cpp" />
     <ClCompile Include="src\MatrixMultiplication.cpp" />
     <ClCompile Include="src\OneDConvolution.cpp" />
-    <ClCompile Include="src\OperationResultHandler.cpp" />
     <ClCompile Include="src\OperationTimeHandler.cpp" />
     <ClCompile Include="src\ProgramHandler.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -175,7 +174,6 @@
     <ClInclude Include="inc\MaskAttributes.h" />
     <ClInclude Include="inc\MatrixMultiplication.h" />
     <ClInclude Include="inc\OneDConvolution.h" />
-    <ClInclude Include="inc\OperationResultHandler.h" />
     <ClInclude Include="inc\OperationTimeHandler.h" />
     <ClInclude Include="inc\ProgramDirectives.h" />
     <ClInclude Include="inc\ProgramHandler.h" />
