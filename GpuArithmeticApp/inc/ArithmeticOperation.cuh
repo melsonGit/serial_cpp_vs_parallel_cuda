@@ -35,8 +35,9 @@ protected:
     OperationResultHandler OperationResultHandler; // Remove this then add a seperate branch for it
 
     // CUDA Specific Variables
-    std::size_t tempConSize{}; // temp
+    std::size_t tempConSize{}; // temp - currently used for MatMulti
     std::size_t mMemSize{};
+    std::size_t mMaskMemSize{};
     std::size_t mTHREADS{ 32 }; // Threads per Cooperative Thread Array
     std::size_t mBLOCKS{}; // No. CTAs per grid | Add padding | Enables compatibility with sample sizes not divisible by 32
     dim3 mDimThreads{};
@@ -68,9 +69,10 @@ protected:
     void prep2DKernelVars();
     void updateDimStructs();
     void update1DMemSize();
-    void update2DMemSize(); // temp
+    void update2DMemSize(); // temp?
+    void updateMaskMemSize();
     void update1DBlockSize();
-    void update2DBlockSize(); // temp
+    void update2DBlockSize(); // temp?
 
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);

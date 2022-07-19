@@ -81,11 +81,15 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 // CUDA Specific Functions
 void ArithmeticOperation::update1DMemSize()
 {
-	this->mMemSize = sizeof(size_t) * this->mCurrSampleSize;
+	this->mMemSize = sizeof(std::size_t) * this->mCurrSampleSize;
 }
 void ArithmeticOperation::update2DMemSize()
 {
 	this->mMemSize = this->tempConSize * this->tempConSize * sizeof(std::size_t);
+}
+void ArithmeticOperation::updateMaskMemSize() // To be used in operations that work with Mask vectors
+{
+	this->mMaskMemSize = MaskAttributes::maskDim * sizeof(std::size_t);
 }
 void ArithmeticOperation::update1DBlockSize()
 {

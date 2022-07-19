@@ -43,6 +43,7 @@ void OneDConvolution::setContainer(const int& userInput)
 
 	// Prepare device containers
 	this->prep1DKernelVars();
+	this->updateMaskMemSize();
 	this->allocateMemToDevice();
 	this->copyHostToDevice();
 
@@ -133,14 +134,14 @@ void OneDConvolution::processContainerSize(const int& newIndex)
 void OneDConvolution::allocateMemToDevice()
 {
 	cudaMalloc(&this->mOCDeviceInputVec, this->mMemSize);
-	cudaMalloc(&this->mOCDeviceMaskVec, this->mMemSize);
+	cudaMalloc(&this->mOCDeviceMaskVec, this->mMaskMemSize);
 	cudaMalloc(&this->mOCDeviceOutputVec, this->mMemSize);
 }
 void OneDConvolution::copyHostToDevice()
 {
 	// Copy data from the host to the device using cudaMemcpy | .data() returns pointer to memory used by vector/array to store its owned elements
 	cudaMemcpy(this->mOCDeviceInputVec, this->mOCHostInputVec.data(), this->mMemSize, cudaMemcpyHostToDevice);
-	cudaMemcpy(this->mOCDeviceMaskVec, this->mOCHostMaskVec.data(), this->mMemSize, cudaMemcpyHostToDevice);
+	cudaMemcpy(this->mOCDeviceMaskVec, this->mOCHostMaskVec.data(), this->mMaskMemSize, cudaMemcpyHostToDevice);
 }
 void OneDConvolution::copyDeviceToHost()
 {
