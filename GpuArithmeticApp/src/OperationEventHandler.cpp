@@ -34,16 +34,19 @@ void OperationEventHandler::processEvent() const
 
 void OperationEventHandler::outputTimeResults() const
 {
+	constexpr int widthApTime{ 10 };
+	constexpr int widthApMetric{ 5 };
+
 	std::cout << "\n\nGPU " << this->ArithmeticOperationPtr->getOpName() << " computation time (container size : "
-		<< this->ArithmeticOperationPtr->getCurrSampleSize() << ") :\n"
-		<< this->OperationTimerPtr->getElapsedMicroseconds() << " us (microseconds)\n"
-		<< this->OperationTimerPtr->getElapsedMilliseconds() << " ms (milliseconds)\n"
-		<< this->OperationTimerPtr->getElapsedSeconds() << " s (seconds)\n\n";
+		<< this->ArithmeticOperationPtr->getCurrSampleSize() << ") :\n\n"
+		<< std::setw(widthApTime) << this->OperationTimerPtr->getElapsedSeconds() << std::setw(widthApMetric) << " s " << std::setw(widthApMetric) << "(seconds)\n"
+		<< std::setw(widthApTime) << this->OperationTimerPtr->getElapsedMilliseconds() << std::setw(widthApMetric) << " ms " << std::setw(widthApMetric) << "(milliseconds)\n"
+		<< std::setw(widthApTime) << this->OperationTimerPtr->getElapsedMicroseconds() << std::setw(widthApMetric) << " us " << std::setw(widthApMetric) << "(microseconds)\n\n\n";
 
 	if (this->ArithmeticOperationPtr->getValidationStatus())
-		std::cout << "Output passed validation. Timing results will now be recorded.\nPress any key to record results and return to sample selection menu.\n\n";
+		std::cout << "Output passed validation. Please record the above timing results.\nPress any key to return to sample selection menu.\n\n";
 	else
-		std::cout << "Output failed validation. Timing results discarded.\nPress any key to return to sample selection menu.\n\n";
+		std::cout << "Output failed validation. Please discard timing results.\nPress any key to return to sample selection menu.\n\n";
 
 	// move into function
 	std::cin.get();

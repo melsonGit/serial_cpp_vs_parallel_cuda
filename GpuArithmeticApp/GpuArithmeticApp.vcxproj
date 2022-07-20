@@ -95,7 +95,6 @@
       <FileType>CppCode</FileType>
     </CudaCompile>
     <ClCompile Include="src\OperationEventHandler.cpp" />
-    <ClCompile Include="src\OperationResultHandler.cpp" />
     <ClCompile Include="src\OperationTimeHandler.cpp" />
     <ClCompile Include="src\ProgramHandler.cpp" />
     <ClCompile Include="src\ProgramUtilities.cpp" />
@@ -115,7 +114,6 @@
     <CudaCompile Include="inc\MatrixMultiplication.cuh" />
     <CudaCompile Include="inc\OneDConvolution.cuh" />
     <ClInclude Include="inc\OperationEventHandler.h" />
-    <ClInclude Include="inc\OperationResultHandler.h" />
     <ClInclude Include="inc\OperationTimeHandler.h" />
     <ClInclude Include="inc\ProgramDirectives.h" />
     <ClInclude Include="inc\ProgramHandler.h" />
