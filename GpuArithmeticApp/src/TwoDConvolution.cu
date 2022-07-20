@@ -20,9 +20,6 @@ __global__ void twoConvKernel(const std::size_t* __restrict mainVec, const std::
 	std::size_t radiusOffsetRows{ gThreadRowId - maskOffset };
 	std::size_t radiusOffsetCols{ gThreadColId - maskOffset };
 
-	// Accumulate results - temp?
-	std::size_t resultVar{};
-
 	// For each row
 	for (auto rowId{ 0 }; rowId < maskDim; ++rowId)
 	{
@@ -41,8 +38,6 @@ __global__ void twoConvKernel(const std::size_t* __restrict mainVec, const std::
 			}
 		}
 	}
-	// Assign resultVec the accumulated value of resultVar
-	//resultVec[gThreadRowId * conSize + gThreadColId] = resultVar;
 }
 
 // Reminder: When we switch from using native arrays to 2d vectors, Remove this

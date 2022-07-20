@@ -15,7 +15,6 @@ class OperationEventHandler
 private:
 
 	const class ArithmeticOperation* ArithmeticOperationPtr;
-	const class OperationResultHandler* OperationResultHandlerPtr;
 	const OperationTimeHandler* OperationTimerPtr;
 
 	const std::unordered_map<EventDirectives, std::string> mEventHolder{};
@@ -27,12 +26,11 @@ private:
 	void outputTimeResults() const;
 	void badEvent() const;
 	void outputEvent() const;
-	//void processTimeResults();
 
 public:
 
-	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationResultHandler& opResultHandler, const OperationTimeHandler& opTimer)
-		: ArithmeticOperationPtr{ &arithOp }, OperationResultHandlerPtr{ &opResultHandler }, OperationTimerPtr{ &opTimer }, mEventHolder{ eventDirectiveMap } {}
+	OperationEventHandler(const ArithmeticOperation& arithOp, const OperationTimeHandler& opTimer)
+		: ArithmeticOperationPtr{ &arithOp }, OperationTimerPtr{ &opTimer }, mEventHolder{ eventDirectiveMap } {}
 
 	void setEvent(const EventDirectives& event);
 	void processEvent() const;

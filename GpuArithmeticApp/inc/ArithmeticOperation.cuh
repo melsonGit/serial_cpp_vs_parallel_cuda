@@ -3,7 +3,6 @@
 #define ARITHMETIC_OPERATION
 
 #include "OperationEventHandler.h"
-#include "OperationResultHandler.h"
 #include "OperationTimeHandler.h"
 #include "RandNumGen.h"
 #include "MaskAttributes.h"
@@ -32,10 +31,9 @@ protected:
     // Operation Tools
     OperationTimeHandler OperationTimeHandler{};
     OperationEventHandler OperationEventHandler;
-    OperationResultHandler OperationResultHandler; // Remove this then add a seperate branch for it
 
     // CUDA Specific Variables
-    std::size_t tempConSize{}; // temp - currently used for MatMulti
+    std::size_t tempConSize{}; // temp - currently used for MatMulti / TwoConv
     std::size_t mMemSize{};
     std::size_t m1DMaskMemSize{};
     std::size_t m2DMaskMemSize{};
@@ -45,14 +43,12 @@ protected:
     dim3 mDimBlocks{};
 
     ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationResultHandler, OperationTimeHandler }, 
-        OperationResultHandler{*this, OperationEventHandler, OperationTimeHandler, this->mOperationName} {}
+        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationTimeHandler } {}
 
     // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0;
-    void storeResults();
 
     // Container Checks
     virtual void processContainerSize(const int& newIndex) = 0;
