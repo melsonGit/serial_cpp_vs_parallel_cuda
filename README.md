@@ -5,7 +5,7 @@ This application (split between GpuArithmeticApp and CpuArithmeticApp) aims to d
 
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/appExample.gif" alt="App image"/>
-    <p align="center"><i>Application Window</i></p>
+    <p align="center"><i>Application Demonstration</i></p>
 </p>
 
 The written portion of this project explored GPU/GPGPU and CPU roles and architecture, using CUDA/C++ as tools to develop an application. I originally developed 8 programs: 4 programs were developed in traditional C++ and executed by the CPU; 4 programs were developed in Nvidia's proprietary GPU/GPGPU CUDA/C++ language, executed by the GPU/GPGPU. The 4 arithmetic operations are: [Vector Addition](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-vector-addition), [Matrix Multiplication](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-matrix-multiplication), [1-D Convolution](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-1-d-convolution) and [2-D Convolution](https://github.com/melsonGit/serial_cpp_vs_parallel_cuda#program-logic-2-d-convolution).
