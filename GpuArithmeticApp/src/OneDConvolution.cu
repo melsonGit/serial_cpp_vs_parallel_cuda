@@ -42,7 +42,7 @@ void OneDConvolution::setContainer(const int& userInput)
 	this->setCurrSampleSize(actualIndex);
 
 	// Prepare device containers
-	this->prep1DKernelVars();
+	this->update1DKernelVars();
 	this->update1DMaskMemSize();
 	this->allocateMemToDevice();
 	this->copyHostToDevice();

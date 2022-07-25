@@ -33,11 +33,11 @@ void MatrixMultiplication::tempConSizeInitTEMP()
 
 	switch (this->mMMHostOutputVec.size())
 	{
-	case 1048576: {this->tempConSize = 1024; return; break; }
-	case 4194304: {this->tempConSize = 2048; return; break; }
-	case 9437184: {this->tempConSize = 3072; return; break; }
-	case 16777216: {this->tempConSize = 4096; return; break; }
-	case 26214400: {this->tempConSize = 5120; return; break; }
+	case 1048576: {this->mTemp2DConSize = 1024; return; break; }
+	case 4194304: {this->mTemp2DConSize = 2048; return; break; }
+	case 9437184: {this->mTemp2DConSize = 3072; return; break; }
+	case 16777216: {this->mTemp2DConSize = 4096; return; break; }
+	case 26214400: {this->mTemp2DConSize = 5120; return; break; }
 	default: {badChoice = true; break; }
 	}
 	
@@ -57,7 +57,7 @@ void MatrixMultiplication::setContainer(const int& userInput)
 
 	// Prepare device containers
 	this->tempConSizeInitTEMP();
-	this->prep2DKernelVars();
+	this->update2DKernelVars();
 	this->allocateMemToDevice();
 	this->copyHostToDevice();
 	this->updateDimStructs();
@@ -70,7 +70,7 @@ void MatrixMultiplication::launchOp()
 	this->OperationTimeHandler.resetStartTimer();
 
 	// Launch kernel on device
-	matMultiKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mMMDeviceInputVecA, this->mMMDeviceInputVecB, this->mMMDeviceOutputVec, this->tempConSize);
+	matMultiKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mMMDeviceInputVecA, this->mMMDeviceInputVecB, this->mMMDeviceOutputVec, this->mTemp2DConSize);
 
 	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
@@ -88,22 +88,22 @@ void MatrixMultiplication::validateResults()
 	bool doesMatch{ true };
 
 	// For each row
-	for (auto rowIn{ 0 }; rowIn < this->tempConSize; ++rowIn)
+	for (auto rowIn{ 0 }; rowIn < this->getTemp2DConSize(); ++rowIn)
 	{
-		for (auto colIn{ 0 }; colIn < this->tempConSize && doesMatch; ++colIn) // For each column in that row
+		for (auto colIn{ 0 }; colIn < this->getTemp2DConSize() && doesMatch; ++colIn) // For each column in that row
 		{
 			// Reset resultVar to 0 on next element
 			resultVar = 0;
 
 			// For each row-column combination
-			for (auto rowColPair{ 0 }; rowColPair < this->tempConSize; ++rowColPair)
+			for (auto rowColPair{ 0 }; rowColPair < this->getTemp2DConSize(); ++rowColPair)
 			{
 				// Accumulate results into resultVar
-				resultVar += this->mMMHostInputVecA[rowIn * this->tempConSize + rowColPair] * this->mMMHostInputVecB[rowColPair * this->tempConSize + colIn];
+				resultVar += this->mMMHostInputVecA[rowIn * this->getTemp2DConSize() + rowColPair] * this->mMMHostInputVecB[rowColPair * this->getTemp2DConSize() + colIn];
 			}
 				
 			// Check accumulated resultVar value with corresponding value in resultVec
-			if (resultVar != this->mMMHostOutputVec[rowIn * this->tempConSize + colIn])
+			if (resultVar != this->mMMHostOutputVec[rowIn * this->getTemp2DConSize() + colIn])
 				doesMatch = false;
 		}
 	}

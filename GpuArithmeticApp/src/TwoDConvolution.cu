@@ -50,11 +50,11 @@ void TwoDConvolution::tempConSizeInitTEMP()
 
 	switch (this->mTCHostOutputVec.size())
 	{
-	case 16777216: {this->tempConSize = 4096; return; break; }
-	case 26214400: {this->tempConSize = 5120; return; break; }
-	case 37748736: {this->tempConSize = 6144; return; break; }
-	case 67108864: {this->tempConSize = 8192; return; break; }
-	case 104857600: {this->tempConSize = 10240; return; break; }
+	case 16777216: {this->mTemp2DConSize = 4096; return; break; }
+	case 26214400: {this->mTemp2DConSize = 5120; return; break; }
+	case 37748736: {this->mTemp2DConSize = 6144; return; break; }
+	case 67108864: {this->mTemp2DConSize = 8192; return; break; }
+	case 104857600: {this->mTemp2DConSize = 10240; return; break; }
 	default: {badChoice = true; break; }
 	}
 
@@ -74,7 +74,7 @@ void TwoDConvolution::setContainer(const int& userInput)
 
 	// Prepare device containers
 	this->tempConSizeInitTEMP();
-	this->prep2DKernelVars();
+	this->update2DKernelVars();
 	this->update2DMaskMemSize();
 	this->allocateMemToDevice();
 	this->updateDimStructs();
@@ -88,7 +88,7 @@ void TwoDConvolution::launchOp()
 	this->OperationTimeHandler.resetStartTimer();
 
 	// Launch Kernel on device
-	twoConvKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mTCDeviceInputVec, this->mTCDeviceMaskVec, this->mTCDeviceOutputVec, this->tempConSize);
+	twoConvKernel <<< this->mDimBlocks, this->mDimThreads >>> (this->mTCDeviceInputVec, this->mTCDeviceMaskVec, this->mTCDeviceOutputVec, this->mTemp2DConSize);
 
 	this->OperationTimeHandler.collectElapsedTimeData();
 	this->updateEventHandler(EventDirectives::endOperation);
@@ -105,7 +105,7 @@ void TwoDConvolution::validateResults()
 	std::size_t radiusOffsetCols{ 0 };
 
 	// Replace this var with mTCOutputVec.size() in all if loop conditional statements when we use 2d vectors
-	// this->tempConSize
+	// this->mTemp2DConSize
 
 	// Accumulates our results
 	std::size_t resultVar{};
@@ -114,10 +114,10 @@ void TwoDConvolution::validateResults()
 	bool doesMatch{ true };
 
 	// For each row in mainVec
-	for (auto rowIn{ 0 }; rowIn < this->tempConSize; ++rowIn)
+	for (auto rowIn{ 0 }; rowIn < this->getTemp2DConSize(); ++rowIn)
 	{
 		// For each column in that row
-		for (auto colIn{ 0 }; colIn < this->tempConSize && doesMatch; ++colIn)
+		for (auto colIn{ 0 }; colIn < this->getTemp2DConSize() && doesMatch; ++colIn)
 		{
 			// Reset resultVar to 0 on next element
 			resultVar = 0;
@@ -135,20 +135,20 @@ void TwoDConvolution::validateResults()
 					radiusOffsetCols = colIn - MaskAttributes::maskOffset + maskColIn;
 
 					// Check if we're hanging off mask row
-					if (radiusOffsetRows >= 0 && radiusOffsetRows < this->tempConSize)
+					if (radiusOffsetRows >= 0 && radiusOffsetRows < this->getTemp2DConSize())
 					{
 						// Check if we're hanging off mask column
-						if (radiusOffsetCols >= 0 && radiusOffsetCols < this->tempConSize)
+						if (radiusOffsetCols >= 0 && radiusOffsetCols < this->getTemp2DConSize())
 						{
 							// Accumulate results into resultVar
-							resultVar += this->mTCHostInputVec[radiusOffsetRows * this->tempConSize + radiusOffsetCols] * this->mTCHostMaskVec[maskRowIn * MaskAttributes::maskDim + maskColIn];
+							resultVar += this->mTCHostInputVec[radiusOffsetRows * this->getTemp2DConSize() + radiusOffsetCols] * this->mTCHostMaskVec[maskRowIn * MaskAttributes::maskDim + maskColIn];
 						}
 					}
 				}
 			}
 
 			// Check accumulated resultVar value with corresponding value in resultVec
-			if (resultVar != this->mTCHostOutputVec[rowIn * this->tempConSize + colIn])
+			if (resultVar != this->mTCHostOutputVec[rowIn * this->getTemp2DConSize() + colIn])
 				doesMatch = false;
 		}
 	}

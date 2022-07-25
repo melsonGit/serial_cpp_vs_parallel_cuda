@@ -8,19 +8,19 @@ void ArithmeticOperation::updateEventHandler(const EventDirectives& event)
 
 // Container Check
 
-const bool ArithmeticOperation::isNewContainer()
+bool ArithmeticOperation::isNewContainer()
 {
 	constexpr int firstRun{ 99 }; return (this->getVecIndex() == firstRun); // First run check - any number outside 0 - 6 is fine but just to be safe
 }
-const bool ArithmeticOperation::isContainerSameSize(const int& newIndex)
+bool ArithmeticOperation::isContainerSameSize(const int& newIndex)
 {
 	return (this->getVecIndex() == newIndex); // If the same, no changes are needed
 }
-const bool ArithmeticOperation::isContainerSmallerSize(const int& newIndex)
+bool ArithmeticOperation::isContainerSmallerSize(const int& newIndex)
 {
 	return (this->getVecIndex() < newIndex); // If current sample selection is higher than previous run - resize()
 }
-const bool ArithmeticOperation::isContainerLargerSize(const int& newIndex)
+bool ArithmeticOperation::isContainerLargerSize(const int& newIndex)
 {
 	return (this->getVecIndex() > newIndex); // If current sample selection is lower than previous run - resize() and then shrink_to_fit().
 }

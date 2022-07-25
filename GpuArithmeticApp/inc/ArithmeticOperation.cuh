@@ -18,67 +18,72 @@ class ArithmeticOperation
 {
 protected:
 
-    // Characteristics unique to every ArithmeticOperation child
     const std::string mOperationName{};
     const std::array<std::size_t, 5> mSampleSizes{};
     const bool mHasMask{};
 
-    // Var checks for ArithmeticOperation function checks 
-    bool mHasPassedValidation{};
-    std::size_t mCurrSampleSize{};
-    int mVecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine but just to be safe
+    // ArithmeticOperation function checks 
+    bool mHasPassedValidation{}; // Used in result validation checks (refer to child validateResults())
+    std::size_t mCurrSampleSize{}; // Used in container size checks (refer to child setContainer())
+    int mVecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine.
 
     // Operation Tools
-    OperationTimeHandler OperationTimeHandler{};
-    OperationEventHandler OperationEventHandler;
+    OperationTimeHandler OperationTimeHandler; // Collects and provides kernel execution time
+    OperationEventHandler OperationEventHandler; // Reports operation events to interface
 
-    // CUDA Specific Variables
-    std::size_t tempConSize{}; // temp - currently used for MatMulti / TwoConv
-    std::size_t mMemSize{};
-    std::size_t m1DMaskMemSize{};
-    std::size_t m2DMaskMemSize{};
-    std::size_t mTHREADS{ 32 }; // Threads per Cooperative Thread Array
-    std::size_t mBLOCKS{}; // No. CTAs per grid | Add padding | Enables compatibility with sample sizes not divisible by 32
-    dim3 mDimThreads{};
-    dim3 mDimBlocks{};
+    // CUDA Specific Variables - Usage specifically to work with CUDA
+    std::size_t mTemp2DConSize{}; // 2D containers require a pre-squared container value for use in kernel execution and result validation  
+    std::size_t mMemSize{}; // Utilised in device variable memory allocation, required for copying of data to and from device (refer to child allocateMemToDevice())
+    std::size_t m1DMaskMemSize{}; // As above, but for 1D mask containers
+    std::size_t m2DMaskMemSize{}; // As above, but for 2D mask containers
+    const std::size_t mTHREADS{ 32 }; // No. of threads to execute per mBLOCKS | 32 because warps come in sizes of 32 and must by default by divisible by 32 to work effectively
+    std::size_t mBLOCKS{}; // Number of Blocks holding mTHREADS used to execute kernel simultaneously
+    /*
+    * dim3 CUDA types allow mTHREADSand mBLOCKS to work within 2D/3D containers
+    * when initialised, we're given a variable capable of working in a row/column fashion when used as a kernel launch parameter
+    * e.g. kernels are provided with mBLOCKS * mBLOCKS of mTHREADS * mTHREADS
+    */  
+    dim3 mDimThreads{}; // 2D mTHREADS launch parameter
+    dim3 mDimBlocks{}; // 2D mBLOCKS launch parameter
 
-    ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationTimeHandler } {}
-
-    // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
+    // Operation-specific functions
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0;
 
     // Container Checks
-    virtual void processContainerSize(const int& newIndex) = 0;
+    virtual void processContainerSize(const int& newIndex) = 0; // Higher function for container functions
     bool isNewContainer();
     bool isContainerSameSize(const int& newIndex);
     bool isContainerSmallerSize(const int& newIndex);
     bool isContainerLargerSize(const int& newIndex);
     
     // CUDA Specific Functions
-    virtual void allocateMemToDevice() = 0;
-    virtual void copyHostToDevice() = 0;
-    virtual void copyDeviceToHost() = 0;
-    virtual void freeDeviceData() = 0;
-    void prep1DKernelVars();
-    void prep2DKernelVars();
+    virtual void allocateMemToDevice() = 0; // Memory is assigned to device variables as per use sample size selection
+    virtual void copyHostToDevice() = 0; // Copy host containers to device for kernel operation.
+    virtual void copyDeviceToHost() = 0; // Copy device containers back to host once kernel operation is complete.
+    virtual void freeDeviceData() = 0; // Free device variable memory
+    void update1DKernelVars();
+    void update2DKernelVars();
     void updateDimStructs();
     void update1DMemSize();
-    void update2DMemSize(); // temp?
+    void update2DMemSize();
     void update1DMaskMemSize();
     void update2DMaskMemSize();
     void update1DBlockSize();
-    void update2DBlockSize(); // temp?
+    void update2DBlockSize();
 
+    // Setters & Getters
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);
     void setVecIndex(const int& newIndex);
-    void updateEventHandler(const EventDirectives& event);
     const int& getVecIndex() const;
+    const std::size_t& getTemp2DConSize() const;
+
+    // Send events to OperationEventHandler
+    void updateEventHandler(const EventDirectives& event);
     
-    // Functions used by all operations
+    // Container functions used by all operations (1D & 2D containers listed respectively)
     // populateContainer
     template<typename P1> void populateContainer (std::vector<P1>& vecToPop);
     template<typename P1, typename ... Args> void populateContainer(std::vector<P1>& vecToPop, Args&... args);
@@ -94,14 +99,22 @@ protected:
     template<typename P1, typename ... Args> void shrinkContainer(std::vector<P1>& vecToShrink, Args&... args);
     template<typename P1> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink);
     template<typename P1, typename ... Args> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink, Args&... args);
+
+    ArithmeticOperation() = delete;
+
+    ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
+        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationTimeHandler } {}
    
 public:
 
+    // Getters for outside class operations
     const bool& getValidationStatus() const;
     const bool& getMaskStatus() const;
     const std::size_t& getCurrSampleSize() const;
     const std::size_t& getOpSampleSize(const int& option) const;
     const std::string& getOpName() const;
+
+    // Launch ArithmeticOperation
     void startOpSeq(const int& userInput);
 };
 

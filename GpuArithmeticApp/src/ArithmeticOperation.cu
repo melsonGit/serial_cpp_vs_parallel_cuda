@@ -51,6 +51,10 @@ const std::size_t& ArithmeticOperation::getOpSampleSize(const int& option) const
 {
 	return this->mSampleSizes[option];
 }
+const std::size_t& ArithmeticOperation::getTemp2DConSize() const
+{
+	return this->mTemp2DConSize;
+}
 
 // Setters
 void ArithmeticOperation::setCurrSampleSize(const int& index)
@@ -72,14 +76,14 @@ void ArithmeticOperation::startOpSeq(const int& userInput)
 	this->validateResults();
 }
 
-// CUDA Specific Functions
+// CUDA Specific Functions - NOTE: mTemp2DConSize used in place of mCurrSampleSize as a work around for 2D containers (we need a pre-squared value)
 void ArithmeticOperation::update1DMemSize()
 {
 	this->mMemSize = sizeof(std::size_t) * this->mCurrSampleSize;
 }
 void ArithmeticOperation::update2DMemSize()
 {
-	this->mMemSize = this->tempConSize * this->tempConSize * sizeof(std::size_t);
+	this->mMemSize = this->mTemp2DConSize * this->mTemp2DConSize * sizeof(std::size_t);
 }
 void ArithmeticOperation::update1DMaskMemSize()
 {
@@ -89,28 +93,28 @@ void ArithmeticOperation::update2DMaskMemSize()
 {
 	this->m2DMaskMemSize = MaskAttributes::maskDim * MaskAttributes::maskDim * sizeof(std::size_t);
 };
-void ArithmeticOperation::update1DBlockSize()
+void ArithmeticOperation::update1DBlockSize() // We want mBLOCKS of mTHREADS so we get one thread executing per element in container (mBLOCKS * mTHREADS = SampleSize)
 {
 	this->mBLOCKS = (this->mCurrSampleSize + this->mTHREADS - 1) / this->mTHREADS;
 }
 void ArithmeticOperation::update2DBlockSize()
 {
-	this->mBLOCKS = (this->tempConSize + this->mTHREADS - 1) / this->mTHREADS;
+	this->mBLOCKS = (this->mTemp2DConSize + this->mTHREADS - 1) / this->mTHREADS;
 }
-void ArithmeticOperation::prep1DKernelVars()
+void ArithmeticOperation::update1DKernelVars()
 {
 	this->update1DBlockSize();
 	this->update1DMemSize();
 }
-void ArithmeticOperation::prep2DKernelVars()
+void ArithmeticOperation::update2DKernelVars()
 {
 	this->update2DBlockSize();
 	this->update2DMemSize();
 }
 void ArithmeticOperation::updateDimStructs()
 {
-	// Use dim3 structs for BLOCKS and THREADS dimensions | Passed to kernal lauch as launch arguments
-	dim3 mTempThreads(this->mTHREADS, this->mTHREADS);
+	// Construct temp dim3 vars to then assign to member dim3 structs
+	dim3 mTempThreads(this->mTHREADS, this->mTHREADS); 
 	dim3 mTempBlocks(this->mBLOCKS, this->mBLOCKS);
 
 	this->mDimBlocks = mTempBlocks;

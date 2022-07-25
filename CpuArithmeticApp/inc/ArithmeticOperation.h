@@ -15,43 +15,39 @@ class ArithmeticOperation
 {
 protected:
 
-    // Characteristics unique to every ArithmeticOperation child
     const std::string mOperationName{};
     const std::array<std::size_t, 5> mSampleSizes{};
     const bool mHasMask{};
 
-    // Var checks for ArithmeticOperation function checks 
-    bool mHasPassedValidation{};
-    std::size_t mCurrSampleSize{};
-    int mVecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine but just to be safe
+    // ArithmeticOperation function checks 
+    bool mHasPassedValidation{}; // Used in result validation checks (refer to child validateResults())
+    std::size_t mCurrSampleSize{}; // Used in container size checks (refer to child setContainer())
+    int mVecIndex{ 99 }; // Default first run value (see setContainer() of any child). Any number outside 0 - 6 is fine.
 
     // Operation Tools
-    OperationTimeHandler OperationTimeHandler{};
-    OperationEventHandler OperationEventHandler;
+    OperationTimeHandler OperationTimeHandler{}; // Collects and provides kernel execution time
+    OperationEventHandler OperationEventHandler; // Reports operation events to interface
 
-    ArithmeticOperation() = delete;
-    
-    ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
-        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationTimeHandler }{}
-
-    // Operation-specific functions (.... where a template doesn't feel like an appropriate solution (for now))
+    // Operation-specific functions
     virtual void setContainer(const int& userInput) = 0;
     virtual void launchOp() = 0;
     virtual void validateResults() = 0;
 
     // Container Checks
-    virtual void processContainerSize(const int& newIndex) = 0;
-    const bool isNewContainer();
-    const bool isContainerSameSize(const int& newIndex);
-    const bool isContainerSmallerSize(const int& newIndex);
-    const bool isContainerLargerSize(const int& newIndex);
+    virtual void processContainerSize(const int& newIndex) = 0; // Higher function for container functions
+    bool isNewContainer();
+    bool isContainerSameSize(const int& newIndex);
+    bool isContainerSmallerSize(const int& newIndex);
+    bool isContainerLargerSize(const int& newIndex);
 
+    // Setters & Getters
     void setCurrSampleSize(const int& index);
     void setValidationStatus(const bool& validationResult);
     void setVecIndex(const int& newIndex);
     const int& getVecIndex() const;
-    void updateEventHandler(const EventDirectives& event);
 
+    // Send events to OperationEventHandler
+    void updateEventHandler(const EventDirectives& event);
 
     // Functions used by all operations
     // populateContainer
@@ -69,14 +65,22 @@ protected:
     template<typename P1, typename ... Args> void shrinkContainer(std::vector<P1>& vecToShrink, Args&... args);
     template<typename P1> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink);
     template<typename P1, typename ... Args> void shrinkContainer(std::vector<std::vector<P1>>& vecToShrink, Args&... args);
+
+    ArithmeticOperation() = delete;
+
+    ArithmeticOperation(const std::string& name, const std::array<std::size_t, 5>& samples, const bool& maskStatus)
+        : mOperationName{ name }, mSampleSizes{ samples }, mHasMask{ maskStatus }, OperationEventHandler{ *this, OperationTimeHandler }{}
    
 public:
 
+    // Getters for outside class operations
     const bool& getValidationStatus() const;
     const bool& getMaskStatus() const;
     const std::size_t& getCurrSampleSize() const;
     const std::size_t& getOpSampleSize(const int& option) const;
     const std::string& getOpName() const;
+
+    // Launch ArithmeticOperation
     void startOpSeq(const int& userInput);
 };
 
