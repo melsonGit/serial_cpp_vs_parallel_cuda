@@ -1,7 +1,7 @@
 # serial_cpp_vs_parallel_cuda application
 Thesis code for completion of my MSc ICT. This application, alongside my written thesis, achieved a 77% mark; I achieved a Distinction for my MSc overall.
 
-This application (split between GpuArithmeticApp and CpuArithmeticApp) aims to demonstrate computational differences in CPUs and GPU/GPGPUs by executing numerous arithmetic operations with substantial sample sizes. I developed this application using C++ and CUDA. Despite completing my MSc, I continued to develop this application, refactoring and redesigning the code into an OOP approach.
+This application (split between GpuArithmeticApp and CpuArithmeticApp) aims to demonstrate computational differences in CPUs and GPU/GPGPUs by executing numerous arithmetic operations with substantial sample sizes. I developed this application using C++ and CUDA. Despite completing my MSc, I continued to develop this application, refactoring and redesigning the code using an OOP approach.
 
 <p align="center">
   <img src="https://github.com/melsonGit/serial_cpp_vs_parallel_cuda/blob/main/img/appExample.gif" alt="App image"/>
